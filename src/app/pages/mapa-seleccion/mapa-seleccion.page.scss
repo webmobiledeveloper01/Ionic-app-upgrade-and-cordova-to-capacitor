@@ -1,0 +1,376 @@
+ion-content{
+
+   
+
+
+    .contenido{
+        
+
+        ion-list{
+            //cc
+            width: 377px;
+            padding-top: 20px;
+            background: transparent;
+            
+            ion-row{
+                display: flex;
+                justify-content: center;
+                
+                    
+                //Foto del perfil
+                ion-col.col-perfil{
+                    max-width: 50px;
+
+                    .imagen-atras{
+                        min-width: 27px;
+                        border-radius: 25px;
+                        margin-left: 5px;
+
+                    }
+
+                    .imagen-perfil{
+                        min-width: 27px;
+                        border-radius: 25px;
+                        margin-left: 5px;
+
+                    }
+                    
+                    
+
+                }
+
+                ion-col.col-perfil-respuesta{
+                    max-width: 50px;
+
+
+                    .imagen-perfil{
+                        min-width: 20px;
+                        border-radius: 25px;
+                        margin-left: 5px;
+
+                    }
+                }
+
+
+                ion-item.item-respuesta{
+
+                    ion-col.col-publicacion{
+
+                        ion-row{
+                            .col-perfil-respuesta{
+                                .imagen-perfil{
+                                    width: 30px;
+                                }
+                            }
+                        }
+
+
+                        ion-col{
+                            .nombre-perfil-respuesta{
+                                font-weight: 700;
+                                font-size: 12px;
+                                font-family: "Canela";
+                            }
+
+                            .fecha-publicacion{
+                                font-size: 10px;
+                                padding-top: 3px;
+                                padding-bottom: 15px;
+                            }
+                        }
+
+                    }
+                    
+                }
+
+
+
+
+                ion-item.item-respuesta-respuesta{
+                    width: 277px;
+                    padding-top: 5px;
+                    --background: transparent;
+
+
+                    .col-publicacion{
+                        ion-row{
+                            .col-perfil{
+                                .imagen-perfil{
+                                    width: 30px;
+                                }
+                            }
+
+                            ion-col{
+                                .nombre-perfil{
+                                    font-weight: 700;
+                                    font-size: 12px;
+                                    font-family: "Canela";
+                                }
+
+                                .fecha-publicacion{
+                                    font-size: 10px;
+                                    padding-top: 3px;
+                                    padding-bottom: 15px;
+                                }
+                            }
+                        }
+                    }
+
+                   
+
+                    
+                }
+
+                    
+                ion-item{
+                    padding-top: 5px;
+                    --background: transparent;
+
+                    //Col aprece nombre, fecha, texto audio o imagen
+                    ion-col.col-publicacion{
+                        width: 300px;
+
+
+
+
+                        .nombre-perfil{
+                            font-weight: 700;
+                            font-size: 17px;
+                            font-family: "Canela";
+                        }
+
+                        .nombre-lugar{
+                            font-weight: 700;
+                            font-size: 17px;
+                            font-family: "Canela";
+                        }
+
+                        .fecha-publicacion{
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+
+                        .informacion{
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+
+                        ion-row.row-fecha-rango{
+                            justify-content: start;
+
+                            .fecha-publicacion{
+                                font-size: 12px;
+                                padding-top: 3px;
+                                padding-bottom: 15px;
+                            }
+
+                            .rango{
+                                font-size: 14px;
+                                margin-left: 5px;
+                                background-color:#ffd39e ;
+                                color: #CB954D;
+                                border-radius: 15px;
+                                height: 20px;
+                                width: 117px;
+                                padding-left: 7px;
+                            }
+                        }
+                        ion-col.col-texto-publicacion{
+                            display: flex;
+                            flex-flow: row;
+                            justify-content: center;
+                            align-items: center;
+                            max-width: 300px;
+                            .texto-publicacion{
+                                
+                                font-size: 16px;
+                                padding-bottom: 15px;
+                                font-family: "Alliance No.1";
+                            }
+
+                        }
+
+                        
+
+                        .audio-publicacion{
+                            width: 170px;
+                            height: 40px;
+                        }
+
+                        .imagen-publicacion{
+                            width: 285px;
+                            height: 300px;
+                            
+                        }
+
+                        .imagen-publicacion_adaptada{
+                            width:270px ;
+                        }
+
+                        //Row interna donde tenemos los me gusta y las publicaciones
+                       ion-row.row-acciones{
+                            position: relative;
+                            align-items: center;
+                            justify-content: left;
+
+                            .meGusta-publicacionRojo{
+                                margin-left: 3px;
+                                margin-top: 3px;
+                            }
+                            .meGusta-publicacion{
+                            position: absolute;
+                            z-index: 1;
+                            }
+                            //Me gusta
+                            #megusta-numero{
+                                padding-left: 5px;
+                                font-size: 13px;
+                            }
+
+                        
+
+
+                            //Comentarios
+                            .comentario-publicacion{
+                                margin-left: 30px;
+                            }
+
+                            #comentario-numero{
+                                padding-left: 5px;
+                                font-size: 13px;
+                            }
+
+                            //guardar
+                            .comentario-guardar{
+                                margin-left: 155px;
+                            }
+                        }
+                      
+                    }
+
+
+                    ion-col.col-respuesta{
+                        width: 300px;
+                        .nombre-perfil{
+                            font-weight: 700;
+                            font-size: 17px;
+                            font-family: "Canela";
+                            
+                        }
+
+                        .nombre-lugar{
+                            font-weight: 700;
+                            font-size: 17px;
+                            font-family: "Canela";
+                        }
+
+                        .fecha-publicacion{
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+
+                        .informacion{
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+                    }
+
+                }
+            }
+
+            //Row publicidad
+            ion-row{
+
+                ion-item.publicidad{
+                    display: flex;
+                    --background: transparent;
+
+                    .imagen-publicidad{
+                        padding: 10px;
+                        width: 400px;
+                        
+                    }
+                    
+                }
+            }
+
+
+
+            //Input
+
+            ion-row{
+
+                .row-input{
+
+                    display: flex;
+                    justify-content: center;
+
+                
+                    ion-item{
+                        width: 305px;
+                        --background: transparent;
+                        padding-bottom: 10px;
+
+                        .col-perfil{
+                            width: 130px;
+                            display: flex;
+                            justify-content: center;
+
+                            .imagen-perfil{
+                                border-radius: 50%;
+                                    height: 38px;
+                                    max-width: 40px;
+                                    
+                            }
+                        }
+
+                        .col-input{
+                            
+                            margin-right: 5px;
+                            display: inline-flex;
+
+                            
+
+                            ion-item{
+                                max-width: 220px;
+                                
+                                background-color: white;
+                                border-radius: 25px;
+                                height: 41px;
+
+                                ion-input{
+                                    background-color: white;
+                                    color: #5C4B518A;
+                                    width: 200px;
+                                    border-radius: 15px;
+                                    padding-left: 20px;
+                                    padding-right: 30px;
+                                    margin-top: -10px;
+                                    font-size: 13px;
+
+                                
+
+                                }
+                                ion-icon{
+                                        
+                                    margin-top: -10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //final input
+
+
+            
+        }
+
+    }
+
+}

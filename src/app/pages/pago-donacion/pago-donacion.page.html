@@ -1,0 +1,74 @@
+<ion-content color="primary">
+  <div>
+    <div class="contenedor">
+      <h1 class="titulo" style="color:black;font-family: 'Canela';"><ion-icon name="arrow-back" style="margin-right: 25px;padding-left: 20px;" (click)="irAtras()"></ion-icon>Datos de la Donación</h1>
+        <div style="margin-top:20px;">
+          <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+            <ion-grid style="width: 90%;height: 365px;background: white;border-radius: 25px;margin-left: 5%;">
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">Importe de la Donación</ion-label>
+                    <ion-input placeholder="30€" formControlName="precio"></ion-input>
+                  </ion-item>
+                </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item lines="none">
+                      <ion-label style="font-size: 12px;font-family: Canela;">Nombre del Titular</ion-label>
+                      <ion-input placeholder="Hugo Garcia" formControlName="name"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">Número de la Tarjeta</ion-label>
+                    <ion-input placeholder="2541 2518 1581 2141" formControlName="number"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">Mes de Expedición</ion-label>
+                    <ion-input placeholder="12" formControlName="expMonth"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">Año de Expedición</ion-label>
+                    <ion-input placeholder="2020" formControlName="expYear"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">CCV</ion-label>
+                    <ion-input placeholder="254" formControlName="cvc"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        
+        </div>
+      </div>
+    
+      <div text-center class="boton" style="margin-top: 12vh;">
+        <ion-button class="pago" (click)="submitForm()" >Realizar Pago</ion-button>
+      </div>
+     <!--  <div class="boton">
+        <ion-button class="pago" (click)="pagarPaypal()"> <ion-img style="width: 40%;" src="assets/imgs/logo-paypal.png"></ion-img></ion-button>
+      </div> -->
+  </div>
+
+
+  
+ 
+  
+</ion-content>

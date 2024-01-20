@@ -1,0 +1,52 @@
+ion-content {
+
+    ion-grid.wrap-grid {
+
+
+        ion-row.top {
+            margin: 10% auto;
+
+            label.pagetitle {
+                font-size: 30px;
+                text-align: center;
+                width: 100%;
+                color: #333;
+                font-family: canela;
+            }
+
+
+        }
+
+        ion-row.mid {
+
+            .list-wrap {
+
+                width: 80%;
+                margin: auto;
+
+                .user-wrap {
+                    min-height: 15vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    app-user-follower{
+                        width: 100%;
+                    }
+                }
+            }
+
+
+        }
+
+        ion-row.bot {
+
+
+            label.pagetitle {}
+
+
+        }
+
+    }
+
+
+}

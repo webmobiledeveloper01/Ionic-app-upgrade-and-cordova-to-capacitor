@@ -1,0 +1,341 @@
+ion-content {
+
+    .searchBtn {
+        --background: #ff9500;
+        color: #ffffff;
+
+    }
+
+    .main-wrap {
+        height: 130px;
+
+        .top-wrap {
+
+            margin: 10% auto;
+
+            .inner-top-left-wrap {
+                // padding-left: 5%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .btn-atras {
+                    position: absolute;
+                    margin-left: 10%;
+                }
+
+                #ondas_imagen {
+                    margin-left: 0px;
+                }
+            }
+
+            .inner-top-mid-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-right: 15px;
+
+                .title-label {
+                    color: #333;
+                    font-size: 25px;
+                    font-family: "Canela";
+                    font-weight: 700;
+
+                }
+
+            }
+
+            .inner-top-right-wrap {
+                display: flex;
+                justify-content: flex-end;
+
+                .star-wrap {
+                    width: 50%;
+                    max-width: 65px;
+
+                    ion-grid {
+                        display: flex;
+                        flex-flow: column;
+
+                        .star-top {
+                            justify-content: flex-start;
+                        }
+
+                        .star-mid {
+                            justify-content: flex-end;
+                        }
+
+                        .star-bot {
+                            justify-content: flex-start;
+                        }
+
+
+
+
+                    }
+                }
+
+            }
+
+
+
+
+
+        }
+    }
+
+    .body-wrap {
+        width: 95%;
+        margin: 0% auto;
+
+
+        .searchbar-row-buscador {
+            display: flex;
+            justify-content: space-between;
+            flex-flow: row;
+            align-items: center;
+
+
+
+
+
+            ion-searchbar {
+
+
+                --background: #F0E9DF;
+                --border-radius: 20pt;
+                font-family: Alliance;
+                --color: #AF947F;
+                --placeholder-color: #AF947F;
+                width: 90%;
+                margin: auto;
+
+            }
+        }
+
+        .filter-row {
+            margin: 5% auto;
+
+            .btn-wrap {
+                margin-left: 8px;
+
+                .btn-filter {
+                    background: #F0E9DF;
+
+                    border-radius: 20pt;
+
+                    .inner-btn-row {
+                        .btn-inner-col {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .left {
+                            color:
+                                #CB954D;
+                        }
+
+                        .mid {
+                            p {
+                                white-space: nowrap;
+                                margin: 5px;
+                            }
+                        }
+
+                        .right {
+                            ion-icon {}
+
+                            ion-icon.rotated {
+                                transform: rotateZ(180deg);
+                            }
+                        }
+
+
+                    }
+
+                }
+            }
+        }
+
+
+
+        .filter-display-row {
+            border-bottom: 1px solid black;
+            padding-bottom: 10px;
+            border-radius: 10pt;
+
+            .filter-display-wrap {
+                width: 90%;
+                margin: auto;
+
+
+                .row-title {
+                    display: flex;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    margin: 1.5vh;
+
+                    ion-icon {
+                        margin-right: 5vw;
+                    }
+                }
+
+                .title {
+                    font-size: 15px;
+                    font-family: Alliance;
+                    color: #333;
+
+                }
+
+                .filter-display-temas-wrap {
+
+                    .temas-row {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-evenly;
+
+                        ion-chip {
+                            --background: #F1EAE0;
+                            --color: #B69C87;
+                            width: 30%;
+                            font-size: 1rem;
+                            text-align: center;
+                            display: flex;
+                            justify-content: center;
+                        }
+
+
+
+
+                        ion-chip.customChip {
+                            --background: #EEAE5C;
+                            --color: #ffffff;
+
+                            p.inner-chip {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+
+                .filter-display-fecha-wrap {
+
+                    .fecha-input-wrap {
+                        background-color: #F0E9DF;
+                        border-radius: 10pt;
+                        display: flex;
+                        justify-content: center;
+                        margin: 1vw;
+                        min-height: 5vh;
+
+
+
+
+                        ion-datetime {
+                            color: black;
+                            --placeholder-color: #979193;
+                            margin: 0px;
+                            padding: 0px;
+                            text-align: center;
+                            vertical-align: middle;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        ion-select {
+                            color: black;
+                            --placeholder-color: #979193;
+                            margin: 0px;
+                            padding: 0px;
+                            text-align: center;
+                            vertical-align: middle;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                    }
+
+                    .fecha-row {
+                        // width: 100%;
+                        // height: 100%;
+
+
+
+                    }
+                }
+
+                .filter-display-ubicacion-wrap {
+
+
+
+                    .row-ubicacion-input {
+
+                        .ubicacion-input {
+
+
+                            background: #F1EAE0;
+                            border-radius: 10pt;
+                            color: #B69C87;
+                            --placeholder-color: #B69C87;
+
+                        }
+
+                    }
+
+
+
+                    .row-ubicacion-map {
+
+                        width: 100%;
+                        // height: 30vh;
+
+                        .map-container {
+                            width: 100%;
+                            height: 100%;
+                            min-width: 150px;
+                            min-height: 300px;
+                            background-color: #F1EAE0;
+                            margin: auto;
+
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+
+
+
+
+
+        .data-row {
+
+            ion-list {
+                // background: #FAF5F0;
+            }
+
+            .item-wrap {
+                margin: 10% auto;
+
+            }
+
+            .voidText {
+                color: #333;
+                font-family: 'Alliance';
+                font-size: 30px;
+                width: 90%;
+                text-align: center;
+                margin: 10% auto;
+
+            }
+        }
+    }
+
+
+}

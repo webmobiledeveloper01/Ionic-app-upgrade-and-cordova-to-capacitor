@@ -1,0 +1,218 @@
+<ion-content color="primary">
+  <ion-row class="row-titulo-pagina">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina">
+      <p
+        id="titulo"
+        style="
+          font-size: 20px;
+          font-family: 'Canela';
+          color: black;
+          margin-top: 24%;
+          position: absolute;
+        "
+      >
+        Registro
+      </p>
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <img
+        style="margin-left: -3%"
+        id="cuadrante_puntos"
+        src="assets/imgs/Group 125.png"
+      />
+    </ion-col>
+  </ion-row>
+
+  <div class="contenido">
+    
+    <form
+      *ngIf="form"
+      [formGroup]="form"
+      (ngSubmit)="submitForm()"
+      style="margin-top: -70px"
+    >
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+          
+        "
+      >
+        Nombre
+      </p>
+      <ion-item class="item-native-custom" lines="none">
+        <ion-input class="campos-registro"
+          clearInput
+          type="text"
+          placeholder="Nombre de usuario"
+          formControlName="name"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Email
+      </p>
+      <ion-item class="item-native-custom" lines="none">
+        <ion-input
+          clearInput
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Fecha de Nacimiento
+      </p>
+      <ion-item class="item-native-custom custom-wrap" lines="none" >
+        <ion-row class="date-wrap" style="width: 100%">
+          <ion-col>
+            <ion-datetime
+              formControlName="dia"
+              pickerFormat="DD"
+              displayFormat="DD"
+              placeholder="Día"
+            ></ion-datetime
+          ></ion-col>
+          <ion-col>
+            <ion-datetime
+              formControlName="mes"
+              pickerFormat="MM"
+              displayFormat="MM"
+              placeholder="Mes"
+            ></ion-datetime>
+          </ion-col>
+          <ion-col>
+            <ion-datetime
+              formControlName="anyo"
+              pickerFormat="YYYY"
+              displayFormat="YYYY"
+              placeholder="Año"
+            ></ion-datetime>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Contraseña
+      </p>
+      <ion-item class="contraseña">
+        <ion-input 
+          clearInput
+          type="password"
+          placeholder="Contraseña"
+          formControlName="password"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Repite la contraseña
+      </p>
+      <ion-item class="contraseña" style="margin-bottom: 10%">
+        <ion-input
+          clearInput
+          type="password"
+          placeholder="Confirma la contraseña"
+          formControlName="password_confirmation"
+          required
+        >
+        </ion-input>
+      </ion-item>
+      <ion-checkbox></ion-checkbox
+      ><ion-label style="color: black; padding-left: 5px"
+        >He leido y acepto la
+        <a routerLink="/politica-privacidad" style="color: black"
+          >Politica de Privacidad y de uso</a
+        >
+        y el
+        <a style="color: black" routerLink="/aviso-legal"
+          >Aviso Legal</a
+        ></ion-label
+      >
+
+      <div class="btn-wrap">
+        <ion-button
+          style="
+            --border-radius: 10px;
+            font-family: 'Canela';
+            --color: black !important;
+            --background: #aec5d5;
+          "
+          expand="block"
+          type="button"
+          (click)="loginGoogle()"
+          >Registrate con Google</ion-button
+        >
+        <!-- <ion-button style="--border-radius:10px; font-family: 'Canela';--color: black !important;--background:#72A3C7;" expand="block" type="button" (click)="registroFacebook()">Registrate con Facebook</ion-button> -->
+        <ion-button
+          style="
+            --border-radius: 10px;
+            font-family: 'Canela';
+            --color: black !important;
+            --background: #f3b562;
+          "
+          expand="block"
+          type="submit"
+          >Registrarme</ion-button
+        >
+        <div style="margin-top: 20px; margin-bottom: 10vh; text-align: center">
+          <ion-label style="color: black; padding-left: 5px"
+            >¿Ya tienes cuenta?</ion-label
+          ><ion-label
+            style="color: #cb954d; font-weight: bold; margin-left: 3px"
+            routerLink="/login"
+            >Inicia Sesión</ion-label
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

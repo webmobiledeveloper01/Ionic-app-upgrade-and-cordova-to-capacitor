@@ -1,0 +1,753 @@
+ion-content {
+
+
+    .NoPosts {
+
+        .noposts-label {
+            font-size: 35px;
+            font-family: "Canela";
+            font-weight: 400;
+            margin-top: 10vh;
+            color: #5C4B51;
+            text-align: center;
+        }
+
+    }
+
+    .Year-grid {
+        width: 100%;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+
+
+        .Year-data-row {
+
+            ion-item {
+                width: 100%;
+                --background: transparent;
+
+                .years-label {
+                    font-size: 35px;
+                    font-family: "Canela";
+                    font-weight: 400;
+                    // width: 80px;
+                }
+
+                .numero-label {
+                    font-size: 14px;
+                    font-family: "Canela";
+                    font-weight: 400;
+                    font-style: italic;
+                }
+
+            }
+        }
+
+        .Year-slides {
+            margin: 5%;
+
+            ion-slides {
+
+                display: flex;
+
+                flex-flow: row wrap;
+
+                ion-slide {
+
+
+                    .delete-icon {
+                        color: #ff0040;
+                        font-size: 20px;
+                        background: #FAF5F0;
+                        position: absolute;
+                        border-radius: 100%;
+                        top: 4%;
+                        left: 90%;
+                        z-index: 10;
+                    }
+
+                    // margin: 5%;
+                    display: flex;
+                    flex-flow: column;
+
+                    .text-wrap {
+                        margin: 5%;
+                        display: flex;
+                        flex-flow: column;
+                        margin-top: 10%;
+
+                    }
+
+                    #texto-pie-imagen2 {
+                        color: black;
+                        font-size: 17px;
+                        font-family: "Alliance";
+                        font-weight: 500;
+                        font-style: normal;
+                        // margin-left: -52px;
+                    }
+
+                    #texto-fecha-lugar-imagen2 {
+                        color: #5C4B51;
+                        font-size: 14px;
+                        font-family: "Alliance";
+                        font-weight: 400;
+                        font-style: normal;
+                        // margin-left: -140px;
+                    }
+
+                }
+
+                .slide-img {
+
+                    // max-width: 60vw;
+                    .audio-player {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 15% auto;
+
+                        audio {
+                            width: 80%;
+                            max-height: 50%;
+                            // height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    img {
+                        // max-height: 40vh;
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+
+                    .player {
+                        object-fit: cover;
+
+
+                        video {
+                            max-width: 100%;
+                            max-height: 100%;
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+    .pago {
+        margin-top: 4vh;
+        width: 85vw;
+        height: 7vh;
+        --border-radius: 15px;
+        --background: #F3B562;
+        text-transform: none;
+        color: black;
+        --box-shadow: 2px 4px 15px 1px #4AA8D171;
+        margin-bottom: 2vh;
+        font-weight: bold;
+    }
+
+    .boton-principal {
+        --background: red;
+        color: red;
+        --border-color: red;
+        --border-radius: 10px;
+        --border-width: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+    }
+
+    .cerrar {
+        margin-top: -94%;
+        position: absolute;
+        margin-left: 46%;
+        width: 30px;
+        height: 30px;
+    }
+
+
+    .container {
+        margin-left: 10%;
+        margin-right: 10%;
+        //width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .perfil-datos {
+            width: 375px;
+            border-bottom: 1px black solid;
+
+
+
+            ion-row.row-perfil-datos {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                column-gap: 10px;
+
+
+                //columna 1
+                ion-col.col-perfil-decorado1 {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    max-width: 83px;
+
+
+
+                    width: 50px;
+                    position: relative;
+                    padding-left: 0px;
+
+
+
+                    #btn_atras {
+                        margin-top: 10px;
+                        position: absolute;
+                        width: 40px;
+                        margin-left: 10px;
+
+                    }
+
+                    #ondas_imagen {
+                        margin-top: 60px;
+                        height: 40px;
+
+
+                    }
+
+                    #cuadrante_puntos {
+                        position: absolute;
+                        margin-top: 170px;
+
+                    }
+
+                }
+
+
+                //columna 2
+                ion-col.col-perfil-decorado2 {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    max-width: 190px;
+                    min-width: 120px;
+                    margin-top: 100px;
+
+                    #perfil_imagen {
+                        width: 125px;
+                        height: 125px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        min-width: 125px;
+                        min-height: 125px;
+                    }
+
+                    .edit-icon-wrap {
+                        position: absolute;
+                        background: #F3B562;
+                        border-radius: 30pt;
+                        padding: 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        left: 65%;
+                        width:40px;
+                        height: 40px;
+                        ion-icon {
+                            color: rgb(255, 255, 255);
+                            font-size: 25px;
+                        }
+                    }
+
+                }
+
+                //columna 3
+                ion-col.col-perfil-decorado3 {
+                    position: relative;
+                    max-width: 83px;
+
+                    #perfil_estrella1 {
+                        position: absolute;
+                        top: 40px;
+                    }
+
+                    #perfil_estrella2 {
+                        position: absolute;
+                        top: 60px;
+                        right: 25px;
+                    }
+
+                    #perfil_estrella3 {
+                        position: absolute;
+                        top: 90px;
+                        right: 50px;
+                    }
+
+                }
+            }
+
+
+            ion-row.row-perfil-datos-pie {
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+
+                #nombre_usuario {
+                    color: black;
+                    font-size: 36px;
+                    font-family: "Canela";
+                    font-weight: 700;
+                    align-self: center;
+                    margin-top: 20px;
+                }
+
+
+                ion-col.col-perfil-datos-nacionalidad {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+
+                    padding-top: 20px;
+
+                    #imagen_bandera {
+                        width: 20px;
+                        height: 15px;
+                    }
+
+                    #texto_nacionalidad {
+                        color: black;
+                        font-weight: 400;
+                        font-family: Alliance;
+                        font-size: 12px;
+                        margin-left: 5px;
+                    }
+                }
+
+
+                ion-col.col-perfil-datos-texto {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+                    max-width: 375px;
+                    margin-top: 50px;
+
+                    #texto_usuario {
+                        color: black;
+                        text-align: center;
+                        font-family: Alliance;
+                        font-weight: 400;
+                    }
+                }
+
+
+                ion-row.row-perfil-datos-cuenta {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 40px;
+                    width: 100%;
+                    padding-bottom: 10px;
+
+                    ion-col.col-followers {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 125px;
+
+                        #num_followers {
+                            color: black;
+                            font-family: "Canela";
+                            font-weight: 700;
+                            font-size: 21.7px;
+                        }
+
+                        #tipo_followers {
+                            color: black;
+                            font-family: Alliance;
+                            font-weight: 400;
+                            font-size: 10.85px;
+                        }
+                    }
+
+
+                    ion-col.col-following {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 125px;
+
+                        #num_following {
+                            color: black;
+                            font-family: "Canela";
+                            font-weight: 700;
+                            font-size: 21.7px;
+
+                        }
+
+                        #tipo_following {
+                            color: black;
+                            font-family: Alliance;
+                            font-weight: 400;
+                            font-size: 10.85px;
+                        }
+                    }
+
+
+                    ion-col.col-likes {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 125px;
+
+                        #num_likes {
+                            color: black;
+                            font-family: "Canela";
+                            font-weight: 700;
+                            font-size: 21.7px;
+
+                        }
+
+                        #tipo_likes {
+                            color: black;
+                            font-family: Alliance;
+                            font-weight: 400;
+                            font-size: 10.85px;
+                        }
+                    }
+                }
+
+
+
+                .questions-row {
+                    margin: 2.5% auto;
+                    display: flex;
+                    flex-flow: row;
+
+                    ion-button {
+
+                        --border-radius: 20pt;
+                        color: black;
+                        --background: rgba(255, 235, 87, 0.155);
+                        text-transform: none;
+                        font-family: Canela;
+                        letter-spacing: normal;
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    .container2 {
+        margin-left: 10%;
+        margin-right: 10%;
+        // width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+
+        .perfil-contenido-year {
+            width: 375px;
+
+            ion-row.row-years {
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+
+                ion-col.col-years {
+
+                    ion-item.item-years {
+                        --background: transparent;
+
+
+                        //Año 
+                        .years {
+                            font-size: 35px;
+                            font-family: "Canela";
+                            font-weight: 400;
+                            width: 80px;
+                        }
+
+                        //Numero de la imagen 
+                        .numero-years {
+                            font-size: 14px;
+                            font-family: "Canela";
+                            font-weight: 400;
+                            font-style: italic;
+
+
+                        }
+                    }
+
+                }
+
+
+                ion-col.col-imagenes {
+                    margin-top: 50px;
+
+                    ion-slides {
+
+                        ion-slide.slide-publicacion {
+                            width: 100%;
+                            display: flex;
+                            flex-flow: column;
+
+
+
+                            #imagen1 {
+                                margin-left: -107px;
+                                margin-top: 50px;
+                                width: 320px;
+
+
+                            }
+
+
+
+                            #texto-pie-imagen {
+                                color: black;
+                                font-size: 17px;
+                                font-family: Alliance;
+                                font-weight: 500;
+                                font-style: normal;
+                                margin-left: -70px;
+                            }
+
+                            #texto-fecha-lugar-imagen {
+                                color: #5C4B51;
+                                font-size: 14px;
+                                font-family: Alliance;
+                                font-weight: 400;
+                                font-style: normal;
+                                margin-left: -140px;
+                            }
+
+
+                            //Imagen patinadora
+                            #imagen2 {
+                                margin-left: -100px;
+                                width: 350px;
+                                height: 455px;
+
+                            }
+
+
+
+                            #texto-pie-imagen2 {
+                                color: black;
+                                font-size: 17px;
+                                font-family: Alliance;
+                                font-weight: 500;
+                                font-style: normal;
+                                margin-left: -52px;
+                            }
+
+                            #texto-fecha-lugar-imagen2 {
+                                color: #5C4B51;
+                                font-size: 14px;
+                                font-family: Alliance;
+                                font-weight: 400;
+                                font-style: normal;
+                                margin-left: -140px;
+                            }
+
+
+                        }
+
+
+                    }
+
+                }
+
+            }
+
+
+        }
+    }
+
+
+    .container3 {
+        margin-left: 10%;
+        margin-right: 10%;
+        //  width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 0px;
+        
+        ion-button.md{
+            border-radius: 20px;
+            --background: black;
+            width: 160px;
+            
+            p{color: white;}
+        }
+        
+
+        .perfil-contenido-year {
+            width: 375px;
+
+            ion-row.row-years {
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+
+                ion-col.col-years {
+
+                    ion-item.item-years {
+                        --background: transparent;
+
+
+                        //Año 
+                        .years {
+                            font-size: 35px;
+                            font-family: "Canela";
+                            font-weight: 400;
+                            width: 80px;
+
+                        }
+
+                        //Numero de la imagen 
+                        .numero-years {
+                            font-size: 14px;
+                            font-family: "Canela";
+                            font-weight: 400;
+                            font-style: italic;
+
+
+                        }
+                    }
+
+                }
+
+
+                ion-col.col-imagenes {
+                    margin-top: 50px;
+
+                    ion-slides {
+
+                        ion-slide.slide-publicacion {
+                            width: 100%;
+                            display: flex;
+                            flex-flow: column;
+
+
+
+                            #imagen1 {
+                                margin-left: -107px;
+                                margin-top: 50px;
+                                width: 320px;
+
+                            }
+
+
+
+                            #texto-pie-imagen {
+                                color: black;
+                                font-size: 17px;
+                                font-family: Alliance;
+                                font-weight: 500;
+                                font-style: normal;
+                                margin-left: -150px;
+                            }
+
+                            #texto-fecha-lugar-imagen {
+                                color: #5C4B51;
+                                font-size: 14px;
+                                font-family: Alliance;
+                                font-weight: 400;
+                                font-style: normal;
+                                margin-left: -130px;
+                            }
+
+
+
+                            #imagen2 {
+                                margin-left: -117px;
+                                width: 350px;
+                                height: 455px;
+
+                            }
+
+
+
+                            #texto-pie-imagen2 {
+                                color: black;
+                                font-size: 17px;
+                                font-family: Alliance;
+                                font-weight: 500;
+                                font-style: normal;
+                                margin-left: -52px;
+                            }
+
+                            #texto-fecha-lugar-imagen2 {
+                                color: #5C4B51;
+                                font-size: 14px;
+                                font-family: Alliance;
+                                font-weight: 400;
+                                font-style: normal;
+                                margin-left: -155px;
+                            }
+
+
+                        }
+
+
+                    }
+
+                }
+
+            }
+
+
+        }
+    }
+
+    .container4 {
+        
+        margin-left: 10%;
+        margin-right: 10%;
+        //  width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 0px;
+        ion-button.cancelar{
+            border-radius: 20px;
+            --background: #B22A2A;
+            width: 160px;
+            
+            p{color: white;}
+        }
+        
+        
+    }
+
+
+
+
+}

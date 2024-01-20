@@ -1,0 +1,18 @@
+<!-- fullscreen-image.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <img
+        src="assets/icons/Group 114-2.png"/>
+        
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="image-container">
+    <img [src]="imageUrl" />
+  </div>
+</ion-content>

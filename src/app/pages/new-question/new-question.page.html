@@ -1,0 +1,287 @@
+<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+
+<ion-content *ngIf="!isLoading">
+
+	<!-- doomed v3 header -->
+
+	<!-- 
+		typescript back()
+
+		public back() {
+    this.navCtrl.navigateForward("/tabs");
+  	} 
+	-->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+		
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1" size="2">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        <span style="font-style: italic;">geoask</span><br>Pregunta en el mapa
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3" size="2">
+      <img
+        style="margin-top: 10%;"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+  <div class="form-wrap">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+      <ion-grid class="wrap-grid">
+        <ion-row class="row-title">
+          <ion-row class="inner-row-label">
+            <ion-label> Haz tu pregunta </ion-label>
+          </ion-row>
+          <ion-row class="inner-row-input">
+            <!--  -->
+            <ion-input
+              placeholder="Escribe aqui tu pregunta"
+              formControlName="question"
+            ></ion-input>
+          </ion-row>
+        </ion-row>
+<div class="option-wrap">
+  <a
+  *ngIf="base64img"
+  (click)="removeImage()"
+  style="color: #f3b562"
+  (click)="removeImage()"
+  >Eliminar imagen</a
+>
+<a
+*ngIf="base64img"
+(click)="removeImage()"
+style="color: #f3b562"
+(click)="openCropImageModal()"
+>Ajustar imagen</a
+>
+</div>
+        <ion-row class="row-description" *ngIf="base64img">
+          <img class="upload-img" src="{{base64img}}" alt="" srcset="" />
+        </ion-row>
+        <ion-row class="row-description" *ngIf="!base64img">
+          <ion-row class="inner-row-label">
+            <ion-label>Sube un archivo </ion-label>
+          </ion-row>
+          <ion-row class="inner-row-input">
+            <ion-button
+              style="
+                --border-radius: 15px;
+                font-family: 'Alliance';
+                color: rgba(0, 0, 0, 0.507);
+              "
+              expand="block"
+              color="danger"
+              (click)="adjuntarImagen()"
+              ><div class="inner-custom">
+                Adjunta archivo en .jpg, .png o .mp4
+                <ion-icon
+                  name="filing"
+                  src="../../../assets/icon/Upload_Icon_blanco.svg"
+                ></ion-icon></div
+            ></ion-button>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-category">
+          <ion-row> <ion-label> Tema </ion-label></ion-row>
+          <ion-row id="category-wrap" class="chip-row">
+            <ion-col class="chip-wrap" *ngFor="let c of categories">
+              <!-- <ion-chip (click)="SetCategoryValue($event)" id="{{c.id}}"
+                >{{c.name}}</ion-chip
+              > -->
+              <ion-chip (click)="SetCategoryValue($event)" id="{{c.id}}"
+                >{{c.nombre}}</ion-chip
+              >
+            </ion-col>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-type">
+          <ion-row>
+            <ion-label> ¿Te acuerdas de cuándo ocurrió? </ion-label></ion-row
+          >
+          <ion-row id="privacy-wrap" style="flex-flow: row">
+            <ion-col>
+              <ion-datetime
+                formControlName="date"
+                pickerFormat="DD-MM-YYYY"
+                displayFormat="DD-MM-YYYY"
+                placeholder="Fecha"
+              ></ion-datetime>
+            </ion-col>
+
+            <ion-col>
+              <ion-select
+                type="ios"
+                placeholder="Década"
+                (ionChange)="cambiarDecada($event)"
+              >
+                <ion-select-option
+                  *ngFor="let decada of decadas"
+                  [value]="decada.value"
+                  >{{decada.nombre}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col>
+
+            <!-- <ion-col> <ion-chip (click)="SetPrivacy($event)" id="1">Privado</ion-chip></ion-col>
+            <ion-col> <ion-chip (click)="SetPrivacy($event)" id="0">Público</ion-chip></ion-col> -->
+          </ion-row>
+
+          <ion-row class="row-title">
+            <ion-row class="inner-row-label">
+              <ion-label> Establece la duración de tu pregunta </ion-label>
+            </ion-row>
+            <ion-row class="inner-row-input">
+              <ion-datetime
+                class="duracion-date"
+                placeholder="Duración de la pregunta"
+                pickerFormat="DD-MM-YYYY"
+                displayFormat="DD-MM-YYYY"
+                formControlName="duracion"
+                min="{{ SetMinDate }}"
+                max="{{maxYear}}"
+              ></ion-datetime>
+            </ion-row>
+          </ion-row>
+
+          <ion-row id="map-row-vis" style="display: none" class="map-row">
+            <ion-row>
+              <ion-label>Ubicación</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-input
+                type="text"
+                [(ngModel)]="search"
+                [ngModelOptions]="{standalone: true}"
+                placeholder="Escriba aqui la ubicacion"
+                (ionChange)="actualizar()"
+                debounce="500"
+              ></ion-input>
+            </ion-row>
+            <ion-row>
+              <div class="autocompleteItems">
+                <ion-list
+                  class="List"
+                  lines="none"
+                  class="autocomplete"
+                  *ngIf="autocomplete && autocompleteItems.length != 0"
+                >
+                  <div *ngFor="let item of autocompleteItems, let i = index">
+                    <ion-item
+                      *ngIf="!(i == autocompleteItems.length-1)"
+                      class="item-mapa border"
+                      style="border-bottom: 1px solid rgba(#000000, 0.15)"
+                      tappable
+                      (click)="selectSearchResult(item.description)"
+                    >
+                      <p>{{ item.description }}</p>
+                    </ion-item>
+                    <ion-item
+                      *ngIf="i == autocompleteItems.length-1"
+                      class="item-mapa noborder"
+                      style="border-bottom: none"
+                      tappable
+                      (click)="selectSearchResult(item.description)"
+                    >
+                      <p>{{ item.description }}</p>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </div>
+            </ion-row>
+
+            <div id="map-div" class="map-wrap"></div>
+          </ion-row>
+          <!-- <ion-row>La fecha no es correcta, por favor, corrigela </ion-row> -->
+
+          <ion-row class="visibility-row" style="flex-flow: column">
+            <ion-row
+              ><ion-label> ¿Quién podrá ver esta pregunta? </ion-label></ion-row
+            >
+            <ion-row
+              class="visibility-row-inner"
+              id="visibility-row"
+              style="flex-flow: row; margin-top: 5%"
+            >
+              <ion-col>
+                <ion-chip
+                  class="uno"
+                  (click)="SetVisibilityValue($event)"
+                  id="0"
+                  >Grupos</ion-chip
+                ></ion-col
+              >
+              <ion-col>
+                <ion-chip
+                  class="uno"
+                  (click)="SetVisibilityValue($event)"
+                  id="1"
+                  >Usuarios</ion-chip
+                ></ion-col
+              >
+            </ion-row>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-btn">
+          <!-- <ion-col
+            ><ion-button class="btn-add" routerLink="/add-members"
+              >Añadir Miembro</ion-button
+            >
+          </ion-col> -->
+          <ion-col (click)="checkFormValid()">
+            <ion-button
+              class="btn-create-tres"
+              (click)="CreateQuestion()"
+              [disabled]="!form.valid"
+              >Subir pregunta</ion-button
+            >
+            <!-- <ion-button
+            class="btn-create"
+            (click)="CreateChanel()"
+            >Subir pregunta debug</ion-button
+          > -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <!-- <ion-button (click)="CreateChanel()" color="dark"></ion-button> -->
+  </div>
+</ion-content>

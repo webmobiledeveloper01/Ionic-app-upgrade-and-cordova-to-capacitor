@@ -1,0 +1,87 @@
+ion-content {
+    --background: transparent !important;
+    border-radius:20px;
+    
+    .flex{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal{
+        width: 85%;
+        background-color: #FAF5F0;
+        margin: 0 auto;
+        padding: 16px;
+        border-radius: 16px;
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+          
+
+        .clinic-name{
+            color: var(--ion-color-primary);
+            text-align: center;
+            font-size: 12pt;
+
+        }
+
+        .description{
+            font-size: 10pt;
+            padding: 8px;
+            font-weight: bold;
+
+        }
+
+        .date{
+            font-weight: bold;
+            font-size: 18pt;
+            text-align: center;
+
+        }
+
+        .center{
+           
+            padding: 8px;
+        }
+    
+        .reserva{
+            margin-top: 4vh;
+            width: 75vw;
+            height: 7vh;
+            --border-radius: 50px;
+            --background: var(--ion-color-tertiary);
+            text-transform: none;
+            color: white;
+            
+            margin-bottom: 2vh;
+        }
+        .reserva2{
+            margin-top: 4vh;
+            width: 85vw;
+            height: 7vh;
+            --border-radius: 15px;
+            --background: white;
+            text-transform: none;
+            color: black;
+            
+            margin-bottom: 2vh;
+        }
+    }
+    
+    ion-label{
+        padding-left: 8px;
+    }
+
+    ion-checkbox{
+        --size: 15px
+    }
+  
+   
+    
+}

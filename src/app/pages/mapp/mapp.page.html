@@ -1,0 +1,74 @@
+<ion-header>
+  <div *ngIf="!isIos" class="barraSuperior">
+    <ion-row class="row-barraSuperior">
+      <ion-col class="col-btn-atras"> </ion-col>
+      <img id="btn_atras" src="assets/imgs/Group 114.png" (click)="back()" />
+      <ion-col style="text-align: center; margin-top: 20px">
+        <img style="width: 110px" src="assets/imgs/logo_name.svg" />
+      </ion-col>
+
+      <ion-col class="col-btn-ajustes">
+        <ion-button id="btnAjustes" color="primary" (click)="ajustes()">
+          <ion-icon src="/assets/icons/search 1.svg"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="isIos" class="barraSuperior" style="padding-top: 15px">
+    <ion-row class="row-barraSuperior">
+      <ion-col class="col-btn-atras" size="2"></ion-col>
+      <img id="btn_atras" src="assets/imgs/Group 114.png" (click)="back()" />
+
+      <ion-col style="text-align: center">
+        <img style="width: 110px" src="assets/imgs/logo_name.svg" />
+      </ion-col>
+
+      <ion-col class="col-btn-ajustes" size="2">
+        <ion-button id="btnAjustes" color="primary" (click)="ajustes()">
+          <ion-icon src="/assets/icons/search 1.svg"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="divMap">
+    <!--Mapa-->
+    <div id="map_canvas">
+      <!-- <ion-button class="btnPlus" color="light"> -->
+      <!-- <img class="icono_input" src="assets/icons/locate2.png" /> -->
+      <!-- </ion-button> -->
+
+      <!-- <img
+        class="icono_street"
+        src="assets/icons/street.png"
+        routerLink="/mapa-street"
+      /> -->
+    </div>
+  </div>
+
+  <!-- <div class="divBajo">
+    <img id="barra" src="assets/icons/linea.png" />
+
+    <ion-item color="primary" lines="none">
+      <ion-row>
+        <ion-col class="col-info">
+          <p id="localizacion">{{miDireccion}}</p>
+          <p id="informacion">16k memories from 726 people</p>
+        </ion-col>
+      </ion-row>
+
+      <img
+        id="direccion"
+        src="assets/imgs/Flecha.png"
+        routerLink="/mapa-seleccion"
+      />
+    </ion-item>
+
+    <ion-item lines="none" class="item-btn" color="primary">
+      <ion-button color="dark">Upload memories</ion-button>
+    </ion-item>
+  </div> -->
+</ion-content>

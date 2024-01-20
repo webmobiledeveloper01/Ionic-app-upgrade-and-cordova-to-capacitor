@@ -1,0 +1,28 @@
+<ion-grid class="wrap-grid">
+  <ion-row class="user-row">
+    <ion-col (click)="GoToProfile(User)" size="3"
+      ><ion-avatar><img src="{{ User.avatar }}" alt="" /></ion-avatar
+    ></ion-col>
+    <ion-col>
+      <ion-grid>
+        <ion-row>
+          <p>{{ User.name }} <span *ngIf="User.IsCurrentUser">(Tú)</span></p>
+        </ion-row>
+        <ion-row *ngIf="!User.IsCurrentUser">
+          <ion-button
+            *ngIf="NoFollow || isFollower"
+            class="ion-text-wrap follow-btn"
+            (click)="EmitFollow()"
+            >Seguir</ion-button
+          >
+          <ion-button
+            (click)="EmitUnfollow()"
+            *ngIf="isMutual || youFollow"
+            class="ion-text-wrap unfollow-btn"
+            >Dejar de seguir</ion-button
+          ></ion-row
+        >
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ion-grid>

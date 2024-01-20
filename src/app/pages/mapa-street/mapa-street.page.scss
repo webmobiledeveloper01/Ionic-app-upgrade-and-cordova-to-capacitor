@@ -1,0 +1,142 @@
+ion-content{
+    .divMap2{
+
+        #pano_canvas1{
+            height: 680px;
+            width: 100%;
+
+        }
+    }
+
+    .divBajo{
+        background-color: var(--ion-color-primary);
+        align-items: center;
+        #barra{
+            
+            background-color: var(--ion-color-primary);
+            height: 20px;
+            width: 60px;
+        }
+
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        ion-item{
+            display: flex;
+            flex-flow: row;
+
+            ion-row{
+                
+                ion-col.col-info{
+                    #localizacion{
+                    font-weight: 700;
+                    font-family: "Canela";
+                    color: black;
+                    
+                    }
+                    #informacion{
+                        font-family: "Alliance No.1";
+                        color: black;
+                    }
+                }
+
+            }
+
+            #direccion{
+                margin-left: 40px;
+                max-height: 40px;
+            }
+        }
+
+       
+        
+        ion-col.col-imagenes{
+          
+            background-color: #f4f4ee;
+
+            ion-slides{
+                
+                background-color: #f4f4ee;
+
+                ion-slide.slide-publicacion{
+                    background-color: #f4f4ee;
+                    width: 100%;
+                    display: flex;
+                    flex-flow: column;
+                    
+
+
+                    #imagen1{
+                        background-color:#f4f4ee ;
+                        margin-left: -107px;
+                        margin-top: 8px;
+                        width: 341px;
+                        height: 440px;
+                        
+
+                    }
+                
+                
+
+                    #texto-pie-imagen{
+                        color: black;
+                        font-size: 17px;
+                        font-family: "Alliance No.1";
+                        font-weight: 500;
+                        font-style: normal;
+                        margin-left: -218px;
+                    }
+
+                    #texto-fecha-lugar-imagen{
+                        color: #5C4B51;
+                        font-size: 14px;
+                        font-family: "Alliance No.1";
+                        font-weight: 400;
+                        font-style: normal;
+                        margin-left: -140px;
+                    }
+
+
+                    //Imagen B-boys
+                    #imagen2{
+                        margin-left: -100px;
+                        width: 341px;
+                        height: 457px;
+
+                    }
+
+
+                    
+                    #texto-pie-imagen2{
+                        color: black;
+                        font-size: 17px;
+                        font-family: "Alliance No.1";
+                        font-weight: 500;
+                        font-style: normal;
+                        margin-left: -287px;
+                    }
+
+                    #texto-fecha-lugar-imagen2{
+                        color: #5C4B51;
+                        font-size: 14px;
+                        font-family: "Alliance No.1";
+                        font-weight: 400;
+                        font-style: normal;
+                        margin-left: -140px;
+                    }
+
+
+                }
+
+
+            }
+
+        }
+        
+
+
+
+
+    }
+}

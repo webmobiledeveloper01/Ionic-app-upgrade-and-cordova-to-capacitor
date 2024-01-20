@@ -1,0 +1,39 @@
+ion-grid {
+
+
+    ion-row {
+        border-radius: 10pt;
+
+        ion-label {
+            margin: 10px;
+            padding: 10px;
+            font-style: italic;
+            font-family: Alliance;
+            letter-spacing: 0.1px;
+        }
+
+
+        ion-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-button {
+                ion-icon {
+
+                    color: rgb(145, 97, 25);
+                    font-size: 20px;
+
+                }
+
+            }
+
+
+        }
+    }
+
+    ion-row.custom {
+        background: #cebc99;
+    }
+
+}

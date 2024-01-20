@@ -1,0 +1,410 @@
+ion-content {
+    // --background: #FAF5F0;
+
+    ion-button {
+        --box-shadow: none !important;
+    }
+
+    ion-datetime.duracion-date {
+        --placeholder-color: #AD907A;
+        background: #F1EAE0;
+        border-radius: 10pt;
+        width: 100%;
+
+    }
+
+    .option-wrap {
+
+        display: flex;
+        justify-content: space-between;
+        margin: 10%;
+
+    }
+
+    // --background: #fdec0014;
+
+    .visibility-row {
+        display: flex;
+        flex-flow: column;
+        font-family: "Alliance";
+        font-size: 13px;
+
+        .visibility-row-inner {
+            display: flex;
+            flex-flow: row;
+            font-family: "Alliance";
+            font-size: 13px;
+
+            ion-col {
+
+                ion-chip.uno {
+                    // min-width: 80%;
+                    min-height: 80%;
+                    display: flex;
+                    border-radius: 20pt;
+                    justify-content: center;
+                    background: #F1EAE0;
+                    color: #AC927C;
+                    font-family: "Alliance";
+                    font-size: 13px;
+                }
+
+                ion-chip.dos {
+                    // min-width: 80%;
+                    min-height: 80%;
+                    display: flex;
+                    border-radius: 20pt;
+                    justify-content: center;
+                    background: #F2C388;
+                    color: #AC927C;
+                    font-family: "Alliance";
+                    font-size: 13px;
+                }
+
+            }
+        }
+    }
+
+    .inner-custom {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .contenedor {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .titulo-pagina {
+            display: flex;
+            margin-top: 2.5vh;
+            width: 100vw;
+
+            ion-row.row-titulo-pagina {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                flex-flow: row;
+
+                //columna 1
+                ion-col.col-titulo-decorado1 {
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+                    max-width: 83px;
+
+                    #cuadrante_puntos {
+                        padding-left: 0;
+                        margin-top: 40px;
+                        height: 60%;
+                        width: 35%;
+                        margin-left: -20px;
+                    }
+
+                }
+
+                //Columna 2
+                ion-col.col-titulo-pagina {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    max-width: 190px;
+                    min-width: 120px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    #titulo-uno {
+                        color: black;
+                        font-size: 18px;
+                        font-weight: 400;
+                        vertical-align: middle;
+                        text-align: center;
+                        font-family: "Canela";
+                        // margin-top: -5px;
+                    }
+
+                    #titulo-dos {
+                        color: black;
+                        font-size: 18px;
+                        font-weight: 400;
+                        vertical-align: middle;
+                        text-align: center;
+                        font-family: "Canela";
+                        margin-top: 21px;
+                    }
+                }
+
+                ion-col.col-titulo-decorado2 {
+                    position: relative;
+                    max-width: 83px;
+
+                    #perfil_estrella1 {
+                        position: absolute;
+                        top: 25px;
+                        right: 48px;
+                    }
+
+                    #perfil_estrella2 {
+                        position: absolute;
+                        top: 48px;
+                        right: 30px;
+                    }
+
+                    #perfil_estrella3 {
+                        position: absolute;
+                        top: 18px;
+                        right: 20px;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+    ion-button {
+        font-family: "Alliance";
+        font-size: 13px;
+        letter-spacing: 0.1px;
+        color: #CCB8A7;
+    }
+
+    ion-chip {
+        font-family: "Alliance";
+        font-size: 13px;
+        letter-spacing: 0.1px;
+
+    }
+
+    ion-chip.custom {
+        // min-width: 80%;
+        min-height: 80%;
+        display: flex;
+        border-radius: 20pt;
+        justify-content: center;
+        background: #F3B562 !important;
+        color: #ffffff !important;
+    }
+
+    ion-input {
+        padding: 10px !important;
+    }
+
+    .form-wrap {
+
+        // border: 1px solid black;
+        width: 80vw;
+        margin: 5% auto;
+
+        .wrap-grid {
+
+            ion-input {
+                color: black;
+                --placeholder-color: #B0947F;
+                --background: #F1EAE0;
+                border-radius: 10pt;
+
+            }
+
+            ion-label {
+                color: black;
+                font-family: "Alliance";
+                font-size: 13px;
+                margin-left: 5%;
+            }
+
+            ion-row {
+                margin-bottom: 5%;
+                display: flex;
+                flex-flow: column;
+                font-family: "Alliance";
+                font-size: 13px;
+            }
+
+            .row-title {
+                font-family: "Alliance";
+                font-size: 13px;
+            }
+
+            .row-description {
+                .eliminar-img {
+                    ion-button {
+                        --background: red;
+                        position: relative;
+                        left: 60vw;
+                        font-size: 4.5vw;
+                        // z-index: 999;
+                        border-radius: 50%;
+
+                    }
+                }
+
+                .upload-img {
+                    max-height: 35vh;
+                    max-width: 50vw;
+                    margin: 5% auto;
+                }
+            }
+
+            .row-category {
+
+
+                .chip-wrap {
+                    min-width: 30%;
+                    max-width: 30%;
+                    min-height: 5.5vh;
+                    margin-bottom: 1vh;
+                }
+
+                .chip-row {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+
+                    ion-chip {
+                        min-width: 100%;
+                        min-height: 100%;
+                        border-radius: 20pt;
+                        display: flex;
+                        justify-content: center;
+                        background: #F1EAE0;
+                        color: #AC927C;
+                    }
+                }
+
+
+
+
+            }
+
+            .row-type {
+                .map-row {
+                    display: flex;
+                    flex-flow: column;
+                    min-height: 30vh;
+                    color: #FFFFFF;
+                    font-family: "Alliance";
+                    font-size: 13px;
+
+
+                    .autocompleteItems {
+                        width: 100%;
+                        background: antiquewhite;
+                        border-radius: 10pt;
+
+                        ion-list {
+
+                            padding: 0;
+
+                            ion-item.border {
+                                margin: 5% auto;
+                                /* box-shadow: 0px 0px 41px 0px #000000; */
+                                /* border-radius: 10pt; */
+                                border-bottom: 1px solid rgba(#000000, 0.15);
+                            }
+
+                            ion-item.noborder {
+                                margin: 5% auto;
+                                /* box-shadow: 0px 0px 41px 0px #000000; */
+                                /* border-radius: 10pt; */
+                            }
+
+                            ion-item::nthLastChild() {
+                                border-bottom: 0;
+                            }
+
+
+
+                        }
+                    }
+                }
+            }
+
+            .map-wrap {
+                min-width: 90%;
+
+                // border: 1px solid red;
+                min-height: 40vh;
+                max-height: 50vh;
+
+
+
+                #map-div {}
+            }
+
+        }
+
+
+        ion-row {
+            display: flex;
+            flex-flow: row;
+        }
+
+
+        ion-input {
+            color: black;
+            --placeholder-color: #B0947F;
+            --background: #F1EAE0;
+            border-radius: 10pt;
+
+        }
+
+        ion-col {
+            // display: flex;
+            // justify-content: center;
+            min-height: 7.5vh;
+
+            ion-datetime {
+                color: black;
+                --placeholder-color: #B0947F;
+                background: #FFFFFF;
+                border-radius: 10pt;
+
+            }
+
+            ion-select {
+                color: black;
+                --placeholder-color: #B0947F;
+                background: #FFFFFF;
+                border-radius: 10pt;
+
+
+            }
+
+            ion-chip {
+                // min-width: 80%;
+                min-height: 80%;
+                display: flex;
+                border-radius: 20pt;
+                justify-content: center;
+                background: #F1EAE0;
+                color: #AC927C;
+            }
+
+
+        }
+    }
+
+
+
+
+
+    .row-btn {
+
+
+        .btn-create-tres {
+            --background: #F3B562;
+            width: 100%;
+            --border-radius: 10pt;
+            margin: 0 auto;
+            font-family: Canela;
+            color: black !important;
+            font-size: 14px;
+            height: 40px;
+        }
+    }
+
+}

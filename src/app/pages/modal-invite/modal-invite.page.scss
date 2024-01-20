@@ -1,0 +1,55 @@
+ion-content {
+
+
+
+    .friends {
+
+        .btn-wrap {
+            ion-button {
+                width: 80%;
+                margin: 5% auto;
+                --background: #ff8400;
+                --color: black;
+            }
+            ion-button.cancel{
+                width: 80%;
+                margin: 5% auto;
+                --background: #333333;
+                --color: rgb(255, 255, 255);
+            }
+        }
+        .list-wrap {
+
+            ion-list {
+                width: 90%;
+                margin: 5% auto;
+                background: transparent;
+
+                ion-item {
+                    --background: #fff0;
+                    margin: 5% auto;
+                }
+
+                app-select-user {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .nofriends {
+
+        width: 90%;
+        margin: 5% auto;
+        margin-top: 5%;
+        color: black;
+        margin-top: 20vh;
+
+        ion-button.cancel{
+            width: 80%;
+            margin: 15% auto;
+            --background: #333333;
+            --color: rgb(255, 255, 255);
+        }
+    }
+}

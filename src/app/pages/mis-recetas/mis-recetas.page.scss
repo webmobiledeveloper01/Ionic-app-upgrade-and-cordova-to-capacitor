@@ -1,0 +1,141 @@
+ion-content {
+    .main-wrap {
+        margin-bottom: 0px;
+        height: 130px;
+
+        .top-wrap {
+
+            margin: 10% auto;
+
+            .inner-top-left-wrap {
+                margin-left: 0%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .btn-atras {
+                    position: absolute;
+                    margin-left: 10%;
+                }
+
+            }
+
+            .inner-top-mid-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+
+                .title-label {
+                    text-align: center;
+                    color: #333;
+                    font-size: 25px;
+                    font-family: "Canela";
+                    font-weight: 700;
+
+                }
+
+            }
+
+            .inner-top-right-wrap {
+                .star-wrap {
+                    width: 50%;
+                    margin: auto;
+                    padding-right: 0px;
+                    padding-left: 0px;
+
+                    ion-grid {
+                        display: flex;
+                        flex-flow: column;
+
+                        .star-top {
+                            justify-content: flex-start;
+                        }
+
+                        .star-mid {
+                            justify-content: flex-end;
+                        }
+
+                        .star-bot {
+                            justify-content: flex-start;
+                        }
+
+
+
+
+                    }
+                }
+
+            }
+
+
+
+
+
+        }
+    }
+
+
+    .body-wrap {
+
+        .no-recipes-wrap {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .void-text {
+                font-size: 4.5vh;
+                text-align: center;
+                font-family: Alliance;
+            }
+
+        }
+
+
+        .grid-wrap {
+
+            // ion-grid {
+
+
+            .recipe-wrap {
+                width: 90%;
+                margin: auto;
+
+            }
+
+            ion-row {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+
+                ion-col {
+                    display: flex;
+                    flex-direction: column;
+                    flex-basis: 100%;
+                    flex: 1;
+                    max-width: 44vw;
+                    justify-content: center;
+                    align-items: center;
+                    max-height: 40vh;
+                    min-height: 40vh;
+                    
+
+                    app-recetas{
+                        width: 100%;
+                    }
+                }
+
+                .recipe {
+                    height: 100%;
+                }
+            }
+
+            // }
+        }
+
+
+    }
+
+}

@@ -1,0 +1,395 @@
+<!-- <ion-header class="ion-text-center">
+  <ion-toolbar color="dark">
+    <img src="assets/imgs/Logo white 1.png"/>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-text-center" color="primary">
+
+  <div class="contenido">
+
+    <ion-list>
+      
+      <!--Publicacion numero1-->
+      <ion-row>
+
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil">
+          <img class="imagen-atras" src="assets/icons/Group 114.png" (click)="back()"/>
+        </ion-col>
+
+        <ion-item>
+
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+
+            <!--Nombre-->
+            <ion-label class="nombre-lugar">
+              {{miDireccion}}
+            </ion-label>
+
+
+            <!--Fecha-->
+            <ion-label class="informacion">
+              16K memories from 726 people
+            </ion-label>
+
+          </ion-col>
+          
+        </ion-item>
+
+
+      </ion-row>
+
+
+      <!--Publicacion numero2-->
+      <ion-row *ngFor="let publicacion of publicaciones">
+
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil">
+          <img class="imagen-perfil" [src]="publicacion?.usuario.avatar"/>
+          <!-- <p class="fecha-grande">1972</p> -->
+        </ion-col>
+
+        <ion-item>
+
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+
+            <!--Nombre-->
+            <ion-label class="nombre-perfil">
+              {{publicacion?.usuario.name}}
+            </ion-label>
+
+            <ion-row class="row-fecha-rango">
+              <!--Fecha-->
+              <ion-label class="fecha-publicacion">
+                {{publicacion?.created_at}}
+              </ion-label>
+
+              <!-- <ion-label class="rango">
+                Retro storyteller
+              </ion-label> -->
+            </ion-row>
+
+            <!--Texto-->
+            <ion-col class="col-texto-publicacion">
+              <ion-label class="texto-publicacion ion-text-wrap">
+                {{publicacion?.descripcion}}
+              </ion-label>
+            </ion-col>
+
+            <!-- <p class="fecha-grande">1972</p> -->
+            <img class="imagen-publicacion" [src]="publicacion?.archivo"/>
+
+            <ion-row class="row-acciones">
+              <ion-icon class="meGusta-publicacion" src="assets/icons/meGusta.svg" (click)="megustas(publicacion?.id)"></ion-icon>
+              <ion-icon class="meGusta-publicacionRojo" src="assets/icons/meGustaRojo.svg"></ion-icon>
+              <p id="megusta-numero">{{publicacion?.megustas}}</p>
+
+              <ion-icon class="comentario-publicacion" src="assets/icons/comentario.svg"></ion-icon>
+              <p id="comentario-numero">{{publicacion?.comentarios}}</p>
+
+            </ion-row>
+
+          </ion-col>
+          
+        </ion-item>
+
+
+      </ion-row>
+
+     
+
+     
+
+
+      <!--Publicacion publicidad-->
+      <ion-row>
+        <ion-item class="publicidad">
+          <img class="imagen-publicidad" src="assets/imgs/Group 939-2.png"/>
+        </ion-item>
+      </ion-row>
+
+       <!--Publicacion numero4-->
+      <ion-row>
+
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil">
+          <img class="imagen-perfil" src="assets/imgs/image 206.png"/>
+        </ion-col>
+
+        <ion-item>
+
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+
+            <!--Nombre-->
+            <ion-label class="nombre-perfil">
+              Victoria O’Connel
+            </ion-label>
+
+            <!--Fecha-->
+            <ion-label class="fecha-publicacion">
+              10 jul
+            </ion-label>
+
+            <!--Texto-->
+            <ion-col class="col-texto-publicacion">
+              <ion-label class="texto-publicacion ion-text-wrap">
+                It is important to know that the term b-boy cannot be used for an emcee, DJ or rapper. Only breakers can be called b-boys.
+              </ion-label>
+            </ion-col>
+             <img class="imagen-publicacion_adaptada" src="assets/imgs/personas2.png"/>
+
+            <ion-row class="row-acciones">
+              
+              <ion-icon class="meGusta-publicacion" src="assets/icons/meGusta.svg"></ion-icon>
+              <ion-icon class="meGusta-publicacionRojo" src="assets/icons/meGustaRojo.svg"></ion-icon>
+              <p id="megusta-numero">32</p>
+
+              <ion-icon class="comentario-publicacion" src="assets/icons/comentario.svg"></ion-icon>
+              <p id="comentario-numero">5</p>
+
+            </ion-row>
+
+          </ion-col>
+          
+        </ion-item>
+
+
+      </ion-row>
+
+      <!--Publicacion numero5-->
+      <ion-row>
+
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil">
+          <img class="imagen-perfil" src="assets/imgs/image 205.png"/>
+        </ion-col>
+
+        <ion-item lines="none">
+
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+
+            <!--Nombre-->
+            <ion-label class="nombre-perfil">
+              Derrick Johnson
+            </ion-label>
+
+            <!--Fecha-->
+            <ion-label class="fecha-publicacion">
+              12 jul
+            </ion-label>
+
+            <!--Texto-->
+            <ion-col class="col-texto-publicacion">
+              <ion-label class="texto-publicacion ion-text-wrap">
+                My grandma always said: “Don’t sit on cold concrete, you’ll catch a cold on your kindeys.”
+              </ion-label>
+            </ion-col>
+
+          </ion-col>
+          
+        </ion-item>
+
+
+      </ion-row>
+
+
+       <!--Publicacion numero6-->
+       <ion-row>
+
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil">
+          <img class="imagen-perfil" src="assets/imgs/image 205.png"/>
+        </ion-col>
+
+        <ion-item>
+
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+
+            <!--Nombre-->
+            <ion-label class="nombre-perfil">
+              Derrick Johnson
+            </ion-label>
+
+
+            <!--Fecha-->
+            <ion-label class="fecha-publicacion">
+              14 jul
+            </ion-label>
+
+            <!--Texto-->
+            <ion-col class="col-texto-publicacion">
+              <ion-label class="texto-publicacion ion-text-wrap">
+                Just heard this old song on the radio,
+                reminds me of high school!
+              </ion-label>
+            </ion-col>
+
+            <ion-icon class="audio-publicacion" src="assets/icons/audio.svg"></ion-icon>
+            
+
+            <ion-row class="row-acciones">
+              
+              <ion-icon class="meGusta-publicacion" src="assets/icons/meGusta.svg"></ion-icon>
+              <ion-icon class="meGusta-publicacionRojo" src="assets/icons/meGustaRojo.svg"></ion-icon>
+              <p id="megusta-numero">15</p>
+
+              <ion-icon class="comentario-publicacion" src="assets/icons/comentario.svg"></ion-icon>
+              <p id="comentario-numero">2</p>
+
+            </ion-row>
+
+          </ion-col>
+          
+        </ion-item>
+      </ion-row>
+
+
+
+
+
+
+
+      <!--Publicacion respuesta-->
+      <ion-row>
+
+       
+        <ion-col>
+        </ion-col>
+
+        <ion-item class="item-respuesta" lines="none">
+
+          <!--Publicacion Respuesta-->
+          <ion-col class="col-publicacion">
+
+            <ion-row>
+              <ion-col class="col-perfil-respuesta">
+                <img class="imagen-perfil" src="assets/imgs/image 206.png"/>
+              </ion-col>
+
+
+              <ion-col>
+
+                <ion-label class="nombre-perfil-respuesta">
+                  Victoria O’Connel
+                </ion-label>
+
+                  <!--Fecha-->
+                <ion-label class="fecha-publicacion">
+                  14 jul
+                </ion-label>
+
+                <!--Texto-->
+                <ion-label class="texto-publicacion ion-text-wrap">
+                  Love this song! 🔥
+                </ion-label>
+
+              </ion-col>
+
+            </ion-row>
+
+        
+          </ion-col>
+          
+        </ion-item>
+      </ion-row>
+
+
+      <!--Publicacion respuesta de despuesta-->
+      <ion-row>
+
+       
+        <ion-col>
+        </ion-col>
+        
+
+        <ion-item class="item-respuesta-respuesta" lines="none">
+
+          
+
+          <!--Publicacion Respuesta-->
+          <ion-col class="col-publicacion">
+
+            <ion-row>
+              <ion-col class="col-perfil">
+                <img class="imagen-perfil" src="assets/imgs/image 205.png"/>
+              </ion-col>
+
+
+              <ion-col>
+
+                <ion-label class="nombre-perfil">
+                  Derrick Johnson
+                </ion-label>
+
+                  <!--Fecha-->
+                <ion-label class="fecha-publicacion">
+                  14 jul
+                </ion-label>
+
+                <!--Texto-->
+                <ion-label class="texto-publicacion ion-text-wrap">
+                  Best 80’s song ever! 🎵
+                </ion-label>
+
+              </ion-col>
+
+            </ion-row>
+
+        
+          </ion-col>
+          
+        </ion-item>
+      </ion-row>
+
+
+      <ion-row>
+
+        <ion-col>
+
+        </ion-col>
+
+        <ion-row class="row-input">
+
+          
+  
+          <ion-item lines="none">
+            <ion-col class="col-perfil">
+              <img class="imagen-perfil" src="assets/imgs/image 205.png"/>
+            </ion-col>
+            
+            <ion-col class="col-input">
+              <ion-item lines="none" >
+                <ion-input  class="class-input" placeholder="Write a comment..."></ion-input>
+                <ion-icon  src="assets/icons/Group 825.svg"></ion-icon>
+              </ion-item>
+            </ion-col>
+  
+          </ion-item>
+          
+  
+        </ion-row>
+
+      </ion-row>
+
+
+    
+
+
+
+
+
+
+
+
+    </ion-list>
+
+  </div>
+
+
+</ion-content>

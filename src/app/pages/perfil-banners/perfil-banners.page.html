@@ -1,0 +1,139 @@
+<app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
+
+<ion-content color="primary" *ngIf="!isLoading">
+  <ion-grid class="main-wrap">
+    <ion-row class="top-wrap">
+      <ion-col class="inner-top-left-wrap">
+        <!-- <img
+          class="btn-atras"
+          src="assets/imgs/Group 114.png"
+          (click)="back()"
+        /> -->
+        <img id="ondas_imagen" src="assets/imgs/Group 125.png" />
+      </ion-col>
+      <ion-col class="inner-top-mid-wrap">
+        <img src="assets/imgs/logo_name.svg" /></ion-col>
+      <ion-col class="inner-top-right-wrap">
+        <div class="star-wrap">
+          <ion-grid>
+            <ion-row class="star-top"><img id="perfil_estrella1" src="assets/imgs/Star 2.png" /></ion-row>
+            <ion-row class="star-mid"><img id="perfil_estrella2" src="assets/imgs/Star 3.png" /></ion-row>
+            <ion-row class="star-bot"><img id="perfil_estrella3" src="assets/imgs/Star 4.png" /></ion-row>
+          </ion-grid>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="profile-wrap">
+      <ion-row class="avatar-row"><img id="perfil_imagen" [src]="user?.avatar" /></ion-row>
+
+      <ion-grid class="data-grid">
+        <ion-row class="user-name-row">
+          <p class="user-name-label">
+            {{user?.name}} <ion-icon mode="md" name="medal"></ion-icon>
+          </p>
+        </ion-row>
+
+        <ion-row class="data-grid-inner-From">
+          <!-- <ion-col size="3" class="icon-col"><ion-icon src="../../../assets/icons/Inglaterra.svg" ></ion-icon></ion-col>
+          <ion-col><p class="address">London, Baker Street 13</p></ion-col> -->
+
+          <ion-col class="icon-col" size="3" *ngIf="user.user_flag">{{getFlagEmoji(user.user_flag)}}</ion-col>
+          <ion-col *ngIf="user.user_location">
+            <p class="address">{{user.user_location}}</p>
+          </ion-col>
+
+          <ion-col class="icon-col" size="3" *ngIf="!user.user_flag"> </ion-col>
+          <ion-col *ngIf="!user.user_location">
+            <p class="address">Aun no has añadido una localizacion</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="data-grid-inner-Description">
+          <!-- <label id="texto_usuario"
+            >“Remembering my childhood at my family country house gives me a
+            sense of belonging and nourishes my present experience.”</label
+          > -->
+          <label *ngIf="user?.description" id="texto_usuario">{{user?.description}}
+          </label>
+
+          <label *ngIf="!user?.description" id="texto_usuario">Aún no has añadido ninguna descripción
+          </label>
+        </ion-row>
+        <ion-row class="data-grid-inner-Pin">
+          <ion-button routerLink="/crear-pin"> Activar pin oficial </ion-button>
+          <ion-button routerLink="/profile"> Editar perfil</ion-button>
+          <ion-button routerLink="/subir-banner">Subir banner</ion-button>
+          <ion-button (click)="GoToIntranet()">Ir a la intranet</ion-button>
+          <!-- (click)="utils.showAlert('En mantenimiento','En proceso')" -->
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+  </ion-grid>
+
+  <div class="body-wrap">
+    <div class="title-wrap" style="color: black">
+      <p>Banners</p>
+    </div>
+    <div class="banner-list-wrap" (click)="GoToBanners()">
+      <ion-slides class="slider-wrap" *ngIf="!NoBanners">
+        <ion-slide class="slide-img" *ngFor="let b of banners">
+          <img src="{{b.imagen}}" />
+        </ion-slide>
+      </ion-slides>
+
+      <div class="NoBanners" *ngIf="NoBanners">
+        <p>Aun no has subido ningun banner</p>
+      </div>
+    </div>
+
+    <div class="banner-list-wrap">
+      <div class="title-wrap" style="color: black">
+        <p>Publicaciones</p>
+      </div>
+      <ion-row class="Year-slides">
+        <ion-slides class="slider-wrap">
+          <!-- (ionSlideDidChange)="sliderChanges($event,post)" -->
+          <ion-slide class="slide-img" *ngFor="let p of posts" style="width: auto">
+            <!-- <ion-icon
+              class="cerrar"
+              src="assets/icon/eliminar.svg"
+              (click)="borrarPublicacion(1)"
+            ></ion-icon> -->
+            <ion-icon class="delete-icon" (click)="borrarPublicacion(p.id)" name="trash"></ion-icon>
+
+            <!-- <img src="assets/imgs/image 202.png" /> -->
+            <img src="{{p.archivo}}" *ngIf="p.tipo_archivo==1" (click)="GoDetails(p)" />
+
+            <div class="audio-player" *ngIf="p.tipo_archivo == 3">
+              <audio controls controlsList="nodownload">
+                <source src="{{ p.archivo }}" type="audio/mpeg" />
+              </audio>
+            </div>
+
+            <div *ngIf="p.tipo_archivo==2" class="player">
+              <!-- <ion-icon
+                style="font-size: 30px; color: red"
+                name="play-circle"
+              ></ion-icon> -->
+              <!-- (click)="playVideo(publicacion?.archivo)" -->
+              <!-- <p>{{publicacion?.archivo}}</p> -->
+
+              <video playsinline class="video" [src]="p?.archivo" controls controlsList="nodownload"
+                disablePictureInPicture autofullscreen="false"></video>
+            </div>
+
+            <div class="text-wrap" (click)="GoDetails(p)">
+              <label id="texto-pie-imagen2">{{p.titulo}}</label>
+              <label id="texto-fecha-lugar-imagen2">{{p.fecha | date:"dd/MM/yy"}}
+                <span *ngIf="p.ubicacion">- {{p.ubicacion}}</span></label>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+    </div>
+
+    <div class="NoPosts" *ngIf="posts.length < 1">
+      <p class="noposts-label">Aún no hay publicaciones subidas</p>
+    </div>
+  </div>
+</ion-content>

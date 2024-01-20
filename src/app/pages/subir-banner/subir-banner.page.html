@@ -1,0 +1,221 @@
+<ion-content>
+  <ion-row class="top-wrap">
+    <ion-col size="3" class="inner-top-left-wrap">
+      <img
+        class="btn-atras"
+        src="assets/imgs/Group 114.png"
+        (click)="GoBack()"
+      />
+      <img id="ondas_imagen" src="assets/imgs/Group 125.png" />
+    </ion-col>
+    <ion-col size="6" class="inner-top-mid-wrap">
+      <!-- <img src="assets/imgs/logo_name.svg"
+    /> -->
+      <p>Subir Banner</p>
+    </ion-col>
+    <ion-col size="3" class="inner-top-right-wrap">
+      <div class="star-wrap">
+        <ion-grid>
+          <ion-row class="star-top"
+            ><img id="perfil_estrella1" src="assets/imgs/Star 2.png"
+          /></ion-row>
+          <ion-row class="star-mid"
+            ><img id="perfil_estrella2" src="assets/imgs/Star 3.png"
+          /></ion-row>
+          <ion-row class="star-bot"
+            ><img id="perfil_estrella3" src="assets/imgs/Star 4.png"
+          /></ion-row>
+        </ion-grid>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+    <ion-grid class="form-wrap">
+      <ion-row class="input-row">
+        <ion-row class="label-row">
+          <p class="input-label">Nombre del usuario o empresa</p>
+        </ion-row>
+        <ion-row class="input-row-inner"
+          ><ion-input
+            placeholder="Escribe aqui"
+            formControlName="nombre"
+          ></ion-input
+        ></ion-row>
+      </ion-row>
+
+      <ion-row class="input-row">
+        <ion-row class="label-row">
+          <p class="input-label">Duracion del banner</p>
+        </ion-row>
+        <ion-row class="input-row-inner">
+          <ion-datetime
+            placeholder="Fecha de duracion del banner"
+            pickerFormat="DD-MM-YYYY"
+            displayFormat="DD-MM-YYYY"
+            formControlName="Duracion"
+            min="{{ SetMinDate }}"
+            max="{{maxYear}}"
+          ></ion-datetime>
+        </ion-row>
+      </ion-row>
+
+      <ion-row class="input-row">
+        <ion-row class="label-row">
+          <p class="input-label">Descripción del banner</p>
+        </ion-row>
+        <ion-row class="input-row-inner"
+          ><ion-input
+            placeholder="Escribe aqui"
+            formControlName="descripcion"
+          ></ion-input
+        ></ion-row>
+      </ion-row>
+
+      <ion-row class="input-row" *ngIf="base64img === undefined">
+        <ion-row class="label-row">
+          <p class="input-label">Elige el logo del banner</p>
+        </ion-row>
+        <ion-row class="input-row-inner">
+          <ion-button class="upload-btn" (click)="adjuntarImagen()">
+            <div class="inner-button">
+              <p>Selecciona una imagen a subir</p>
+              <ion-icon name="filing"></ion-icon>
+            </div>
+          </ion-button>
+        </ion-row>
+      </ion-row>
+
+      <ion-row class="img-preview-row" *ngIf="base64img != undefined">
+        <div class="img-wrap">
+          <img src="{{base64img}}" alt="" srcset="" />
+        </div>
+        <div class="btn-wrap">
+          <ion-button (click)="deleteImage()"
+            ><p>Eliminar imagen</p></ion-button
+          >
+          <ion-button (click)="openCropImageModal()"
+            ><p>Ajustar imagen</p></ion-button
+          >
+        </div>
+      </ion-row>
+
+      <ion-row class="input-row">
+        <ion-row class="label-row">
+          <p class="input-label">Delimita zona geográfica de tu audiencia</p>
+        </ion-row>
+        <ion-row class="input-row-inner-grid">
+          <ion-grid class="select-grid">
+            <ion-row class="select-row">
+              <!-- (click)="SelectorEvent($event,1)"  -->
+              <ion-col class="select-col"
+                ><ion-button
+                  (click)="SelectorEvent($event, 1)"
+                  class="input-like-select"
+                  ><div class="inn-button">
+                    <div class="text-div">
+                      <p *ngIf="BannerType != 1">Pais</p>
+                      <p *ngIf="BannerType == 1 && BannerLocation != undefined">
+                        {{BannerLocation}}
+                      </p>
+                    </div>
+
+                    <div>
+                      <ion-icon name="arrow-down" mode="ios"></ion-icon>
+                    </div>
+                  </div> </ion-button
+              ></ion-col>
+              <ion-col class="select-col"
+                ><ion-button
+                  (click)="SelectorEvent($event, 2)"
+                  class="input-like-select"
+                  ><div class="inn-button">
+                    <div class="text-div">
+                      <p *ngIf="BannerType != 2">Región</p>
+                      <p
+                        *ngIf="BannerType === 2 && BannerLocation != undefined"
+                      >
+                        {{BannerLocation}}
+                      </p>
+                    </div>
+
+                    <div>
+                      <ion-icon name="arrow-down" mode="ios"></ion-icon>
+                    </div>
+                  </div> </ion-button
+              ></ion-col>
+            </ion-row>
+            <ion-row class="select-row">
+              <ion-col class="select-col"
+                ><ion-button
+                  (click)="SelectorEvent($event, 3)"
+                  class="input-like-select"
+                  ><div class="inn-button">
+                    <div class="text-div">
+                      <p *ngIf="BannerType != 3">Provincia</p>
+                      <p
+                        *ngIf="BannerType === 3 && BannerLocation != undefined"
+                      >
+                        {{BannerLocation}}
+                      </p>
+                    </div>
+
+                    <div>
+                      <ion-icon name="arrow-down" mode="ios"></ion-icon>
+                    </div>
+                  </div> </ion-button
+              ></ion-col>
+              <ion-col class="select-col"
+                ><ion-button
+                  (click)="SelectorEvent($event, 4)"
+                  class="input-like-select"
+                  ><div class="inn-button">
+                    <div class="text-div">
+                      <p *ngIf="BannerType != 4">Población</p>
+                      <p
+                        *ngIf="BannerType === 4 && BannerLocation != undefined"
+                      >
+                        {{BannerLocation}}
+                      </p>
+                    </div>
+
+                    <div>
+                      <ion-icon name="arrow-down" mode="ios"></ion-icon>
+                    </div>
+                  </div> </ion-button
+              ></ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-row>
+      </ion-row>
+
+      <ion-row class="input-row">
+        <ion-row class="label-row">
+          <p class="input-label">Enlace incluido en el banner</p>
+        </ion-row>
+        <ion-row class="input-row-inner-orange">
+          <ion-input
+            formControlName="Url_banner"
+            placeholder="URL de tu banner"
+            type="url"
+          >
+            <!-- <p class="inn-input" style="padding-left: 5px;">{{URLStart}}</p> -->
+          </ion-input></ion-row
+        >
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid class="btn-wrap">
+      <ion-row class="btn-row">
+        <ion-button type="submit" class="btn-submit">
+          <p>Subir banner</p>
+        </ion-button>
+      </ion-row>
+      <!-- <ion-row class="btn-row">
+    <ion-button class="btn-submit" >
+      <p>Hacer donación</p>
+    </ion-button>
+  </ion-row> -->
+    </ion-grid>
+  </form>
+</ion-content>

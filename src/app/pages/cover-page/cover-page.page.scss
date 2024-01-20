@@ -1,0 +1,15 @@
+ion-content{
+    
+    ion-slides{
+        .swiper-pagination, .swiper-pagination-bullets{
+            position: absolute;
+            bottom: 41vh !important;
+            z-index: 9999;
+            left: 0;    
+            .swiper-pagination-bullet-active{
+                background: white !important;
+            }
+        }
+        height: 100%;
+    }
+}

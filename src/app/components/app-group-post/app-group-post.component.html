@@ -1,0 +1,87 @@
+<!-- <p coals>
+  app-group-post works!
+</p> -->
+
+<ion-grid>
+  <ion-row class="main-wrap">
+    <ion-col size="2" class="avatar-col">
+      <ion-row>
+        <ion-col class="img-inner-col" (click)="GotoProfile()">
+          <img src="{{ post.user.avatar }}" alt="" />
+        </ion-col>
+        <ion-col
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+          "
+        >
+          <p class="text-fecha">{{ post.decada }}</p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col class="data-col">
+      <ion-row class="text-top">
+        <ion-row class="inner-text-1">
+          <p class="user-name">{{ post.user.name }}</p></ion-row
+        >
+        <ion-row class="inner-text-2">
+          <p class="date">{{ time }}</p>
+        </ion-row>
+        <ion-row class="inner-text-3">
+          <p>{{ post.titulo }}</p>
+          <br />
+          <p>{{ post.descripcion }}</p>
+        </ion-row>
+      </ion-row>
+      <ion-row class="img-row">
+        <div class="img-wrap">
+          <img
+            *ngIf="post.tipo_archivo == 1"
+            src="{{ post.archivo }}"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <div class="audio-player" *ngIf="post.tipo_archivo == 3">
+          <audio controls controlsList="nodownload">
+            <source src="{{ post.archivo }}" type="audio/mpeg" />
+          </audio>
+        </div>
+
+        <div class="video-wrap" *ngIf="post.tipo_archivo == 2">
+          <video playsinline
+            [src]="post?.archivo"
+            controls
+            controlsList="nodownload"
+            disablePictureInPicture
+            autofullscreen="false"
+          ></video>
+        </div>
+      </ion-row>
+      <ion-row class="action-wrap">
+        <ion-row class="action-inner-row">
+          <ion-col class="action-1" *ngIf="!post.isliked">
+            <ion-icon
+              src="../../../assets/icons/custom/like.svg"
+              (click)="pulse($event)"
+            ></ion-icon>
+            <p>{{ post.megustas }}</p></ion-col
+          >
+          <ion-col class="action-1" *ngIf="post.isliked">
+            <ion-icon
+              class="custom"
+              src="../../../assets/icons/custom/like-on.svg"
+              (click)="pulse($event)"
+            ></ion-icon>
+            <p>{{ post.megustas }}</p></ion-col
+          >
+          <ion-col class="action-2" (click)="GoTo()">
+            <ion-icon src="../../../assets/icons/custom/chat.svg"></ion-icon>
+            <p>{{ post.comentarios }}</p></ion-col
+          >
+        </ion-row>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-grid>

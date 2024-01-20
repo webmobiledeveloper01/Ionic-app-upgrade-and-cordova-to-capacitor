@@ -1,0 +1,20 @@
+<ion-header  no-border="no-border">
+  <ion-toolbar style="--background:#F3B562">
+    <ion-buttons slot="start">
+     <!--  <ng-content></ng-content> -->
+     <img style="margin-top: 10%;
+  margin-left: 5%;" id="btn_atras" src="assets/imgs/Group 114.png" (click)="back()"/>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button></ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      <p class="chatName">{{chatName}}</p>
+      <p class="lastMessage">
+        Último mensaje {{lastMessage | date:'h:mm a'}}
+      </p>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

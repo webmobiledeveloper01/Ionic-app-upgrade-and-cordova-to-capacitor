@@ -1,0 +1,166 @@
+<ion-content color="">
+  <!--<ion-label><span>Total </span>{{cartService?.getCart().total_price.toFixed(2)}}€</ion-label>-->
+
+  <div class="flex">
+    <div class="modal">
+      <ion-icon
+        (click)="closeModalSin()"
+        name="close"
+        style="color: black"
+      ></ion-icon>
+      <p class="description">Escribe la dirección donde quieres ir</p>
+
+      <ion-input
+        placeholder="Calle Sol, 50, Jerez de la Frontera"
+        [(ngModel)]="direccion"
+        debounce="500"
+        (ionChange)="GetLocalizaciones()"
+      ></ion-input>
+      <div class="list-addresses" *ngIf="Lugares.length > 0">
+        <ion-list class="addresses-list">
+          <ion-item
+            class="item-list"
+            lines="none"
+            *ngFor="let l of Lugares"
+            (click)="closeModalWithSelected(l)"
+          >
+            <p class="inner-item-text">
+              <span class="item-name" *ngIf="l.areasOfInterest[0]"
+                >{{l.areasOfInterest[0]}},</span
+              >
+              <span class="item-name" *ngIf="l.thoroughfare"
+                >{{l.thoroughfare}},</span
+              >
+              <span class="item-name" *ngIf="l.subLocality"
+                >{{l.subLocality}},</span
+              >
+              <span class="item-name" *ngIf="l.locality"
+                >Ciudad de {{l.locality}},</span
+              >
+              <span class="item-name" *ngIf="l.subAdministrativeArea"
+                >Provincia de {{l.subAdministrativeArea}},</span
+              >
+
+              <span class="item-name" *ngIf="l.administrativeArea"
+                >{{l.administrativeArea}},</span
+              >
+              <span class="item-name" *ngIf="l.countryName"
+                >{{l.countryName}}</span
+              >
+            </p>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div>
+        <p class="description">Categorias</p>
+        <ion-select (ionChange)="cambiarTema($event)">
+          <ion-select-option *ngFor="let grupo of grupos" [value]="grupo?.id"
+            >{{grupo?.nombre}}</ion-select-option
+          >
+        </ion-select>
+      </div>
+      <div class="filter-display-fecha-wrap">
+        <ion-row class="row-title">
+          <p class="title">Fecha Desde</p>
+        </ion-row>
+        <ion-row class="fecha-row">
+          <ion-col class="fecha-input-wrap">
+            <ion-datetime
+              placeholder="Día"
+              pickerFormat="DD"
+              displayFormat="DD"
+              (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
+            ></ion-datetime>
+          </ion-col>
+
+          <ion-col class="fecha-input-wrap">
+            <ion-datetime
+              placeholder="Mes"
+              pickerFormat="MM"
+              displayFormat="MM"
+              (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
+            ></ion-datetime>
+          </ion-col>
+
+          <ion-col class="fecha-input-wrap">
+            <ion-datetime
+              placeholder="Año"
+              pickerFormat="YYYY"
+              displayFormat="YYYY"
+              (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
+            ></ion-datetime>
+          </ion-col>
+
+          <!-- <ion-col class="fecha-input-wrap">
+            <ion-select
+              #DecadeInput
+              [(ngModel)]="DecadeInputValue"
+              placeholder="Década"
+              (ionChange)="ResetAndUseDecade($event,true)"
+            >
+              <ion-select-option
+                *ngFor="let decada of decadas"
+                [value]="decada.value"
+                >{{decada.nombre}}</ion-select-option
+              >
+            </ion-select>
+          </ion-col> -->
+        </ion-row>
+      </div>
+      <div class="filter-display-fecha-wrap">
+        <ion-row class="row-title">
+          <p class="title">Fecha Hasta</p>
+        </ion-row>
+        <ion-row class="fecha-row">
+          <ion-col class="fecha-input-wrap">
+            <ion-datetime
+              placeholder="Día"
+              pickerFormat="DD"
+              displayFormat="DD"
+              (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
+            ></ion-datetime>
+          </ion-col>
+
+          <ion-col class="fecha-input-wrap">
+            <ion-datetime
+              placeholder="Mes"
+              pickerFormat="MM"
+              displayFormat="MM"
+              (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
+            ></ion-datetime>
+          </ion-col>
+
+          <ion-col class="fecha-input-wrap">
+            <ion-datetime
+              placeholder="Año"
+              pickerFormat="YYYY"
+              displayFormat="YYYY"
+              (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
+            ></ion-datetime>
+          </ion-col>
+
+          <!-- <ion-col class="fecha-input-wrap">
+            <ion-select
+              #DecadeInput
+              [(ngModel)]="DecadeInputValue"
+              placeholder="Década"
+              (ionChange)="ResetAndUseDecade($event,true)"
+            >
+              <ion-select-option
+                *ngFor="let decada of decadas"
+                [value]="decada.value"
+                >{{decada.nombre}}</ion-select-option
+              >
+            </ion-select>
+          </ion-col> -->
+        </ion-row>
+      </div>
+      <div class="center">
+        <!-- <ion-button (click)="closeModal()" class="reserva" expand="block">
+          <p>Enviar Dirección</p>
+        </ion-button> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

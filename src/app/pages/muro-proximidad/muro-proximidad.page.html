@@ -1,0 +1,61 @@
+<app-loading text="Cargando..." *ngIf="IsLoading"></app-loading>
+<ion-content *ngIf="!IsLoading">
+  <ion-grid class="main-wrap">
+    <ion-row class="top-wrap">
+      <ion-col class="inner-top-left-wrap">
+        <img
+          class="btn-atras"
+          src="assets/imgs/Group 114.png"
+          (click)="back()"
+        />
+        <img id="ondas_imagen" src="assets/imgs/Group 125.png" />
+      </ion-col>
+      <ion-col class="inner-top-mid-wrap">
+        <p class="title-label" *ngIf="near!='void'">
+          Cerca de<br />
+          <span>{{near}}</span>
+        </p>
+        <!--   <img src="assets/imgs/logo_name.svg"/> -->
+      </ion-col>
+      <ion-col class="inner-top-right-wrap">
+        <div class="star-wrap">
+          <ion-grid>
+            <ion-row class="star-top"
+              ><img id="perfil_estrella1" src="assets/imgs/Star 2.png"
+            /></ion-row>
+            <ion-row class="star-mid"
+              ><img id="perfil_estrella2" src="assets/imgs/Star 3.png"
+            /></ion-row>
+            <ion-row class="star-bot"
+              ><img id="perfil_estrella3" src="assets/imgs/Star 4.png"
+            /></ion-row>
+          </ion-grid>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="body-wrap">
+    <ion-grid class="list-wrap">
+      <ion-row class="post-row" *ngFor="let p of postList">
+        <!-- @Input() post: any;
+  @Output() onPostLike = new EventEmitter<any>();
+  @Output() onPostDislike = new EventEmitter<any>();
+  @Output() onPostGoDetails = new EventEmitter<any>();
+  @Output() onPostReport = new EventEmitter<any>();
+  @Output() onPostShare = new EventEmitter<any>();
+  @Output() onPostGoProfile = new EventEmitter<any>(); -->
+
+        <app-home-post
+          [post]="p"
+          (onPostLike)="HandlePostLike($event)"
+          (onPostDislike)="HandlePostDislike($event)"
+          (onPostGoDetails)="HandlePostGoDetails($event)"
+          (onPostReport)="HandlePostReport($event)"
+          (onPostShare)="HandlePostShare($event)"
+          (onPostGoProfile)="HandlePostGoProfile($event)"
+        ></app-home-post>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+</ion-content>

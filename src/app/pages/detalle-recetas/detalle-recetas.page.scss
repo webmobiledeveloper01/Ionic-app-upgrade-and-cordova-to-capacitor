@@ -1,0 +1,185 @@
+ion-content {
+
+    .main-wrap {
+        height: 130px;
+
+        .top-wrap {
+
+            margin: 10% auto;
+
+            .inner-top-left-wrap {
+                margin-left: 0%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .btn-atras {
+                    position: absolute;
+                    margin-left: 10%;
+                    top: 0%;
+                    margin-top: 20px;
+                }
+
+            }
+
+            .inner-top-mid-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .title-label {
+                    color: #333;
+                    font-size: 25px;
+                    font-family: "Canela";
+                    font-weight: 700;
+                    justify-content: center;
+                    display: flex;
+                    width: 100%;
+
+                }
+
+            }
+
+            .inner-top-right-wrap {
+                .star-wrap {
+                    width: 50%;
+                    margin: auto;
+
+                    ion-grid {
+                        display: flex;
+                        flex-flow: column;
+
+                        .star-top {
+                            justify-content: flex-start;
+                        }
+
+                        .star-mid {
+                            justify-content: flex-end;
+                        }
+
+                        .star-bot {
+                            justify-content: flex-start;
+                        }
+
+
+
+
+                    }
+                }
+
+            }
+
+
+
+
+
+        }
+    }
+
+
+    .body-wrap {
+        width: 80%;
+        margin: auto;
+
+        .img-wrap {
+
+            max-height: 30vh;
+
+            img {
+                width: 100%;
+                height: 100%;
+                max-width: 100%;
+                max-height: 30vh;
+                object-fit: cover;
+                border-radius: 15pt;
+            }
+        }
+
+        .info-wrap {
+
+            .name-row {
+                // margin: 5% auto;
+
+                .recipe-name {
+                    font-family: "Canela";
+                    font-style: italic;
+                    font-weight: 500;
+                    font-size: 25px;
+
+                }
+
+
+
+            }
+
+            .btn-row {
+                display: flex;
+                flex-flow: row;
+
+                ion-col {
+                    ion-button {
+                        min-width: 90%;
+                        margin: 2.5% auto;
+                        --border-radius: 20pt;
+                        color: #333
+                    }
+                }
+
+                .left-col {
+                    ion-button {
+                        --background: #F3B562;
+                    }
+                }
+
+                .mid-col {
+                    ion-button {
+                        --background: #F9E1C5;
+                    }
+                }
+
+                .right-col {
+                    ion-button {
+                        --background: #B7E4DF;
+                    }
+                }
+            }
+
+
+        }
+
+
+        .Details-wrap {
+            margin: 10% auto;
+
+            ion-grid.ingredient-grid {
+                .title-row {
+                    .title-text {
+                        font-weight: bold;
+                        font-size: 12px;
+                        font-family: Alliance;
+                    }
+                }
+
+                .ingredient-row {
+
+                    .ingredient-names{
+                        color: #333;
+                        font-size: 11px;
+                        font-family: Alliance;
+
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+}

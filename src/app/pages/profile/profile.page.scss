@@ -1,0 +1,180 @@
+ion-content {
+
+
+    .resultadosGeocoder {
+
+        ion-list {
+
+            .place-wrap{
+                
+            }
+        }
+    }
+
+
+    .location-search-btn {
+        color: #333;
+        width: 15%;
+        height: 80%;
+        --background: #F3B562;
+        margin-left: 20px;
+        border-radius: 20px;
+    }
+
+
+    .contenedor {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .ion-text-wrap {
+            white-space: normal !important;
+            width: 100%;
+        }
+
+        .titulo-pagina {
+            display: flex;
+            margin-top: 2.5vh;
+            width: 100vw;
+
+            ion-row.row-titulo-pagina {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                flex-flow: row;
+
+                //columna 1
+                ion-col.col-titulo-decorado1 {
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+                    max-width: 83px;
+
+                    #cuadrante_puntos {
+                        padding-left: 0;
+                        margin-top: 15px;
+                        height: 60px;
+                        margin-left: -20px;
+                    }
+
+                }
+
+                //Columna 2
+                ion-col.col-titulo-pagina {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    max-width: 190px;
+                    min-width: 120px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    #titulo {
+                        color: black;
+                        font-size: 25px;
+                        font-weight: 400;
+                        vertical-align: middle;
+                        text-align: center;
+                        font-family: "Canela";
+                        // margin-top: -5px;
+                    }
+                }
+
+                ion-col.col-titulo-decorado2 {
+                    position: relative;
+                    max-width: 83px;
+
+                    #perfil_estrella1 {
+                        position: absolute;
+                        top: 25px;
+                        right: 48px;
+                    }
+
+                    #perfil_estrella2 {
+                        position: absolute;
+                        top: 48px;
+                        right: 30px;
+                    }
+
+                    #perfil_estrella3 {
+                        position: absolute;
+                        top: 18px;
+                        right: 20px;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+    ion-avatar {
+        width: 125px;
+        height: 125px;
+        margin: 0 auto;
+        margin-bottom: 10%;
+    }
+
+    ion-label {
+        margin: 3.5%;
+        font-family: Alliance;
+        font-size: 14px;
+    }
+
+    ion-item {
+
+        margin: 3.5% auto;
+
+    }
+
+    ion-input {
+        color: black;
+        --placeholder-color: #B0947F;
+        --background: #F1EAE0;
+        border-radius: 10pt;
+        --padding-start: 10px;
+
+    }
+
+
+
+
+    .btn-wrap {
+        margin: 10% auto;
+        width: 100%;
+
+        ion-button {
+            --background: #F3B562;
+            width: 100%;
+            margin: 5% auto;
+            text-transform: none;
+            letter-spacing: normal;
+            --border-radius: 100px;
+            
+
+        }
+
+        ion-button.logout {
+            --background: #2c2c2c;
+            width: 100%;
+            margin: 5% auto;
+            text-transform: none;
+            letter-spacing: normal;
+
+        }
+        ion-button.delete {
+            --background: #B22A2A;
+            width: 100%;
+            margin: 5% auto;
+            text-transform: none;
+            letter-spacing: normal;
+
+        }
+    }
+}

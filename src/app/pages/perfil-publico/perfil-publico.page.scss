@@ -1,0 +1,431 @@
+ion-content {
+
+    ion-button {
+        --box-shadow: none !important;
+    }
+
+
+    .NoPosts {
+
+        .noposts-label {
+            font-size: 35px;
+            font-family: "Canela";
+            font-weight: 400;
+            margin-top: 10vh;
+            color: #5C4B51;
+            text-align: center;
+        }
+
+    }
+
+    .Year-grid {
+        width: 100%;
+        // margin-top: 5vh;
+        margin-bottom: 5vh;
+
+
+        .Year-data-row {
+
+            ion-item {
+                width: 100%;
+                --background: transparent;
+
+                .years-label {
+                    font-size: 35px;
+                    font-family: "Canela";
+                    font-weight: 400;
+                    // width: 80px;
+                }
+
+                .numero-label {
+                    font-size: 14px;
+                    font-family: "Canela";
+                    font-weight: 400;
+                    font-style: italic;
+                }
+
+            }
+        }
+
+        .Year-slides {
+            margin: 5%;
+
+            ion-slides {
+
+                display: flex;
+
+                flex-flow: row wrap;
+
+                ion-slide {
+                    margin: 5%;
+                    display: flex;
+                    flex-flow: column;
+
+                    .text-wrap {
+                        margin: 5%;
+                        display: flex;
+                        flex-flow: column;
+
+                    }
+
+                    #texto-pie-imagen2 {
+                        color: black;
+                        font-size: 17px;
+                        font-family: "Alliance No.1";
+                        font-weight: 500;
+                        font-style: normal;
+                        // margin-left: -52px;
+                    }
+
+                    #texto-fecha-lugar-imagen2 {
+                        color: #5C4B51;
+                        font-size: 14px;
+                        font-family: "Alliance No.1";
+                        font-weight: 400;
+                        font-style: normal;
+                        // margin-left: -140px;
+                    }
+
+                }
+
+                .slide-img {
+                    // max-width: 60vw;
+
+
+                    img {
+                        // max-height: 40vh;
+                    }
+                }
+
+            }
+
+        }
+
+
+    }
+
+
+
+    .NoPosts {
+
+        .noposts-label {
+            font-size: 35px;
+            font-family: "Canela";
+            font-weight: 400;
+            margin-top: 10vh;
+            color: #5C4B51;
+        }
+
+    }
+
+    .action-buttons {
+        width: 100%;
+
+        ion-grid {
+            width: 50%;
+            margin: 5% auto;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: space-evenly;
+
+
+            ion-row {
+                margin: 10% auto;
+            }
+        }
+
+        .stop-follow {
+            --background: red;
+            letter-spacing: normal;
+            --border-radius: 200px;
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+
+
+        }
+
+        .follow {
+            --background: rgb(255, 223, 134);
+            letter-spacing: normal;
+            color: #5C4B51;
+            --border-radius: 200px;
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+
+        }
+
+        .status {
+            font-size: 15px;
+            font-family: "Canela";
+            font-weight: 400;
+            // margin-top: 10vh;
+            color: #5C4B51;
+
+        }
+    }
+
+    .container {
+        margin-left: 10%;
+        margin-right: 10%;
+        //width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .perfil-datos {
+            width: 375px;
+            border-bottom: 1px black solid;
+
+
+
+            ion-row.row-perfil-datos {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                column-gap: 10px;
+
+
+                //columna 1
+                ion-col.col-perfil-decorado1 {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    max-width: 83px;
+
+
+
+                    width: 50px;
+                    position: relative;
+                    padding-left: 0px;
+
+
+
+                    #btn_atras {
+                        margin-top: 10px;
+                        position: absolute;
+                        width: 40px;
+                        margin-left: 10px;
+
+                    }
+
+                    #ondas_imagen {
+                        margin-top: 60px;
+                        height: 40px;
+
+
+                    }
+
+                    #cuadrante_puntos {
+                        position: absolute;
+                        margin-top: 170px;
+
+                    }
+
+                }
+
+
+                //columna 2
+                ion-col.col-perfil-decorado2 {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    max-width: 190px;
+                    min-width: 120px;
+                    margin-top: 100px;
+
+                    #perfil_imagen {
+                        width: 125px;
+                        height: 125px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        min-width: 125px;
+                        min-height: 125px;
+                    }
+
+                }
+
+                //columna 3
+                ion-col.col-perfil-decorado3 {
+                    position: relative;
+                    max-width: 83px;
+
+                    #perfil_estrella1 {
+                        position: absolute;
+                        top: 40px;
+                    }
+
+                    #perfil_estrella2 {
+                        position: absolute;
+                        top: 60px;
+                        right: 25px;
+                    }
+
+                    #perfil_estrella3 {
+                        position: absolute;
+                        top: 90px;
+                        right: 50px;
+                    }
+
+                }
+            }
+
+
+            ion-row.row-perfil-datos-pie {
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+
+                #nombre_usuario {
+                    color: black;
+                    font-size: 36px;
+                    font-family: "Canela";
+                    font-weight: 700;
+                    align-self: center;
+                    margin-top: 20px;
+                }
+
+
+                ion-col.col-perfil-datos-nacionalidad {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+
+                    padding-top: 20px;
+
+                    #imagen_bandera {
+                        width: 20px;
+                        height: 15px;
+                    }
+
+                    #texto_nacionalidad {
+                        color: black;
+                        font-weight: 400;
+                        font-family: "Alliance No.1";
+                        font-size: 12px;
+                        margin-left: 5px;
+                    }
+                }
+
+
+                ion-col.col-perfil-datos-texto {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+                    max-width: 375px;
+                    margin-top: 10px;
+
+                    #texto_usuario {
+                        color: black;
+                        text-align: center;
+                        font-family: "Alliance No.1";
+                        font-weight: 400;
+                    }
+                }
+
+
+                ion-row.row-perfil-datos-cuenta {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 10px;
+                    width: 100%;
+                    padding-bottom: 10px;
+
+                    ion-col.col-followers {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 125px;
+
+                        #num_followers {
+                            color: black;
+                            font-family: "Canela";
+                            font-weight: 700;
+                            font-size: 21.7px;
+                        }
+
+                        #tipo_followers {
+                            color: black;
+                            font-family: "Alliance No.1";
+                            font-weight: 400;
+                            font-size: 10.85px;
+                        }
+                    }
+
+
+                    ion-col.col-following {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 125px;
+
+                        #num_following {
+                            color: black;
+                            font-family: "Canela";
+                            font-weight: 700;
+                            font-size: 21.7px;
+
+                        }
+
+                        #tipo_following {
+                            color: black;
+                            font-family: "Alliance No.1";
+                            font-weight: 400;
+                            font-size: 10.85px;
+                        }
+                    }
+
+
+                    ion-col.col-likes {
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 125px;
+
+                        #num_likes {
+                            color: black;
+                            font-family: "Canela";
+                            font-weight: 700;
+                            font-size: 21.7px;
+
+                        }
+
+                        #tipo_likes {
+                            color: black;
+                            font-family: "Alliance No.1";
+                            font-weight: 400;
+                            font-size: 10.85px;
+                        }
+                    }
+                }
+
+
+
+                .questions-row {
+                    margin: 2.5% auto;
+
+                    ion-button {
+
+                        --border-radius: 20pt;
+                        color: black;
+                        --background: rgba(255, 235, 87, 0.155);
+                        text-transform: none;
+                        font-family: Canela;
+                        letter-spacing: normal;
+                    }
+                }
+
+            }
+        }
+    }
+}

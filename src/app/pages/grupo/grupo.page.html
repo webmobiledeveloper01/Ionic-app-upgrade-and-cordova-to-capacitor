@@ -1,0 +1,157 @@
+<app-loading text="Cargando..." *ngIf="isLoading"></app-loading>
+
+<ion-content color="primary" *ngIf="!isLoading">
+  <div class="container">
+    <img
+      class="btn-atras"
+      style="margin-top: 4.5vh; height: 5%"
+      src="assets/imgs/Group 114.png"
+      
+      routerLink="/tabs/only-chanels"
+    />
+    <div class="titulo-grupo">
+      <ion-row class="row-titulo-grupo">
+        <ion-col class="col-titulo-grupo">
+          <p class="texto-titulo">{{grupo.title}}</p>
+        </ion-col>
+      </ion-row>
+
+      <!--Fila usuarios dentro del grupo imagenes-->
+      <ion-row
+        class="row-titulo-usuario"
+        *ngIf="IsVisible&&grupo.is_chanel != 1"
+      >
+        <ion-col class="col-usuarios">
+          <img
+            *ngFor="let img of grupo.users_avatars"
+            class="imagen-usuario"
+            src="{{img}}"
+          />
+          <!-- <img class="imagen-usuario" src="assets/imgs/image 2055.png" />
+          <img class="imagen-usuario" src="assets/imgs/image 20555.png" /> -->
+          <ion-buttons>
+            <ion-button id="etc" color="light">···</ion-button>
+            <ion-button
+              [disabled]="NoFriends || !grupo.user_belongs"
+              id="invite"
+              color="light"
+              (click)="invitar()"
+              >+ Invitar</ion-button
+            >
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row-titulo-usuario" *ngIf="!IsVisible">
+        <ion-col class="col-usuarios-private">
+          <img
+            *ngFor="let img of grupo.users_avatars"
+            class="imagen-usuario"
+            src="assets/imgs/private.png"
+          />
+          <!-- <img class="imagen-usuario" src="assets/imgs/image 2055.png" />
+          <img class="imagen-usuario" src="assets/imgs/image 20555.png" /> -->
+          <ion-buttons>
+            <ion-button id="etc" color="light">···</ion-button>
+            <ion-button id="invite" color="light" disabled="true"
+              >+ Invitar</ion-button
+            >
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+
+      <div class="group-privacy-wrap" *ngIf="grupo.is_chanel != 1">
+        <ion-row *ngIf="grupo.private==1" class="row-titulo-grupo-informacion">
+          <ion-icon src="assets/icons/candado.svg"></ion-icon>
+          <!-- <p id="texto-info">Private group-126 members</p> -->
+          <p id="texto-info">
+            Canal privado - {{grupo.count_members}} miembro/s
+          </p>
+        </ion-row>
+
+        <ion-row *ngIf="grupo.private==0" class="row-titulo-grupo-informacion">
+          <div class="icon-wrap"><ion-icon name="unlock"></ion-icon></div>
+          <!-- <p id="texto-info">Private group-126 members</p> -->
+          <p id="texto-info">
+            Canal público - {{grupo.count_members}} miembro/s
+          </p>
+        </ion-row>
+      </div>
+
+      <ion-row class="row-post">
+        <ion-item>
+          <p id="texto-post">Últimos Posts</p>
+        </ion-item>
+      </ion-row>
+    </div>
+  </div>
+
+  <div class="NoVisible" *ngIf="!IsVisible">
+    <ion-grid class="nv-grid" *ngIf="!TriedToJoin">
+      <ion-row class="nv-row">
+        <ion-icon src="assets/icons/candado.svg"></ion-icon>
+      </ion-row>
+      <ion-row class="nv-row">
+        <ion-row style="text-align: center">
+          <p>Este grupo es privado<br />¿Quieres unirte?</p></ion-row
+        >
+        <!-- <ion-row> <p></p></ion-row> -->
+      </ion-row>
+      <ion-row class="nv-btn">
+        <ion-button (click)="JoinGroup()">Solicitar unirme</ion-button></ion-row
+      >
+    </ion-grid>
+    <ion-grid class="nv-grid" *ngIf="TriedToJoin">
+      <ion-row class="nv-row">
+        <ion-icon src="assets/icons/candado.svg"></ion-icon>
+      </ion-row>
+      <ion-row class="nv-row">
+        <ion-row style="text-align: center">
+          <p>El creado del grupo debe confirmar tu solicitud</p></ion-row
+        >
+        <!-- <ion-row> <p></p></ion-row> -->
+      </ion-row>
+      <!-- <ion-row class="nv-btn">
+        <ion-button (click)="JoinGroup()">Solicitar unirme</ion-button></ion-row
+      > -->
+    </ion-grid>
+  </div>
+
+  <div class="container2" *ngIf="IsVisible">
+    <!-- <ion-grid class="add-post">
+      <ion-row><ion-button> Compartir publicación </ion-button></ion-row>
+    </ion-grid> -->
+
+    <ion-list *ngIf="Post.length > 0">
+      <div class="post-wrap" *ngFor="let p of Post">
+        <app-group-post
+          *ngIf="p.publication"
+          (LikeUnlike)="handleLike($event)"
+          (GoToProfile)="GoToProfile($event)"
+          [post]="p.publication"
+        ></app-group-post>
+
+        <div *ngIf="p.comment" class="comment-wrap">
+          <p *ngIf="p.publication" class="coment-text">Comentario</p>
+          <ion-grid class="rows-wrap">
+            <ion-row>
+              <ion-col size="3" class="avatar-col"
+                ><ion-avatar><img src="{{p.user.avatar}}" alt="" /></ion-avatar>
+              </ion-col>
+              <ion-col class="name-col">
+                <p>{{p.user.name}}</p>
+              </ion-col></ion-row
+            >
+            <ion-row style="width: 66%; margin-left: 33%"
+              ><p class="comment-content">{{p.comment}}</p></ion-row
+            >
+          </ion-grid>
+        </div>
+      </div>
+    </ion-list>
+
+<p class="void-text" *ngIf="Post.length == 0">
+  Parece que aun no hay nada que ver por aqui...
+</p>
+
+  </div>
+</ion-content>

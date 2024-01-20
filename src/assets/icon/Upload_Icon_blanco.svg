@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 596 606.5">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-width: 80px;
+      }
+
+      .cls-1, .cls-3 {
+        stroke-linejoin: round;
+      }
+
+      .cls-2 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <path class="cls-2" d="m556,402.5v129.73c0,18.93-16.95,34.27-37.86,34.27H77.86c-20.91,0-37.86-15.34-37.86-34.27v-129.73"/>
+      <line class="cls-3" x1="295.98" y1="53.5" x2="295.98" y2="402.75"/>
+      <polyline class="cls-1" points="440.48 199.5 295.98 40 151.48 199.5"/>
+    </g>
+  </g>
+</svg>

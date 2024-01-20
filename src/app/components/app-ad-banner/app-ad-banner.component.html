@@ -1,0 +1,13 @@
+<ion-grid>
+  <ion-row>
+    <p style="width: 100%; text-align: center; font-family: Canela;">Patrocinado por:</p>
+
+    <!-- <input type="number" value="{{banners[BannerIndex].id}}"> -->
+  </ion-row>
+  <ion-row class="img-row">
+    <img
+      (click)="openWindow()"
+      class="imagen-publicidad"
+      [src]="banner.imagen" (error)="handleMissingImage($event)" 
+  /></ion-row>
+</ion-grid>

@@ -1,0 +1,266 @@
+
+<ion-content>
+  <ion-grid class="main-wrap">
+    <ion-row class="top-wrap">
+      <ion-col class="inner-top-left-wrap">
+        <img
+          class="btn-atras"
+          src="assets/imgs/Group 114.png"
+          (click)="back()"
+        />
+        <img id="ondas_imagen" src="assets/imgs/Group 125.png" />
+      </ion-col>
+      <ion-col class="inner-top-mid-wrap">
+        <p class="title-label">Geoask</p>
+        <!--   <img src="assets/imgs/logo_name.svg"/> -->
+      </ion-col>
+      <ion-col class="inner-top-right-wrap">
+        <div class="star-wrap">
+          <ion-grid>
+            <ion-row class="star-top"
+              ><img id="perfil_estrella1" src="assets/imgs/Star 2.png"
+            /></ion-row>
+            <ion-row class="star-mid"
+              ><img id="perfil_estrella2" src="assets/imgs/Star 3.png"
+            /></ion-row>
+            <ion-row class="star-bot"
+              ><img id="perfil_estrella3" src="assets/imgs/Star 4.png"
+            /></ion-row>
+          </ion-grid>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="body-wrap">
+    <p class="disclaimer-text">
+      Cuanta mas informacion des, mas ayudas a la comunidad ¡Gracias!
+    </p><
+  
+    <!--<form *ngIf="form" [formGroup]="form">-->
+      <ion-grid class="form-wrap">
+        <ion-row class="input-wrap">
+          <ion-row><p>Elige la imagen o vídeo de la receta</p></ion-row>-
+          <ion-row>
+            <ion-button class="" (click)="adjuntarImagen()">
+              <div class="inner-custom">
+                Seleccione el archivo a subir
+                <ion-icon name="filing"></ion-icon>
+              </div></ion-button>
+          </ion-row>
+        </ion-row>
+      </ion-grid>
+              
+        
+
+
+        <ion-row class="input-wrap"></ion-row>
+          <ion-row><p>Nombre de la receta</p>
+          
+            
+            <ion-input clearInput type="text" placeholder="Nombre de la receta" required></ion-input>
+          
+        </ion-row>
+
+              
+          
+        
+        
+
+        <!--<ion-row class="input-wrap">
+          <ion-row><p>Tiempo de preparacion</p></ion-row>
+          <ion-row>
+            <ion-input clearInput type="time";
+            placeholder="Escribe aqui el tiempo de preparación";
+            formControlName="time";
+            required>        
+            </ion-input>
+          </ion-row>
+        </ion-row>
+
+        <ion-row class="input-wrap">
+          <ion-row><p>Número de comensales</p></ion-row>
+          <ion-row><ion-input clearInput
+            type="number"
+            min="1"
+            placeholder="Escribe el nº de comensales..."
+            formControlName="eaters"
+            required>
+              
+            </ion-input>
+          </ion-row>
+        </ion-row>
+
+        <ion-row class="input-wrap">
+          <ion-row><p>Ingredientes</p></ion-row>
+          <ion-row><ion-input  clearInput
+            type="text"
+            placeholder="Escribe los ingredientes necesarios..."
+            formControlName="ingredients">
+           
+
+              </ion-input>
+            <ion-button class="add" (click)="addIngredient()"
+              >Añadir</ion-button>
+          </ion-row>
+          <ion-list *ngIf="ingredients.length>0" class="list-ingredients">
+            <ion-row class="list-row" *ngFor="let i of ingredients">
+              <ion-col class="list-col-text"><p>{{i.name}}</p></ion-col>
+              <ion-col size="3" class="list-col-btn"
+                ><ion-button (click)="deleteIngredient(i.id)"
+                  >Eliminar</ion-button
+                ></ion-col
+              >
+            </ion-row>
+          </ion-list>
+        </ion-row>
+        <!-- CHIPS-ROW -->
+        <!--<ion-row class="input-wrap">
+          <ion-row><p>¿Cuando se sirve?</p></ion-row>
+
+          <div class="chips-wrap" id="row-chips-101">
+            <ion-row class="row-chip">
+              <ion-col *ngFor=" let c of Servings">
+                <ion-chip
+                  (click)="SelectChip(c)"
+                  id="{{c.id}}"
+                  class="custom-chip"
+                  ><p class="text-center">{{c.name}}</p></ion-chip
+                >
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-row>
+
+        <ion-row class="input-wrap">
+          <ion-row><p>Pasos</p></ion-row>
+          <ion-row
+            ><ion-textarea
+              clearInput
+              placeholder="Escribe los pasos necesarios..."
+              formControlName="steps"
+            ></ion-textarea>
+            <ion-button class="add" (click)="addSteps()">Añadir</ion-button>
+          </ion-row>
+          <ion-list *ngIf="pasos.length>0" class="list-ingredients">
+            <ion-row class="list-row" *ngFor="let i of pasos">
+              <ion-col class="list-col-text"><p>{{i.step}}</p></ion-col>
+              <ion-col size="3" class="list-col-btn"
+                ><ion-button (click)="deleteSteps(i.id)"
+                  >Eliminar</ion-button
+                ></ion-col
+              >
+            </ion-row>
+          </ion-list>
+        </ion-row>
+
+        <ion-row class="input-wrap">
+          <ion-row><p>Notas / Trucos</p></ion-row>
+          <ion-row
+            ><ion-input
+              clearInput
+              type="text"
+              placeholder="Escribe aquí..."
+              formControlName="notes"
+              
+            ></ion-input>
+          </ion-row>
+        </ion-row>
+
+        <ion-row class="input-wrap">
+          <ion-row><p>URL de la receta</p></ion-row>
+          <ion-row
+            ><ion-input
+              clearInput
+              type="text"
+              placeholder="Inserte aquí un enlace..."
+              formControlName="url"
+            ></ion-input>
+          </ion-row>
+        </ion-row>
+
+        <ion-row class="input-wrap">
+          <ion-row><p>Ubicación</p></ion-row>
+          <ion-row>
+            <ion-input
+              type="text"
+              [(ngModel)]="search"
+              [ngModelOptions]="{standalone: true}"
+              id="position-input-357"
+              placeholder="Escriba aqui la ubicacion"
+              (ionChange)="actualizar()"
+              debounce="500"
+            ></ion-input>
+          </ion-row>
+          <ion-row>
+            <div class="autocompleteItems">
+              <ion-list
+                class="List"
+                lines="none"
+                class="autocomplete"
+                *ngIf="autocomplete && autocompleteItems.length != 0"
+              >
+                <div *ngFor="let item of autocompleteItems, let i = index">
+                  <ion-item
+                    *ngIf="!(i == autocompleteItems.length-1)"
+                    class="item-mapa border"
+                    style="border-bottom: 1px solid rgba(#000000, 0.15)"
+                    tappable
+                    (click)="selectSearchResult(item.description)"
+                  >
+                    <p>{{ item.description }}</p>
+                  </ion-item>
+                  <ion-item
+                    *ngIf="i == autocompleteItems.length-1"
+                    class="item-mapa noborder"
+                    style="border-bottom: none"
+                    tappable
+                    (click)="selectSearchResult(item.description)"
+                  >
+                    <p>{{ item.description }}</p>
+                  </ion-item>
+                </div>
+              </ion-list>
+            </div>
+          </ion-row>
+          <!-- <ion-row
+            ><ion-input
+              clearInput
+              type="text"
+              placeholder="Escribe aquí la direccion..."
+              formControlName="location"
+              required
+            ></ion-input>
+          </ion-row> -->
+        <!--</ion-row>
+
+        <div class="map-div" id="map-div-1010"></div>
+      </ion-grid>
+
+      <ion-grid class="footer-grid">
+        <ion-row><p>¿Cómo se visualizará esta receta?</p></ion-row>
+        <ion-row class="btn-row">
+          <ion-col>
+            <ion-button
+              [ngClass]="private ? 'custom-btn-marked' : ''"
+              (click)="SelectPrivacy(true)"
+            >
+              Privada</ion-button
+            >
+          </ion-col>
+
+          <ion-col>
+            <ion-button
+              [ngClass]="!private ? 'custom-btn-marked' : ''"
+              (click)="SelectPrivacy(false)"
+              >Pública</ion-button
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row class="submit-row">
+          <ion-button (click)="submitForm()">Subir receta</ion-button>
+        </ion-row>
+      </ion-grid>
+    </form>-->
+  </div>
+</ion-content>

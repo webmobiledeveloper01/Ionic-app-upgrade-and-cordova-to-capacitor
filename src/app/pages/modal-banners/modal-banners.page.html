@@ -1,0 +1,111 @@
+<app-loading *ngIf="IsLoading" text="Cargando..."></app-loading>
+
+<ion-content color="" *ngIf="!IsLoading">
+
+	<!-- doomed v3 header -->
+
+	<!-- 
+		typescript back()
+
+		public back() {
+    this.navCtrl.navigateForward("/tabs");
+  	} 
+	-->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+		
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px; position: absolute; width: 100vw;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        <span style="font-style: italic;">crear</span><br>Impacto
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+  <div class="flex">
+    <div class="modal">
+      
+      <div class="content-wrap">
+        <p style="text-align: center; font-family: 'Canela'; font-size: 15px;">
+          ¿Cómo puedes contribuir<br>en este proyecto?
+        </p>
+
+        <div class="center" *ngIf="user.role_id==4">
+          <a
+            style="text-decoration: none"
+            href="https://timemapp.davidtovar.dev/intranet/"
+            ><ion-button class="reserva" expand="block">
+              <p>Banners</p>
+            </ion-button></a
+          >
+        </div>
+
+        <div class="center" *ngIf="user.role_id!=4">
+          <ion-button (click)="GoToSponsor()" class="reserva" expand="block">
+            <p>Ser sponsor</p>
+            <!-- href="https://timemapp.davidtovar.dev/intranet/" -->
+          </ion-button>
+        </div>
+
+        <div class="center">
+          <ion-button (click)="irPin()" class="reserva" expand="block">
+            <p>Canal Privado</p>
+          </ion-button>
+        </div>
+
+				<!-- <div class="center">
+          <ion-button class="reserva" expand="block">
+            <p>Donaciones</p>
+          </ion-button>
+        </div> -->
+
+        <!-- <div class="center">
+          <ion-button (click)="irDonacion()" class="reserva" expand="block">
+            <p>Donanción</p>
+          </ion-button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

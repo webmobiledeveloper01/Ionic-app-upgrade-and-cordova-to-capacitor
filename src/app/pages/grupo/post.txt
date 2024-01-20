@@ -1,0 +1,52 @@
+<ion-row>
+    <!--Imagen perfil-->
+    <ion-col class="col-perfil">
+      <img class="imagen-perfil" src="assets/imgs/image 205.png" />
+    </ion-col>
+
+    <ion-item>
+      <!--Publicacion perfil-->
+      <ion-col class="col-publicacion">
+        <!--Nombre-->
+        <ion-label class="nombre-perfil"> Derrick Johnson </ion-label>
+
+        <!--**************************-->
+        <ion-row class="row-fecha-rango">
+          <!--Fecha-->
+          <ion-label class="fecha-publicacion"> 6 Jul </ion-label>
+
+          <ion-label class="rango"> Event organizer </ion-label>
+        </ion-row>
+
+        <!--**************************-->
+
+        <!--Texto-->
+        <ion-col class="col-texto-publicacion">
+          <ion-label class="texto-publicacion ion-text-wrap">
+            Hello Class of 1987! <br />
+            Let’s celebrate the aniversary like it’s the 80’s again 💃
+          </ion-label>
+        </ion-col>
+
+        <img class="imagenG-publicacion" src="assets/imgs/image 218.png" />
+
+        <ion-row class="row-acciones">
+          <ion-icon
+            class="meGusta-publicacion"
+            src="assets/icons/meGusta.svg"
+          ></ion-icon>
+          <ion-icon
+            class="meGusta-publicacionRojo"
+            src="assets/icons/meGustaRojo.svg"
+          ></ion-icon>
+          <p id="megusta-numero">64</p>
+
+          <ion-icon
+            class="comentario-publicacion"
+            src="assets/icons/comentario.svg"
+          ></ion-icon>
+          <p id="comentario-numero">8</p>
+        </ion-row>
+      </ion-col>
+    </ion-item>
+  </ion-row>

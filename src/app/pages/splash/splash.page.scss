@@ -1,0 +1,18 @@
+ion-content {
+    --background: #F3F3F3;
+
+    .main-wrap {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #F3F3F3;
+
+        video {
+            max-height: 100%;
+            max-width: 100%;
+
+        }
+    }
+}

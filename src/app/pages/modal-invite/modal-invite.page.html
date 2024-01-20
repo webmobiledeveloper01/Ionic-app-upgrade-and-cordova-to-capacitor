@@ -1,0 +1,26 @@
+<ion-content color="primary">
+  <div class="friends" *ngIf="!NoFriends">
+    <div class="list-wrap">
+      <ion-list lines="none">
+        <ion-item *ngFor="let s of invited">
+          <app-select-user
+            [object]="s"
+            (OnSelected)="selected($event)"
+          ></app-select-user>
+
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="btn-wrap">
+      <ion-button (click)="dismiss()" size="block">Añadir</ion-button>
+      <ion-button class="cancel" (click)="dismissNull()" size="block">Cancelar</ion-button>
+
+    </div>
+  </div>
+
+  <div class="nofriends" *ngIf="NoFriends">
+    <p>No tienes amigos que se puedan añadir a este grupo</p>
+    <ion-button class="cancel" (click)="dismiss()" size="block">Volver</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,82 @@
+<ion-content color="primary">
+  <div>
+    <div class="contenedor">
+
+      <ion-icon name="arrow-back" style="
+      position: absolute;
+			top: 13px;
+			left: 12px;
+
+      color: black;
+      font-size: 25px;
+      padding: 8px;" (click)="irAtras()"></ion-icon>
+      <h1 class="titulo" style="color:black;text-align: center;font-family: 'Canela';">Datos de pago</h1>
+
+
+
+        <div style="margin-top:20px;">
+          <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+            <ion-grid style="width: 90%;height: 300px;background: white;border-radius: 25px;margin-left: 5%;">
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">NOMBRE DEL TITULAR</ion-label>
+                    <ion-input placeholder="Hugo Garcia" formControlName="name"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">NÚMERO DE TARJETA</ion-label>
+                    <ion-input placeholder="2541 2518 1581 2141" formControlName="number" type="number" ></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">Mes de Expedición</ion-label>
+                    <ion-input placeholder="12" formControlName="expMonth" type="number" min="01" max="12"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">Año de Expedición</ion-label>
+                    <ion-input placeholder="2020" formControlName="expYear" type="number" min="2023" max="2099" ></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label style="font-size: 12px;font-family: Canela;">CCV</ion-label>
+                    <ion-input placeholder="254" formControlName="cvc" type="number" min="100" max="999"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        
+        </div>
+        <p text-center style="color: black;font-family: 'Canela';">El importe a abonar es: 0,99 €</p>
+      </div>
+    
+      <div text-center class="boton">
+        <ion-button class="pago" style="--color:black;" (click)="submitForm()" style="
+						font-family: 'Alliance';
+						font-size: 15px;
+					">Realizar Pago</ion-button>
+      </div>
+     <!--  <div class="boton">
+        <ion-button class="pago" (click)="pagarPaypal()"> <ion-img style="width: 40%;" src="assets/imgs/logo-paypal.png"></ion-img></ion-button>
+      </div> -->
+  </div>
+
+
+  
+ 
+  
+</ion-content>

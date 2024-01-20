@@ -1,0 +1,32 @@
+<ion-item-sliding>
+  <ion-item [routerLink]="redirection">
+    <!-- Imagen del chat -->
+    <ion-avatar slot="start">
+      <img [src]="icon">
+    </ion-avatar>
+
+    <!-- Titulo y subtitulo -->
+    <ion-label>
+      <h2 class="title">{{title}}</h2>
+      <p class="subtitle">{{subtitle}}</p>
+    </ion-label>
+
+    <!-- Último mensaje y mensajes por ver -->
+    <ion-label class="right">
+
+      <p class="hora">{{lastMessage | date:'h:mm a'}}</p>
+
+      <p class="mensajes" *ngIf="newMessages >0">
+        <ion-badge color="primary">{{newMessages}}</ion-badge>
+      </p>
+    </ion-label>
+  </ion-item>
+
+  <!-- SlidingOptions -->
+  <ion-item-options [side]="slidingOptionsSide">
+    <ion-item-option [color]="slidingOptionsColor">
+      <ion-icon [name]="slidingOptionsIcon"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+
+</ion-item-sliding>

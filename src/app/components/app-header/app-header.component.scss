@@ -1,0 +1,51 @@
+.header {
+
+
+
+
+    .badge {
+        width: 20px;
+        /* left: 90vw; */
+        position: absolute;
+        color: black;
+        background: #fa581e;
+        border-radius: 20px;
+        bottom: 70%;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        visibility: visible;
+        left: 0;
+    }
+
+
+    font-family: canela;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2.5% auto;
+    // margin-top: 10%;
+
+    ion-col {
+        display: flex;
+        justify-content: center;
+    }
+
+    // :first-child {
+    //     color: black;
+    //     width: 8.5%;
+    // }
+
+    // :nth-child(2) {
+    //     color: black;
+    //     font-size: 18px;
+    //     font-weight: 900;
+    // }
+
+    // :nth-child(3) {
+    //     color: black;
+    //     width: 8.5%;
+    // }
+
+}

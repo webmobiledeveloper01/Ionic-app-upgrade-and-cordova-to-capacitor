@@ -1,0 +1,46 @@
+ion-footer{
+    background: #F4EEE6;
+    height: 80px;
+}
+.camera{
+    //position: absolute;
+    right: 15vw;
+    bottom: 0vw;
+    z-index: 99;
+
+}
+.send{
+    //position: absolute;
+    right: 5vw;
+    z-index: 99;
+    bottom: 0vw;
+}
+.imagen {
+    padding: 15px 0px 15px 0px;
+    max-height: 50vh;
+    margin:0 auto;
+}
+.texto{
+    max-width: 100% !important;
+    ion-input{
+        --padding-botom:15px !important;
+        text-align: left;
+    }
+    
+}
+.close{
+    position: absolute;
+    top: 1px;
+    right: 2vw;
+    font-size: 30px;
+    color:red;
+    z-index: 99;
+    font-weight: bold;
+    background:white;
+    border-radius: 50%;
+}
+
+ion-input{
+    width: 75%;
+}
+

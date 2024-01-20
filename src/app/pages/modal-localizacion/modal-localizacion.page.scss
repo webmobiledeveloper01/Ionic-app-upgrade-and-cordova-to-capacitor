@@ -1,0 +1,140 @@
+ion-content {
+
+
+    .main-wrap {
+        height: 60%;
+        margin: auto;
+
+
+        ion-grid {
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+        }
+
+        ion-row.label-row {
+            margin-bottom: 10%;
+            p {
+                width: 95%;
+                color: black;
+                text-align: center;
+                font-family: 'Alliance';
+                font-size: 25px;
+            }
+
+        }
+
+    }
+
+
+    ion-row.input-row {
+        display: flex;
+        flex-flow: row;
+        width: 80%;
+        margin: 0 auto;
+
+        ion-input {
+            border-radius: 10pt;
+            --placeholder-color: #AD907A;
+            --background: #F1EAE0;
+            color: #000000;
+            width: 95%;
+
+        }
+
+        ion-button {
+            --border-radius: 10pt;
+            height: 100%;
+            margin: 0;
+        }
+
+        ion-icon {}
+
+
+    }
+
+
+    .result-list {
+        background: transparent;
+
+        ion-item {
+            --background: transparent;
+            border-radius: 10pt;
+            background: #f8e2c6;
+            width: 80%;
+            margin: 5px auto;
+
+            .response-wrap {
+                width: 100%;
+
+                p {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+
+
+    //Loader 
+.item-loader{
+    display: flex;
+    justify-content: center;
+    
+    ion-row{
+        height: 10vh;
+        width: 100%;
+    }
+}
+    .lds-ripple {
+        position: relative;
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        justify-content: center;
+      }
+      .lds-ripple div {
+        // position: absolute;
+        border: 4px solid #cc881a;
+        opacity: 1;
+        border-radius: 50%;
+        animation: lds-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      }
+
+      .lds-ripple div:nth-child(2) {
+        animation-delay: -0.5s;
+      }
+
+      @keyframes lds-ripple {
+        0% {
+          top: 36px;
+          left: 36px;
+          width: 0;
+          height: 0;
+          opacity: 0;
+        }
+        4.9% {
+          top: 36px;
+          left: 36px;
+          width: 0;
+          height: 0;
+          opacity: 0;
+        }
+        5% {
+          top: 36px;
+          left: 36px;
+          width: 0;
+          height: 0;
+          opacity: 1;
+        }
+        100% {
+          top: 0px;
+          left: 0px;
+          width: 72px;
+          height: 72px;
+          opacity: 0;
+        }
+      }
+      
+
+}

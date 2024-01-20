@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="flex">
+    <div class="modal">
+      <ion-buttons slot="end">
+        <ion-button class="close-btn" (click)="cerrarModal()">
+          <ion-icon name="close" slot="end"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <p class="description">Explica el motivo por el cual quieres reportar esta publicación</p>      
+      <div class="center">
+        <div style="margin-top: 5%;">
+          <ion-checkbox mode="ios" (ionChange)="spam($event)"></ion-checkbox><ion-label>Es spam</ion-label>
+        </div>
+       <div style="margin-top: 5%;">
+        <ion-checkbox mode="ios" (ionChange)="nomegusta($event)"></ion-checkbox><ion-label>No me gusta</ion-label>
+       </div>
+        <div style="margin-top: 5%;">
+          <ion-checkbox mode="ios" (ionChange)="suicidio($event)"></ion-checkbox><ion-label>Suicidio, autolesión o trastornos alimenticios</ion-label>
+        </div>
+        <div style="margin-top: 5%;">
+          <ion-checkbox mode="ios" (ionChange)="desnudo($event)"></ion-checkbox><ion-label>Desnudos o actividad sexual</ion-label>
+        </div>
+       <div style="margin-top: 5%;">
+        <ion-checkbox mode="ios" (ionChange)="lenguaje($event)"></ion-checkbox><ion-label>Lenguaje o símbolos que incitan al odio</ion-label>
+       </div>
+        <div style="margin-top: 5%;">
+          <ion-checkbox mode="ios" (ionChange)="contenido($event)"></ion-checkbox><ion-label>Contenido incorrecto o inapropiado</ion-label>
+        </div>
+      </div>
+      <ion-button (click)="reportar()" class="reserva" expand="block">
+        <p>Reportar</p>
+      </ion-button>
+    </div>
+  </div>
+  
+</ion-content>

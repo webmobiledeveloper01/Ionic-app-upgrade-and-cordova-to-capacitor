@@ -1,0 +1,17 @@
+<ion-grid>
+  <ion-row id="custom{{object.id}}">
+    <ion-col size="3">
+      <ion-avatar>
+        <img *ngIf="!object.avatar" src="assets/imgs/private.png" alt="" />
+        <img src="{{object.avatar}}" alt="">
+      </ion-avatar>
+    </ion-col>
+    <ion-col >
+      <ion-label>{{object.name}}</ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button *ngIf="!IsSelectedItem" (click)="ChangeMode(true)"><ion-icon name="add-circle"></ion-icon></ion-button>
+      <ion-button *ngIf="IsSelectedItem" (click)="ChangeMode(false)" ><ion-icon name="close"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

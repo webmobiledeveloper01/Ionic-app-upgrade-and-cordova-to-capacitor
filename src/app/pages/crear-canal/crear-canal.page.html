@@ -1,0 +1,89 @@
+<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+
+<ion-content *ngIf="!isLoading" color="primary">
+  <div class="contenedor">
+    <div class="titulo-pagina">
+      <ion-row class="row-titulo-pagina">
+        <!--Decorado 1-->
+        <ion-col class="col-titulo-decorado1">
+          <img id="cuadrante_puntos" src="assets/imgs/Group 125P.png" />
+          <img
+          style="position: absolute;top: 4.5vh;"
+          src="assets/imgs/Group 114.png"
+          (click)="back()"
+        />
+        </ion-col>
+
+        <!--Titulo de la pestaña-->
+        <ion-col class="col-titulo-pagina">
+          <!-- <img style="width: 150vh;" src="assets/icons/LosCanales2.svg"> -->
+
+          <div class="ion-text-wrap"><p id="titulo">Crear nuevo grupo</p></div>
+        </ion-col>
+
+        <!--Decorado 2-->
+        <ion-col class="col-titulo-decorado2">
+          <img id="perfil_estrella1" src="assets/imgs/Star 2.png" />
+          <img id="perfil_estrella2" src="assets/imgs/Star 3.png" />
+          <img id="perfil_estrella3" src="assets/imgs/Star 4.png" />
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div class="form-wrap">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+      <ion-grid class="wrap-grid">
+        <ion-row class="row-title">
+          <ion-row class="inner-row-label">
+            <ion-label> Título del grupo </ion-label>
+          </ion-row>
+          <ion-row class="inner-row-input">
+            <!--  -->
+            <ion-input
+              placeholder="Escribe aqui el título del grupo..."
+              formControlName="title"
+            ></ion-input>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-description">
+          <ion-row class="inner-row-label">
+            <ion-label> Descripcion del grupo </ion-label>
+          </ion-row>
+          <ion-row class="inner-row-input">
+            <!--  -->
+            <ion-input
+              placeholder="Escribe aqui la descripcion del grupo..."
+              formControlName="description"
+            ></ion-input>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-category">
+          <ion-row> <ion-label> Categoría </ion-label></ion-row>
+          <ion-row id="category-wrap" class="chip-row">
+            <div class="chip-wrap" *ngFor="let c of categories">
+              <ion-chip (click)="SetCategoryValue($event)" id="{{c.id}}"
+                >{{c.name}}</ion-chip
+              >
+            </div>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-type">
+          <ion-row> <ion-label> Tipo de grupo </ion-label></ion-row>
+          <ion-row id="privacy-wrap">
+            <ion-col> <ion-chip (click)="SetPrivacy($event)" id="1">Privado</ion-chip></ion-col>
+            <ion-col> <ion-chip (click)="SetPrivacy($event)" id="0">Público</ion-chip></ion-col>
+          </ion-row>
+        </ion-row>
+        <ion-row class="row-btn">
+          <ion-col
+            ><ion-button class="btn-add" routerLink="/add-members" >Añadir Miembro</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button class="btn-create" (click)="CreateChanel()" [disabled]="!form.valid" >Crear grupo</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

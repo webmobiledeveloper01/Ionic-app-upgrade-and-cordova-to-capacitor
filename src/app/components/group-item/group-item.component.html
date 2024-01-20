@@ -1,0 +1,88 @@
+<ion-grid *ngIf="grupo.user_belongs" class="own-main-wrap" (click)="clicked()">
+  <ion-row class="top-wrap">
+    <p class="grupo-title">
+      {{ grupo.title }}
+    </p>
+  </ion-row>
+  <ion-row class="mid-wrap">
+    <p class="grupo-description">
+      {{ grupo.description }}
+    </p>
+  </ion-row>
+  <ion-row class="bot-wrap">
+    <ion-row style="margin: 0">
+      <ion-avatar *ngFor="let img of grupo.users_avatars" class="avatar"
+        ><img src="{{ img }}" alt="" srcset=""
+      /></ion-avatar>
+      <ion-avatar>
+        <div class="etc"><p>...</p></div>
+      </ion-avatar></ion-row
+    >
+  </ion-row>
+</ion-grid>
+
+<ion-grid *ngIf="!grupo.user_belongs" class="not-own-main-wrap">
+  <ion-row class="top-wrap">
+    <p class="grupo-title">
+      {{ grupo.title }}
+    </p>
+  </ion-row>
+  <ion-row class="mid-wrap">
+    <ion-row>
+      <ion-avatar *ngFor="let img of grupo.users_avatars" class="avatar"
+        ><img src="{{ img }}" alt="" srcset=""
+      /></ion-avatar>
+      <ion-avatar>
+        <div class="etc"><p>...</p></div>
+      </ion-avatar></ion-row
+    >
+
+    <ion-row *ngIf="grupo.private == 1" class="row-titulo-grupo-informacion">
+      <ion-icon src="assets/icons/candado.svg"></ion-icon>
+      <!-- <p id="texto-info">Private group-126 members</p> -->
+      <p id="texto-info">Grupo privado - {{ grupo.count_members }} miembro/s</p>
+    </ion-row>
+
+    <ion-row *ngIf="grupo.private == 0" class="row-titulo-grupo-informacion">
+      <p id="texto-info">Grupo público - {{ grupo.count_members }} miembro/s</p>
+    </ion-row>
+  </ion-row>
+  <ion-row class="bot-wrap">
+    <ion-button *ngIf="!grupo.user_tried_to_join" (click)="TriedToJoin()" class="request-btn">Solicitar unirse</ion-button>
+    <ion-button *ngIf="grupo.user_tried_to_join" [disabled]="'true'" class="requested-btn">Ya has solicitado unirte</ion-button>
+  </ion-row>
+</ion-grid>
+
+<!-- 
+category_id: 1
+​​​
+category_name: "Recuerdos"
+​​​
+count_members: 2
+​​​
+created_at: "2023-01-24 13:16:03"
+​​​
+creator_id: 23
+​​​
+description: "po eso"
+​​​
+id: 19
+​​​
+image: null
+​​​
+last_archive: null
+​​​
+private: 1
+​​​
+title: "unete manin"
+​​​
+updated_at: "2023-01-24 13:16:03"
+​​​
+user_belongs: true
+​​​
+user_tried_to_join: true
+​​​
+users_avatars: Array [ "http://192.168.18.96/FERNANDO/laravel-fer/public/storage/users/0216202314183763ee2d2d442bf.jpeg", "http://192.168.18.96/FERNANDO/laravel-fer/public/storage/users/juana.jpg" ]
+​​​
+users_list: Array [ {…}, {…} ]
+ -->

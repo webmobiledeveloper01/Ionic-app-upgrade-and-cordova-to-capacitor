@@ -1,0 +1,337 @@
+ion-content {
+
+
+    .custom-btn-marked {
+        --background: #F3B562 !important;
+    }
+
+
+    .option-wrap {
+
+
+        width: 90%;
+        margin: 10% auto;
+        display: flex;
+        justify-content: space-evenly;
+
+    }
+
+    .main-wrap {
+
+        .top-wrap {
+
+            margin: 10% auto;
+
+            .inner-top-left-wrap {
+                margin-left: 0%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .btn-atras {
+                    position: absolute;
+                    margin-left: 5%;
+                }
+
+            }
+
+            .inner-top-mid-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .title-label {
+                    color: #333;
+                    font-size: 25px;
+                    font-family: "Canela";
+                    font-weight: 700;
+
+                }
+
+            }
+
+            .inner-top-right-wrap {
+                .star-wrap {
+                    width: 100%;
+                    margin: auto;
+
+                    ion-grid {
+                        display: flex;
+                        flex-flow: column;
+
+                        .star-top {
+                            justify-content: flex-start;
+                        }
+
+                        .star-mid {
+                            justify-content: flex-end;
+                        }
+
+                        .star-bot {
+                            justify-content: flex-start;
+                        }
+
+
+
+
+                    }
+                }
+
+            }
+
+
+
+
+
+        }
+    }
+
+    .body-wrap {
+        margin: 10% auto;
+        margin-top: 0;
+
+        .disclaimer-text {
+            width: 80%;
+            text-align: center;
+            margin: auto;
+            font-size: 14px;
+            font-family: Alliance;
+        }
+
+        .form-wrap {
+
+            .map-div {
+                width: 80%;
+                margin: 5% auto;
+                background-color: rgba(255, 255, 255, 0);
+                // border: 1px solid red;
+                height: 30vh;
+                min-width: 200px;
+                min-height: 200px;
+            }
+
+            .row-description {
+                margin: 10% auto;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+
+                .eliminar-img {
+                    ion-button {
+                        --background: red;
+                        position: relative;
+                        left: 60vw;
+                        font-size: 4.5vw;
+                        // z-index: 999;
+                        --border-radius: 20pt;
+                        top: 4.5vh;
+                    }
+                }
+
+                .upload-img {
+                    max-height: 35vh;
+                    max-width: 50vw;
+                    margin: 5% auto;
+                }
+            }
+
+
+            .input-wrap {
+                width: 85%;
+                margin: 5% auto;
+                display: flex;
+                justify-content: center;
+
+                ion-button.add {
+                    --border-radius: 20pt;
+                    --background: #F3B562;
+                    color: white;
+                    width: 100%;
+                    margin-top: 15px;
+                    font-family: 'Alliance';
+                    font-size: 15px;
+                }
+
+                .list-ingredients {
+
+                    width: 100%;
+                    background: transparent;
+
+                    .list-row {
+                        width: 100%;
+                        background: #fff0e1;
+                        border-radius: 10pt;
+                        margin: 5px;
+
+                        .list-col-text {
+                            p {
+                                color: #363A3C;
+                            }
+                        }
+
+                        .list-col-btn {
+                            ion-button {
+                                width: 90%;
+                                color: #AAA8A7;
+                                margin: auto;
+                            }
+                        }
+
+                    }
+
+
+                }
+
+
+                .chips-wrap {
+                    width: 100%;
+
+
+                    .row-chip {
+                        .custom-chip {
+                            background-color: white;
+                            width: 100%;
+                            height: 6.5vh;
+                            text-align: center;
+                            font-family: "Alliance";
+                            font-size: 13xt;
+                            border-radius: 20pt;
+
+                            p {
+                                text-align: center;
+                                white-space: nowrap;
+                                color: #847E77;
+                            }
+
+                        }
+
+                        .custom-chip-marked {
+                            background-color: #F3B562;
+                            width: 100%;
+                            height: 6.5vh;
+                            text-align: center;
+                            font-family: "Alliance";
+                            font-size: 13px;
+                            border-radius: 20pt;
+
+                            p {
+                                text-align: center;
+                                white-space: nowrap;
+                                color: #363A3C;
+                            }
+                        }
+                    }
+                }
+
+
+                ion-row {
+                    width: 100%;
+
+
+                }
+
+                p {
+                    font-family: "Alliance";
+                    font-size: 13px;
+                    color: #363A3C;
+                    width: 90%;
+                    text-align: left;
+                    margin: 5% auto;
+
+                }
+
+                ion-input {
+                    --background: #F0E8DEE2;
+                    border-radius: 9pt;
+                    --placeholder-color: #BAA28E;
+                    width: 100%;
+                    color: #BAA28E;
+                    padding: 5px !important;
+                }
+
+                ion-textarea {
+                    --background: #F0E8DEE2;
+                    border-radius: 9pt;
+                    --placeholder-color: #D5C4B8;
+                    width: 100%;
+                    min-height: 20vh;
+                    color: #D5C4B8;
+                    padding: 5px !important;
+                }
+
+                ion-button {
+
+                    --border-radius: 20pt;
+                    --background: #F3B562;
+                    color: white;
+                    width: 100%;
+                    font-family: 'Alliance';
+                    font-size: 15px;
+
+                    .inner-custom {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        text-transform: none;
+                        letter-spacing: normal;
+                    }
+
+                }
+
+            }
+
+
+        }
+
+    }
+
+
+    .footer-grid {
+
+        .btn-row {
+            width: 80%;
+            margin: auto;
+
+            ion-col {
+                display: flex;
+                justify-content: center;
+
+                ion-button {
+                    --background: #FFFFFFE2;
+                    --border-radius: 10pt;
+                    color: #847E77;
+                    width: 100%;
+                    font-family: "Alliance";
+                }
+            }
+        }
+
+        p {
+            font-family: "Alliance";
+            font-size: 13px;
+            color: #363A3C;
+            width: 90%;
+            text-align: center;
+            margin: 5% auto;
+
+
+        }
+
+        .submit-row {
+            width: 80%;
+            margin: 5% auto;
+
+            ion-button {
+                --background: #F3B562;
+                --border-radius: 10pt;
+                color: #ffffff;
+                width: 100%;
+                font-family: "Alliance";
+                font-size: 14px;
+            }
+        }
+
+
+    }
+
+}

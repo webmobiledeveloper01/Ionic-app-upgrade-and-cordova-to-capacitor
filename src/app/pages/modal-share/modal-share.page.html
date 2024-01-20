@@ -1,0 +1,51 @@
+<ion-content color="primary">
+  <div class="buttons-wrap" *ngIf="!ShareOnChanels">
+    <ion-button class="shareApp" (click)="ShareInApps()"
+      >Compartir en redes</ion-button
+    >
+    <ion-button class="shareApp-canales" (click)="ShareOnGroups()"
+      >Compartir en grupo</ion-button
+    >
+  </div>
+
+  <div class="ShareOnChanels" *ngIf="ShareOnChanels">
+    <ion-grid class="Nogroup" *ngIf="NoGroups">
+      <p style="color: black">Aun no perteneces a ningun canal</p>
+    </ion-grid>
+
+    <ion-grid *ngIf="!NoGroups">
+      <div class="comment-wrap">
+        <ion-row class="comment-row">
+          <p>¿Quieres añadir un comentario?</p>
+        </ion-row>
+        <ion-row class="comment-row">
+          <ion-input
+            [(ngModel)]="comment"
+            id="comment357"
+            class="comment357"
+            placeholder="Escribe aqui tu comentario"
+          ></ion-input>
+        </ion-row>
+      </div>
+
+      <ion-row *ngFor="let c of chanels">
+        <ion-col size="3">
+          <ion-avatar *ngIf="c.image">
+            <img src="" alt="" />
+          </ion-avatar>
+          <ion-avatar *ngIf="!c.image">
+            <img src="../../../assets/imgs/new_default_group.png" alt="" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <p>{{c.title}}</p>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button (click)="SharePost(c.id)"
+            ><ion-icon name="paper-plane"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,116 @@
+<app-loading
+  text=" Cargando notificaciones... "
+  *ngIf="IsLoading"
+></app-loading>
+
+<ion-content color="primary" *ngIf="!IsLoading">
+  <app-app-header
+    textHeader="Notificaciones"
+    [showNotification]="false"
+    imageNotification="assets/icon/Notificaciones.svg"
+    [editButton]="false"
+    [arrowBack]="true"
+  ></app-app-header>
+
+  <div class="config-wrap">
+    <ion-grid class="wrap-grid">
+      <ion-row class="grid-row">
+        <ion-col size="2" class="not-col">
+          <ion-icon (click)="toggleConfig($event)" name="settings"></ion-icon
+        ></ion-col>
+        <ion-col> <p style="font-weight: bold;">Configuración de notificaciones</p></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-grid class="inner-wrap">
+          <ion-row class="wrap-title">
+            <p>Bloqueo de notificaciones</p></ion-row
+          >
+          <ion-row
+            ><ion-col class="text-col"
+              >Notificacion al recibir un mensaje</ion-col
+            >
+            <ion-col size="3"
+              ><ion-toggle
+                [checked]="block_notification_mensaje"
+                id="not-mensaje"
+              ></ion-toggle></ion-col
+          ></ion-row>
+          <ion-row
+            ><ion-col class="text-col"
+              >Notificacion al recibir un comentario</ion-col
+            >
+            <ion-col size="3"
+              ><ion-toggle
+                [checked]="block_notification_comentario"
+                id="not-comentario"
+              ></ion-toggle></ion-col
+          ></ion-row>
+          <ion-row
+            ><ion-col class="text-col">Notificacion al recibir like</ion-col>
+            <ion-col size="3"
+              ><ion-toggle
+                [checked]="block_notification_like"
+                id="not-like"
+              ></ion-toggle></ion-col
+          ></ion-row>
+          <ion-row
+            ><ion-col class="text-col"
+              >Notificacion para nuevo seguidor</ion-col
+            >
+            <ion-col size="3"
+              ><ion-toggle
+                [checked]="block_notification_seguidor"
+                id="not-seguidor"
+              ></ion-toggle></ion-col
+          ></ion-row>
+          <ion-row
+            ><ion-col class="text-col"
+              >Notificacion al ser añadido a un grupo</ion-col
+            >
+            <ion-col size="3"
+              ><ion-toggle
+                [checked]="block_notification_grupo"
+                id="not-grupo"
+              ></ion-toggle></ion-col
+          ></ion-row>
+          <ion-row>
+            <ion-button class="save-btn" (click)="savePreferences()" style="
+							font-family: 'Alliance';
+							font-size: 15px;
+							">
+              Guardar mis preferencias</ion-button
+            ></ion-row
+          >
+        </ion-grid>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-list
+    style="background: #faf5f0"
+    *ngIf="notificaciones != null"
+    lines="none"
+  >
+    <ion-item
+      *ngFor="let notificacion of notificaciones"
+      id="{{notificacion.id}}"
+    >
+      <app-notification-item
+        [notification]="notificacion"
+        (onDelete)="deleteNotification($event)"
+        (onInvite)="DisplayInvitations($event)"
+        (onRequest)="DisplayRequest($event)"
+      ></app-notification-item>
+
+      <!-- <div  style="--background:#FAF5F0;color:black;font-family: 'Canela';padding-left: 15px;" >
+      <h2>{{notificacion.title}}</h2>
+      <ion-label>{{notificacion.description}}</ion-label>
+      <hr color="black">
+    </div> -->
+    </ion-item>
+  </ion-list>
+
+  <div class="void" *ngIf="isVoid&&!IsLoading">
+    <h1>No hay notificaciones nuevas</h1>
+  </div>
+</ion-content>

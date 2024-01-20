@@ -1,0 +1,78 @@
+
+<app-loading text="Cargando preguntas..." *ngIf=""></app-loading>
+
+<ion-content color="primary">
+  
+		<!-- doomed v3 header -->
+
+	<!-- 
+		typescript back()
+
+		public back() {
+    this.navCtrl.navigateForward("/tabs");
+  	} 
+	-->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+		
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        <span style="font-style: italic;">mis</span><br>Preguntas
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+  <div class="list-wrap" *ngIf="!noQuestions">
+    <div class="item-wrap" *ngFor="let q of questions" (click)="GotoEdit(q)">
+      <app-question-item [object]="q"></app-question-item>
+    </div>
+  </div>
+
+  <div class="list-wrap" *ngIf="noQuestions">
+    <div class="item-wrap">
+      <p>Aún no has hecho ninguna pregunta</p>
+    </div>
+  </div>
+</ion-content>

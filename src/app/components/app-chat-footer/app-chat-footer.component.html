@@ -1,0 +1,9 @@
+<ion-footer class="ion-text-center">
+  <img class="imagen" [src]="message?.imagen" *ngIf="message?.imagen">
+  <ion-icon class="close" name="close-circle" *ngIf="message?.imagen" (click)="deleteImage()"></ion-icon>
+  <ion-item lines="none" style="--background:#F4EEE6;">
+    <ion-input type="text" [placeholder]="placeholder" [(ngModel)]="message.texto"></ion-input>
+    <ion-icon class="camera" src="../../../assets/icons/camera-chat.svg" slot="end" (click)="addImage()"></ion-icon>
+    <ion-icon class="send" src="../../../assets/icons/enviar.svg" slot="end" (click)="onSendText()"></ion-icon>
+  </ion-item>
+</ion-footer>

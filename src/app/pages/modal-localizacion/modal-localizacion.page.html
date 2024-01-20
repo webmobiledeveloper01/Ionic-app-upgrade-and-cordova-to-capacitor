@@ -1,0 +1,103 @@
+<ion-content color="primary">
+  <div class="main-wrap">
+    <ion-grid>
+      <ion-row class="label-row">
+        <p class="label">
+          Introduce
+          <span *ngIf="isCountry">el pais</span>
+          <span *ngIf="isProvince">la provincia</span>
+          <span *ngIf="isRegion">la region</span>
+          <span *ngIf="isTown">la localidad</span>
+          a buscar
+        </p>
+      </ion-row>
+      <ion-row class="input-row">
+        <ion-input class="direction-input" [(ngModel)]="direccion"> </ion-input>
+        <ion-button color="dark" (click)="SearchLocation()"
+          ><ion-icon name="search"></ion-icon
+        ></ion-button>
+      </ion-row>
+
+      <ion-list class="result-list" *ngIf="!NoResult&&isSearched">
+        <ion-item
+          *ngFor="let r of resultadosDireccion"
+          lines="none"
+          (click)="SelectLocation(r)"
+        >
+          <div class="response-wrap" *ngIf="isTown">
+            <p style="color: black">
+              {{r.areasOfInterest[0]}}<span
+                *ngIf="r.administrativeArea"
+                style="color: black"
+                >,{{r.administrativeArea}}</span
+              >
+              <span *ngIf="r.countryName" style="color: black"
+                >,{{r.countryName}}</span
+              ><span *ngIf="r.locality" style="color: black"
+                >, termino municipal de {{r.locality}}</span
+              >
+            </p>
+          </div>
+
+          <div class="response-wrap" *ngIf="isRegion">
+            <p style="color: black">
+              <span
+              *ngIf="r.subAdministrativeArea!=r.countryName"
+              style="color: black"
+              >{{r.subAdministrativeArea}},</span
+            >
+              <span
+                *ngIf="r.administrativeArea!=r.countryName"
+                style="color: black"
+                >{{r.administrativeArea}}</span
+              >
+              <!-- <span style="color: black">,{{r.subAdministrativeArea}}</span> -->
+              <span *ngIf="r.countryName" style="color: black"
+                >,{{r.countryName}}</span
+              >
+            </p>
+          </div>
+
+          <div class="response-wrap" *ngIf="isProvince">
+            <p style="color: black">
+              <span *ngIf="r.administrativeArea" style="color: black"
+                >{{r.administrativeArea}}</span
+              >
+              <span *ngIf="r.countryName" style="color: black"
+                >,{{r.countryName}}</span
+              ><span *ngIf="r.subAdministrativeArea" style="color: black"
+                >, Provincia de {{r.subAdministrativeArea}}</span
+              >
+            </p>
+          </div>
+
+          <div class="response-wrap" *ngIf="isCountry">
+            <p style="color: black">
+              {{r.countryName}}<span *ngIf="r.countryCode" style="color: black"
+                >,{{r.countryCode}}</span
+              >
+            </p>
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-list class="result-list" *ngIf="NoResult&&isSearched">
+        <ion-item lines="none">
+          <p style="color: black">No se encontraron resultados</p>
+        </ion-item>
+      </ion-list>
+      <ion-list class="result-list" *ngIf="isLoadingPlaces&&isSearched">
+        <ion-item lines="none" class="item-loader">
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col
+              ><div class="lds-ripple">
+                <div></div>
+                <div></div></div
+            ></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-grid>
+  </div>
+</ion-content>

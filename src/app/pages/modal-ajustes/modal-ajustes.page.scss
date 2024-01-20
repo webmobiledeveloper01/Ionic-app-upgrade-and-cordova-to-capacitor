@@ -1,0 +1,104 @@
+ion-content {
+    --background: transparent !important;
+    border-radius: 20px;
+
+
+
+    div.list-addresses {
+        ion-list.addresses-list {
+            background: transparent;
+            ion-item.item-list {
+                text-align: center;
+                border-radius: 10pt;
+                --background: #ffe09b;
+
+                p.inner-item-text {
+                    font-family: Alliance;
+
+                    span.item-name {}
+
+                }
+
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    .flex {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal {
+        width: 85%;
+        background-color: #FAF5F0;
+        margin: 0 auto;
+        padding: 16px;
+        border-radius: 16px;
+
+        .clinic-name {
+            color: var(--ion-color-primary);
+            text-align: center;
+            font-size: 12pt;
+
+        }
+
+        .description {
+            font-size: 10pt;
+            text-align: center;
+            font-weight: bold;
+
+        }
+
+        .date {
+            font-weight: bold;
+            font-size: 18pt;
+            text-align: center;
+
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reserva {
+            margin-top: 4vh;
+            width: 85vw;
+            height: 7vh;
+            --border-radius: 50px;
+            --background: var(--ion-color-tertiary);
+            text-transform: none;
+            color: white;
+            --box-shadow: 2px 4px 15px 1px #4AA8D171;
+            margin-bottom: 2vh;
+        }
+
+        .reserva2 {
+            margin-top: 4vh;
+            width: 85vw;
+            height: 7vh;
+            --border-radius: 15px;
+            --background: white;
+            text-transform: none;
+            color: black;
+            --box-shadow: 2px 4px 15px 1px #4AA8D171;
+            margin-bottom: 2vh;
+        }
+    }
+
+
+}

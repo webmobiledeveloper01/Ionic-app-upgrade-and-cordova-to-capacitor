@@ -1,0 +1,89 @@
+<app-loading text="Cargando..." *ngIf="IsLoading"></app-loading>
+<ion-content *ngIf="!IsLoading">
+
+	<!-- doomed v3 header -->
+
+	<!-- 
+		typescript back()
+
+		public back() {
+    this.navCtrl.navigateForward("/tabs");
+  	} 
+	-->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+		
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        <span style="font-style: italic;">los</span><br>Canales
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+<ion-grid class="body-wrap">
+
+
+<ion-row class="void" *ngIf="void" >
+
+
+<p class="void-text">
+  Parece que no hay nada que ver por aqui...
+</p>
+
+</ion-row>
+
+<ion-row class="chanel-wrap" *ngFor="let g of Chanels">
+   <app-chanel [Group]="g" (OnClick)="goToGrupos($event)"></app-chanel>
+</ion-row>
+
+
+</ion-grid>
+
+
+
+
+
+
+</ion-content>

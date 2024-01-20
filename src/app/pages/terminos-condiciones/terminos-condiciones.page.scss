@@ -1,0 +1,21 @@
+ion-content{
+    div{
+        padding: 8px;
+        font-family: "Canela";
+        color: black;
+    }
+    h2{
+        text-align: center !important;
+        font-weight: bold;
+        font-family: "Canela";
+        color: black;
+    }
+}
+
+ion-toolbar{
+    
+    font-weight: bold;
+    font-family: 'Canela';
+    --background:  var(--ion-color-primary);
+   
+}

@@ -1,0 +1,185 @@
+<app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
+
+<ion-content color="primary" *ngIf="!isLoading">
+  <div class="container">
+    <div class="perfil-datos">
+      <ion-row class="row-perfil-datos">
+        <!--Decorado 1-->
+        <ion-col class="col-perfil-decorado1">
+          <img
+            id="btn_atras"
+            style="margin-top: 4.5vh;"
+            src="assets/imgs/Group 114.png"
+            (click)="back()"
+          />
+          <img id="ondas_imagen" src="assets/imgs/Group 126.png" />
+          <img id="cuadrante_puntos" src="assets/imgs/Group 125.png" />
+        </ion-col>
+
+        <!--Decorado 2-->
+        <ion-col class="col-perfil-decorado2">
+          <img id="perfil_imagen" [src]="user?.avatar" />
+        </ion-col>
+
+        <!-- Decorado 3 -->
+        <ion-col class="col-perfil-decorado3">
+          <img id="perfil_estrella1" src="assets/imgs/Star 2.png" />
+          <img id="perfil_estrella2" src="assets/imgs/Star 3.png" />
+          <img id="perfil_estrella3" src="assets/imgs/Star 4.png" />
+        </ion-col>
+      </ion-row>
+
+      <!--Nombre, nacionalidad, texto-->
+      <ion-row class="row-perfil-datos-pie">
+        <label id="nombre_usuario">{{user?.name}}</label>
+
+        <!-- <ion-col class="col-perfil-datos-nacionalidad">
+          <img id="imagen_bandera" src="assets/imgs/Inglaterra.png" />
+          <label id="texto_nacionalidad">London,UK</label>
+        </ion-col> -->
+        <ion-col
+        *ngIf="user.user_location"
+        (click)="out()"
+        class="col-perfil-datos-nacionalidad"
+      >
+        <!-- <img id="imagen_bandera" src="assets/imgs/Inglaterra.png" /> -->
+
+        <label id="texto_nacionalidad">{{user.user_location}}</label>
+      </ion-col>
+
+
+        <ion-col class="col-perfil-datos-texto">
+          <!-- <label id="texto_usuario"
+            >“Remembering my childhood at my family country house gives me a
+            sense of belonging and nourishes my present experience.”</label
+          > -->
+          
+          <label *ngIf="user?.description" id="texto_usuario"
+            >{{user?.description}}
+          </label>
+
+   
+        </ion-col>
+        <!-- 
+        <ion-button class="boton-principal" type="submit" color="primary" style="margin-bottom: 2vh;" (click)="auth.logout()">
+          <p class="register">Salir de la cuenta</p>
+          </ion-button> -->
+
+        <!--Numero de seguidores....-->
+        <ion-row class="row-perfil-datos-cuenta">
+          <!-- <ion-button color="dark" routerLink="/new-question">ASKING</ion-button> -->
+          <!--Followers-->
+          <ion-col class="col-followers" (click)="GoToFollowers()">
+            <label id="num_followers">{{user?.followers}}</label>
+            <label id="tipo_followers">SEGUIDORES</label>
+          </ion-col>
+
+          <!--Following-->
+          <ion-col class="col-following" (click)="GoToFollowing()">
+            <label id="num_following">{{user?.seguidos}}</label>
+            <label id="tipo_following">SIGUIENDO</label>
+          </ion-col>
+
+          <!-- follow -->
+          <!-- <ion-col class="col-likes">
+        
+          </ion-col> -->
+        </ion-row>
+      </ion-row>
+    </div>
+  </div>
+
+  
+
+  <div class="action-buttons">
+    <div class="action-follows" >
+      <ion-grid style="margin: 0px;width: 100%;">
+        <ion-row style="margin:0px"
+          ><ion-button class="follow" (click)="chat()"
+            >Crear chat</ion-button
+          ></ion-row
+        >
+      </ion-grid>
+    </div>
+    <div class="action-Mutual" *ngIf="isMutual">
+      <ion-grid style="margin: 0px;width: 100%;">
+        
+        <ion-row  style="margin:0px" class="status"> Os seguis mutuamente</ion-row>
+        <ion-row style="margin:11px">
+          <ion-button class="stop-follow" (click)="StopFollow()"
+            >Dejar de seguir</ion-button
+          >
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+    <div class="action-follows" *ngIf="isFollower">
+      <ion-grid>
+        <ion-row style="margin:0px" class="status">Te sigue</ion-row>
+        <ion-row
+          ><ion-button (click)="Follow()" class="follow"
+            >Seguir</ion-button
+          ></ion-row
+        >
+      </ion-grid>
+    </div>
+
+    <div class="action-youFollow" *ngIf="YouFollow">
+      <ion-grid style="margin:0px">
+        <ion-row class="status">Siguiendo</ion-row>
+        <ion-row>
+          <ion-button class="stop-follow" style="margin:0px" (click)="StopFollow()"
+            >Dejar de seguir</ion-button
+          ></ion-row
+        >
+      </ion-grid>
+    </div>
+
+    <div class="action-nothing" *ngIf="!YouFollow&&!isFollower&&!isMutual">
+      <ion-grid>
+        <ion-row class="status">No os seguis</ion-row>
+        <ion-row>
+          <ion-button (click)="Follow()" class="follow"
+            >Seguir</ion-button
+          ></ion-row
+        >
+      </ion-grid>
+    </div>
+  </div>
+
+
+  <div class="posts-wrap" *ngIf="ThereIsPosts&&verPublicaciones">
+    <ion-grid class="Year-grid" *ngFor="let post of years">
+      <ion-row class="Year-data-row">
+        <ion-item class="item-years" lines="full">
+          <label slot="start" class="years-label">{{post.year}}</label>
+          <label slot="end" class="numero-label">{{post.postPosition}} of {{post.postCount}}</label>
+        </ion-item>
+      </ion-row>
+      <ion-row class="Year-slides">
+        <ion-slides class="slider-wrap" (ionSlideDidChange)="sliderChanges($event,post)">
+          <ion-slide class="slide-img" *ngFor="let p of post.posts">
+            <!-- <ion-icon
+              src="assets/icon/eliminar.svg"
+              (click)="borrarPublicacion(p)"
+            ></ion-icon> -->
+            <!-- <img src="assets/imgs/image 202.png" /> -->
+            <img src="{{p.archivo}}" (click)="GoDetails(p)" />
+
+            <div class="text-wrap">
+              <label id="texto-pie-imagen2">{{p.titulo}}</label>
+              <label id="texto-fecha-lugar-imagen2"
+                >{{p.fecha | date:"dd/MM/yy"}} - {{p.ubicacion}}</label
+              >
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="NoPosts" *ngIf="!ThereIsPosts&&verPublicaciones">
+    <p class="noposts-label">Aún no hay publicaciones subidas</p>
+  </div>
+</ion-content>

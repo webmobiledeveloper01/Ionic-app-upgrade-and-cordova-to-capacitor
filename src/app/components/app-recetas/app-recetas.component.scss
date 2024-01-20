@@ -1,0 +1,42 @@
+.receta-wrap {
+    height: 100%;
+
+    .img-wrap {
+        height: 80%;
+
+        .lock-wrap {
+            position: absolute;
+            /* z-index: 10; */
+            top: 65%;
+            color: rgb(211, 211, 211);
+            font-size: 25px;
+            left: 15%;
+            background: #9C928F;
+            padding: 5px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            height: 100% !important;
+            // -o-object-fit: cover;
+            object-fit: cover;
+            border-radius: 15px;
+            width: 100%;
+        }
+
+    }
+
+    .text-wrap {
+
+        .recipe-name {
+            text-align: center;
+            width: 80%;
+            margin: 5px auto;
+        }
+
+    }
+
+}

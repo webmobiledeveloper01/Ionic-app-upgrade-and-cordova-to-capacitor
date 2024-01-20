@@ -1,0 +1,76 @@
+<ion-content color="primary">
+  <ion-row class="row-perfil-datos" style="margin-top: 5%;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img style="position: absolute; margin-top: 10%; margin-left: 15%" id="btn_atras" src="assets/imgs/Group 114.png"
+        (click)="back()" />
+      <img style="margin-top: 10%" id="ondas_imagen" src="assets/imgs/Group 126.png" />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina" style="display: flex; justify-content: center; align-items: center">
+      <p id="titulo" style="
+          font-size: 20px;
+          font-family: 'Canela';
+          color: black;
+          text-align: center;
+        ">
+        Login
+      </p>
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img style="margin-top: 10%; margin-left: 50%" id="perfil_estrella1" src="assets/imgs/estrellas_registro.svg" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <img style="margin-left: -3%" id="cuadrante_puntos" src="assets/imgs/Group 125.png" />
+    </ion-col>
+  </ion-row>
+
+  <div class="contenido">
+
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+
+      <p style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        ">
+        Email
+      </p>
+      <ion-item class="item-native" lines="none">
+        <ion-input clearInput type="email" placeholder="Email" formControlName="email" required></ion-input>
+      </ion-item>
+
+
+      <p style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        ">
+        Contraseña
+      </p>
+
+      <ion-item class="item-native">
+        <ion-input clearInput type="password" placeholder="Contraseña" formControlName="password" required></ion-input>
+      </ion-item>
+
+
+
+      <div style="margin-top: 15%">
+        <ion-button style="--border-radius: 10px; --background: black; margin-top: 20px" expand="block"
+          type="submit">Entrar</ion-button>
+      </div>
+      <ion-button
+      style="--border-radius: 10px; --color: black"
+      expand="block"
+      type="button"
+      (click)="rememberPassword()"
+      >No recuerdo mi contraseña</ion-button
+    >
+    </form>
+  </div>
+</ion-content>

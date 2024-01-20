@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>457684864864-49aef7o9age8hve0nekok66pa2387ffp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.457684864864-49aef7o9age8hve0nekok66pa2387ffp</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>457684864864-a6job15llmttnqec2cvtd81cqigsii4j.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAnTmRhhJNNaTwAGSlXZhZb8d4hAmcEyrM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>457684864864</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.xerintel.timemapp5872</string>
+	<key>PROJECT_ID</key>
+	<string>app-fernando</string>
+	<key>STORAGE_BUCKET</key>
+	<string>app-fernando.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:457684864864:ios:e670d000c3079e834cd805</string>
+</dict>
+</plist>

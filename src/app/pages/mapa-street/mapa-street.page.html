@@ -1,0 +1,50 @@
+<ion-content color="primary">
+
+  <!--Street view-->
+<div class="divMap2">
+
+  <div id="pano_canvas1">
+
+  </div>
+
+</div>
+
+<div class="divBajo">
+
+  <img  id="barra" src="assets/icons/linea.png"/>
+
+  <ion-item color="primary" lines="none">
+    
+    <ion-row>
+      <ion-col class="col-info">
+        <p id="localizacion">{{miDireccion}}</p>
+        <p id="informacion">40 post from 38 nostalgics</p>
+      </ion-col>
+    </ion-row>
+
+    <img id="direccion" src="assets/imgs/Flecha.png" routerLink="/mapa-seleccion"/>
+
+
+
+  </ion-item>
+
+  <ion-col class="col-imagenes" >
+    <ion-slides >
+      <ion-slide class="slide-publicacion" *ngFor="let publicacion of publicaciones">
+        <img id="imagen1" [src]="publicacion?.archivo"/>
+        <label id="texto-pie-imagen">{{publicacion?.titulo}}</label>
+        <label id="texto-fecha-lugar-imagen">{{publicacion?.created_at}} — {{publicacion?.ubicacion}}</label>
+      </ion-slide>
+
+     <!--  <ion-slide class="slide-publicacion" >
+        <img id="imagen2" src="assets/imgs/personas2.png"/>
+        <label id="texto-pie-imagen2">B-boys</label>
+        <label id="texto-fecha-lugar-imagen2">8 August 1983 — Manhattan, NY</label>
+      </ion-slide> -->
+    </ion-slides>
+  </ion-col>
+
+
+</div>
+
+</ion-content>

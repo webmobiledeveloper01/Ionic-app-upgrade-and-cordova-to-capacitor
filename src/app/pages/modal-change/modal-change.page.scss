@@ -1,0 +1,36 @@
+ion-content {
+
+    .main-wrap {
+        width: 80%;
+        margin: 30vh auto;
+        display: flex;
+        flex-flow: column;
+    }
+
+    ion-input {
+        --background: #F0E8DEE2;
+        border-radius: 9pt;
+        --placeholder-color: #BAA28E;
+        width: 100%;
+        color: #BAA28E;
+        padding: 5px !important;
+
+    }
+
+    ion-button {
+        min-width: 90%;
+        margin: 10% auto;
+        margin-bottom: 2.5%;
+        --border-radius: 20pt;
+        color: #333;
+        --background: #7b6b5e;
+    }
+    ion-button.cancelar {
+        min-width: 90%;
+        margin: 5% auto;
+        --border-radius: 20pt;
+        color: #c2c2c2;
+        --background: rgb(0, 0, 0);
+    }
+
+}

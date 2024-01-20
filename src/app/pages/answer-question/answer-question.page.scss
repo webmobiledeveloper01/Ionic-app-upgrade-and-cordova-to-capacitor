@@ -1,0 +1,241 @@
+ion-content {
+    .contenedor {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .titulo-pagina {
+            display: flex;
+            margin-top: 2.5vh;
+            width: 100vw;
+
+            ion-row.row-titulo-pagina {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                flex-flow: row;
+
+                //columna 1
+                ion-col.col-titulo-decorado1 {
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+                    max-width: 83px;
+
+                    #cuadrante_puntos {
+                        padding-left: 0;
+                        margin-top: 15px;
+                        height: 60px;
+                        margin-left: -20px;
+                    }
+
+                }
+
+                //Columna 2
+                ion-col.col-titulo-pagina {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    max-width: 190px;
+                    min-width: 120px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    #titulo {
+                        color: black;
+                        font-size: 25px;
+                        font-weight: 400;
+                        vertical-align: middle;
+                        text-align: center;
+                        font-family: "Canela";
+                        // margin-top: -5px;
+                    }
+                }
+
+                ion-col.col-titulo-decorado2 {
+                    position: relative;
+                    max-width: 83px;
+
+                    #perfil_estrella1 {
+                        position: absolute;
+                        top: 25px;
+                        right: 48px;
+                    }
+
+                    #perfil_estrella2 {
+                        position: absolute;
+                        top: 48px;
+                        right: 30px;
+                    }
+
+                    #perfil_estrella3 {
+                        position: absolute;
+                        top: 18px;
+                        right: 20px;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+
+    .main-wrap {
+        width: 90%;
+        margin: 5% auto;
+
+        ion-row {
+            margin: 5% auto;
+        }
+
+        .text-row {
+            p {
+                font-size: 25px;
+                text-align: center;
+                font-family: "Alliance";
+                width: 100%;
+                color: black;
+            }
+        }
+
+        .img-row {
+
+
+            img {
+                width: 90%;
+                margin: auto;
+                min-height: 40vh;
+            }
+
+            p {
+                color: rgb(160, 160, 160) !important;
+                letter-spacing: normal;
+                width: 100%;
+                text-align: center;
+                margin: 5% auto;
+            }
+
+        }
+
+        .action-row {
+
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+
+            ion-button {
+                color: black !important;
+                letter-spacing: normal;
+                width: 70%;
+                margin: auto;
+                --background: #ffe3b0;
+            }
+
+        }
+    }
+
+
+    /* ----------------------------------------
+ * animation slide-in-fwd-bottom
+ * ----------------------------------------
+ */
+    @-webkit-keyframes slide-in-fwd-bottom {
+        0% {
+            -webkit-transform: translateZ(-1400px) translateY(800px);
+            transform: translateZ(-1400px) translateY(800px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-in-fwd-bottom {
+        0% {
+            -webkit-transform: translateZ(-1400px) translateY(800px);
+            transform: translateZ(-1400px) translateY(800px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .slide-in-fwd-bottom {
+        -webkit-animation: slide-in-fwd-bottom 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: slide-in-fwd-bottom 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        display: block;
+    }
+
+    .answer-wrap {
+        background: bisque;
+        position: absolute;
+        box-shadow: 0px 0px 15px -7px black;
+        bottom: 0%;
+        min-height: 15vh;
+        max-height: 15vh;
+        display: none;
+        margin-top: 2.5%;
+        width: 90vw;
+        margin-left: 5vw;
+        border-radius: 20pt;
+
+        ion-grid {
+
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            margin-top: 2.5%; // box-shadow: 0px 0px 15px -7px rgb(0 0 0 / 75%);
+
+            ion-row {
+                .avatar-col {
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        border-radius: 50px;
+                        width: 50px;
+                        height: 50px;
+
+                    }
+                }
+
+                .answer-col {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    ion-input {
+                        border-radius: 20pt;
+                        color: black;
+                        box-shadow: 0px 0px 15px -7px black;
+                        --padding-start: 12px;
+                    }
+                }
+
+                .send-col {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    ion-icon {
+                        font-size: 4.5vh;
+                    }
+
+                }
+            }
+        }
+    }
+
+
+}

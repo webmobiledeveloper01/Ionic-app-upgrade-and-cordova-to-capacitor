@@ -1,0 +1,18 @@
+<ion-content color="">
+  <!--<ion-label><span>Total </span>{{cartService?.getCart().total_price.toFixed(2)}}€</ion-label>-->
+  
+  <div class="flex">
+    <div class="modal">
+      <p class="description">¿Seguro que quieres eliminar el recuerdo?</p>      
+      <div class="center">
+        <ion-button (click)="closeModal(true)" class="reserva2" expand="block">
+          <p>Si</p>
+        </ion-button>
+        <ion-button (click)="closeModal(false)" class="reserva2" expand="block">
+          <p>No</p>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  
+</ion-content>

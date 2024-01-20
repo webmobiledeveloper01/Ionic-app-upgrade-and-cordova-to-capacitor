@@ -1,0 +1,41 @@
+<ion-tabs (ionTabsDidChange)="tabChange($event)">
+  <ion-tab-bar
+    slot="bottom"
+    color="light"
+    [ngClass]=" visibleTab ? '' : 'hide'"
+  >
+    <!--Tab izquierda-->
+    <ion-tab-button (click)="abrirMenu()">
+      <ion-icon
+        src="/assets/icons/home-2 1.svg"
+        name="/assets/icons/home-2 1.svg"
+      ></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button [tab]="p.tab" *ngFor="let p of pagesIzq">
+      <ion-icon [src]="p?.icon" [name]="p?.icon"></ion-icon>
+      <!-- <ion-label>{{p.name}}</ion-label> -->
+    </ion-tab-button>
+
+    <!--Boton +-->
+    <ion-tab-button>
+      <ion-icon></ion-icon>
+      <ion-label></ion-label>
+    </ion-tab-button>
+
+    <!--Tab derecha-->
+    <ion-tab-button [tab]="p.tab" *ngFor="let p of pagesDcha">
+      <ion-icon [src]="p?.icon" [name]="p?.icon"></ion-icon>
+      <!-- <ion-label>{{p.name}}</ion-label> -->
+    </ion-tab-button>
+  </ion-tab-bar>
+
+  <ion-fab class="btn_add" [ngClass]=" visibleTab ? '' : 'hide'">
+    <ion-fab-button
+      color="warning"
+      class="fab-button"
+      routerLink="/subir-contenido"
+    >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-tabs>

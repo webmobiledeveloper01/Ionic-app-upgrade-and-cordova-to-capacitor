@@ -1,0 +1,15 @@
+<div class="img-wrap" (click)="HasBeenClicked()">
+  <img *ngIf="Group.last_archive" src="{{ Group.last_archive }}" alt="" />
+  <img
+    *ngIf="!Group.last_archive"
+    src="../../../assets/imgs/image 199.png"
+    alt=""
+  />
+  <div class="up-wrap" style="
+  background: #ffffff87;">
+    <div class="text-wrap">
+      <p>{{ Group.title }}</p>
+      <!-- <p>{{ Group.category_name }}</p>  -->
+    </div>
+  </div>
+</div>

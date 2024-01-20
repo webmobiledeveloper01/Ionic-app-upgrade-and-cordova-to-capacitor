@@ -1,0 +1,122 @@
+<app-loading *ngIf="isLoading" text="Cargando receta..."></app-loading>
+
+<ion-content *ngIf="!isLoading">
+ 
+			<!-- doomed v3 header -->
+
+	<!-- 
+		typescript back()
+
+		public back() {
+    this.navCtrl.navigateForward("/tabs");
+  	} 
+	-->
+
+	<img
+	style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+	id="btn_atras"
+	src="assets/imgs/Group 114.png"
+	(click)="back()"
+	
+/>
+<ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+	<!--Decorado 1-->
+	<ion-col class="col-perfil-decorado1">
+		<img
+			style="margin-top: 10%"
+			id="ondas_imagen"
+			src="assets/imgs/Group 126.png"
+		/>
+	</ion-col>
+
+	<ion-col class="col-titulo-pagina"
+		style="
+			display: flex;
+			align-items: center;
+			"
+		>
+		<p
+			id="titulo"
+			style="
+				font-size: 25px;
+				font-family: 'Canela';
+				color: black;
+				margin: 0 auto;
+				text-align: center;
+			"
+		>
+			<span style="font-style: italic;">detalle</span><br>de Receta
+		</p>
+
+		<!-- <ion-button (click)="out()" style="color: red
+		;">FUERA</ion-button> -->
+	</ion-col>
+	<!-- Decorado 3 -->
+	<ion-col class="col-perfil-decorado3">
+		<img
+			style="margin-top: 10%; margin-left: 50%"
+			id="perfil_estrella1"
+			src="assets/imgs/estrellas_registro.svg"
+		/>
+	</ion-col>
+</ion-row>
+
+<!-- doomed header v3 -->
+
+  <div class="body-wrap">
+    <div class="img-wrap">
+      <img src="{{receta.archivo}}" alt="" srcset="" />
+    </div>
+
+    <div class="info-wrap">
+      <ion-grid>
+        <ion-row class="name-row">
+          <p class="recipe-name">{{receta.nombre}}</p>
+        </ion-row>
+        <ion-row class="btn-row">
+          <ion-col class="left-col">
+            <ion-button>{{time}}</ion-button>
+          </ion-col>
+          <ion-col class="mid-col">
+            <ion-button>{{receta.comensales}} persona / s</ion-button>
+          </ion-col>
+          <ion-col class="right-col">
+            <ion-button>{{receta.serving_name}}</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="Details-wrap">
+      <ion-grid class="ingredient-grid">
+        <ion-row class="title-row">
+          <p class="title-text">Ingredientes</p>
+        </ion-row>
+        <ion-row class="ingredient-row" *ngFor="let i of ingredientes ">
+          <p class="ingredient-names">
+            {{i.name}}
+          </p>
+<!-- 
+          <ion-button (click)="getRecipeData()">
+            <p style="color: red;"> hacer peticion</p>
+          </ion-button> -->
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="ingredient-grid">
+        <ion-row class="title-row">
+          <p class="title-text">Pasos de la receta</p>
+        </ion-row>
+        <ion-row class="ingredient-row" *ngFor="let i of pasos ">
+          <p class="ingredient-names">
+            {{i.step}}
+          </p>
+<!-- 
+          <ion-button (click)="getRecipeData()">
+            <p style="color: red;"> hacer peticion</p>
+          </ion-button> -->
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

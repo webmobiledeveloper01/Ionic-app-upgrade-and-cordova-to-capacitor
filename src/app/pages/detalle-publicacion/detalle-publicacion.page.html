@@ -1,0 +1,286 @@
+<!-- <app-loading  *ngIf="isloading" text="Cargando..." color="danger" ></app-loading> -->
+<!-- *ngIf="!isloading" -->
+
+<ion-content color="primary">
+  <div class="container">
+    <div class="cabecera-pagina">
+      <img *ngIf="post.tipo_archivo == 1"
+      class="imagen-cabecera"
+      [src]="post.archivo"
+      (click)="openFullscreen(post.archivo)" />
+      
+      <div *ngIf="post.tipo_archivo==2" class="player">
+        <video playsinline
+          class="video"
+          [src]="post?.archivo"
+          controls
+          controlsList="nodownload"
+          disablePictureInPicture
+          autofullscreen="false"
+        ></video>
+      </div>
+
+      <div class="audio-player" *ngIf="post.tipo_archivo == 3">
+        <audio controls controlsList="nodownload">
+          <source src="{{ post.archivo }}" type="audio/mpeg" />
+        </audio>
+      </div>
+
+      <img [ngClass]="platform.is('ios') ? 'ios-image' : 'imagen-atras'"
+      src="assets/icons/Group 114-2.png" (click)="back()" />
+      
+    </div>
+  </div>
+
+  <div class="container2">
+    <div class="cuerpo-pagina">
+      <!-- <ion-row class="row-cuerpo-pagina">
+        <label class="lbl-fechas">1979 ------ 2020</label>
+        <img class="decorado" src="" />
+      </ion-row> -->
+
+      <ion-row class="row-cuerpo-pagina-titulo">
+        <label class="pagina-titulo">{{post.titulo}}</label>
+      </ion-row>
+    </div>
+  </div>
+
+  <div class="container3">
+    <ion-list>
+      <!--Publicacion numero1-->
+      <ion-row class="row-publicacion" style="justify-content: left">
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil" size="2">
+          <img class="imagen-perfil" [src]="post.user.avatar" />
+        </ion-col>
+
+        <ion-item style="width: 100%">
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+            <!--Nombre-->
+            <ion-label class="nombre-perfil"> {{post.user.name}} </ion-label>
+
+            <!--Fecha-->
+            <ion-label class="fecha-publicacion">
+              {{post.created_at | date:"dd/MM/yy"}}
+            </ion-label>
+
+            <!--Texto-->
+            <ion-col class="col-texto-publicacion">
+              <ion-label class="texto-publicacion ion-text-wrap">
+                {{post.descripcion}}
+              </ion-label>
+            </ion-col>
+
+            <div class="propose-change">
+              <ion-row (click)="proponercambio()" *ngIf="!isOwnPost">
+                <ion-col class="icon" size="3">
+                  <ion-icon name="create" mode="md"></ion-icon>
+                </ion-col>
+                <ion-col><p style="    font-size: 17px;">Proponer un cambio</p></ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="isOwnPost">
+                <ion-col
+                  (click)="GoToEditPost()"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                >
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="3" style="justify-content: flex-end">
+                        <ion-icon
+                          name="create"
+                          style="margin-right: 10px"
+                        ></ion-icon
+                      ></ion-col>
+                      <ion-col> <p style="    font-size: 17px;">Editar recuerdo</p> </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col></ion-row
+              >
+
+              <ion-row
+                *ngIf="isOwnPost&&(post.wasQuestion&&post.wasQuestion!=0)"
+              >
+                <ion-col
+                  (click)="reactivatePost()"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                  ><ion-grid>
+                    <ion-row>
+                      <ion-col size="3" style="justify-content: flex-end">
+                        <ion-icon
+                          name="redo"
+                          style="margin-right: 10px"
+                        ></ion-icon
+                      ></ion-col>
+                      <ion-col><p>Reactivar esta pregunta</p> </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col></ion-row
+              >
+              <!-- <ion-row
+                *ngIf="isOwnPost&&post.wasQuestion"
+                class="reactivate-row"
+              >
+                <ion-col class="reactivate-col">
+                  <ion-button class="reactivate-btn" (click)="reactivatePost()"
+                    ><p class="inner-reactivate-btn">
+                      Reactivar esta pregunta
+                    </p></ion-button
+                  >
+                </ion-col></ion-row
+              > -->
+            </div>
+
+            <!-- <ion-icon
+              class="cambio-icono"
+              src="assets/icons/Group 870.svg"
+            ></ion-icon> -->
+            <!-- 
+            <ion-slides class="slides1">
+              <ion-slide class="slide1">
+                <img class="imagen-slide" src="assets/imgs/Rectangle 104.png" />
+                <img class="imagen-slide" src="assets/imgs/Rectangle 105.png" />
+              </ion-slide>
+
+              <ion-slide class="slide2">
+                <img class="imagen-slide" src="assets/imgs/Rectangle 105.png" />
+              </ion-slide>
+            </ion-slides> -->
+
+            <!--Me gusta , comentario y guardar-->
+            <ion-row class="row-acciones">
+              <ion-col
+                style="
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: center;
+                "
+                *ngIf="!post.isliked"
+              >
+                <ion-icon
+                  src="../../../assets/icons/custom/like.svg"
+                  (click)="pulse($event)"
+                  id="TargetIconNoLiked"
+                ></ion-icon>
+                <p>{{post.megustas}}</p></ion-col
+              >
+              <ion-col
+                style="
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: center;
+                "
+                *ngIf="post.isliked"
+              >
+                <ion-icon
+                  class="custom"
+                  src="../../../assets/icons/custom/like-on.svg"
+                  id="TargetIconIsLiked"
+                  (click)="pulse($event)"
+                ></ion-icon>
+                <p>{{post.megustas}}</p></ion-col
+              >
+              <!-- <p id="megusta-numero">{{post.megustas}}</p> -->
+
+              <ion-col
+                style="
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: center;
+                "
+              >
+                <ion-icon src="assets/icons/comentario.svg"></ion-icon>
+                <p>{{post.comentarios}}</p></ion-col
+              >
+
+              <!-- id="comentario-numero" -->
+
+              <ion-icon
+                class="comentario-guardar"
+                (click)="reportar()"
+                src="assets/icons/block.svg"
+              ></ion-icon>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+      </ion-row>
+
+      <ion-row *ngFor="let comentario of comentarios">
+        <!--Imagen perfil-->
+        <ion-col class="col-perfil" size="2">
+          <img class="imagen-perfil" [src]="comentario?.usuario.avatar" />
+          <!-- <p class="fecha-grande">1972</p> -->
+        </ion-col>
+
+        <ion-item lines="none">
+          <!--Publicacion perfil-->
+          <ion-col class="col-publicacion">
+            <!--Nombre-->
+            <ion-label class="nombre-perfil">
+              {{comentario?.usuario.name}}
+            </ion-label>
+
+            <ion-row class="row-fecha-rango">
+              <!--Fecha-->
+              <ion-label class="fecha-publicacion">
+                {{comentario?.created_at | date:"dd/MM/yy HH:mm "}}
+              </ion-label>
+
+              <!-- <ion-label class="rango">
+                Retro storyteller
+              </ion-label> -->
+            </ion-row>
+
+            <!--Texto-->
+            <ion-col class="col-texto-publicacion">
+              <ion-label class="texto-publicacion ion-text-wrap">
+                {{comentario?.texto}}
+              </ion-label>
+            </ion-col>
+          </ion-col>
+        </ion-item>
+      </ion-row>
+    </ion-list>
+  </div>
+
+  <div class="container4">
+    <div class="pie-pagina">
+      <ion-row class="row-input">
+        <ion-col class="col-perfil">
+          <img class="imagen-perfil" [src]="user?.avatar" />
+        </ion-col>
+
+        <ion-item>
+          <ion-col class="col-input">
+            <ion-item lines="none">
+              <ion-input
+                class="class-input"
+                postholder="Escribe tu comentario..."
+                [(ngModel)]="comentario"
+              ></ion-input>
+              <ion-icon
+                (click)="enviarComentario()"
+                src="assets/icons/Group 825.svg"
+              ></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-item>
+      </ion-row>
+
+      <!--Publicacion publicidad-->
+      <!-- <ion-row class="row-publicidad">
+        <img class="imagen-publicidad" src="assets/imgs/Group 888.png" />
+      </ion-row> -->
+    </div>
+  </div>
+</ion-content>
+<!--  -->

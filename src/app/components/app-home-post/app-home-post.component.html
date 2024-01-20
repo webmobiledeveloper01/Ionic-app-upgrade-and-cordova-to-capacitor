@@ -1,0 +1,99 @@
+<ion-grid class="main-wrap">
+  <ion-row class="top-row">
+    <ion-col class="avatar-col" size="2" (click)="GoToProfile()">
+      <ion-avatar>
+        <img [src]="post.user.avatar" alt="" srcset="" />
+      </ion-avatar>
+    </ion-col>
+    <ion-col class="text-col">
+      <ion-row class="top-text-row">
+        <p class="user-name">{{ post.user.name }}</p>
+      </ion-row>
+      <ion-row class="mid-text-row">
+        <p class="date-text">
+          {{ post.fecha | date : "dd/MM/yy" }}
+        </p>
+      </ion-row>
+      <ion-row class="bot-text-row">
+        <p class="post-description">
+          {{ post.descripcion }}
+        </p>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row class="mid-row">
+    <ion-col class="year-col" size="2">
+      <div class="year-wrap">
+        <p class="year-label">{{ post.fecha | date : "yyyy" }}</p>
+      </div>
+    </ion-col>
+    <ion-col class="img-col">
+      <img
+        *ngIf="post.tipo_archivo == 1"
+        (click)="GoDetails()"
+        [src]="post.archivo"
+        alt=""
+        srcset=""
+      />
+
+      <div class="audio-player" *ngIf="post.tipo_archivo == 3">
+        <audio controls controlsList="nodownload">
+          <source src="{{ post.archivo }}" type="audio/mpeg" />
+        </audio>
+      </div>
+
+      <div *ngIf="post.tipo_archivo == 2" class="player">
+        <video playsinline
+          class="video"
+          [src]="post?.archivo"
+          controls
+          [muted]="true"
+          controlsList="nodownload"
+          disablePictureInPicture
+          autofullscreen="false"
+        ></video>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="bot-row">
+    <ion-col class="icon-col">
+      <ion-icon
+        src="assets/icons/compartir.svg"
+        (click)="openShare()"
+      ></ion-icon
+    ></ion-col>
+
+    <ion-col class="icon-col">
+      <ion-icon
+        class="meGusta-post"
+        *ngIf="!post?.isliked"
+        src="../../../assets/icons/custom/like.svg"
+        (click)="megustas()"
+      ></ion-icon>
+      <ion-icon
+        class="meGusta-post"
+        *ngIf="post?.isliked"
+        src="../../../assets/icons/custom/like-on.svg"
+        (click)="nomegustas()"
+      ></ion-icon>
+      <p id="megusta-numero">{{ post.megustas }}</p>
+    </ion-col>
+
+    <ion-col class="icon-col">
+      <ion-icon
+        (click)="GoDetails()"
+        class="comentario-post"
+        src="assets/icons/comentario.svg"
+      ></ion-icon>
+      <p id="comentario-numero">{{ post.comentarios }}</p>
+    </ion-col>
+
+    <ion-col class="icon-col">
+      <ion-icon
+        class="comentario-post"
+        src="assets/icons/block.svg"
+        (click)="reportar()"
+      ></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>

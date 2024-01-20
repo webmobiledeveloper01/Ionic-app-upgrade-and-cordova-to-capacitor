@@ -1,0 +1,369 @@
+
+ion-content{
+width: 100%;
+
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .cabecera-pagina{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 375px;
+            
+            .imagen-cabecera{
+                width: 375px;
+                
+            }
+
+            .imagen-atras{
+                position: absolute;
+                top: 20px;
+                left: 10px;
+               
+            }
+        }
+    }
+
+
+    .container2{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .cuerpo-pagina{
+            display: flex;
+            justify-content: center;
+            flex-flow: column;
+
+            .row-cuerpo-pagina{
+                display: flex;
+                justify-content: space-between;
+                width: 375px;
+                padding:20px;
+                padding-right: 0px;
+               
+                .lbl-fechas{
+                    color: #343434;
+                    font-family: "Canela";
+                    font-weight: 400;
+                    font-size: 17px;
+                }
+                .decorado{
+                    margin-top: 10px;
+                }
+
+                
+                
+            }
+
+
+            .row-cuerpo-pagina-titulo{
+                display: flex;
+                justify-content: center;
+
+                .pagina-titulo{
+                    width: 230px;
+                    color: #343434;
+                    font-family: "Canela";
+                    font-weight: 700;
+                    font-size: 50px;
+                    
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    .container3{
+
+        
+
+        ion-list{
+            //cc
+            width: 390px;
+            padding-top: 20px;
+            background: transparent;
+            
+            ion-row{
+                display: flex;
+                justify-content: center;
+                
+                    
+                //Foto del perfil
+                ion-col.col-perfil{
+                    max-width: 50px;
+
+                    .imagen-perfil{
+                        min-width: 27px;
+                        border-radius: 25px;
+                        margin-left: 5px;
+
+                    }
+                    
+                }
+
+                    
+                ion-item{
+                    padding-top: 5px;
+                    --background: transparent;
+
+                    //Col aprece nombre, fecha, texto audio o imagen
+                    ion-col.col-publicacion{
+                        width: 300px;
+                        .nombre-perfil{
+                            font-weight: 700;
+                            // height: 25px;
+                            font-size: 17px;
+                            font-family: "Canela";
+                        }
+
+                        .fecha-publicacion{
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+
+                        ion-row.row-fecha-rango{
+                            justify-content: start;
+
+                            .fecha-publicacion{
+                                font-size: 12px;
+                                padding-top: 3px;
+                                padding-bottom: 15px;
+                            }
+
+                            .rango{
+                                font-size: 14px;
+                                margin-left: 5px;
+                                background-color:#ffd39e ;
+                                color: #CB954D;
+                                border-radius: 15px;
+                                height: 20px;
+                                width: 117px;
+                                padding-left: 7px;
+                            }
+                        }
+                        ion-col.col-texto-publicacion{
+                            display: flex;
+                            flex-flow: row;
+                            justify-content: center;
+                            align-items: center;
+                            max-width: 300px;
+                            .texto-publicacion{
+                                
+                                font-size: 16px;
+                                padding-bottom: 15px;
+                                font-family: "Alliance No.1";
+                            }
+
+                        }
+
+                        ion-slides.slides1{
+                            ion-slide.slide1{
+
+                                .imagen-slide{
+                                    padding-left: 4px;
+                                    padding-right: 4px;
+                                }
+
+                            }
+
+                            ion-slide.slide2{
+
+                                .imagen-slide{
+                                    margin-left: -22px;
+                                }
+
+                            }
+                        }
+
+                        
+
+                        .audio-publicacion{
+                            width: 170px;
+                            height: 40px;
+                        }
+
+                        .cambio-icono{
+                            width: 130px;
+                            height: 40px;
+                        }
+
+                        .imagen-publicacion{
+                            width: 285px;
+                            height: 200px;
+                            
+                        }
+
+                        .imagen-publicacion_adaptada{
+                            width:270px ;
+                        }
+
+                        //Row interna donde tenemos los me gusta y las publicaciones
+                       ion-row.row-acciones{
+                        position: relative;
+                        align-items: center;
+                        justify-content: left;
+
+                        .meGusta-publicacionRojo{
+                            margin-left: 3px;
+                            margin-top: 3px;
+                        }
+                        .meGusta-publicacion{
+                           position: absolute;
+                           z-index: 1;
+                        }
+                        //Me gusta
+                        #megusta-numero{
+                            padding-left: 5px;
+                            font-size: 13px;
+                        }
+
+                    
+
+
+                        //Comentarios
+                        .comentario-publicacion{
+                            margin-left: 30px;
+                        }
+
+                        #comentario-numero{
+                            padding-left: 5px;
+                            font-size: 13px;
+                        }
+
+                        //guardar
+                        .comentario-guardar{
+                            margin-left: 155px;
+                        }
+
+
+                        }
+
+                        .class-input{
+                            margin-left: 50px;
+                            width: 300px;
+                        }
+                      
+                    }
+                }
+            }
+
+            //Row publicidad
+            // ion-row{
+
+            //     ion-item.publicidad{
+            //         display: flex;
+            //         --background: transparent;
+
+            //         .imagen-publicidad{
+            //             padding: 10px;
+            //             width: 400px;
+                        
+            //         }
+                    
+            //     }
+            // }
+
+           
+            
+        }
+
+    }
+
+
+    .container4{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+
+        .pie-pagina{
+
+            display: flex;
+            justify-content: center;
+            flex-flow: column;
+
+            .row-input{
+
+                display: flex;
+                justify-content: center;
+
+                .col-perfil{
+                    width: 130px;
+                    display: flex;
+                    justify-content: center;
+                    .imagen-perfil{
+                        border-radius: 50%;
+                            height: 40px;
+                            max-width: 40px;
+                            
+                    }
+                }
+            
+                ion-item{
+                    width: 305px;
+                    --background: transparent;
+                    padding-bottom: 10px;
+
+                    .col-input{
+                        
+                        margin-right: 5px;
+                        display: inline-flex;
+
+                        
+
+                        ion-item{
+                            max-width: 285px;
+                            min-width: 200px;
+                            background-color: white;
+                            border-radius: 25px;
+                            height: 41px;
+
+                            ion-input{
+                                background-color: white;
+                                color: #5C4B518A;
+                                width: 200px;
+                                border-radius: 15px;
+                                padding-left: 20px;
+                                padding-right: 30px;
+                                margin-top: -5px;
+
+                            
+
+                            }
+                            ion-icon{
+                                    
+                                margin-top: -5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            .row-publicidad{
+                display: flex;
+                justify-content: center;
+                
+                .imagen-publicidad{
+                    width: 320px;
+                }
+            }
+
+
+
+
+        }
+
+    }
+
+
+
+}

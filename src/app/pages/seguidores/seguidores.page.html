@@ -1,0 +1,33 @@
+<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+
+<ion-content *ngIf="!isLoading" color="primary">
+  <ion-grid class="wrap-grid">
+    <ion-row class="top">
+      <ion-col size="3">
+        <img
+          id="btn_atras"
+          style="margin-left: 2.5vh"
+          src="assets/imgs/Group 114.png"
+          (click)="Back()"
+      /></ion-col>
+      <ion-col
+        size="6"
+        style="display: flex; justify-content: center; align-items: center;"
+        ><label class="pagetitle"> {{title}} </label></ion-col
+      >
+      <ion-col size="3"></ion-col>
+    </ion-row>
+    <ion-row class="mid">
+      <div class="list-wrap">
+        <div class="user-wrap" *ngFor="let s of UserList">
+          <app-user-follower
+            (onUnfollow)="Unfollow($event)"
+            (onFollow)="Follow($event)"
+            [User]="s"
+          ></app-user-follower>
+        </div>
+      </div>
+    </ion-row>
+    <ion-row class="bot"></ion-row>
+  </ion-grid>
+</ion-content>

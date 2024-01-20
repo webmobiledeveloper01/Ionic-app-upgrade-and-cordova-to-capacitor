@@ -1,0 +1,183 @@
+<app-loading *ngIf="isLoading" text="Cargando recuerdo..."></app-loading>
+
+<ion-content *ngIf="!isLoading">
+  <div class="main-wrap">
+    <div class="image-wrap">
+      <img
+        class="imagen-atras"
+        src="assets/icons/Group 114-2.png"
+        (click)="back()"
+      />
+      <div class="image-detail" *ngIf="Post.tipo_archivo == 1">
+        <img [src]="base64img" alt="" />
+      </div>
+
+      <div class="audio-player" *ngIf="Post.tipo_archivo == 3">
+        <audio controls controlsList="nodownload">
+          <source src="{{ base64img }}" type="audio/mpeg" />
+        </audio>
+      </div>
+
+      <div *ngIf="!this.base64img" class="void-archive"></div>
+
+      <!-- <p>{{ base64img }}</p> -->
+      <div *ngIf="Post.tipo_archivo==2" class="player">
+        <video
+          playsinline
+          class="video"
+          [src]="base64img"
+          controls
+          controlsList="nodownload"
+          disablePictureInPicture
+          autofullscreen="false"
+        ></video>
+      </div>
+      <div class="btn-wrap">
+        <ion-button
+          *ngIf="SelectedFileType.isImage"
+          class="btn-change"
+          (click)="adjuntarImagen()"
+        >
+          Cambiar foto
+        </ion-button>
+        <ion-button
+          *ngIf="SelectedFileType.isImage&&this.base64img"
+          class="btn-change"
+          (click)="openCropImageModal()"
+        >
+          Ajustar foto
+        </ion-button>
+        <ion-button
+          *ngIf="SelectedFileType.isVideo"
+          class="btn-change"
+          (click)="getVideo()"
+        >
+          Cambiar video
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- <ion-item> </ion-item> -->
+
+    <div class="data-wrap">
+      <ion-list class="form">
+        <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+          <ion-item class="form-item" lines="none">
+            <ion-grid>
+              <ion-row class="form-item-label">
+                <ion-label> Titulo </ion-label>
+              </ion-row>
+              <ion-row class="form-item-input">
+                <ion-input
+                  formControlName="titulo"
+                  placeholder="{{Post.titulo}}"
+                ></ion-input>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item class="form-item" lines="none">
+            <ion-grid>
+              <ion-row class="form-item-label">
+                <ion-label> Tipo de archivo </ion-label>
+              </ion-row>
+              <ion-row class="form-item-input">
+                <ion-select
+                  #TypeSelect
+                  (ionChange)="cambiarTipoArchivo($event)"
+                  placeholder="Tipo de Archivo"
+                >
+                  <ion-select-option value="1">Foto</ion-select-option>
+                  <ion-select-option value="2">Video</ion-select-option>
+                  <!-- <ion-select-option value="3">Documento</ion-select-option> -->
+                </ion-select>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item class="form-item" lines="none">
+            <ion-grid>
+              <ion-row class="form-item-label">
+                <ion-label> Descripcion </ion-label>
+              </ion-row>
+              <ion-row class="form-item-input">
+                <ion-input
+                  formControlName="descripcion"
+                  placeholder="{{Post.descripcion}}"
+                ></ion-input>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item class="form-item" lines="none">
+            <ion-grid>
+              <ion-row class="form-item-label">
+                <ion-label> Fecha </ion-label>
+              </ion-row>
+              <ion-row class="form-item-input">
+                <ion-datetime
+                  formControlName="fecha"
+                  placeholder="{{Post.fecha}}"
+                  pickerFormat="DD-MM-YYYY"
+                  displayFormat="DD-MM-YYYY"
+                ></ion-datetime>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item class="form-item" lines="none">
+            <ion-grid>
+              <ion-row class="form-item-label">
+                <ion-label> Década </ion-label>
+              </ion-row>
+              <ion-row class="form-item-input">
+                <ion-select formControlName="decada">
+                  <ion-select-option
+                    *ngFor="let decada of decadas"
+                    [value]="decada.value"
+                    >{{decada.nombre}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item class="form-item" lines="none">
+            <ion-grid>
+              <ion-row class="form-item-label">
+                <ion-col class="map-select-col" size="3">
+                  <ion-checkbox
+                    [checked]="MustShowMap"
+                    (ionChange)="EnterMapMode($event)"
+                  ></ion-checkbox>
+                </ion-col>
+
+                <ion-col class="map-select-col-label" size="9">
+                  <ion-label>Modificar ubicacion</ion-label>
+                </ion-col>
+              </ion-row>
+              <ion-row class="form-item-input">
+                <div class="map-wrap" #MapDiv *ngIf="MustShowMap">
+                  <div id="map-container"></div>
+                </div>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <div class="btn-wrap">
+            <!-- <ion-button
+              class="btn-submit"
+              color="danger"
+              (click)="LogFormValues()"
+              >DEBUG</ion-button
+            > -->
+
+            <ion-button class="btn-submit" (click)="SubmitForm()"
+              >Actualizar recuerdo</ion-button
+            >
+          </div>
+        </form>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

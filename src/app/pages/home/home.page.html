@@ -1,0 +1,92 @@
+<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+
+<ion-header *ngIf="!isLoading" no-border>
+  <app-app-header
+    textHeader="TimeMapp"
+    [showNotification]="true"
+    imageNotification="assets/icon/campana.png"
+    [editButton]="false"
+    [arrowBack]="false"
+  ></app-app-header>
+
+  <!-- <ion-button routerLink="/landing"><p style="color:red">CLICK</p></ion-button> -->
+  <!-- <p routerLink="/landing">LANDING</p> -->
+</ion-header>
+
+<!-- <img src="../../../assets/imgs/logo01.png" alt=""> -->
+
+<ion-content *ngIf="!isLoading" class="ion-text-center" color="primary">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Suelte para refrescar..."
+      refreshingSkspinner="circles"
+      refreshingText="Cargando..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="contenido">
+    <ion-list>
+      <!--Publicaciones -->
+      <ion-row *ngFor="let publicacion of publicaciones , let i = index ">
+        <!--Imagen perfil-->
+        <!-- <ion-col class="col-perfil" (click)="GoToProfile(publicacion?.usuario)">
+          <img class="imagen-perfil" [src]="publicacion?.usuario.avatar" />
+        </ion-col> -->
+
+        <ion-item style="--background: transparent; width: 100%">
+          <!--Publicacion perfil-->
+
+          <app-home-post
+            (onPostLike)="megustas($event)"
+            (onPostDislike)="nomegustas($event)"
+            (onPostGoDetails)="GoDetails($event)"
+            (onPostReport)="reportar($event)"
+            (onPostShare)="openShare($event)"
+            (onPostGoProfile)="GoToProfile($event)"
+            (onTrueDislike)="onTrueDislike($event)"
+            style="width: 100%"
+            [post]="publicacion"
+          ></app-home-post>
+        </ion-item>
+
+        <ion-row
+          class="banner-row"
+          *ngIf="i % 2 == 0 && banners[(i/2)-1] != null"
+          style="border-bottom: 1px solid #d7d7d7; margin: 10% auto"
+        >
+          <ion-item class="" lines="none" style="--background: transparent">
+            <!-- {{ increaseIndex() }} -->
+            <app-ad-banner
+              [banner]="banners[(i/2)-1]"
+              (IsTapped)="OpenWeb($event)"
+            ></app-ad-banner>
+          </ion-item>
+          <p
+            text-center
+            *ngIf="user?.role_id == 4"
+            style="color: black; width: 100%"
+            (click)="openModal()"
+          >
+            Mas acciones
+          </p>
+          <div class="button-like-banner">
+            <p class="sponsors">Sponsor</p>
+            <div
+              class="button-gracias"
+              (click)="IsVisited(banners[(i/2)-1].id)"
+            >
+              ¡Gracias!
+            </div>
+          </div>
+        </ion-row>
+      </ion-row>
+
+
+
+
+ 
+      <!--Publicacion publicidad-->
+    </ion-list>
+  </div>
+</ion-content>

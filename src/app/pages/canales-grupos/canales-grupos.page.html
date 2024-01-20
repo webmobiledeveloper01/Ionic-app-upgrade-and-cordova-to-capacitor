@@ -1,0 +1,112 @@
+<app-loading *ngIf="IsLoading" text="Cargando..."></app-loading>
+
+<ion-content *ngIf="!IsLoading" color="primary">
+
+	<!-- doomed v3 header -->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 125P.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        <span style="font-style: italic;">los</span><br>Grupos
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+  
+
+  <div class="btn-wrap">
+    <ion-grid>
+      <ion-row
+        ><ion-col
+          ><ion-button
+            [ngClass]="DisplayOwnGroups==false ? 'new': 'none'"
+            (click)="SetDisplayMode(false)"
+            >Grupos</ion-button
+          ></ion-col
+        >
+        <ion-col
+          ><ion-button 
+            [ngClass]="DisplayOwnGroups==true ? 'new': 'none' "
+            (click)="SetDisplayMode(true)"
+            >Mis grupos</ion-button
+          ></ion-col
+        ></ion-row
+      >
+      <!-- (click)="DisplayOwnGroups = true" -->
+
+      <ion-row
+        ><ion-button routerLink="/crear-canal" class="only"
+          >Crear grupo</ion-button
+        ></ion-row
+      >
+    </ion-grid>
+  </div>
+
+  <!-- <div class="contenedor2">
+    <div class="canales">
+      <div class="chanel-wrap" *ngFor="let g of chanels">
+        <app-chanel [Group]="g"></app-chanel>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <ion-item
+        *ngFor="let grupo of grupos"
+        lines="none"
+        (click)="goToGrupos(grupo)"
+      >
+        <ion-img [src]="grupo.imagen"></ion-img>
+      </ion-item> -->
+  <ion-list lines="none" id="chanels-display">
+    <div class="chanel-wrap" *ngFor="let g of chanels">
+      <!-- <app-chanel [Group]="g" (OnClick)="goToGrupos($event)"></app-chanel> -->
+      <app-group-item
+        (OnSelected)="goToGrupos($event)"
+        (OnTryToJoin)="JoinGroup($event)"
+        [grupo]="g"
+      ></app-group-item>
+    </div>
+  </ion-list>
+</ion-content>

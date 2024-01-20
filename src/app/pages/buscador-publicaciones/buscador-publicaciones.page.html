@@ -1,0 +1,271 @@
+<ion-content>
+ 
+		<!-- doomed v3 header -->
+
+		<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        Búsqueda
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+  <!-- BODY -->
+  <ion-grid class="body-wrap">
+    <ion-row class="searchbar-row-buscador">
+      <ion-searchbar
+        class="searchbar-301"
+        [(ngModel)]="search"
+        placeholder="Busca recuerdos"
+        debounce="500"
+        search-icon="undefined"
+      ></ion-searchbar>
+      <!-- <ion-button class="searchBtn" (click)="SearchPublicaciones()" -->
+      <ion-button class="searchBtn" (click)="SearchPublicacionesFilter()"
+        ><ion-icon name="search"></ion-icon
+      ></ion-button>
+    </ion-row>
+
+    <!-- Btn-Filtro -->
+
+    <ion-row class="filter-row">
+      <div class="btn-wrap">
+        <button class="btn-filter" (click)="MostrarFiltros($event)">
+          <ion-row class="inner-btn-row">
+            <ion-col class="btn-inner-col left" size="3"
+              ><ion-icon name="options"></ion-icon
+            ></ion-col>
+            <ion-col class="btn-inner-col mid" size="6"
+              ><p class="inner-btn-txt">Más filtros</p></ion-col
+            >
+            <ion-col class="btn-inner-col right" size="3"
+              ><ion-icon #FlechaIcon name="arrow-down" mode="ios"></ion-icon
+            ></ion-col>
+          </ion-row>
+        </button>
+      </div>
+    </ion-row>
+
+    <!-- WRAP DE FILTROS -->
+
+    <ion-row class="filter-display-row" *ngIf="MustShowFiltros">
+      <div class="filter-display-wrap">
+        <div class="filter-display-temas-wrap">
+          <ion-row class="row-title">
+            <p class="title">Canales</p>
+          </ion-row>
+
+          <ion-row class="temas-row">
+            <ion-chip
+              *ngFor="let t of temas"
+              class="team-chip"
+              (click)="SelectThisChip(t.id,$event)"
+              >
+              {{t.name}}
+              
+              </ion-chip
+            >
+          </ion-row>
+        </div>
+
+        <div class="filter-display-fecha-wrap">
+          <ion-row class="row-title">
+            <p class="title">Fecha Desde</p>
+          </ion-row>
+          <ion-row class="fecha-row">
+            <ion-col class="fecha-input-wrap">
+              <ion-datetime
+                placeholder="Día"
+                pickerFormat="DD"
+                displayFormat="DD"
+                (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
+              ></ion-datetime>
+            </ion-col>
+
+            <ion-col class="fecha-input-wrap">
+              <ion-datetime
+                placeholder="Mes"
+                pickerFormat="MM"
+                displayFormat="MM"
+                (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
+              ></ion-datetime>
+            </ion-col>
+
+            <ion-col class="fecha-input-wrap">
+              <ion-datetime
+                placeholder="Año"
+                pickerFormat="YYYY"
+                displayFormat="YYYY"
+                (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
+              ></ion-datetime>
+            </ion-col>
+
+            <!-- <ion-col class="fecha-input-wrap">
+              <ion-select
+                #DecadeInput
+                [(ngModel)]="DecadeInputValue"
+                placeholder="Década"
+                (ionChange)="ResetAndUseDecade($event,true)"
+              >
+                <ion-select-option
+                  *ngFor="let decada of decadas"
+                  [value]="decada.value"
+                  >{{decada.nombre}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col> -->
+          </ion-row>
+        </div>
+
+        <div class="filter-display-fecha-wrap">
+          <ion-row class="row-title">
+            <p class="title">Fecha Hasta</p>
+          </ion-row>
+          <ion-row class="fecha-row">
+            <ion-col class="fecha-input-wrap">
+              <ion-datetime
+                placeholder="Día"
+                pickerFormat="DD"
+                displayFormat="DD"
+                (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
+              ></ion-datetime>
+            </ion-col>
+
+            <ion-col class="fecha-input-wrap">
+              <ion-datetime
+                placeholder="Mes"
+                pickerFormat="MM"
+                displayFormat="MM"
+                (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
+              ></ion-datetime>
+            </ion-col>
+
+            <ion-col class="fecha-input-wrap">
+              <ion-datetime
+                placeholder="Año"
+                pickerFormat="YYYY"
+                displayFormat="YYYY"
+                (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
+              ></ion-datetime>
+            </ion-col>
+
+            <!-- <ion-col class="fecha-input-wrap">
+              <ion-select
+                #DecadeInput
+                [(ngModel)]="DecadeInputValue"
+                placeholder="Década"
+                (ionChange)="ResetAndUseDecade($event,true)"
+              >
+                <ion-select-option
+                  *ngFor="let decada of decadas"
+                  [value]="decada.value"
+                  >{{decada.nombre}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col> -->
+          </ion-row>
+        </div>
+
+        <div class="filter-display-ubicacion-wrap">
+          <ion-row class="row-title">
+            <p class="title">Ubicación</p>
+          </ion-row>
+
+          <ion-row class="row-ubicacion-input">
+            <ion-input
+              class="ubicacion-input"
+              placeholder="Introduce una ubicación..."
+              [(ngModel)]="direccionSeleccionada"
+            ></ion-input>
+            <!-- (ionChange)="InputValue($event)" 
+              [debounce]="1000" -->
+            <ion-button class="searchBtn" (click)="SearchLocalizacion()"
+              ><ion-icon name="search"></ion-icon
+            ></ion-button>
+          </ion-row>
+
+          <ion-row class="row-ubicacion-map">
+            <ion-row class="row-title">
+              <ion-icon src="assets/icons/map 1.svg" mode="ios"></ion-icon>
+              <p class="title">Enlace a mapa</p>
+            </ion-row>
+            <div id="map-container" class="map-container"></div>
+          </ion-row>
+        </div>
+      </div>
+    </ion-row>
+
+    <ion-row class="data-row">
+      <ion-list *ngIf="!isVoid">
+        <div class="item-wrap" *ngFor="let p of posts">
+          <app-group-post
+            (LikeUnlike)="handleLike($event)"
+            [post]="p"
+            (GoToProfile)="GoToProfile($event)"
+          ></app-group-post>
+        </div>
+      </ion-list>
+
+      <ion-label *ngIf="isVoid" class="voidText">
+        No hay resultados con los términos introducidos.
+      </ion-label>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-grid style="margin: 10% auto;width: 90%;">
+    
+    <ion-row><img src="assets/imgs/image 202.png"  id="image-357" /></ion-row>
+    <ion-row><canvas id="canva-357" ></canvas></ion-row>
+  </ion-grid>
+
+
+
+
+<ion-button (click)="draw()">
+
+  <p style="color: red;">click</p>
+
+</ion-button> -->
+</ion-content>

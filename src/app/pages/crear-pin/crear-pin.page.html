@@ -1,0 +1,152 @@
+<ion-content>
+  <!-- style="--background:#FAF5F0;" -->
+
+	<!-- doomed v3 header -->
+
+	<!-- 
+		typescript back()
+
+		public back() {
+    this.navCtrl.navigateForward("/tabs");
+  	} 
+	-->
+
+	<img
+	style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+	id="btn_atras"
+	src="assets/imgs/Group 114.png"
+	(click)="back()"
+	
+/>
+<ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+	<!--Decorado 1-->
+	<ion-col class="col-perfil-decorado1">
+		<img
+			style="margin-top: 10%"
+			id="ondas_imagen"
+			src="assets/imgs/Group 126.png"
+		/>
+	</ion-col>
+
+	<ion-col class="col-titulo-pagina"
+		style="
+			display: flex;
+			align-items: center;
+			"
+		>
+		<p
+			id="titulo"
+			style="
+				font-size: 25px;
+				font-family: 'Canela';
+				color: black;
+				margin: 0 auto;
+				text-align: center;
+			"
+		>
+			<span style="font-style: italic;">canal</span><br>Privado
+		</p>
+
+		<!-- <ion-button (click)="out()" style="color: red
+		;">FUERA</ion-button> -->
+	</ion-col>
+	<!-- Decorado 3 -->
+	<ion-col class="col-perfil-decorado3">
+		<img
+			style="margin-top: 10%; margin-left: 50%"
+			id="perfil_estrella1"
+			src="assets/imgs/estrellas_registro.svg"
+		/>
+	</ion-col>
+</ion-row>
+
+<!-- doomed header v3 -->
+
+  
+  
+
+	<p class="subtitulo">Reserva tu «Canal privado», <br>que es tu geolocalización oficial y <br>exclusiva en el mapa, donde podrás <br>comunicar a tu manera tu historia <br>a los miembros asociados.</p>
+
+  <div class="contenido">
+    <form
+      *ngIf="form"
+      [formGroup]="form"
+      (ngSubmit)="submitForm()"
+      style="margin: 20% auto"
+    >
+
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Titulo de la publicación
+      </p>
+      <ion-item class="item-native" lines="none" style="--background: #f1eae0">
+        <ion-input
+          clearInput
+          type="text"
+          placeholder="Escribe aqui el titulo..."
+          formControlName="titulo"
+          required
+        ></ion-input>
+      </ion-item>
+      <p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Descripción de la publicación
+      </p>
+      <ion-item class="item-native" lines="none" style="--background: #f1eae0">
+        <ion-input
+          clearInput
+          type="text"
+          placeholder="Escribe aqui la descripcion..."
+          formControlName="descripcion"
+          required
+          [(ngModel)]="direccion"
+        ></ion-input>
+      </ion-item>
+
+			<p
+        style="
+          color: black;
+          text-align: left;
+          font-family: 'Canela';
+          padding: 8px;
+        "
+      >
+        Ubicación
+      </p>
+      <ion-item class="item-native" lines="none" style="--background: #f1eae0">
+        <ion-input
+          clearInput
+          type="email"
+          placeholder="Escribe aqui la dirección..."
+          formControlName="direccion"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <div class="mapi">
+        <div id="map_canvas"></div>
+      </div>
+
+      <ion-button
+        style="margin: 10% auto; --border-radius: 15px; font-family: 'Alliance'"
+        expand="block"
+        color="warning"
+        type="submit"
+      >
+        Crear Canal Privado
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

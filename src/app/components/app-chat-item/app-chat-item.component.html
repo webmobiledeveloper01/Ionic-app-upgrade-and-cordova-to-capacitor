@@ -1,0 +1,18 @@
+<div [ngClass]="(icon) ? 'item-left' : 'item-right'">
+
+  <div [ngClass]="(icon) ? 'left' : 'right'">
+    <ion-avatar *ngIf="icon">
+      <img [src]="icon">
+    </ion-avatar>
+
+    <div class="message">
+      <img *ngIf="image" [src]="image">
+      <p>{{text}}</p>
+    </div>
+  </div>
+
+  <span class="date">
+    {{date | date:'h:mm a'}}
+  </span>
+
+</div>

@@ -1,0 +1,261 @@
+.button-like-banner {
+		width: 100%;
+    color: black;
+    position: relative;
+    top: 3.5%;
+    // right: 20%;
+    display: flex;
+    justify-content: center;
+		align-items: center;
+    // left: 5%;
+
+    .button-gracias {
+        
+        border-radius: 10pt;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Canela';
+        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.29);
+        font-size:15px;
+        font-weight: 400;
+        font-style: italic;
+        vertical-align: middle;
+        text-align: center;
+        width: 100px;
+        height: 30px;
+				background-color: #ffd39e;
+    }
+
+    p.sponsors {
+        // margin-right: 10px;
+        color: black;
+        font-size: 15px;
+        font-weight: 400;
+        font-style: italic;
+        vertical-align: middle;
+        text-align: center;
+        font-family: "Canela";
+				margin: 0 10px;
+        // margin-top: -5px;
+
+    }
+
+}
+
+.player {
+    display: flex;
+    justify-content: center;
+    object-fit: cover;
+    .video{
+        
+    }
+}
+
+
+ion-header {
+
+    // padding-top: 3.5vh;
+
+    background-color: #FAF5F0;
+}
+
+
+ion-content {
+
+
+    .banner-row {
+        margin: 0%;
+        margin-right: 0;
+				padding-bottom: 20px;
+
+
+    }
+
+    .contenido {
+        display: flex;
+        justify-content: center;
+        margin-top: 0%;
+        margin-bottom: 0%;
+
+        ion-list {
+            //cc
+            // width: 375px;
+            padding-top: 20px;
+            background: transparent;
+
+
+           
+
+            ion-row.publicacion-row-wrap {
+                display: -webkit-box;
+                display: flex;
+                -webkit-box-pack: center;
+                justify-content: center;
+                width: 90%;
+                flex-flow: row;
+                margin: 0%;
+            
+
+
+                //Foto del perfil
+                ion-col.col-perfil {
+                    max-width: 50px;
+
+                    .imagen-perfil {
+                        min-width: 27px;
+                        border-radius: 25px;
+                        margin-left: 5px;
+                        width: 35px;
+                        object-fit: cover;
+                        height: 35px;
+
+                    }
+
+                    //PAra poner la fecha en un costado
+                    // .fecha-grande{
+                    //     margin-top: 170px;
+
+                    //     position: absolute;
+                    //     transform: rotate(270deg);
+                    // }
+
+                }
+
+
+                ion-item {
+                    padding-top: 5px;
+                    --background: transparent;
+
+                    //Col aprece nombre, fecha, texto audio o imagen
+                    ion-col.col-publicacion {
+                        // width: 300px;
+
+                        .nombre-perfil {
+                            font-weight: 700;
+                            // height: 25px;
+                            font-size: 17px;
+                            font-family: "Canela";
+                        }
+
+                        .fecha-publicacion {
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+
+                        ion-row.row-fecha-rango {
+                            justify-content: start;
+
+                            .fecha-publicacion {
+                                font-size: 12px;
+                                padding-top: 3px;
+                                padding-bottom: 15px;
+                            }
+
+                            .rango {
+                                font-size: 14px;
+                                margin-left: 5px;
+                                background-color: #ffd39e;
+                                color: #CB954D;
+                                border-radius: 15px;
+                                height: 20px;
+                                width: 117px;
+                                padding-left: 7px;
+                            }
+                        }
+
+                        ion-col.col-texto-publicacion {
+                            display: flex;
+                            flex-flow: row;
+                            justify-content: flex-start;
+                            align-items: center;
+                            // max-width: 300px;
+
+                            .texto-publicacion {
+
+                                font-size: 20px;
+                                padding-bottom: 15px;
+                                font-family: "Alliance";
+                                margin-top: 0%;
+                                margin-bottom: 0%;
+                            }
+
+                        }
+
+
+
+                        .audio-publicacion {
+                            width: 170px;
+                            height: 40px;
+                        }
+
+                        .imagen-publicacion {
+                            width: 285px;
+                            height: 200px;
+
+                        }
+
+                        .imagen-publicacion_adaptada {
+                            width: 270px;
+                        }
+
+                        //Row interna donde tenemos los me gusta y las publicaciones
+                        ion-row.row-acciones {
+                            align-items: center;
+                            justify-content: left;
+                            display: flex;
+                            // justify-content: space-around;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+
+                            .meGusta-publicacion {
+                                margin-left: 30px;
+                            }
+
+                            //Me gusta
+                            #megusta-numero {
+                                padding-left: 5px;
+                                font-size: 13px;
+                            }
+
+
+                            //Comentarios
+                            .comentario-publicacion {
+                                margin-left: 30px;
+                                margin-top: 0%;
+                                margin-bottom: 0%;
+                            }
+
+                            #comentario-numero {
+                                padding-left: 5px;
+                                font-size: 13px;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            //Row publicidad
+            ion-row {
+
+                ion-item.publicidad {
+                    display: flex;
+                    --background: transparent;
+
+                    .imagen-publicidad {
+                        padding: 10px;
+                        width: 400px;
+
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+}

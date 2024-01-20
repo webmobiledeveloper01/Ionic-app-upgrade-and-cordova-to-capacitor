@@ -1,0 +1,53 @@
+ion-list {
+
+
+
+    ion-item.select-item {
+
+
+        ion-grid.item-inner {
+
+            ion-row.inner-row {
+
+
+                ion-col.img-col {
+                    display: flex;
+                    align-items: center;
+
+                    ion-avatar {
+                        img {}
+                    }
+
+                    ion-col.text-col {
+                        ion-grid.inner-col-grid {
+                            ion-row.text-row {
+                                p.text-col {}
+                            }
+
+                        }
+
+
+
+                        ion-col.icon-col {
+                            align-items: center;
+                            display: flex;
+
+                            ion-icon {}
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+
+        }
+
+
+    }
+
+
+}

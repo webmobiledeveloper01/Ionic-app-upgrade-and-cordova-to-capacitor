@@ -1,0 +1,79 @@
+ion-content{
+
+    .subtitulo{
+				width: 100%;
+        margin-top: 25px;
+        font-family: 'Alliance';
+				font-size: 14px;
+				text-align: center;
+        
+    }
+
+    .mapi{ 
+        width: 80%; 
+        margin: 16px auto; 
+        height: 200px ; 
+        border-radius: 16px;
+        --border-radius: 16px;
+        background-color:transparent !important;
+    }
+    
+    #map_canvas{
+        position: relative;
+        width: 100%;
+        height: 100%; 
+    }
+
+    .map{
+        width: 80%; 
+        margin: 16px auto; 
+        height: 200px ; 
+        border-radius: 16px;
+        object-fit: cover;
+    }
+
+    ion-item{
+        padding: 8px;
+        --border-radius:15px;
+       
+    }
+  
+
+    
+
+
+    .contenedor2{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .canales{
+                
+            margin-top: -30px;
+
+            ion-item{
+                padding-bottom: 15px;
+                
+                --background: transparent;
+
+                ion-img{
+                    width: 344px;
+                    
+                }
+            }
+            
+
+        }
+    }
+    
+    .contenido{
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .temas{
+        --color: black;
+        ion-button{
+            --color:black;
+        }
+    }
+}

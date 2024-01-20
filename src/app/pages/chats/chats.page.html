@@ -1,0 +1,96 @@
+<app-loading
+  [text]="'Cargando chats...'"
+  [color]="'primary'"
+  *ngIf="isLoading"
+></app-loading>
+
+<ion-content *ngIf="!isLoading" color="primary">
+  
+	<!-- doomed v3 header -->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 126.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        Chats
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+	
+  <ion-row> </ion-row>
+  <ion-searchbar
+    class="caja"
+    mode="ios"
+    placeholder="Buscar Contactos..."
+    (ionChange)="buscarUsuarios($event)"
+  ></ion-searchbar>
+  <!-- Item chat -->
+  <ion-list lines="none" *ngIf="usuarios == null">
+    <app-chat-group
+      *ngFor="let chat of chats"
+      [icon]="chat?.urlImagen"
+      [redirection]="['/interior-chat', chat?.id,chat?.nombre,chat?.ultimo_mensaje]"
+      [title]="chat?.nombre"
+      [subtitle]="chat?.descripcion"
+      [lastMessage]="chat?.ultimo_mensaje"
+      [newMessages]="chat?.mensajes_nuevos"
+      [slidingOptionsSide]="'end'"
+      [slidingOptionsColor]="'primary'"
+      [slidingOptionsIcon]="'trash'"
+    >
+    </app-chat-group>
+  </ion-list>
+  <ion-list *ngIf="usuarios">
+    <ion-item
+      class="inner-item"
+      *ngFor="let usuario of usuarios"
+      (click)="crearChat(usuario)"
+    >
+      <ion-avatar slot="start">
+        <img [src]="usuario?.avatar" />
+      </ion-avatar>
+      <p>{{usuario?.name}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

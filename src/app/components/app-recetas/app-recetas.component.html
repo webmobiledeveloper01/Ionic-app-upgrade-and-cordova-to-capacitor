@@ -1,0 +1,14 @@
+<div class="receta-wrap">
+  <div class="img-wrap">
+    <img src="{{ receta.archivo }}" alt="" srcset="" />
+
+    <div class="lock-wrap" *ngIf="receta.private!=0">
+      <ion-icon name="lock" mode="ios"></ion-icon>
+    </div>
+  </div>
+  <div class="text-wrap">
+    <p class="recipe-name">
+      {{ receta.nombre }}
+    </p>
+  </div>
+</div>

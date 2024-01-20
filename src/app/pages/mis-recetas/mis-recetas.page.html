@@ -1,0 +1,91 @@
+<app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
+
+<ion-content *ngIf="!isLoading">
+  
+	<!-- doomed v3 header -->
+
+	<img
+    style="margin-top: 10%; margin-left: 5%; position: absolute;z-index: 5;"
+    id="btn_atras"
+    src="assets/imgs/Group 114.png"
+    (click)="back()"
+  />
+  <ion-row class="row-perfil-datos" style="margin-top: 1.5vh; padding-bottom: 20px;">
+    <!--Decorado 1-->
+    <ion-col class="col-perfil-decorado1">
+      <img
+        style="margin-top: 10%"
+        id="ondas_imagen"
+        src="assets/imgs/Group 125P.png"
+      />
+    </ion-col>
+
+    <ion-col class="col-titulo-pagina"
+			style="
+				display: flex;
+				align-items: center;
+				"
+			>
+      <p
+        id="titulo"
+        style="
+          font-size: 25px;
+          font-family: 'Canela';
+          color: black;
+          margin: 0 auto;
+          text-align: center;
+        "
+      >
+        <span style="font-style: italic;">mis</span><br>Recetas
+      </p>
+
+      <!-- <ion-button (click)="out()" style="color: red
+      ;">FUERA</ion-button> -->
+    </ion-col>
+    <!-- Decorado 3 -->
+    <ion-col class="col-perfil-decorado3">
+      <img
+        style="margin-top: 10%; margin-left: 50%"
+        id="perfil_estrella1"
+        src="assets/imgs/estrellas_registro.svg"
+      />
+    </ion-col>
+  </ion-row>
+
+	<!-- doomed header v3 -->
+
+  <ion-grid class="body-wrap">
+    <div class="no-recipes-wrap" *ngIf="sinRecetas">
+      <p class="void-text">Aún no has subido ninguna receta</p>
+    </div>
+
+    <div class="grid-wrap" *ngIf="!sinRecetas">
+      <!-- <ion-grid> -->
+      <div class="recipe-wrap">
+        <ion-row style="flex-direction: row; flex-wrap: wrap;"> 
+          <ion-col style=" flex-basis: 50%" *ngFor="let r of recipes ; let i=index" (click)="GoTo(recipes[i])">
+
+            <app-recetas class="recipe" [receta]="recipes[i]"></app-recetas>
+
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row *ngIf=" i % 2 == 0">
+          <ion-col (click)="GoTo(recipes[i])">
+            <app-recetas class="recipe" [receta]="recipes[i]"></app-recetas
+          ></ion-col>
+          <ion-col *ngIf="recipes[i+1]" (click)="GoTo(recipes[i+1])">
+            <app-recetas class="recipe" [receta]="recipes[i+1]"></app-recetas
+          ></ion-col>
+        </ion-row> -->
+
+        <!-- <ion-col><app-recetas></app-recetas></ion-col> -->
+      </div>
+      <!-- <ion-col><app-recetas></app-recetas></ion-col>
+  <ion-col><app-recetas></app-recetas></ion-col>
+  <ion-col><app-recetas></app-recetas></ion-col> -->
+
+      <!-- </ion-grid> -->
+    </div>
+  </ion-grid>
+</ion-content>

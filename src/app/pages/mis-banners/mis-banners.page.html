@@ -1,0 +1,44 @@
+<ion-content>
+  <ion-row class="top-wrap">
+    <ion-col size="3" class="inner-top-left-wrap">
+      <img
+        class="btn-atras"
+        src="assets/imgs/Group 114.png"
+        (click)="GoBack()"
+      />
+      <img id="ondas_imagen" src="assets/imgs/Group 125.png" />
+    </ion-col>
+    <ion-col size="6" class="inner-top-mid-wrap">
+      <!-- <img src="assets/imgs/logo_name.svg"
+    /> -->
+      <p>Mis Banners</p>
+    </ion-col>
+    <ion-col size="3" class="inner-top-right-wrap">
+      <div class="star-wrap">
+        <ion-grid>
+          <ion-row class="star-top"
+            ><img id="perfil_estrella1" src="assets/imgs/Star 2.png"
+          /></ion-row>
+          <ion-row class="star-mid"
+            ><img id="perfil_estrella2" src="assets/imgs/Star 3.png"
+          /></ion-row>
+          <ion-row class="star-bot"
+            ><img id="perfil_estrella3" src="assets/imgs/Star 4.png"
+          /></ion-row>
+        </ion-grid>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid class="body-wrap">
+    <ion-row class="banner-item" *ngFor="let b of banners">
+      <div class="inner-img-wrap" size="10">
+        <img src="{{b.imagen}}" alt="" />
+      </div>
+      <div class="inner-text-wrap">
+        <p class="title">{{b.descripcion}}</p>
+        <p class="title">Veces que se ha reaccionado a este banner: {{b.reactions}}</p>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

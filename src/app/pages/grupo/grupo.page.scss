@@ -1,0 +1,419 @@
+ion-content {
+
+    .col-usuarios-private {
+        display: flex;
+        justify-content: center;
+
+        .imagen-usuario {
+            border-radius: 50%;
+            padding-left: 3px;
+            margin-right: -5%;
+            height: 35px;
+            width: 40px;
+            min-width: 40px;
+            min-height: 35px;
+            max-width: 40px;
+            max-height: 35px;
+        }
+    }
+
+
+    .comment-wrap {
+
+        width: 80%;
+        margin: 5% auto;
+
+        .coment-text {
+            width: 100%;
+            text-align: left;
+            color: #333;
+        }
+
+
+        .rows-wrap {
+            background: #F9E1C5;
+            border-radius: 10pt;
+        }
+
+        ion-row {
+
+            .comment-content {
+                width: 100%;
+                text-align: left;
+                color: #333;
+            }
+        }
+
+
+        ion-col.avatar-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-flow: column;
+
+            .user-name {
+                font-weight: 580;
+                font-size: 17px;
+                font-family: "Canela";
+                color: black;
+                margin: 0;
+            }
+
+            ion-avatar {
+                max-width: 40px;
+                max-height: 40px;
+
+                img {}
+
+
+            }
+        }
+
+        ion-col.name-col {
+
+            display: flex;
+            align-items: center;
+
+            p {
+                font-weight: 580;
+                font-size: 17px;
+                font-family: "Canela";
+                color: black;
+                margin: 0;
+            }
+        }
+
+    }
+
+
+
+
+    .NoVisible {
+        * {
+            color: #969092
+        }
+
+        width: 100vw;
+        height: 100%;
+        background-color: #E1DDD8;
+        display: flex;
+        margin: 5% auto;
+
+        .nv-grid {
+            height: 50%;
+            margin-top: 5%;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+
+            .nv-btn {
+                width: 100%;
+
+                ion-button {
+                    width: 65%;
+                    margin: 5% auto;
+                    --background: #1E1E1E;
+                    --border-radius: 20pt;
+                    color: #E1DDD8
+                }
+            }
+
+            .nv-row {
+                margin: 5%;
+                margin-bottom: 0%;
+
+                ion-icon {
+
+                    font-size: 20vw;
+                }
+
+                p {
+                    font-size: 4.5vw;
+                }
+
+
+            }
+        }
+
+
+    }
+
+    .container {
+        margin-left: 10%;
+        margin-right: 10%;
+        display: flex;
+        justify-content: center;
+        //width: 100%;
+
+        .titulo-grupo {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            width: 80%;
+            margin: auto;
+
+            ion-row.row-titulo-grupo {
+                display: flex;
+                flex-flow: row;
+                justify-content: center;
+                width: 100%;
+
+                ion-col.col-titulo-grupo {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 7.5vh;
+
+                    .texto-titulo {
+                        color: black;
+                        font-size: 4.5vh;
+                        font-family: "Canela";
+                        text-align: center;
+                        font-weight: 600;
+
+                    }
+                }
+            }
+
+            .icon-wrap {
+                display: flex;
+                align-content: center;
+                margin-right: 0.5vw;
+
+                ion-icon {
+                    color: #5C4B518A;
+                }
+
+            }
+
+
+
+
+            ion-row.row-titulo-usuario {
+                margin-top: -26px;
+
+                ion-col.col-usuarios {
+                    display: flex;
+                    justify-content: center;
+
+                    .imagen-usuario {
+                        border-radius: 50%;
+                        padding-left: 3px;
+                        height: 35px;
+                        width: 40px;
+
+                        margin-right: -5%;
+                        min-width: 40px;
+                        min-height: 35px;
+                        max-width: 40px;
+                        max-height: 35px;
+                    }
+
+                }
+
+                ion-buttons {
+
+                    #etc {
+                        background-color: #F3B562;
+                        border-radius: 50%;
+                        width: 35px;
+                        height: 35px;
+                    }
+
+                    #invite {
+                        background-color: #1E1E1E;
+                        border-radius: 15px;
+                        width: 76px;
+                        font-size: 12px;
+                    }
+
+                }
+
+            }
+
+            ion-row.row-titulo-grupo-informacion {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                #texto-info {
+                    color: #5C4B518A;
+                    font-size: 13px;
+                }
+            }
+
+
+            ion-row.row-post {
+
+                width: 100%;
+
+                ion-item {
+                    --background: transparent;
+                    width: 100%;
+
+                    #texto-post {
+                        font-size: 12px;
+                        margin-bottom: -3px;
+                        font-family: "Alliance No.1";
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    .container2 {
+
+
+        p.void-text {
+            font-size: 20px;
+            text-align: center;
+            color: #333;
+            width: 80%;
+            margin: 10% auto;
+        }
+
+        .add-post {
+            width: 80%;
+            margin: 5% auto;
+
+            ion-row {
+                display: flex;
+                justify-content: center;
+
+                ion-button {
+                    --background: #1E1E1E;
+                }
+            }
+
+
+        }
+
+        ion-list {
+            //cc
+
+            background: transparent;
+
+            .post-wrap {
+
+                min-height: 40vh;
+            }
+
+
+            ion-item {
+                padding-top: 5px;
+                padding-right: 5px;
+                --background: transparent;
+
+                //Col aprece nombre, fecha, texto audio o imagen
+                ion-col.col-publicacion {
+                    width: 300px;
+
+                    .nombre-perfil {
+                        font-weight: 700;
+
+                        // height: 25px;
+                        font-size: 17px;
+                        font-family: "Canela";
+                    }
+
+                    //**************************************************
+                    ion-row.row-fecha-rango {
+                        justify-content: start;
+
+                        .fecha-publicacion {
+                            font-size: 12px;
+                            padding-top: 3px;
+                            padding-bottom: 15px;
+                        }
+
+                        .rango {
+                            font-size: 14px;
+                            margin-left: 5px;
+                            background-color: #f5eaea;
+                            color: #F06060;
+                            border-radius: 15px;
+                            height: 20px;
+                            width: 109px;
+                            padding-left: 7px;
+                        }
+                    }
+
+                    //**************************************************
+
+                    ion-col.col-texto-publicacion {
+                        display: flex;
+                        flex-flow: row;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 300px;
+
+                        .texto-publicacion {
+
+                            font-size: 16px;
+                            padding-bottom: 15px;
+                            font-family: "Alliance No.1";
+                        }
+
+                    }
+
+                    .imagenG-publicacion {
+                        width: 286px;
+                        height: 284px;
+                    }
+
+                    .imagen-publicacion {
+                        width: 285px;
+                        height: 200px;
+
+                    }
+
+                    .imagen-publicacion_adaptada {
+                        width: 270px;
+                    }
+
+                    //Row interna donde tenemos los me gusta y las publicaciones
+                    ion-row.row-acciones {
+                        position: relative;
+                        align-items: center;
+                        justify-content: left;
+
+                        .meGusta-publicacionRojo {
+                            margin-left: 3px;
+                            margin-top: 3px;
+                        }
+
+                        .meGusta-publicacion {
+                            position: absolute;
+                            z-index: 1;
+                        }
+
+                        //Me gusta
+                        #megusta-numero {
+                            padding-left: 5px;
+                            font-size: 13px;
+                        }
+
+
+
+
+                        //Comentarios
+                        .comentario-publicacion {
+                            margin-left: 30px;
+                        }
+
+                        #comentario-numero {
+                            padding-left: 5px;
+                            font-size: 13px;
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+    }
+}

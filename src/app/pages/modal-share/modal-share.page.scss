@@ -1,0 +1,117 @@
+ion-content {
+
+    .buttons-wrap{
+        width: 80%;
+        margin: 20% auto;
+    }
+
+    .shareApp {
+        width: 100%;
+        margin: 15% auto;
+        --background: #AC9B82;
+        --border-radius: 10pt;
+        color: #ffffff;
+        height: 10vh;
+    }
+    .shareApp-canales {
+        width: 100%;
+        margin: 15% auto;
+        --background: #CCC0AF;
+        --border-radius: 10pt;
+        color: #ffffff;
+        height: 10vh;
+
+    }
+
+    .comment-wrap {
+        margin: 5% auto;
+        margin-bottom: 20%;
+
+    }
+
+    .comment-row {
+        background-color: #ffffff00 !important;
+        border-radius: 20pt;
+        margin: 5% auto;
+        width: 100%;
+
+        p {
+            color: #333;
+            text-align: center;
+            width: 100%;
+        }
+
+        ion-input {
+            background: #F1EAE0;
+            border-radius: 10pt;
+            --placeholder-color: #AD907A;
+            --padding-start: 10px;
+            color: #333;
+        }
+
+    }
+
+
+    .Nogroup {
+
+        width: 90%;
+        margin: 30vh auto;
+
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        p {
+            font-size: 14px;
+            font-family: Alliance;
+            text-align: center;
+        }
+
+    }
+
+    ion-grid {
+        margin: 5% auto;
+        margin-top: 10vh;
+        width: 80%;
+
+        ion-row {
+
+            background-color: #f0d2ab;
+            border-radius: 20pt;
+            margin: 5% auto;
+            width: 100%;
+
+            ion-col {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                ion-avatar {
+                    max-width: 10vh;
+                    max-height: 6vh;
+
+                    img {
+                        object-fit: cover;
+                    }
+                }
+
+                ion-icon {
+                    color: black;
+                    font-size: 15px;
+
+                }
+
+                ion-button {
+                    --background: rgb(255, 255, 255);
+                }
+
+                p {
+                    color: black;
+                }
+
+            }
+        }
+    }
+
+}
