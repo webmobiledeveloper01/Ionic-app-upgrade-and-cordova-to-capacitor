@@ -34,7 +34,7 @@
           text-align: center;
         "
       >
-        Búsqueda
+        {{"Búsqueda" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -58,7 +58,7 @@
       <ion-searchbar
         class="searchbar-301"
         [(ngModel)]="search"
-        placeholder="Busca recuerdos"
+        [placeholder]="'Busca recuerdos' | translate"
         debounce="500"
         search-icon="undefined"
       ></ion-searchbar>
@@ -78,7 +78,7 @@
               ><ion-icon name="options"></ion-icon
             ></ion-col>
             <ion-col class="btn-inner-col mid" size="6"
-              ><p class="inner-btn-txt">Más filtros</p></ion-col
+              ><p class="inner-btn-txt">{{"Más filtros" | translate}}</p></ion-col
             >
             <ion-col class="btn-inner-col right" size="3"
               ><ion-icon #FlechaIcon name="arrow-down" mode="ios"></ion-icon
@@ -94,7 +94,7 @@
       <div class="filter-display-wrap">
         <div class="filter-display-temas-wrap">
           <ion-row class="row-title">
-            <p class="title">Canales</p>
+            <p class="title">{{"Canales" | translate}}</p>
           </ion-row>
 
           <ion-row class="temas-row">
@@ -112,7 +112,7 @@
 
         <div class="filter-display-fecha-wrap">
           <ion-row class="row-title">
-            <p class="title">Fecha Desde</p>
+            <p class="title">{{"Fecha Desde" | translate}}</p>
           </ion-row>
           <ion-row class="fecha-row">
             <ion-col class="fecha-input-wrap">
@@ -161,7 +161,7 @@
 
         <div class="filter-display-fecha-wrap">
           <ion-row class="row-title">
-            <p class="title">Fecha Hasta</p>
+            <p class="title">{{"Fecha Hasta" | translate}}</p>
           </ion-row>
           <ion-row class="fecha-row">
             <ion-col class="fecha-input-wrap">
@@ -210,7 +210,7 @@
 
         <div class="filter-display-ubicacion-wrap">
           <ion-row class="row-title">
-            <p class="title">Ubicación</p>
+            <p class="title">{{"Ubicación" | translate}}</p>
           </ion-row>
 
           <ion-row class="row-ubicacion-input">
@@ -229,7 +229,7 @@
           <ion-row class="row-ubicacion-map">
             <ion-row class="row-title">
               <ion-icon src="assets/icons/map 1.svg" mode="ios"></ion-icon>
-              <p class="title">Enlace a mapa</p>
+              <p class="title">{{"Enlace a mapa" | translate}}</p>
             </ion-row>
             <div id="map-container" class="map-container"></div>
           </ion-row>
@@ -249,7 +249,7 @@
       </ion-list>
 
       <ion-label *ngIf="isVoid" class="voidText">
-        No hay resultados con los términos introducidos.
+        {{"No hay resultados con los términos introducidos." | translate}}
       </ion-label>
     </ion-row>
   </ion-grid>

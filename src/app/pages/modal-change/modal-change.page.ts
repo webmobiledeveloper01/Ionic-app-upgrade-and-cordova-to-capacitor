@@ -1,10 +1,13 @@
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { IonInput, ModalController } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
+import { IonInput, IonicModule, ModalController } from "@ionic/angular";
 
 @Component({
   selector: "app-modal-change",
   templateUrl: "./modal-change.page.html",
   styleUrls: ["./modal-change.page.scss"],
+ 
 })
 export class ModalChangePage implements OnInit {
   input: IonInput;

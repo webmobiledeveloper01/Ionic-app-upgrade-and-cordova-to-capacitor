@@ -24,8 +24,10 @@ import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { AuthenticationService } from "src/app/services/authentication.service";
+import { TranslateService } from "@ngx-translate/core";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-buscador-publicaciones",
@@ -79,6 +81,7 @@ export class BuscadorPublicacionesPage implements OnInit {
     public utils: UtilitiesService,
     private geo: NativeGeocoder,
     private Auth: AuthenticationService,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -100,8 +103,8 @@ export class BuscadorPublicacionesPage implements OnInit {
 
     if (this.everyFieldIsVoid(params)) {
       this.utils.showAlert(
-        "¡Vaya!",
-        "Introduce algun termino para tu busqueda"
+        this.translateService.instant("¡Vaya!"),
+        this.translateService.instant("Introduce algun termino para tu busqueda")
       );
     } else {
       await this.api
@@ -273,6 +276,8 @@ export class BuscadorPublicacionesPage implements OnInit {
         case 3:
           return formatDate.getFullYear();
           break;
+        default:
+          return formatDate.getFullYear();
       }
     } catch (error) {
       return "NaN";
@@ -358,8 +363,8 @@ export class BuscadorPublicacionesPage implements OnInit {
         console.log(error);
 
         this.utils.showAlert(
-          "Ubicacion desactivada",
-          "Sin acceso a la ubicacion no se visualizara la localización"
+          this.translateService.instant("Ubicacion desactivada"),
+          this.translateService.instant("Sin acceso a la ubicacion no se visualizara la localización")
         );
       });
 
@@ -379,8 +384,8 @@ export class BuscadorPublicacionesPage implements OnInit {
         console.log(error);
 
         this.utils.showAlert(
-          "Ubicacion desactivada",
-          "Sin acceso a la ubicacion no se podra actualizar la localización"
+          this.translateService.instant("Ubicacion desactivada"),
+          this.translateService.instant("Sin acceso a la ubicacion no se podra actualizar la localización")
         );
       });
   }
@@ -407,7 +412,8 @@ export class BuscadorPublicacionesPage implements OnInit {
         throw new Error(res);
       }
     } catch (error) {
-      this.utils.showAlert("¡Vaya!", "Ha ocurrido un error en el servidor");
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"), 
+      this.translateService.instant("Ha ocurrido un error en el servidor"));
 
       console.log(error);
     }
@@ -455,7 +461,7 @@ export class BuscadorPublicacionesPage implements OnInit {
     };
 
     let iconpin: MarkerIcon = {
-      url: "https://timemapp.davidtovar.dev/storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
+      url: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
       size: {
         width: 40,
         height: 60,

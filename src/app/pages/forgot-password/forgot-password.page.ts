@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password',
@@ -19,6 +20,7 @@ export class ForgotPasswordPage implements OnInit {
     private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
     private utilities: UtilitiesService,
+    private translateService: TranslateService,
     private api: ApiService) {
   }
 
@@ -47,11 +49,11 @@ export class ForgotPasswordPage implements OnInit {
     this.utilities.showLoading();
     this.api.forgotPassword(this.form.value).subscribe(response => {
       console.log(response);
-      this.utilities.showToast('Se ha enviado el email correctamente!');
+      this.utilities.showToast(this.translateService.instant('Se ha enviado el email correctamente!'));
       this.utilities.dismissLoading();
     }, error => {
       console.log(error);
-      this.utilities.showToast('Error al enviar el email');
+      this.utilities.showToast(this.translateService.instant('Error al enviar el email'));
       this.utilities.dismissLoading();
     });
   }

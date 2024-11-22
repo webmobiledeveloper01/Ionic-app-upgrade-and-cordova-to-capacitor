@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { ActivatedRoute } from '@angular/router';
-import { Events } from '@ionic/angular';
 import { Mensaje } from 'src/app/models/Mensaje';
+import { EventsService } from 'src/app/services/events.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-interior-chat',
@@ -12,7 +13,7 @@ import { Mensaje } from 'src/app/models/Mensaje';
 })
 export class InteriorChatPage implements OnInit {
 
-  @ViewChild('content', null) private content: any;
+  @ViewChild('content') private content: any;
 
   public messages: Mensaje[];
   public idChat: number;
@@ -24,7 +25,8 @@ export class InteriorChatPage implements OnInit {
   constructor(private apiService: ApiService,
     private utilities: UtilitiesService,
     private route: ActivatedRoute,
-    private events: Events,
+    private events: EventsService,
+    private translateService: TranslateService,
     private ngZone: NgZone) {
 
     this.route.params.subscribe(params => {
@@ -43,7 +45,12 @@ export class InteriorChatPage implements OnInit {
   }
   /* Obtenemos los mensajes y nos suscribimos a las notificaciones push */
   public ngOnInit(): void {
-    this.events.subscribe('add-mensaje', (mensaje) => {
+    
+    // TODO *** Create a new evet service with Behaviour subject
+    
+    
+    
+    this.events.addMensaje().subscribe((mensaje) => {
       this.ngZone.run(() => {
         let m: Mensaje = {
           id: mensaje.id,
@@ -75,7 +82,7 @@ export class InteriorChatPage implements OnInit {
     }, error => {
       this.isLoading = false;
       console.log(error);
-      this.utilities.showToast("No se pueden obtener los mensajes");
+      this.utilities.showToast(this.translateService.instant("No se pueden obtener los mensajes"));
     });
     // this.apiService.deleteEntity('mensajesNuevos', this.idChat).subscribe(res => {
     //   console.log(res);
@@ -102,7 +109,7 @@ export class InteriorChatPage implements OnInit {
         this.lastMessage = msj.created_at;
         this.content.scrollToBottom(300);
       }, error => {
-        this.utilities.showToast("No se ha podido enviar el mensaje");
+        this.utilities.showToast(this.translateService.instant("No se ha podido enviar el mensaje"));
         console.log(error);
       });
 

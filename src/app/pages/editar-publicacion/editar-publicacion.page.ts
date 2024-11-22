@@ -14,7 +14,7 @@ import {
 import { MapState } from "src/app/models/MapState";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import {
   GoogleMaps,
   GoogleMap,
@@ -33,19 +33,20 @@ import {
   HtmlInfoWindow,
   Circle,
 } from "@ionic-native/google-maps/ngx";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 import {
   FileTransfer,
   FileTransferObject,
   FileUploadOptions,
-} from "@ionic-native/file-transfer/ngx";
+} from "@awesome-cordova-plugins/file-transfer/ngx";
 import { environment } from "src/environments/environment";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
+import { TranslateService } from "@ngx-translate/core";
 declare var Google: any;
 
 @Component({
@@ -79,12 +80,12 @@ export class EditarPublicacionPage implements OnInit {
 
   CameraVideoOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    mediaType: this.camera.MediaType.VIDEO,
+    resultType: CameraResultType.DataUrl,
+   
     // encodingType: this.camera.EncodingType.JPEG,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    targetWidth: 1920,
-    targetHeight: 1080,
+ source: CameraSource.Camera,
+    width: 1920,
+    height: 1080,
     // allowEdit: true,
     // correctOrientation: true,
   };
@@ -115,14 +116,13 @@ export class EditarPublicacionPage implements OnInit {
     private api: ApiService,
     private utils: UtilitiesService,
     private nav: NavController,
-    private geo: NativeGeocoder,
-    private camera: Camera,
-    private ngzone: NgZone,
+    private geo: NativeGeocoder,private ngzone: NgZone,
     private storage: Storage,
     private transfer: FileTransfer,
     private alertController: AlertController,
     private appref: ApplicationRef,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -207,7 +207,7 @@ export class EditarPublicacionPage implements OnInit {
     console.log(event.target);
     // this.MustShowMap = event.target.checked;
     if (!this.MustShowMap) {
-      await this.utils.showLoading("Cargando el mapa");
+      await this.utils.showLoading(this.translateService.instant("Cargando el mapa"));
       this.OpenMap()
         .then(() => {
           this.utils.dismissLoading();
@@ -218,7 +218,7 @@ export class EditarPublicacionPage implements OnInit {
           this.utils.dismissLoading();
         });
     } else {
-      await this.utils.showLoading("Eliminando el mapa");
+      await this.utils.showLoading(this.translateService.instant("Eliminando el mapa"));
       this.DestroyMap()
         .then(() => {
           this.utils.dismissLoading();
@@ -287,7 +287,7 @@ export class EditarPublicacionPage implements OnInit {
       });
 
       let iconpin: MarkerIcon = {
-        url: "https://timemapp.davidtovar.dev/storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
+        url: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
         size: {
           width: 40,
           height: 60,
@@ -326,8 +326,8 @@ export class EditarPublicacionPage implements OnInit {
         console.log(error);
 
         this.utils.showAlert(
-          "Ubicacion desactivada",
-          "Sin acceso a la ubicacion no se podra actualizar la localización"
+          this.translateService.instant("Ubicacion desactivada"),
+          this.translateService.instant("Sin acceso a la ubicacion no se podra actualizar la localización")
         );
       });
   }
@@ -429,7 +429,7 @@ export class EditarPublicacionPage implements OnInit {
     }
 
     let iconpin: MarkerIcon = {
-      url: "https://timemapp.davidtovar.dev/storage/nhWaZo9RlQX8pXLfgrvrhz4jJAJqYcoLhoFzDDOZ.png",
+      url: environment.domainUrl + "storage/nhWaZo9RlQX8pXLfgrvrhz4jJAJqYcoLhoFzDDOZ.png",
       size: {
         width: 40,
         height: 60,
@@ -585,6 +585,7 @@ export class EditarPublicacionPage implements OnInit {
       if (CheckString.substring(0, 3) === decadaString.substring(0, 3)) {
         IsCorrect = true;
         // console.log("TRUE");
+        return true;
       }
 
       if (IsCorrect) {
@@ -593,6 +594,9 @@ export class EditarPublicacionPage implements OnInit {
       } else {
         return false;
       }
+    }
+    else{
+      return false;
     }
   }
   // Metodos form
@@ -629,7 +633,7 @@ export class EditarPublicacionPage implements OnInit {
           // await this.SetArchivoValue();
 
           console.log("Se subira la publicacion");
-          await this.utils.showLoading("Actualizando publicacion...");
+          await this.utils.showLoading(this.translateService.instant("Actualizando publicacion..."));
 
           this.api
             .updateEntity("publicaciones", this.Post.id, this.form.value)
@@ -638,13 +642,13 @@ export class EditarPublicacionPage implements OnInit {
                 this.api.postChanges.next(true);
                 this.utils.dismissLoading();
                 this.nav.navigateForward("tabs/home");
-                this.utils.showToast("Se ha actualizado su publicación");
+                this.utils.showToast(this.translateService.instant("Se ha actualizado su publicación"));
               },
               (error) => {
                 // this.utils.showToast(codeErrors(error));
                 this.utils.dismissLoading();
                 this.utils.showToast(
-                  "Ha ocurrido un error al actualizar la publicación"
+                  this.translateService.instant("Ha ocurrido un error al actualizar la publicación")
                 );
               }
             );
@@ -652,13 +656,13 @@ export class EditarPublicacionPage implements OnInit {
           console.log("No se subira la publicacion");
           let invalidforms = this.GetInvalidControls();
           this.utils.showAlert(
-            "Los siguentes campos estan incompletos",
+            this.translateService.instant("Los siguentes campos estan incompletos"),
             invalidforms
           );
         }
       });
     } else {
-      this.utils.showAlert("¡Vaya!", "La fecha y la decada no coinciden");
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"), this.translateService.instant("La fecha y la decada no coinciden"));
     }
   }
 
@@ -682,18 +686,19 @@ export class EditarPublicacionPage implements OnInit {
   //Obtener Archivos//
   getVideo() {
     let options = this.CameraVideoOptions;
-    this.camera.getPicture(options).then(async (file) => {
+    Camera.getPhoto(options).then(async (file) => {
       console.log(file);
 
-      let extension = this.utils.getFileExtension(file);
+      let extension = this.utils.getFileExtension(file.path);
       console.log("EXTENSION=>", extension);
 
       if (extension === "mp4") {
-        this.base64img = file;
+        this.base64img = file.dataUrl;
 
         this.form.patchValue({ archivo: this.base64img });
       } else {
-        this.utils.showAlert("¡Vaya!", "La extension del video debe ser mp4");
+        this.utils.showAlert(this.translateService.instant("¡Vaya!"), 
+        this.translateService.instant("La extension del video debe ser mp4"));
       }
     });
   }
@@ -701,20 +706,20 @@ export class EditarPublicacionPage implements OnInit {
   public async adjuntarImagen(): Promise<void> {
     let CameraImageOptions: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
+      resultType: CameraResultType.DataUrl,
+      
+      
+      source: CameraSource.Photos,
+     width: 1920,
+     height: 1080,
       // allowEdit: true,
       correctOrientation: true,
     };
 
     let options = CameraImageOptions;
     this.ngzone.run(() => {
-      this.camera
-        .getPicture(options)
+      Camera
+        .getPhoto(options)
         .then(async (urlFoto) => {
           this.base64img = "data:image/jpeg;base64," + urlFoto;
 
@@ -725,7 +730,7 @@ export class EditarPublicacionPage implements OnInit {
           // console.log(urlFoto);
         })
         .catch((error) => {
-          this.utils.showAlert("Error al obtener imagen", error);
+          this.utils.showAlert(this.translateService.instant("Error al obtener imagen"), error);
         });
     });
   }
@@ -734,7 +739,7 @@ export class EditarPublicacionPage implements OnInit {
     let file = this.base64img;
     console.log(this.token);
 
-    await this.utils.showLoading("Subiendo vídeo...");
+    await this.utils.showLoading(this.translateService.instant("Subiendo vídeo..."));
 
     const fileTransfer: FileTransferObject = this.transfer.create();
     const options: FileUploadOptions = {
@@ -757,7 +762,7 @@ export class EditarPublicacionPage implements OnInit {
           console.log("Error");
 
           this.utils.showToast(
-            "El tamaño del vídeo no puede ser superior a 55 MB. El vídeo no ha sido subido."
+           this.translateService.instant( "El tamaño del vídeo no puede ser superior a 55 MB. El vídeo no ha sido subido.")
           );
           this.form.patchValue({ archivo: "" });
           return false;
@@ -769,7 +774,7 @@ export class EditarPublicacionPage implements OnInit {
 
           this.form.patchValue({ archivo: res.url });
           this.utils.dismissLoading();
-          this.utils.showToast("Vídeo subido correctamente.");
+          this.utils.showToast(this.translateService.instant("Vídeo subido correctamente."));
 
           return true;
         }
@@ -779,7 +784,7 @@ export class EditarPublicacionPage implements OnInit {
         this.form.patchValue({ archivo: "" });
         console.log(err);
         this.utils.dismissLoading();
-        this.utils.showToast("Error subiendo el vídeo.");
+        this.utils.showToast(this.translateService.instant("Error subiendo el vídeo."));
         return false;
       }
     );
@@ -789,10 +794,10 @@ export class EditarPublicacionPage implements OnInit {
     const alert = await this.alertController.create({
       header: "Aviso",
       message:
-        "Si insertas un video en esta publicacion, no podra ser reactivada como pregunta",
+        this.translateService.instant("Si insertas un video en esta publicacion, no podra ser reactivada como pregunta"),
       buttons: [
         {
-          text: "Cancelar",
+          text: this.translateService.instant("Cancelar"),
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
@@ -802,7 +807,7 @@ export class EditarPublicacionPage implements OnInit {
           },
         },
         {
-          text: "Continuar",
+          text: this.translateService.instant("Continuar"),
           handler: () => {
             this.form.patchValue({
               tipo_archivo: event.detail.value,

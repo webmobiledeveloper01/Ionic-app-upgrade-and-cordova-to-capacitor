@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PerfilBannersPage } from './perfil-banners.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
     ComponentsModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes), TranslateModule
   ],
   declarations: [PerfilBannersPage]
 })

@@ -1,12 +1,13 @@
 import { Component, OnInit, NgZone } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { AlertController, Events, NavController } from "@ionic/angular";
+import { AlertController, NavController } from "@ionic/angular";
 import { Chat } from "src/app/models/Chat";
 import { Mensaje } from "src/app/models/Mensaje";
 import { User } from "src/app/models/User";
-import { ThrowStmt } from "@angular/compiler";
+// import { ThrowStmt } from "@angular/compiler";
 import { AuthenticationService } from "src/app/services/authentication.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-chats",
@@ -22,10 +23,11 @@ export class ChatsPage implements OnInit {
     private apiService: ApiService,
     private utilities: UtilitiesService,
     private alertCtrl: AlertController,
-    private events: Events,
+    // private events: Events,
     private ngZone: NgZone,
     private navCtrl: NavController,
     private auth: AuthenticationService,
+    private translateService: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -83,7 +85,7 @@ export class ChatsPage implements OnInit {
       (error) => {
         console.log(error);
         this.isLoading = false;
-        this.utilities.showToast("No se pueden obtener los chats");
+        this.utilities.showToast(this.translateService.instant("No se pueden obtener los chats"));
       }
     );
   }
@@ -101,7 +103,7 @@ export class ChatsPage implements OnInit {
         {
           text: "Aceptar",
           handler: () => {
-            this.utilities.showLoading("Borrando chat");
+            this.utilities.showLoading(this.translateService.instant("Borrando chat"));
             this.apiService
               .deleteSubEntity("chats", chat.id, "unirse", 1)
               .subscribe(
@@ -113,7 +115,7 @@ export class ChatsPage implements OnInit {
                 (error) => {
                   console.log(error);
                   this.utilities.dismissLoading();
-                  this.utilities.showToast("No se ha podido borrar el chat");
+                  this.utilities.showToast(this.translateService.instant("No se ha podido borrar el chat"));
                 }
               );
           },
@@ -122,7 +124,7 @@ export class ChatsPage implements OnInit {
     });
 
     await alert.present();
-    this.apiService.chatChanges.next()
+    this.apiService.chatChanges.next("")
   }
 
   buscarUsuarios(event) {
@@ -149,7 +151,7 @@ export class ChatsPage implements OnInit {
       user2_id: usuario.id,
     };
     this.apiService.addEntity("chats", params).subscribe((chat) => {
-      this.apiService.chatChanges.next();
+      this.apiService.chatChanges.next("");
       this.navCtrl.navigateForward(
         "/interior-chat/" +
           chat.id +
@@ -158,9 +160,9 @@ export class ChatsPage implements OnInit {
           "/" +
           chat.ultimo_mensaje
       );
-      this.utilities.showToast("Chat Creado con éxito");
+      this.utilities.showToast(this.translateService.instant("Chat Creado con éxito"));
     });
 
-    this.apiService.chatChanges.next();
+    this.apiService.chatChanges.next("");
   }
 }

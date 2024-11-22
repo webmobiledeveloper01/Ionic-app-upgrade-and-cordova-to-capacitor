@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ModalReportarMotivoPage } from './modal-reportar-motivo.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -22,9 +23,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ModalReportarMotivoPage],
-  entryComponents: [ModalReportarMotivoPage]
+  // entryComponents: [ModalReportarMotivoPage]
 })
 export class ModalReportarMotivoPageModule {}

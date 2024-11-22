@@ -13,4 +13,7 @@ export interface Receta {
   location: string;
   serving_name?:string;
   tiempo_preparacion?:string;
+  nombre? : any;
+  private?: any;
+  archivo?: any;
 }

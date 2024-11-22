@@ -156,7 +156,7 @@ export class NotificationUserPage implements OnInit {
 
     console.log(res);
 
-    this.apiService.groupChanges.next();
+    this.apiService.groupChanges.next("");
   }
 
   async AddUserToGroupFromRequest(id) {
@@ -176,7 +176,7 @@ export class NotificationUserPage implements OnInit {
 
     console.log(res);
 
-    this.apiService.groupChanges.next();
+    this.apiService.groupChanges.next("");
   }
   
 
@@ -230,7 +230,7 @@ export class NotificationUserPage implements OnInit {
     console.log("Response =>");
 
     console.log(res);
-    this.apiService.notificationChanges.next();
+    this.apiService.notificationChanges.next("");
   }
 
   fade(element) {

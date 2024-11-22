@@ -13,13 +13,13 @@
             *ngIf="NoFollow || isFollower"
             class="ion-text-wrap follow-btn"
             (click)="EmitFollow()"
-            >Seguir</ion-button
+            >{{"Seguir" | translate}}</ion-button
           >
           <ion-button
             (click)="EmitUnfollow()"
             *ngIf="isMutual || youFollow"
             class="ion-text-wrap unfollow-btn"
-            >Dejar de seguir</ion-button
+            >{{"Dejar de seguir" | translate}}</ion-button
           ></ion-row
         >
       </ion-grid>

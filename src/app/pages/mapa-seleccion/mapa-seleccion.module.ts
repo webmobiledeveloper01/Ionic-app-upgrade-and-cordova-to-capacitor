@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MapaSeleccionPage } from './mapa-seleccion.page';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MapaSeleccionPage]
+  declarations: [MapaSeleccionPage],
+  providers: [NativeGeocoder]
 })
 export class MapaSeleccionPageModule {}

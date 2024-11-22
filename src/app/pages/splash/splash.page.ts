@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { SplashScreenPlugin } from "@capacitor/splash-screen";
 import { ModalController, NavController } from "@ionic/angular";
 import { AuthenticationService } from "src/app/services/authentication.service";
 
@@ -19,16 +19,13 @@ export class SplashPage implements OnInit {
   //video: HTMLVideoElement;
 
   constructor(
-    private auth: AuthenticationService,
-    private modalController: ModalController,
-    public splashScreen: SplashScreen,
     private nav: NavController
   ) {}
 
   ngOnInit() {
     // console.log("Entra en la splash");
     // this.video = document.createElement('video');
-    // this.video.src = "https://timemapp.davidtovar.dev/storage/assets/Ko9gkmVtRwRVUa1FsW0ugvuO58smeNvXr9CkP1AR.mp4";
+    // this.video.src = environment.domainUrl + "storage/assets/Ko9gkmVtRwRVUa1FsW0ugvuO58smeNvXr9CkP1AR.mp4";
     // this.video.oncanplay = () => {
     //   this.isLoading = false;
     //   console.log("EMPIEZA EL VIDEO");

@@ -9,7 +9,7 @@
 
 <ion-content #content color="primary">
   
-  <app-loading [text]="'Cargando mensajes...'" [color]="'dark'" *ngIf="isLoading"></app-loading>
+  <app-loading [text]="'Cargando mensajes...' | translate" [color]="'dark'" *ngIf="isLoading"></app-loading>
   
   <app-chat-item *ngFor="let message of messages" 
     [icon]="message?.avatar" 

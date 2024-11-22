@@ -5,7 +5,7 @@ import * as moment from "moment";
 import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import {
   GoogleMaps,
   GoogleMap,
@@ -28,7 +28,7 @@ import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
 
 // import {
@@ -80,9 +80,7 @@ export class NewQuestionPage implements OnInit {
     private api: ApiService,
     private utils: UtilitiesService,
     private fb: FormBuilder,
-    private nav: NavController,
-    private camera: Camera,
-    private ngZone: NgZone,
+    private nav: NavController,private ngZone: NgZone,
     private nativeGeocoder: NativeGeocoder,
     private platform: Platform,
     private navCtrl: NavController,
@@ -304,37 +302,67 @@ export class NewQuestionPage implements OnInit {
 
   //<----------------------METODO Adjuntar imagen---------------------->
 
-  public adjuntarImagen(): void {
+ // UsingCapacitorPlugin: Camera Plugin to use Capacitor Implementation.
+  // public adjuntarImagen(): void {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //     targetWidth: 1920,
+  //     targetHeight: 1080,
+  //     allowEdit: true,
+  //     correctOrientation: true,
+  //   };
+
+  //   try {
+  //     // console.log("Entra en try");
+
+  //     this.camera
+  //       .getPicture(options)
+  //       .then((urlFoto) => {
+  //         this.base64img = "data:image/jpeg;base64," + urlFoto;
+  //         this.form.patchValue({ archivo: this.base64img });
+
+  //         console.log(urlFoto);
+
+  //         this.chargeMap();
+  //       })
+  //       .catch((error) => {
+  //         this.utils.showAlert("Error al obtener imagen", error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  public async adjuntarImagen(): Promise<void> {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: true,
+      resultType: CameraResultType.DataUrl, // Use DataUrl for data URI
+      source: CameraSource.Photos, // Use Photos for PhotoLibrary
+      width: 1920,
+      height: 1080,
+      allowEditing: true,
       correctOrientation: true,
     };
-
+  
     try {
-      // console.log("Entra en try");
-
-      this.camera
-        .getPicture(options)
-        .then((urlFoto) => {
-          this.base64img = "data:image/jpeg;base64," + urlFoto;
-          this.form.patchValue({ archivo: this.base64img });
-
-          console.log(urlFoto);
-
-          this.chargeMap();
-        })
-        .catch((error) => {
-          this.utils.showAlert("Error al obtener imagen", error);
-        });
+      const capturedPhoto = await Camera.getPhoto(options);
+  
+      if (capturedPhoto.dataUrl) {
+        this.base64img = capturedPhoto.dataUrl;
+        this.form.patchValue({ archivo: this.base64img });
+  
+        console.log(capturedPhoto.dataUrl);
+  
+        this.chargeMap();
+      } else {
+        this.utils.showAlert("Error al obtener imagen", "No se pudo obtener la imagen");
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      this.utils.showAlert("Error al obtener imagen", error.message);
     }
   }
   chargeMap() {
@@ -372,6 +400,7 @@ export class NewQuestionPage implements OnInit {
       if (CheckString.substring(0, 3) === decadaString.substring(0, 3)) {
         IsCorrect = true;
         console.log("TRUE");
+        return IsCorrect;
       }
 
       if (IsCorrect) {
@@ -380,6 +409,9 @@ export class NewQuestionPage implements OnInit {
       } else {
         return false;
       }
+    }
+    else{
+      return false;
     }
   }
   //<----------------------METODO SUBMIT---------------------->
@@ -408,7 +440,7 @@ export class NewQuestionPage implements OnInit {
 
           // this.api.groupChanges.next("Grupo ha sido creado");
           this.utils.showAlert("¡Listo!", "Tu pregunta ha sido creada");
-          this.api.questionChange.next();
+          this.api.questionChange.next("");
           this.nav.navigateBack("/map");
         } else {
           console.log(res);

@@ -4,7 +4,7 @@ import { User } from "src/app/models/User";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { codeErrors } from "src/app/utils/utils";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { UserService } from "src/app/services/user.service";
 import { AlertController, NavController } from "@ionic/angular";
@@ -12,7 +12,7 @@ import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 
 @Component({
   selector: "app-profile",
@@ -33,7 +33,6 @@ export class ProfilePage implements OnInit {
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private utilities: UtilitiesService,
-    private camera: Camera,
     public auth: AuthenticationService,
     private uservice: UserService,
     private nav: NavController,
@@ -90,17 +89,15 @@ export class ProfilePage implements OnInit {
   public adjuntarImagen(): void {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos,
+      width: 1920,
+      height: 1080,
+      allowEditing: true,
       correctOrientation: true,
     };
-    this.camera
-      .getPicture(options)
+    Camera
+      .getPhoto(options)
       .then((urlFoto) => {
         this.base64img = "data:image/jpeg;base64," + urlFoto;
         this.user.avatar = this.base64img;

@@ -72,7 +72,7 @@ export class AnswerQuestionPage implements OnInit {
       };
       let res = await this.api.AnswerQuestion(params).toPromise();
       console.log(res);
-      this.api.questionChange.next();
+      this.api.questionChange.next("");
       window.history.back();
       this.utils.showToast(res.message);
     }

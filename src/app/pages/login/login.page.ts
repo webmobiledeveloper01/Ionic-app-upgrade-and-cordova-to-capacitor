@@ -2,12 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { MenuController, NavController, Events } from "@ionic/angular";
+import { MenuController, NavController } from "@ionic/angular";
 import { User } from "src/app/models/User";
 import { codeErrors } from "../../utils/utils";
 import { AuthenticationService } from "src/app/services/authentication.service";
-import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
-import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
+// import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx"; // TODO
+// import { GooglePlus } from "@ionic-native/google-plus/ngx";
 
 @Component({
   selector: "app-login",
@@ -26,10 +27,10 @@ export class LoginPage implements OnInit {
     private utilitiesService: UtilitiesService,
     private menuCtrl: MenuController,
     private navCtrl: NavController,
-    private events: Events,
+    // private events: Events,
     private auth: AuthenticationService,
-    private fb: Facebook,
-    private googlePlus: GooglePlus
+    // private fb: Facebook, // TODO
+    // private googlePlus: GooglePlus
   ) {}
 
   public ngOnInit(): void {
@@ -53,7 +54,7 @@ export class LoginPage implements OnInit {
         this.apiService.setTokenToHeaders(user.api_token);
 
         //Emitimos el evento de login
-        this.events.publish("user:login");
+        // this.events.publish("user:login"); // TODO Create Event Service if required.
 
         //Vamos a inicio
         this.auth.login(user.api_token);
@@ -96,49 +97,51 @@ export class LoginPage implements OnInit {
    * ===================================================================================
    */
   public async loginFacebook(): Promise<void> {
-    this.fb
-      .login(["public_profile", "email"])
-      .then((response: FacebookLoginResponse) => {
-        this.utilitiesService.showLoading();
-        if (response.status === "connected") {
-          console.log("Logueo Correcto");
-          this.getUserDetail(response.authResponse.userID);
-        } else {
-          console.log("No logueado");
-        }
-      })
-      .catch((error) => console.log("Error al loguear en facebook", error));
+    // TODO Use Capacitor Plugin
+    // this.fb
+    //   .login(["public_profile", "email"])
+    //   .then((response: FacebookLoginResponse) => {
+    //     this.utilitiesService.showLoading();
+    //     if (response.status === "connected") {
+    //       console.log("Logueo Correcto");
+    //       this.getUserDetail(response.authResponse.userID);
+    //     } else {
+    //       console.log("No logueado");
+    //     }
+    //   })
+    //   .catch((error) => console.log("Error al loguear en facebook", error));
   }
 
   public getUserDetail(userId): void {
-    this.fb
-      .api("/" + userId + "/?fields=id,email,name,picture,gender", [
-        "public_profile",
-      ])
-      .then((detail) => {
-        console.log("User detail: ", detail);
-        this.usuarioFacebook = detail;
-        this.apiService
-          .loginFacebook(this.usuarioFacebook)
-          .subscribe((user: User) => {
-            this.utilitiesService.dismissLoading();
-            console.log(user);
+    // TODO Use Capacitor Plugin
+    // this.fb
+    //   .api("/" + userId + "/?fields=id,email,name,picture,gender", [
+    //     "public_profile",
+    //   ])
+    //   .then((detail) => {
+    //     console.log("User detail: ", detail);
+    //     this.usuarioFacebook = detail;
+    //     this.apiService
+    //       .loginFacebook(this.usuarioFacebook)
+    //       .subscribe((user: User) => {
+    //         this.utilitiesService.dismissLoading();
+    //         console.log(user);
 
-            //Ahora aplicamos la cabecera devuelta a las siguientes peticiones
-            this.apiService.setTokenToHeaders(user.api_token);
+    //         //Ahora aplicamos la cabecera devuelta a las siguientes peticiones
+    //         this.apiService.setTokenToHeaders(user.api_token);
 
-            //Emitimos el evento de login
-            this.events.publish("user:login");
+    //         //Emitimos el evento de login
+    //         // this.events.publish("user:login");
 
-            //Vamos a inicio
-            this.auth.login(user.api_token);
+    //         //Vamos a inicio
+    //         this.auth.login(user.api_token);
 
-            this.utilitiesService.dismissLoading();
-          })
-          .catch((error) => {
-            console.log("Error al coger usuario Facebook ", error);
-          });
-      });
+    //         this.utilitiesService.dismissLoading();
+    //       })
+    //       .catch((error) => {
+    //         console.log("Error al coger usuario Facebook ", error);
+    //       });
+    //   });
   }
 
   /**
@@ -157,53 +160,82 @@ export class LoginPage implements OnInit {
    * ===============================================================================
    */
   public async loginGoogle() {
-    try {
-      const gplusUser = await this.googlePlus.login({
-        webClientId: "WEB CLIENT ID COGIDO DESDE FIREBASE",
-        // EJEMPLO : 785790182231-8vm1d1ouqlp5v8u5v95dltr9eql0954u.apps.googleusercontent.com
-        offline: true,
-        scopes: "profile email",
-      });
+    // TODO Google Capacitor Plugin
+    // try {
+    //   const gplusUser = await this.googlePlus.login({
+    //     webClientId: "WEB CLIENT ID COGIDO DESDE FIREBASE",
+    //     // EJEMPLO : 785790182231-8vm1d1ouqlp5v8u5v95dltr9eql0954u.apps.googleusercontent.com
+    //     offline: true,
+    //     scopes: "profile email",
+    //   });
 
-      console.log(gplusUser);
-      let user: User = {
-        name: gplusUser.displayName,
-        email: gplusUser.email,
-        avatar: gplusUser.imageUrl,
-        givenName: gplusUser.givenName,
-      };
-      await this.utilitiesService.showLoading("Entrando...");
-      this.apiService.loginGoogle(user).subscribe(
-        (user: User) => {
-          this.utilitiesService.dismissLoading();
-
-          //Ahora aplicamos la cabecera devuelta a las siguientes peticiones
-          this.apiService.setTokenToHeaders(user.api_token);
-
-          //Emitimos el evento de login
-          this.events.publish("user:login");
-
-          //Vamos a inicio
-          this.auth.login(user.api_token);
-        },
-        (error) => {
-          this.utilitiesService.dismissLoading();
-          this.utilitiesService.showToast("No se ha podido entrar con Google");
-          console.log(error);
-        }
-      );
-    } catch (err) {
-      console.log("Catch native Google", err);
-      this.utilitiesService.showToast("No se ha podido entrar con Google");
-    }
-  }
-
-  async rememberPassword() {
-    let email = this.form.get("email").value;
-
-    console.log(email);
-    
-    let ValidEmail = this.validateMail(email);
+    //   console.log(gplusUser);
+    //   let user: User = {
+    //     name: gplusUser.displayName,
+    //     email: gplusUser.email,
+    //     avatar: gplusUser.imageUrl,
+    //     givenName: gplusUser.givenName,
+    //   };
+    //   await this.utilitiesService.showLoading("Entrando...");
+    //   this.apiService.loginGoogle(user).subscribe(
+      //     (user: User) => {
+        //       this.utilitiesService.dismissLoading();
+        
+        //       //Ahora aplicamos la cabecera devuelta a las siguientes peticiones
+        //       this.apiService.setTokenToHeaders(user.api_token);
+        
+        //       //Emitimos el evento de login
+        //       // this.events.publish("user:login"); // TODO create service if required.
+        
+        //       //Vamos a inicio
+        //       this.auth.login(user.api_token);
+        //     },
+        //     (error) => {
+          //       this.utilitiesService.dismissLoading();
+          //       this.utilitiesService.showToast("No se ha podido entrar con Google");
+          //       console.log(error);
+          //     }
+          //   );
+          // } catch (err) {
+            //   console.log("Catch native Google", err);
+            //   this.utilitiesService.showToast("No se ha podido entrar con Google");
+            // }
+            const gplusUser = await GoogleAuth.signIn();
+            console.log(gplusUser);
+            let user: User = {
+              name: gplusUser.name,
+              email: gplusUser.email,
+              avatar: gplusUser.imageUrl,
+              givenName: gplusUser.givenName,
+            };
+              await this.utilitiesService.showLoading("Entrando...");
+              this.apiService.loginGoogle(user).subscribe(
+                (user: User) => {
+                  this.utilitiesService.dismissLoading();
+              
+                  // Now apply the returned header to the following requests
+                  this.apiService.setTokenToHeaders(user.api_token);
+              
+                  // Emit the login event
+                  // this.events.publish("user:login"); // TODO create service if required.
+              
+                  // Go to home
+                  this.auth.login(user.api_token);
+                },
+                (error) => {
+                  this.utilitiesService.dismissLoading();
+                  this.utilitiesService.showToast("No se ha podido entrar con Google");
+                  console.log(error);
+                }
+              );
+          }
+          
+          async rememberPassword() {
+            let email = this.form.get("email").value;
+            
+            console.log(email);
+            
+            let ValidEmail = this.validateMail(email);
 
     if (ValidEmail) {
       console.log(

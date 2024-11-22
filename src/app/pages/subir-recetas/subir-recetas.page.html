@@ -1,6 +1,6 @@
-<app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
+<app-loading *ngIf="IsLoading" text="Cargando Perfil..."></app-loading>
 
-<ion-content *ngIf="!isLoading">
+<ion-content *ngIf="!IsLoading">
 
 	<!-- doomed v3 header -->
 
@@ -36,7 +36,7 @@
           text-align: center;
         "
       >
-        <span style="font-style: italic;">subir</span><br>Recetas
+        <span style="font-style: italic;">{{"subir" | translate}}</span><br>{{"Recetas" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -56,26 +56,26 @@
 
   <div class="body-wrap">
     <p class="disclaimer-text">
-      Cuanta más información dés, más ayudas a la comunidad. ¡Gracias!
+      {{"Cuanta más información dés, más ayudas a la comunidad. ¡Gracias!" | translate}}
     </p>
     <form *ngIf="form" [formGroup]="form">
       <ion-grid class="form-wrap">
         <ion-row class="input-wrap" *ngIf="!base64img">
-          <ion-row><p>Elige la imagen o vídeo de la receta</p></ion-row>
+          <ion-row><p>{{"Elige la imagen o vídeo de la receta" | translate}}</p></ion-row>
           <ion-row
             ><ion-button class="" (click)="adjuntarImagen()">
               <div class="inner-custom">
-                Seleccione el archivo a subir
+                {{"Seleccione el archivo a subir" | translate}}
                 <ion-icon name="filing"></ion-icon></div></ion-button
           ></ion-row>
         </ion-row>
         <ion-row class="row-description" *ngIf="base64img">
        <div class="option-wrap">
         <a *ngIf="base64img" (click)="removeImage()" style="color: #f3b562"
-        >Eliminar imagen</a
+        >{{"Eliminar imagen" | translate}}</a
       >
       <a *ngIf="base64img" (click)="openCropImageModal()" style="color: #f3b562"
-      >Ajustar imagen</a
+      >{{"Ajustar imagen" | translate}}</a
     >
        </div>
 
@@ -83,12 +83,12 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Nombre de la receta</p></ion-row>
+          <ion-row><p>{{"Nombre de la receta" | translate}}</p></ion-row>
           <ion-row
             ><ion-input
               clearInput
               type="text"
-              placeholder="Nombre de la receta"
+              [placeholder]="'Nombre de la receta' | translate"
               formControlName="name"
               required
             ></ion-input>
@@ -96,7 +96,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Tiempo de preparacion</p></ion-row>
+          <ion-row><p>{{"Tiempo de preparacion" | translate}}</p></ion-row>
           <ion-row
             ><ion-input
               clearInput
@@ -109,7 +109,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Número de comensales</p></ion-row>
+          <ion-row><p>{{"Número de comensales" | translate}}</p></ion-row>
           <ion-row
             ><ion-input
               clearInput
@@ -123,7 +123,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Ingredientes</p></ion-row>
+          <ion-row><p>{{"Ingredientes" | translate}}</p></ion-row>
           <ion-row
             ><ion-input
               clearInput
@@ -132,7 +132,7 @@
               formControlName="ingredients"
             ></ion-input>
             <ion-button class="add" (click)="addIngredient()"
-              >Añadir</ion-button
+              >{{"Añadir" | translate}}</ion-button
             >
           </ion-row>
           <ion-list *ngIf="ingredients.length>0" class="list-ingredients">
@@ -140,7 +140,7 @@
               <ion-col class="list-col-text"><p>{{i.name}}</p></ion-col>
               <ion-col size="3" class="list-col-btn"
                 ><ion-button (click)="deleteIngredient(i.id)"
-                  >Eliminar</ion-button
+                  >{{"Eliminar" | translate}}</ion-button
                 ></ion-col
               >
             </ion-row>
@@ -148,7 +148,7 @@
         </ion-row>
         <!-- CHIPS-ROW -->
         <ion-row class="input-wrap">
-          <ion-row><p>¿Cuando se sirve?</p></ion-row>
+          <ion-row><p>{{"¿Cuando se sirve?" | translate}}</p></ion-row>
 
           <div class="chips-wrap" id="row-chips-101">
             <ion-row class="row-chip">
@@ -165,7 +165,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Pasos</p></ion-row>
+          <ion-row><p>{{"Pasos" | translate}}</p></ion-row>
           <ion-row
             ><ion-textarea
               clearInput
@@ -179,7 +179,7 @@
               <ion-col class="list-col-text"><p>{{i.step}}</p></ion-col>
               <ion-col size="3" class="list-col-btn"
                 ><ion-button (click)="deleteSteps(i.id)"
-                  >Eliminar</ion-button
+                  >{{"Eliminar" | translate}}</ion-button
                 ></ion-col
               >
             </ion-row>
@@ -187,7 +187,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Notas / Trucos</p></ion-row>
+          <ion-row><p>{{"Notas / Trucos" | translate}}</p></ion-row>
           <ion-row
             ><ion-input
               clearInput
@@ -200,7 +200,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>URL de la receta</p></ion-row>
+          <ion-row><p>{{"URL de la receta" | translate}}</p></ion-row>
           <ion-row
             ><ion-input
               clearInput
@@ -212,7 +212,7 @@
         </ion-row>
 
         <ion-row class="input-wrap">
-          <ion-row><p>Ubicación</p></ion-row>
+          <ion-row><p>{{"Ubicación" | translate}}</p></ion-row>
           <ion-row>
             <ion-input
               type="text"
@@ -270,7 +270,7 @@
       </ion-grid>
 
       <ion-grid class="footer-grid">
-        <ion-row><p>¿Cómo se visualizará esta receta?</p></ion-row>
+        <ion-row><p>{{"¿Cómo se visualizará esta receta?" | translate}}</p></ion-row>
         <ion-row class="btn-row">
           <ion-col>
             <ion-button
@@ -308,7 +308,7 @@
 					font-size: 15px;
 					color: white;
 				"
-					>Subir receta</ion-button>
+					>{{"Subir receta" | translate}}</ion-button>
         </ion-row>
       </ion-grid>
     </form>

@@ -1,4 +1,4 @@
-<app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
+<app-loading *ngIf="isLoading" [text]="'Cargando Perfil...' | translate"></app-loading>
 
 <ion-content color="primary" *ngIf="!isLoading">
   <div class="container">
@@ -71,13 +71,13 @@
           <!--Followers-->
           <ion-col class="col-followers" (click)="GoToFollowers()">
             <label id="num_followers">{{user?.followers}}</label>
-            <label id="tipo_followers">SEGUIDORES</label>
+            <label id="tipo_followers">{{"SEGUIDORES" | translsate}}</label>
           </ion-col>
 
           <!--Following-->
           <ion-col class="col-following" (click)="GoToFollowing()">
             <label id="num_following">{{user?.seguidos}}</label>
-            <label id="tipo_following">SIGUIENDO</label>
+            <label id="tipo_following">{{"SIGUIENDO" | translate}}</label>
           </ion-col>
 
           <!-- follow -->
@@ -96,7 +96,7 @@
       <ion-grid style="margin: 0px;width: 100%;">
         <ion-row style="margin:0px"
           ><ion-button class="follow" (click)="chat()"
-            >Crear chat</ion-button
+            >{{"Crear chat" | translate}}</ion-button
           ></ion-row
         >
       </ion-grid>
@@ -104,10 +104,10 @@
     <div class="action-Mutual" *ngIf="isMutual">
       <ion-grid style="margin: 0px;width: 100%;">
         
-        <ion-row  style="margin:0px" class="status"> Os seguis mutuamente</ion-row>
+        <ion-row  style="margin:0px" class="status"> {{"Os seguis mutuamente" | translate}}</ion-row>
         <ion-row style="margin:11px">
           <ion-button class="stop-follow" (click)="StopFollow()"
-            >Dejar de seguir</ion-button
+            >{{"Dejar de seguir" | translate}}</ion-button
           >
         </ion-row>
       </ion-grid>
@@ -116,10 +116,10 @@
 
     <div class="action-follows" *ngIf="isFollower">
       <ion-grid>
-        <ion-row style="margin:0px" class="status">Te sigue</ion-row>
+        <ion-row style="margin:0px" class="status">{{"Te sigue" | translate}}</ion-row>
         <ion-row
           ><ion-button (click)="Follow()" class="follow"
-            >Seguir</ion-button
+            >{{"Seguir" | translate}}</ion-button
           ></ion-row
         >
       </ion-grid>
@@ -127,10 +127,10 @@
 
     <div class="action-youFollow" *ngIf="YouFollow">
       <ion-grid style="margin:0px">
-        <ion-row class="status">Siguiendo</ion-row>
+        <ion-row class="status">{{"Siguiendo" | translate}}</ion-row>
         <ion-row>
           <ion-button class="stop-follow" style="margin:0px" (click)="StopFollow()"
-            >Dejar de seguir</ion-button
+            >{{"Dejar de seguir" | translate}}</ion-button
           ></ion-row
         >
       </ion-grid>
@@ -138,10 +138,10 @@
 
     <div class="action-nothing" *ngIf="!YouFollow&&!isFollower&&!isMutual">
       <ion-grid>
-        <ion-row class="status">No os seguis</ion-row>
+        <ion-row class="status">{{"No os seguis" | translate}}</ion-row>
         <ion-row>
           <ion-button (click)="Follow()" class="follow"
-            >Seguir</ion-button
+            >{{"Seguir" | translate}}</ion-button
           ></ion-row
         >
       </ion-grid>
@@ -180,6 +180,6 @@
   </div>
 
   <div class="NoPosts" *ngIf="!ThereIsPosts&&verPublicaciones">
-    <p class="noposts-label">Aún no hay publicaciones subidas</p>
+    <p class="noposts-label">{{"Aún no hay publicaciones subidas" | translate}}</p>
   </div>
 </ion-content>

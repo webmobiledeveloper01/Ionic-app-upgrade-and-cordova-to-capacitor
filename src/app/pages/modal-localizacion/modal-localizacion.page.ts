@@ -4,7 +4,7 @@ import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { FormGroup } from "@angular/forms";
 @Component({
   selector: "app-modal-localizacion",

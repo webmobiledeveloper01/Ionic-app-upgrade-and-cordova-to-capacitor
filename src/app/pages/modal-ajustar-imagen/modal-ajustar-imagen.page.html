@@ -3,7 +3,6 @@
     <image-cropper
       format="jpeg"
       [imageBase64]="base64img"
-      [imageChangedEvent]="imageChangedEvent"
       [maintainAspectRatio]="true"
       [aspectRatio]="aspectRatio"
       (imageCropped)="imageCropped($event)"
@@ -38,12 +37,12 @@
     <ion-grid>
       <ion-row
         ><ion-button class="confirm" (click)="onClickAcept()">
-          <p>Aceptar</p>
+          <p>{{"Aceptar"| translate}}</p>
         </ion-button>
       </ion-row>
       <ion-row>
         <ion-button class="cancel" (click)="onClickCancel()">
-          <p>Cancelar</p>
+          <p>{{"Cancelar" | translate}}</p>
         </ion-button>
       </ion-row>
     </ion-grid>

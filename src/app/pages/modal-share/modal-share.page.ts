@@ -7,6 +7,7 @@ import { FormsModule } from "@angular/forms";
   selector: "app-modal-share",
   templateUrl: "./modal-share.page.html",
   styleUrls: ["./modal-share.page.scss"],
+  standalone: false
 })
 export class ModalSharePage implements OnInit {
   post_id;

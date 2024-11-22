@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ModalController, NavController, Platform } from "@ionic/angular";
+import { IonicModule, ModalController, NavController, Platform } from "@ionic/angular";
 import { HistoricPlace } from "src/app/models/historic-place";
 import { User } from "src/app/models/User";
 import { ApiService } from "src/app/services/api.service";
@@ -21,9 +21,9 @@ export class DetallePublicacionPage implements OnInit {
   public comentarios: any[] = [];
   public user: User;
   private id: any;
-  private isloading: boolean = true;
-  private isOwnPost: boolean = false;
-  private IsIos: boolean = false;
+  public isloading: boolean = true;
+  public isOwnPost: boolean = false;
+  public IsIos: boolean = false;
   constructor(
     private modalController: ModalController,
     private navCtrl: NavController,
@@ -32,7 +32,7 @@ export class DetallePublicacionPage implements OnInit {
     private route: ActivatedRoute,
     private appref: ApplicationRef,
     private mdlctrl: ModalController,
-    private platform: Platform
+    public platform: Platform
   ) {}
   async openFullscreen(imageUrl: string) {
     const modal = await this.modalController.create({
@@ -84,7 +84,7 @@ export class DetallePublicacionPage implements OnInit {
       .toPromise()
       .then((res) => {
         if (res.status == "ok") {
-          this.apiService.postChanges.next();
+          this.apiService.postChanges.next("");
           this.utilities.showAlert(
             "¡Listo!",
             "Tu pregunta se ha rectivado correctamente"
@@ -146,7 +146,7 @@ export class DetallePublicacionPage implements OnInit {
         this.utilities.showToast("Comentario enviado");
         this.appref.tick();
         this.post.comentarios++;
-        this.apiService.postChanges.next();
+        this.apiService.postChanges.next("");
       } else {
         throw new Error(res.message + " @@TRACE => " + res.trace);
       }

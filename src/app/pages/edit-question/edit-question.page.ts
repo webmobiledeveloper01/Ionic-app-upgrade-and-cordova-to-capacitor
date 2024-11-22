@@ -5,7 +5,7 @@ import * as moment from "moment";
 import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import {
   GoogleMaps,
   GoogleMap,
@@ -28,8 +28,9 @@ import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
+import { TranslateService } from "@ngx-translate/core";
 
 // import {
 //   Environment,
@@ -75,11 +76,10 @@ export class EditQuestionPage implements OnInit {
     private api: ApiService,
     private utils: UtilitiesService,
     private fb: FormBuilder,
-    private nav: NavController,
-    private camera: Camera,
-    private ngZone: NgZone,
+    private nav: NavController,private ngZone: NgZone,
     private nativeGeocoder: NativeGeocoder,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private translateService: TranslateService
   ) {
     this.googleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
@@ -159,8 +159,8 @@ export class EditQuestionPage implements OnInit {
         console.log(error);
 
         this.utils.showAlert(
-          "Ubicacion desactivada",
-          "Sin acceso a la ubicacion la publicacion no se subira correctamente"
+          this.translateService.instant("Ubicacion desactivada"),
+          this.translateService.instant("Sin acceso a la ubicacion la publicacion no se subira correctamente")
         );
       });
   }
@@ -207,35 +207,66 @@ export class EditQuestionPage implements OnInit {
     mpRow.style.display = "none";
   }
 
-  public adjuntarImagen(): void {
+  // TODO Camera Capacitor Implementation below
+  // public adjuntarImagen(): void {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //     targetWidth: 1920,
+  //     targetHeight: 1080,
+  //     allowEdit: true,
+  //     correctOrientation: true,
+  //   };
+
+  //   try {
+  //     this.camera
+  //       .getPicture(options)
+  //       .then((urlFoto) => {
+  //         this.base64img = "data:image/jpeg;base64," + urlFoto;
+  //         this.form.patchValue({ archivo: this.base64img });
+
+  //         console.log(urlFoto);
+  //       })
+  //       .catch((error) => {
+  //         this.utils.showAlert("Error al obtener imagen", error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  
+  public async adjuntarImagen(): Promise<void> {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: true,
+      resultType: CameraResultType.DataUrl, // Use DataUrl for data URI
+      source: CameraSource.Photos, // Use Photos for PhotoLibrary
+      width: 1920,
+      height: 1080,
+      allowEditing: true,
       correctOrientation: true,
     };
-
+  
     try {
-      this.camera
-        .getPicture(options)
-        .then((urlFoto) => {
-          this.base64img = "data:image/jpeg;base64," + urlFoto;
-          this.form.patchValue({ archivo: this.base64img });
-
-          console.log(urlFoto);
-        })
-        .catch((error) => {
-          this.utils.showAlert("Error al obtener imagen", error);
-        });
+      const capturedPhoto = await Camera.getPhoto(options);
+  
+      if (capturedPhoto.dataUrl) {
+        this.base64img = capturedPhoto.dataUrl;
+        this.form.patchValue({ archivo: this.base64img });
+  
+        console.log(capturedPhoto.dataUrl);
+      } else {
+        this.utils.showAlert(this.translateService.instant("Error al obtener imagen"), this.translateService.instant("No se pudo obtener la imagen"));
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      this.utils.showAlert(this.translateService.instant("Error al obtener imagen"), error.message);
     }
   }
+  
+  
   deleteImage(){
     this.base64img=null;
     this.form.patchValue({ archivo: "" });
@@ -328,7 +359,7 @@ export class EditQuestionPage implements OnInit {
         throw new Error(res);
       }
     } catch (error) {
-      this.utils.showAlert("¡Vaya!", "Ha ocurrido un error en el servidor");
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"), this.translateService.instant("Ha ocurrido un error en el servidor"));
 
       console.log(error);
     }
@@ -344,7 +375,7 @@ export class EditQuestionPage implements OnInit {
   }
 
   async deleteQuestion() {
-    this.utils.showLoading("Eliminando pregunta...");
+    this.utils.showLoading(this.translateService.instant("Eliminando pregunta..."));
     try {
       let res = await this.api
         .deleteEntity("question", this.question.id)
@@ -356,9 +387,9 @@ export class EditQuestionPage implements OnInit {
 
       console.log(res);
 
-      this.api.questionChange.next();
+      this.api.questionChange.next("");
 
-      this.utils.showToast("Pregunta borrada correctamente");
+      this.utils.showToast(this.translateService.instant("Pregunta borrada correctamente"));
       window.history.back();
     } catch (error) {
       this.utils.dismissLoading();
@@ -401,7 +432,7 @@ export class EditQuestionPage implements OnInit {
     // let date = this.form.get("date").value.split("T")[0];
     // this.form.get("date").setValue(date);
     if (this.setFechaValueIfVoid()) {
-      await this.utils.showLoading("Editando pregunta...");
+      await this.utils.showLoading(this.translateService.instant("Editando pregunta..."));
       try {
         this.search == ""
           ? console.log("Not void")
@@ -416,8 +447,8 @@ export class EditQuestionPage implements OnInit {
 
         console.log(res);
 
-        this.api.questionChange.next();
-        this.utils.showToast("Pregunta editada correctamente");
+        this.api.questionChange.next("");
+        this.utils.showToast(this.translateService.instant("Pregunta editada correctamente"));
 
         window.history.back();
       } catch (error) {
@@ -428,7 +459,8 @@ export class EditQuestionPage implements OnInit {
         console.log(error);
       }
     } else {
-      this.utils.showAlert("¡Vaya!", "La fecha y la decada no coinciden");
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"), 
+      this.translateService.instant("La fecha y la decada no coinciden"));
     }
   }
 

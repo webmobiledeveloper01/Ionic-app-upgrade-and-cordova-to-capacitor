@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { Banner } from "src/app/models/Banner";
+import { environment } from "src/environments/environment";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AppAdBannerComponent implements OnInit {
 
   public handleMissingImage(event: Event) {
     (event.target as HTMLImageElement).src =
-      "https://timemapp.davidtovar.dev/storage/banners/October2022/XsC2uuXbhgmrbOOXevJ5.jpg";
+      environment.domainUrl + "storage/banners/October2022/XsC2uuXbhgmrbOOXevJ5.jpg";
   }
 
   openWindow() {

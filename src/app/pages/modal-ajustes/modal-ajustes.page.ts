@@ -1,16 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { IonicModule, ModalController } from "@ionic/angular";
 import { ApiService } from "src/app/services/api.service";
 import {
   NativeGeocoder,
-  NativeGeocoderOptions,
-  NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+  ForwardOptions
+} from "@capgo/nativegeocoder";
 
 @Component({
   selector: "app-modal-ajustes",
   templateUrl: "./modal-ajustes.page.html",
   styleUrls: ["./modal-ajustes.page.scss"],
+ 
 })
 export class ModalAjustesPage implements OnInit {
   public direccion: any;
@@ -21,7 +21,6 @@ export class ModalAjustesPage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private apiService: ApiService,
-    private nativeGeocoder: NativeGeocoder
   ) {}
 
   ngOnInit() {
@@ -51,18 +50,23 @@ export class ModalAjustesPage implements OnInit {
   }
 
   GetLocalizaciones() {
-    let options: NativeGeocoderOptions = {
+    let options: ForwardOptions = {
+      addressString: this.direccion,
       useLocale: true,
       maxResults: 5,
     };
-    this.nativeGeocoder
-      .forwardGeocode(this.direccion, options)
-      .then((result: NativeGeocoderResult[]) => {
-        this.Lugares = result;
+    NativeGeocoder
+      .forwardGeocode(options)
+      .then((result) => {
+        this.Lugares = result.addresses;
         console.log(this.Lugares);
       })
       .catch((error: any) => {
         this.Lugares = [];
       });
+  }
+
+  SetDateValue(value: any){
+
   }
 }

@@ -5,12 +5,13 @@ import { ApiService } from "src/app/services/api.service";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { ModalEliminarpublicacionPage } from "../modal-eliminarpublicacion/modal-eliminarpublicacion.page";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { codeErrors } from "src/app/utils/utils";
 import { ModalBannersPage } from "../modal-banners/modal-banners.page";
 import { yearContainer } from "src/app/models/YearContainer";
 import { UserService } from "src/app/services/user.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-perfil",
@@ -35,10 +36,10 @@ export class PerfilPage implements OnInit {
     private apiService: ApiService,
     public auth: AuthenticationService,
     private utilities: UtilitiesService,
-    private camera: Camera,
     private formBuilder: FormBuilder,
     private modalCtrl: ModalController,
-    private uservice: UserService
+    private uservice: UserService,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -251,7 +252,7 @@ Followers : false,
 
       if (dataReturned.data == true) {
         await this.deletePost(id);
-        this.apiService.postChanges.next();
+        this.apiService.postChanges.next("");
       }
     });
     await modal.present();
@@ -266,7 +267,8 @@ Followers : false,
       console.log(res);
     } catch (error) {
       this.utilities.showToast(
-        "Ha ocurrido un error en el servidor, inténtelo mas tarde"
+        this.translateService.instant("Ha ocurrido un error en el servidor, inténtelo mas tarde")
+        
       );
       console.log(error);
     }
@@ -281,24 +283,22 @@ Followers : false,
   cancelarSuscripcion() {
     this.apiService.cancelar().subscribe((user: User) => {
       this.user = user;
-      this.utilities.showToast("Suscripción Cancelada");
+      this.utilities.showToast(this.translateService.instant("Suscripción Cancelada"));
     });
   }
 
   public adjuntarImagen(): void {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos,
+      width: 1920,
+      height: 1080,
+      allowEditing: true,
       correctOrientation: true,
     };
-    this.camera
-      .getPicture(options)
+    Camera
+      .getPhoto(options)
       .then((urlFoto) => {
         this.base64img = "data:image/jpeg;base64," + urlFoto;
         this.form.patchValue({ avatar: this.base64img });
@@ -306,7 +306,7 @@ Followers : false,
         this.apiService.updateUser(this.form.value).subscribe(
           (user: User) => {
             this.user = user;
-            this.utilities.showToast("Usuario actualizado correctamente");
+            this.utilities.showToast(this.translateService.instant("Usuario actualizado correctamente"));
           },
           (error) => {
             this.utilities.showToast(codeErrors(error));
@@ -317,7 +317,7 @@ Followers : false,
         this.UpdateUser();
       })
       .catch((error) => {
-        this.utilities.showAlert("Error al obtener imagen", error);
+        this.utilities.showAlert(this.translateService.instant("Error al obtener imagen"), error);
       });
   }
   async UpdateUser() {

@@ -5,6 +5,7 @@ import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { ModalInvitacionGrupoPage } from "../modal-invitacion-grupo/modal-invitacion-grupo.page";
 import { ModalInvitePage } from "../modal-invite/modal-invite.page";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-grupo",
@@ -26,7 +27,8 @@ export class GrupoPage implements OnInit {
     private api: ApiService,
     private mcontrol: ModalController,
     private utils: UtilitiesService,
-    private nav: NavController
+    private nav: NavController,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -141,7 +143,7 @@ export class GrupoPage implements OnInit {
     console.log(res);
 
     if (res.status === "ok") {
-      this.utils.showAlert("¡Listo!", "Se han invitado a tus contactos");
+      this.utils.showAlert(this.translateService.instant("¡Listo!"), this.translateService.instant("Se han invitado a tus contactos"));
       this.api.inviteChanges.next(this.inviteObjectsList);
     }
   }
@@ -195,7 +197,7 @@ export class GrupoPage implements OnInit {
   }
 
   async JoinGroup() {
-    await this.utils.showLoading("Añadiendo solicitud");
+    await this.utils.showLoading(this.translateService.instant("Añadiendo solicitud"));
 
     let params = {
       chanel_id: this.grupo.id,

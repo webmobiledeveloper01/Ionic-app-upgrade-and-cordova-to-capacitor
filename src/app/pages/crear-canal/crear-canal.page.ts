@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { NavController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
@@ -20,7 +21,8 @@ export class CrearCanalPage implements OnInit {
     private api: ApiService,
     private utils: UtilitiesService,
     private fb: FormBuilder,
-    private nav: NavController
+    private nav: NavController,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -81,7 +83,7 @@ export class CrearCanalPage implements OnInit {
         throw new Error(res);
       }
     } catch (error) {
-      this.utils.showAlert("¡Vaya!", "Ha ocurrido un error en el servidor");
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"), this.translateService.instant("Ha ocurrido un error en el servidor"));
 
       console.log(error);
     }
@@ -142,14 +144,14 @@ export class CrearCanalPage implements OnInit {
     };
 
     try {
-      await this.utils.showLoading("Añadiendo grupo");
+      await this.utils.showLoading(this.translateService.instant("Añadiendo grupo"));
       let res = await this.api.addEntity("Chanels", params).toPromise();
 
       if (res.status === "ok") {
         this.utils.dismissLoading();
 
         this.api.groupChanges.next("Grupo ha sido creado");
-        this.utils.showAlert("¡Listo!", "Tu grupo ha sido creado");
+        this.utils.showAlert(this.translateService.instant("¡Listo!"), this.translateService.instant("Tu grupo ha sido creado"));
         this.nav.navigateBack("/tabs/canales-grupos");
       } else {
         console.log(res);
@@ -167,8 +169,8 @@ export class CrearCanalPage implements OnInit {
 
   HandlError() {
     this.utils.showAlert(
-      "¡Vaya!",
-      "Ha ocurrido un error en el servidor, por favor intentelo de nuevo mas tarde"
+      this.translateService.instant("¡Vaya!"),
+      this.translateService.instant("Ha ocurrido un error en el servidor, por favor intentelo de nuevo mas tarde")
     );
     this.nav.back();
   }

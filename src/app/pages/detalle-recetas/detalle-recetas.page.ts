@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { Ingrediente } from "src/app/models/Ingrediente";
 import { PasoReceta } from "src/app/models/PasoReceta";
 import { Receta } from "src/app/models/Receta";
@@ -21,7 +22,8 @@ export class DetalleRecetasPage implements OnInit {
   constructor(
     private utils: UtilitiesService,
     private api: ApiService,
-    private nav: NavController
+    private nav: NavController,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -47,7 +49,7 @@ export class DetalleRecetasPage implements OnInit {
   }
   checkError() {
     if (this.error == true) {
-      this.utils.showToast("parece que hay un error, pruebe mas tarde");
+      this.utils.showToast(this.translateService.instant("parece que hay un error, pruebe mas tarde"));
       this.nav.back();
     } else {
       console.log("todo correcto");

@@ -77,7 +77,7 @@
                 <ion-col class="icon" size="3">
                   <ion-icon name="create" mode="md"></ion-icon>
                 </ion-col>
-                <ion-col><p style="    font-size: 17px;">Proponer un cambio</p></ion-col>
+                <ion-col><p style="    font-size: 17px;">{{"Propón un cambio" | translate}}</p></ion-col>
               </ion-row>
 
               <ion-row *ngIf="isOwnPost">
@@ -267,10 +267,11 @@
                 postholder="Escribe tu comentario..."
                 [(ngModel)]="comentario"
               ></ion-input>
-              <ion-icon
-                (click)="enviarComentario()"
-                src="assets/icons/Group 825.svg"
-              ></ion-icon>
+              <ion-buttons slot="end">
+              <ion-button  (click)="enviarComentario()">
+                <ion-icon slot="icon-only" src="assets/icons/Group 825.svg"></ion-icon>
+              </ion-button>
+            </ion-buttons>
             </ion-item>
           </ion-col>
         </ion-item>

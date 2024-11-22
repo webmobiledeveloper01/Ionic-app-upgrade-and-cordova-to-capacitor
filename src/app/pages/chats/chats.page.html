@@ -1,5 +1,5 @@
 <app-loading
-  [text]="'Cargando chats...'"
+  [text]="'Cargando chats...' | translate"
   [color]="'primary'"
   *ngIf="isLoading"
 ></app-loading>
@@ -40,7 +40,7 @@
           text-align: center;
         "
       >
-        Chats
+        {{"Chats" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red

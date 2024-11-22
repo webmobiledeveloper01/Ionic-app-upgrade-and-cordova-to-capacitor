@@ -4,7 +4,7 @@ import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalController, NavController } from "@ionic/angular";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import { ModalLocalizacionPage } from "../modal-localizacion/modal-localizacion.page";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
 
@@ -24,9 +24,7 @@ export class SubirBannerPage implements OnInit {
   tomorrow = new Date();
   SetMinDate: string;
   maxYear: string = (new Date().getFullYear() + 10).toString();
-  constructor(
-    private camera: Camera,
-    private ngzone: NgZone,
+  constructor(private ngzone: NgZone,
     private modalCtrl: ModalController,
     private utilities: UtilitiesService,
     private formBuilder: FormBuilder,
@@ -118,29 +116,53 @@ export class SubirBannerPage implements OnInit {
     console.log(this.BannerLocation);
     console.log(this.BannerType);
   }
-
-  public adjuntarImagen(): void {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: false,
-      correctOrientation: true,
-    };
-    this.ngzone.run(() => {
-      this.camera
-        .getPicture(options)
-        .then(async (urlFoto) => {
-          this.base64img = "data:image/jpeg;base64," + urlFoto;
-        })
-        .catch((error) => {
-          this.utilities.showAlert("Error al obtener imagen", error);
-        });
-    });
+  // UsingCapacitorPlugin: Implement Capacitor Camera Plugin
+  // public adjuntarImagen(): void {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //     targetWidth: 1920,
+  //     targetHeight: 1080,
+  //     allowEdit: false,
+  //     correctOrientation: true,
+  //   };
+  //   this.ngzone.run(() => {
+  //     this.camera
+  //       .getPicture(options)
+  //       .then(async (urlFoto) => {
+  //         this.base64img = "data:image/jpeg;base64," + urlFoto;
+  //       })
+  //       .catch((error) => {
+  //         this.utilities.showAlert("Error al obtener imagen", error);
+  //       });
+  //   });
+  // }
+  
+  public async adjuntarImagen(): Promise<void> {
+    try {
+      const options: CameraOptions = {
+        quality: 100,
+        resultType: CameraResultType.DataUrl, // Use DataUrl for data URI
+        source: CameraSource.Photos, // Use Photos for PhotoLibrary
+        width: 1920,
+        height: 1080,
+        allowEditing: false,
+        correctOrientation: true,
+      };
+  
+      const capturedPhoto = await Camera.getPhoto(options);
+  
+      if (capturedPhoto.dataUrl) {
+        this.base64img = capturedPhoto.dataUrl;
+      } else {
+        this.utilities.showAlert("Error", "No se pudo obtener la imagen");
+      }
+    } catch (error) {
+      this.utilities.showAlert("Error al obtener imagen", error.message);
+    }
   }
 
   async submitForm() {
@@ -222,6 +244,9 @@ export class SubirBannerPage implements OnInit {
   formatName(control: string) {
     if (control.includes("_") || control == "lat" || control == "lng") {
       return true;
+    }
+    else{
+      return false;
     }
   }
 

@@ -1,10 +1,13 @@
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
+import { IonicModule, ModalController } from "@ionic/angular";
 
 @Component({
   selector: "app-modal-invite",
   templateUrl: "./modal-invite.page.html",
   styleUrls: ["./modal-invite.page.scss"],
+  
 })
 export class ModalInvitePage implements OnInit {
   invited;

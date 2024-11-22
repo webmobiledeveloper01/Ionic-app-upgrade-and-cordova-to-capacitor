@@ -1,5 +1,6 @@
 import { ApplicationRef, Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { Banner } from "src/app/models/Banner";
 import { User } from "src/app/models/User";
 import { ApiService } from "src/app/services/api.service";
@@ -25,7 +26,8 @@ export class PerfilBannersPage implements OnInit {
     private UserService: UserService,
     private utils: UtilitiesService,
     private auth: AuthenticationService,
-    private appref: ApplicationRef
+    private appref: ApplicationRef,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -88,8 +90,8 @@ export class PerfilBannersPage implements OnInit {
         this.NoBanners = true;
       } else {
         this.utils.showAlert(
-          "Vaya...",
-          "parece que ha habido un error, intentalo de nuevo mas tarde"
+          this.translateService.instant("Vaya..."),
+          this.translateService.instant("parece que ha habido un error, intentalo de nuevo mas tarde")
         );
         // console.log(res);
       }

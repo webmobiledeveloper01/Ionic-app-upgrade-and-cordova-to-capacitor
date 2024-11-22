@@ -1,4 +1,4 @@
-<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+<app-loading *ngIf="isLoading" [text]="'Cargando...' | translate"></app-loading>
 
 <ion-content *ngIf="!isLoading" color="primary">
   <ion-grid class="wrap-grid">

@@ -11,7 +11,7 @@
         <img id="ondas_imagen" src="assets/imgs/Group 125.png" />
       </ion-col>
       <ion-col class="inner-top-mid-wrap">
-        <p class="title-label">Geoask</p>
+        <p class="title-label">{{"Geoask" | translate}}</p>
         <!--   <img src="assets/imgs/logo_name.svg"/> -->
       </ion-col>
       <ion-col class="inner-top-right-wrap">
@@ -34,17 +34,17 @@
 
   <div class="body-wrap">
     <p class="disclaimer-text">
-      Cuanta mas informacion des, mas ayudas a la comunidad ¡Gracias!
+      {{"Cuanta mas informacion des, mas ayudas a la comunidad ¡Gracias!" | translate}}
     </p><
   
     <!--<form *ngIf="form" [formGroup]="form">-->
       <ion-grid class="form-wrap">
         <ion-row class="input-wrap">
-          <ion-row><p>Elige la imagen o vídeo de la receta</p></ion-row>-
+          <ion-row><p>{{"Elige la imagen o vídeo de la receta" | translate}}</p></ion-row>-
           <ion-row>
             <ion-button class="" (click)="adjuntarImagen()">
               <div class="inner-custom">
-                Seleccione el archivo a subir
+                {{"Seleccione el archivo a subir"| translate}}
                 <ion-icon name="filing"></ion-icon>
               </div></ion-button>
           </ion-row>
@@ -55,10 +55,10 @@
 
 
         <ion-row class="input-wrap"></ion-row>
-          <ion-row><p>Nombre de la receta</p>
+          <ion-row><p>{{"Nombre de la receta" | translate}}</p>
           
             
-            <ion-input clearInput type="text" placeholder="Nombre de la receta" required></ion-input>
+            <ion-input clearInput type="text" [placeholder]="'Nombre de la receta' | translate" required></ion-input>
           
         </ion-row>
 

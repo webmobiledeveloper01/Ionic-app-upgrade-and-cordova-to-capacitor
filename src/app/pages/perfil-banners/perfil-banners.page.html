@@ -1,4 +1,4 @@
-<app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
+<app-loading *ngIf="isLoading" [text]="'Cargando Perfil...' | translate"></app-loading>
 
 <ion-content color="primary" *ngIf="!isLoading">
   <ion-grid class="main-wrap">
@@ -45,7 +45,7 @@
 
           <ion-col class="icon-col" size="3" *ngIf="!user.user_flag"> </ion-col>
           <ion-col *ngIf="!user.user_location">
-            <p class="address">Aun no has añadido una localizacion</p>
+            <p class="address">{{"Aun no has añadido una localizacion" | translate}}</p>
           </ion-col>
         </ion-row>
         <ion-row class="data-grid-inner-Description">
@@ -56,14 +56,14 @@
           <label *ngIf="user?.description" id="texto_usuario">{{user?.description}}
           </label>
 
-          <label *ngIf="!user?.description" id="texto_usuario">Aún no has añadido ninguna descripción
+          <label *ngIf="!user?.description" id="texto_usuario">{{"Aún no has añadido ninguna descripción" | translate}}
           </label>
         </ion-row>
         <ion-row class="data-grid-inner-Pin">
-          <ion-button routerLink="/crear-pin"> Activar pin oficial </ion-button>
-          <ion-button routerLink="/profile"> Editar perfil</ion-button>
-          <ion-button routerLink="/subir-banner">Subir banner</ion-button>
-          <ion-button (click)="GoToIntranet()">Ir a la intranet</ion-button>
+          <ion-button routerLink="/crear-pin"> {{"Activar pin oficial" | tanslate}} </ion-button>
+          <ion-button routerLink="/profile"> {{"Editar perfil" | translate}}</ion-button>
+          <ion-button routerLink="/subir-banner">{{"Subir banner" | translate}}</ion-button>
+          <ion-button (click)="GoToIntranet()">{{"Ir a la intranet" | translate}}</ion-button>
           <!-- (click)="utils.showAlert('En mantenimiento','En proceso')" -->
         </ion-row>
       </ion-grid>
@@ -72,7 +72,7 @@
 
   <div class="body-wrap">
     <div class="title-wrap" style="color: black">
-      <p>Banners</p>
+      <p>{{"Banners" | translate}}</p>
     </div>
     <div class="banner-list-wrap" (click)="GoToBanners()">
       <ion-slides class="slider-wrap" *ngIf="!NoBanners">
@@ -82,13 +82,13 @@
       </ion-slides>
 
       <div class="NoBanners" *ngIf="NoBanners">
-        <p>Aun no has subido ningun banner</p>
+        <p>{{"Aún no has subido ningún banner" | translate}}</p>
       </div>
     </div>
 
     <div class="banner-list-wrap">
       <div class="title-wrap" style="color: black">
-        <p>Publicaciones</p>
+        <p>{{"Publicaciones" | translate}}</p>
       </div>
       <ion-row class="Year-slides">
         <ion-slides class="slider-wrap">
@@ -133,7 +133,7 @@
     </div>
 
     <div class="NoPosts" *ngIf="posts.length < 1">
-      <p class="noposts-label">Aún no hay publicaciones subidas</p>
+      <p class="noposts-label">{{"Aún no hay publicaciones subidas" | translate}}</p>
     </div>
   </div>
 </ion-content>

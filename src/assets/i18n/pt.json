@@ -1,0 +1,12 @@
+{
+    "Register" : "Registro",
+    "English": "Inglês",
+    "Spanish ": "Spanish",
+    "Name" : "Nombre",
+    "Email": "Email",
+    "Birthday": "Fecha de Nacimiento",
+    "Password" : "contraseña",
+    "RepeatPassword": "Repite la contraseña",
+    "ConfirmPassword": "Confirma la contraseña"
+    
+}

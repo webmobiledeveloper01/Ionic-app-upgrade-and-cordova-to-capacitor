@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { User } from "src/app/models/User";
 import { ApiService } from "src/app/services/api.service";
 import { UserService } from "src/app/services/user.service";
@@ -20,7 +21,8 @@ export class SeguidoresPage implements OnInit {
     private api: ApiService,
     private utils: UtilitiesService,
     private Uservice: UserService,
-    private navctrl: NavController
+    private navctrl: NavController,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {}
@@ -96,7 +98,7 @@ export class SeguidoresPage implements OnInit {
     let user = $event;
     console.log(user);
 
-    await this.utils.showLoading("Actualizando...");
+    await this.utils.showLoading(this.translateService.instant("Actualizando..."));
     console.log("se seguira ");
 
     let params = {
@@ -113,7 +115,7 @@ export class SeguidoresPage implements OnInit {
     let user = $event;
     console.log(user);
 
-    await this.utils.showLoading("Actualizando...");
+    await this.utils.showLoading(this.translateService.instant("Actualizando..."));
     console.log("se deja de seguir");
 
     this.api.deleteEntity("seguidores", user.id).subscribe((seguido) => {

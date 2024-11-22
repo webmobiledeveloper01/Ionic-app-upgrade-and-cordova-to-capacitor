@@ -4,7 +4,7 @@ import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { ModalReportarPublicacionPage } from "../modal-reportar-publicacion/modal-reportar-publicacion.page";
 import { ModalSharePage } from "../modal-share/modal-share.page";
-import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Share } from "@capacitor/share";
 
 @Component({
   selector: "app-muro-proximidad",
@@ -23,7 +23,6 @@ export class MuroProximidadPage implements OnInit {
     private nav: NavController,
     private api: ApiService,
     private utils: UtilitiesService,
-    private socialSharing: SocialSharing,
     private modalCtrl: ModalController
   ) {}
 
@@ -150,7 +149,7 @@ export class MuroProximidadPage implements OnInit {
     console.log("INIT SHARE");
     console.log(res.data.chanel_id);
 
-    this.api.groupChanges.next();
+    this.api.groupChanges.next("");
     await this.getGrupo(res.data.chanel_id).then((chanel) => {
       this.nav.navigateForward("grupo", {
         state: {
@@ -172,12 +171,12 @@ export class MuroProximidadPage implements OnInit {
     // console.log(id);
 
     // Image:
-    //   "https://timemapp.davidtovar.dev/storage/CtD5XZr2MZ6RVTvMc0uSuzRjA0v86MTmEuHt2v5h.png",
+    //   environment.domainUrl + "storage/CtD5XZr2MZ6RVTvMc0uSuzRjA0v86MTmEuHt2v5h.png",
     // let message = "Test Plugin SocialSharing"; // not supported on some apps (Facebook, Instagram)
     // // subject: "Sujeto", // fi. for email
     // let chooserTitle = "Escoge la app para compartir"; // Android only, you can override the default share sheet title
     // let url =
-    //   "https://timemapp.davidtovar.dev/storage/special-events/May2022/rlx6e6ShXQhpqylUDLYl.png";
+    //   environment.domainUrl + "storage/special-events/May2022/rlx6e6ShXQhpqylUDLYl.png";
 
     let files = imagen;
     // let files ="timemapp.davidtovar.dev/storage/CtD5XZr2MZ6RVTvMc0uSuzRjA0v86MTmEuHt2v5h.png";
@@ -191,7 +190,7 @@ export class MuroProximidadPage implements OnInit {
       files: [imagen],
     };
 
-    this.socialSharing.shareWithOptions(options).then(
+    Share.share(options).then(
       (result) => {
         console.log("plugin result", result);
       },

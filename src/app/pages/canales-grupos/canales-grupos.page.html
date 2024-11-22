@@ -36,7 +36,7 @@
           text-align: center;
         "
       >
-        <span style="font-style: italic;">los</span><br>Grupos
+        <span style="font-style: italic;">{{"los" | translate}}</span><br>{{"Grupos" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -61,16 +61,17 @@
       <ion-row
         ><ion-col
           ><ion-button
-            [ngClass]="DisplayOwnGroups==false ? 'new': 'none'"
-            (click)="SetDisplayMode(false)"
-            >Grupos</ion-button
+            [ngClass]="DisplayOwnGroups==false ? 'new' : 'none'"
+            (click)="SetDisplayMode(false)">
+            {{"Grupos" | translate}}
+            </ion-button
           ></ion-col
         >
         <ion-col
           ><ion-button 
-            [ngClass]="DisplayOwnGroups==true ? 'new': 'none' "
+            [ngClass]="DisplayOwnGroups==true ? 'new' : 'none' "
             (click)="SetDisplayMode(true)"
-            >Mis grupos</ion-button
+            >{{"Mis grupos" | translate}}</ion-button
           ></ion-col
         ></ion-row
       >
@@ -78,7 +79,7 @@
 
       <ion-row
         ><ion-button routerLink="/crear-canal" class="only"
-          >Crear grupo</ion-button
+          >{{"Crear grupo" | translate}}</ion-button
         ></ion-row
       >
     </ion-grid>

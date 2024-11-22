@@ -13,7 +13,7 @@
         <ion-col class="col-titulo-pagina">
           <!-- <img style="width: 150vh;" src="assets/icons/LosCanales2.svg"> -->
 
-          <div class="ion-text-wrap"><p id="titulo">Añadir miembros</p></div>
+          <div class="ion-text-wrap"><p id="titulo">{{"Añadir miembros" | translate}}</p></div>
         </ion-col>
 
         <!--Decorado 2-->
@@ -38,12 +38,12 @@
     </div>
 
     <div class="btn-wrap">
-      <ion-button (click)="addMember()" size="block">Añadir</ion-button>
-      <ion-button class="cancel" (click)="Cancelar()" size="block">Cancelar</ion-button>
+      <ion-button (click)="addMember()" size="block">{{"Añadir" | translate}}</ion-button>
+      <ion-button class="cancel" (click)="Cancelar()" size="block">{{"Cancelar" | translate}}</ion-button>
     </div>
   </div>
 
   <div class="nofriends" *ngIf="NoFriends">
-    <p>No tienes amigos que se puedan añadir a este grupo</p>
+    <p>{{"No tienes amigos que se puedan añadir a este grupo" | translate}}</p>
   </div>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  Events,
+  // Events,
   MenuController,
   ModalController,
   NavController,
@@ -16,9 +16,10 @@ import { ModalReportarPublicacionPage } from "../modal-reportar-publicacion/moda
 import { ModalReportarMotivoPage } from "../modal-reportar-motivo/modal-reportar-motivo.page";
 import { ModalInvitacionGrupoPage } from "../modal-invitacion-grupo/modal-invitacion-grupo.page";
 import { ModalSolicitarGrupoPage } from "../modal-solicitar-grupo/modal-solicitar-grupo.page";
-import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { GoogleAuth, GoogleAuthPlugin } from "@codetrix-studio/capacitor-google-auth";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import * as moment from "moment";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-register",
@@ -29,7 +30,9 @@ export class RegisterPage implements OnInit {
   form: FormGroup;
   isChecked: boolean = false;
   isCorrectAge: boolean = false;
+  datepickerDate: any;
 
+  currentLang: string = "en";
   constructor(
     private menuCtrl: MenuController,
     private formBuilder: FormBuilder,
@@ -37,14 +40,18 @@ export class RegisterPage implements OnInit {
     private utilitiesService: UtilitiesService,
     private navCtrl: NavController,
     private modalCtrl: ModalController,
-    private events: Events,
-    private googlePlus: GooglePlus,
-    private auth: AuthenticationService
-  ) {}
+    // private events: Events, // TODO
+    
+    private auth: AuthenticationService,
+    private translateService: TranslateService
+  ) {
+    
+  }
 
-  public ngOnInit(): void {
+  async ngOnInit() {
+    this.currentLang = this.translateService.currentLang;
+    GoogleAuth.initialize();
     this.menuCtrl.enable(false);
-
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
       email: ["", Validators.required],
@@ -65,14 +72,12 @@ export class RegisterPage implements OnInit {
 
       console.log(this.form.value);
 
-      await this.utilitiesService.showLoading("Registrando usuario...");
+      await this.utilitiesService.showLoading(this.translateService.instant("Registrando usuario..."));
 
       this.apiService.register(this.form.value).subscribe(
         (user: User) => {
           this.utilitiesService.dismissLoading();
-
-          this.utilitiesService.showToast("Registro correcto");
-
+          this.utilitiesService.showToast(this.translateService.instant("Registro correcto"));
           this.navCtrl.navigateRoot("/login");
         },
         (error) => {
@@ -82,13 +87,23 @@ export class RegisterPage implements OnInit {
       );
     }
   }
+
+  onDiaChange(event: any){
+    const selectedDate = new Date(event.detail.value);
+    this.form.patchValue({
+      mes: selectedDate,
+      anyo: selectedDate,
+      dia: selectedDate
+    });
+  }
+
   SetValues() {
     let fechaFromat = "";
 
     let fechas = ["anyo", "mes", "dia"];
 
     fechas.forEach((element) => {
-      let value = new Date(this.form.value[element]);
+      let value = this.form.get("dia").value;
 
       switch (element) {
         case "dia":
@@ -110,7 +125,6 @@ export class RegisterPage implements OnInit {
           break;
       }
     });
-
     let HowLong = moment().diff(fechaFromat, "years", false);
 
     HowLong > 12 ? (this.isCorrectAge = true) : (this.isCorrectAge = false);
@@ -130,14 +144,14 @@ export class RegisterPage implements OnInit {
     } else {
       if (this.form.valid && !this.isCorrectAge) {
         this.utilitiesService.showAlert(
-          "¡Vaya!",
-          "Debes ser mayor de 12 años para usar esta app"
+          this.translateService.instant("¡Vaya!"),
+          this.translateService.instant("Debes ser mayor de 12 años para usar esta app")
         );
         return false;
       } else {
         this.utilitiesService.showAlert(
-          "¡Vaya!",
-          "Por favor, rellena todos los campos"
+          this.translateService.instant("¡Vaya!"),
+          this.translateService.instant("Por favor, rellena todos los campos")
         );
         return false;
       }
@@ -171,23 +185,18 @@ export class RegisterPage implements OnInit {
   public async loginGoogle() {
     // if (this.checkFormData()) {
     try {
-      const gplusUser = await this.googlePlus.login({
-        webClientId:
-          "457684864864-iaffen1ng8d9o5jq6vsupgekj2omb5s4.apps.googleusercontent.com",
-        offline: true,
-        scopes: "profile email",
-      });
+      const gplusUser = await GoogleAuth.signIn();
 
       console.log(gplusUser);
-      let user: User = {
-        name: gplusUser.displayName,
+      let user:User = {
+        name: gplusUser.name,
         email: gplusUser.email,
         avatar: gplusUser.imageUrl,
         givenName: gplusUser.givenName,
         familyName: gplusUser.familyName,
       };
 
-      await this.utilitiesService.showLoading("Entrando");
+      await this.utilitiesService.showLoading(this.translateService.instant("Entrando"));
       this.apiService.loginGoogle(user).subscribe(
         (user: User) => {
           this.utilitiesService.dismissLoading();
@@ -196,7 +205,7 @@ export class RegisterPage implements OnInit {
           this.apiService.setTokenToHeaders(user.api_token);
 
           //Emitimos el evento de login
-          this.events.publish("user:login");
+          // this.events.publish("user:login"); // TODO: User not subscribing this event
 
           //Vamos a inicio
           this.auth.login(user.api_token);
@@ -207,12 +216,12 @@ export class RegisterPage implements OnInit {
 
           console.log(error);
           console.log("*****Catch native Google*****");
-          this.utilitiesService.showToast("No se ha podido entrar con Google");
+          this.utilitiesService.showToast(this.translateService.instant("No se ha podido entrar con Google"));
         }
       );
     } catch (err) {
       console.log("Catch native Google", err);
-      this.utilitiesService.showToast("No se ha podido entrar con Google");
+      this.utilitiesService.showToast(this.translateService.instant("No se ha podido entrar con Google"));
     }
     // }
   }
@@ -244,4 +253,9 @@ export class RegisterPage implements OnInit {
    * ===================================================================================
    */
   public registroFacebook() {}
+
+  setLanguage(lang: string){
+    this.currentLang = lang;
+    this.translateService.setDefaultLang(lang);
+  }
 }

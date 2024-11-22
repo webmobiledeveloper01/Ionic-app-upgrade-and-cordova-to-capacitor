@@ -60,39 +60,23 @@
           >
         </ion-select>
       </div>
-      <div class="filter-display-fecha-wrap">
+      <!-- <div class="filter-display-fecha-wrap">
         <ion-row class="row-title">
           <p class="title">Fecha Desde</p>
         </ion-row>
-        <ion-row class="fecha-row">
+       <ion-row class="fecha-row">
           <ion-col class="fecha-input-wrap">
-            <ion-datetime
-              placeholder="Día"
-              pickerFormat="DD"
-              displayFormat="DD"
-              (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
-            ></ion-datetime>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            
+            <ion-modal [keepContentsMounted]="true" #datetime>
+              <ng-template>
+                <ion-datetime id="datetime" presentation="date" (ionChange)="SetDateValue($event)"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+            
           </ion-col>
 
-          <ion-col class="fecha-input-wrap">
-            <ion-datetime
-              placeholder="Mes"
-              pickerFormat="MM"
-              displayFormat="MM"
-              (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
-            ></ion-datetime>
-          </ion-col>
-
-          <ion-col class="fecha-input-wrap">
-            <ion-datetime
-              placeholder="Año"
-              pickerFormat="YYYY"
-              displayFormat="YYYY"
-              (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
-            ></ion-datetime>
-          </ion-col>
-
-          <!-- <ion-col class="fecha-input-wrap">
+           <ion-col class="fecha-input-wrap">
             <ion-select
               #DecadeInput
               [(ngModel)]="DecadeInputValue"
@@ -105,10 +89,10 @@
                 >{{decada.nombre}}</ion-select-option
               >
             </ion-select>
-          </ion-col> -->
+          </ion-col> 
         </ion-row>
-      </div>
-      <div class="filter-display-fecha-wrap">
+      </div>-->
+      <!-- <div class="filter-display-fecha-wrap">
         <ion-row class="row-title">
           <p class="title">Fecha Hasta</p>
         </ion-row>
@@ -119,7 +103,7 @@
               pickerFormat="DD"
               displayFormat="DD"
               (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
-            ></ion-datetime>
+              ></ion-datetime>
           </ion-col>
 
           <ion-col class="fecha-input-wrap">
@@ -127,8 +111,8 @@
               placeholder="Mes"
               pickerFormat="MM"
               displayFormat="MM"
-              (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
-            ></ion-datetime>
+              TODO (ionChange)="SetDateValue($event.detail.value,'month',2,true)"
+              ></ion-datetime>
           </ion-col>
 
           <ion-col class="fecha-input-wrap">
@@ -136,9 +120,9 @@
               placeholder="Año"
               pickerFormat="YYYY"
               displayFormat="YYYY"
-              (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
-            ></ion-datetime>
-          </ion-col>
+              TODO (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
+              ></ion-datetime>
+          </ion-col> -->
 
           <!-- <ion-col class="fecha-input-wrap">
             <ion-select
@@ -153,9 +137,9 @@
                 >{{decada.nombre}}</ion-select-option
               >
             </ion-select>
-          </ion-col> -->
+          </ion-col> 
         </ion-row>
-      </div>
+      </div>-->
       <div class="center">
         <!-- <ion-button (click)="closeModal()" class="reserva" expand="block">
           <p>Enviar Dirección</p>

@@ -1,5 +1,5 @@
 <ion-content color="primary">
-  <ion-row class="row-titulo-pagina">
+  <ion-row class="row-titulo-pagina ion-align-items-center">
     <!--Decorado 1-->
     <ion-col class="col-perfil-decorado1">
       <img
@@ -9,18 +9,16 @@
       />
     </ion-col>
 
-    <ion-col class="col-titulo-pagina">
+    <ion-col class="col-titulo-pagina ion-text-center">
       <p
         id="titulo"
         style="
           font-size: 20px;
           font-family: 'Canela';
           color: black;
-          margin-top: 24%;
-          position: absolute;
         "
       >
-        Registro
+        {{"Register" | translate}}
       </p>
     </ion-col>
     <!-- Decorado 3 -->
@@ -59,13 +57,13 @@
           
         "
       >
-        Nombre
+        {{"Name" | translate}}
       </p>
       <ion-item class="item-native-custom" lines="none">
         <ion-input class="campos-registro"
           clearInput
           type="text"
-          placeholder="Nombre de usuario"
+          [placeholder]="'Nombre de usuario' | translate"
           formControlName="name"
           required
         ></ion-input>
@@ -78,7 +76,7 @@
           padding: 8px;
         "
       >
-        Email
+        {{"Email" | translate}}
       </p>
       <ion-item class="item-native-custom" lines="none">
         <ion-input
@@ -97,35 +95,44 @@
           padding: 8px;
         "
       >
-        Fecha de Nacimiento
+        {{"Birthday" | translate}}
       </p>
-      <ion-item class="item-native-custom custom-wrap" lines="none" >
-        <ion-row class="date-wrap" style="width: 100%">
+      <ion-item  lines="none" >
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true" #datetime>
+          <ng-template>
+            <ion-datetime id="datetime"  
+            presentation="date"
+            (ionChange)="onDiaChange($event)"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+     <!--    <ion-row class="date-wrap" style="width: 100%">
           <ion-col>
-            <ion-datetime
-              formControlName="dia"
-              pickerFormat="DD"
-              displayFormat="DD"
-              placeholder="Día"
-            ></ion-datetime
-          ></ion-col>
-          <ion-col>
-            <ion-datetime
-              formControlName="mes"
-              pickerFormat="MM"
-              displayFormat="MM"
-              placeholder="Mes"
+            
+
+            
+            </ion-col>
+              <ion-col>
+                <ion-datetime
+                formControlName="mes"
+                pickerFormat="MM"
+                displayFormat="MM"
+                placeholder="Mes"
+                presentation="month"
+                ></ion-datetime>
+              </ion-col>
+              <ion-col>
+                <ion-datetime
+                formControlName="anyo"
+                pickerFormat="YYYY"
+                displayFormat="YYYY"
+                placeholder="Año"
+                presentation="year"
             ></ion-datetime>
           </ion-col>
-          <ion-col>
-            <ion-datetime
-              formControlName="anyo"
-              pickerFormat="YYYY"
-              displayFormat="YYYY"
-              placeholder="Año"
-            ></ion-datetime>
-          </ion-col>
-        </ion-row>
+        </ion-row> -->
       </ion-item>
       <p
         style="
@@ -135,13 +142,13 @@
           padding: 8px;
         "
       >
-        Contraseña
+        {{"Password" | translate}}
       </p>
       <ion-item class="contraseña">
         <ion-input 
           clearInput
           type="password"
-          placeholder="Contraseña"
+          [placeholder]="'Password' | translate"
           formControlName="password"
           required
         ></ion-input>
@@ -154,13 +161,13 @@
           padding: 8px;
         "
       >
-        Repite la contraseña
+        {{"RepeatPassword" | translate}}
       </p>
       <ion-item class="contraseña" style="margin-bottom: 10%">
         <ion-input
           clearInput
           type="password"
-          placeholder="Confirma la contraseña"
+          [placeholder]="'ConfirmPassword'| translate"
           formControlName="password_confirmation"
           required
         >
@@ -168,13 +175,13 @@
       </ion-item>
       <ion-checkbox></ion-checkbox
       ><ion-label style="color: black; padding-left: 5px"
-        >He leido y acepto la
+        >{{"IHaveReadAndAccept" | translate}}
         <a routerLink="/politica-privacidad" style="color: black"
-          >Politica de Privacidad y de uso</a
+          >{{ "PrivacyUsePolicy" | translate}}</a
         >
-        y el
+        {{"AndThe" | translate}}
         <a style="color: black" routerLink="/aviso-legal"
-          >Aviso Legal</a
+          >{{"LegalNotice" | translate}}</a
         ></ion-label
       >
 
@@ -189,7 +196,7 @@
           expand="block"
           type="button"
           (click)="loginGoogle()"
-          >Registrate con Google</ion-button
+          >{{ "SignUpWithGoogle" | translate }}</ion-button
         >
         <!-- <ion-button style="--border-radius:10px; font-family: 'Canela';--color: black !important;--background:#72A3C7;" expand="block" type="button" (click)="registroFacebook()">Registrate con Facebook</ion-button> -->
         <ion-button
@@ -201,18 +208,30 @@
           "
           expand="block"
           type="submit"
-          >Registrarme</ion-button
+          >{{"RegisterBtnText" | translate}}</ion-button
         >
         <div style="margin-top: 20px; margin-bottom: 10vh; text-align: center">
           <ion-label style="color: black; padding-left: 5px"
-            >¿Ya tienes cuenta?</ion-label
+            >{{"DoYouAlreadyHaveAnAccount" | translate}}</ion-label
           ><ion-label
             style="color: #cb954d; font-weight: bold; margin-left: 3px"
             routerLink="/login"
-            >Inicia Sesión</ion-label
+            >{{"LogIn" | translate}}</ion-label
           >
         </div>
       </div>
     </form>
   </div>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="setLanguage('en')">
+        <ion-icon name="checkmark" color="success" *ngIf="currentLang == 'en'"></ion-icon>
+        {{"English" | translate}}
+      </ion-button>
+      <ion-button (click)="setLanguage('es')">
+        <ion-icon name="checkmark" color="success" *ngIf="currentLang == 'es'"></ion-icon>
+        {{"Spanish" | translate}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-content>

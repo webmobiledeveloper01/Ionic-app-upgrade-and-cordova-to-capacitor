@@ -1,4 +1,4 @@
-<app-loading text="Cargando..." *ngIf="isLoading"></app-loading>
+<app-loading [text]="'Cargando...' | translate" *ngIf="isLoading"></app-loading>
 
 <ion-content color="primary" *ngIf="!isLoading">
   <div class="container">
@@ -36,7 +36,7 @@
               id="invite"
               color="light"
               (click)="invitar()"
-              >+ Invitar</ion-button
+              >+ {{"Invitar" | translate}}</ion-button
             >
           </ion-buttons>
         </ion-col>
@@ -53,18 +53,18 @@
           <ion-buttons>
             <ion-button id="etc" color="light">···</ion-button>
             <ion-button id="invite" color="light" disabled="true"
-              >+ Invitar</ion-button
+              >+ {{"Invitar" | translate}}</ion-button
             >
           </ion-buttons>
         </ion-col>
       </ion-row>
 
       <div class="group-privacy-wrap" *ngIf="grupo.is_chanel != 1">
-        <ion-row *ngIf="grupo.private==1" class="row-titulo-grupo-informacion">
+        <ion-row *ngIf="grupo.private == 1" class="row-titulo-grupo-informacion">
           <ion-icon src="assets/icons/candado.svg"></ion-icon>
           <!-- <p id="texto-info">Private group-126 members</p> -->
           <p id="texto-info">
-            Canal privado - {{grupo.count_members}} miembro/s
+           {{"Canal privado" | translate}} - {{grupo.count_members}} {{"miembro/s" | translate}}
           </p>
         </ion-row>
 
@@ -72,14 +72,14 @@
           <div class="icon-wrap"><ion-icon name="unlock"></ion-icon></div>
           <!-- <p id="texto-info">Private group-126 members</p> -->
           <p id="texto-info">
-            Canal público - {{grupo.count_members}} miembro/s
+            {{"Canal público" | translate}} - {{grupo.count_members}} {{"miembro/s" | translate}}
           </p>
         </ion-row>
       </div>
 
       <ion-row class="row-post">
         <ion-item>
-          <p id="texto-post">Últimos Posts</p>
+          <p id="texto-post">{{"Últimos Posts" | translate}}</p>
         </ion-item>
       </ion-row>
     </div>
@@ -92,12 +92,12 @@
       </ion-row>
       <ion-row class="nv-row">
         <ion-row style="text-align: center">
-          <p>Este grupo es privado<br />¿Quieres unirte?</p></ion-row
+          <p>{{"Este grupo es privado" | translate}}<br />{{"¿Quieres unirte?" | translate}}</p></ion-row
         >
         <!-- <ion-row> <p></p></ion-row> -->
       </ion-row>
       <ion-row class="nv-btn">
-        <ion-button (click)="JoinGroup()">Solicitar unirme</ion-button></ion-row
+        <ion-button (click)="JoinGroup()">{{"Solicitar unirme" | translate}}</ion-button></ion-row
       >
     </ion-grid>
     <ion-grid class="nv-grid" *ngIf="TriedToJoin">
@@ -106,7 +106,7 @@
       </ion-row>
       <ion-row class="nv-row">
         <ion-row style="text-align: center">
-          <p>El creado del grupo debe confirmar tu solicitud</p></ion-row
+          <p>{{"El creado del grupo debe confirmar tu solicitud" | translate}}</p></ion-row
         >
         <!-- <ion-row> <p></p></ion-row> -->
       </ion-row>
@@ -131,7 +131,7 @@
         ></app-group-post>
 
         <div *ngIf="p.comment" class="comment-wrap">
-          <p *ngIf="p.publication" class="coment-text">Comentario</p>
+          <p *ngIf="p.publication" class="coment-text">{{"Comentario" | translate}}</p>
           <ion-grid class="rows-wrap">
             <ion-row>
               <ion-col size="3" class="avatar-col"
@@ -150,7 +150,7 @@
     </ion-list>
 
 <p class="void-text" *ngIf="Post.length == 0">
-  Parece que aun no hay nada que ver por aqui...
+  {{"Parece que aun no hay nada que ver por aqui..." | translate}}
 </p>
 
   </div>

@@ -1,4 +1,4 @@
-<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+<app-loading *ngIf="isLoading" [text]="'Cargando...' | translate"></app-loading>
 
 <ion-header *ngIf="!isLoading" no-border>
   <app-app-header
@@ -19,9 +19,9 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
-      pullingText="Suelte para refrescar..."
+      [pullingText]="'Suelte para refrescar...' | translate"
       refreshingSkspinner="circles"
-      refreshingText="Cargando..."
+      [refreshingText]="'Cargando...' | translate"
     >
     </ion-refresher-content>
   </ion-refresher>
@@ -68,15 +68,15 @@
             style="color: black; width: 100%"
             (click)="openModal()"
           >
-            Mas acciones
+            {{"Mas acciones" | translate}}
           </p>
           <div class="button-like-banner">
-            <p class="sponsors">Sponsor</p>
+            <p class="sponsors">{{"Sponsor" | translate}}</p>
             <div
               class="button-gracias"
               (click)="IsVisited(banners[(i/2)-1].id)"
             >
-              ¡Gracias!
+              {{"¡Gracias!" | translate}}
             </div>
           </div>
         </ion-row>

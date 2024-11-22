@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CrearPinPage } from './crear-pin.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 const routes: Routes = [
   {
@@ -20,8 +22,11 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule,
+
   ],
-  declarations: [CrearPinPage]
+  declarations: [CrearPinPage],
+  providers: [NativeGeocoder]
 })
 export class CrearPinPageModule {}

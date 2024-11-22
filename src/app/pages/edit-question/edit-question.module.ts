@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { EditQuestionPage } from './edit-question.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes), TranslateModule
   ],
   declarations: [EditQuestionPage]
 })

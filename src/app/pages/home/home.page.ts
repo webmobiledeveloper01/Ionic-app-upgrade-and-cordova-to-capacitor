@@ -6,17 +6,17 @@ import { ModalReportarPage } from "../modal-reportar/modal-reportar.page";
 import { ModalReportarPublicacionPage } from "../modal-reportar-publicacion/modal-reportar-publicacion.page";
 import { User } from "src/app/models/User";
 import { ModalBannersPage } from "../modal-banners/modal-banners.page";
-import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Share } from "@capacitor/share";
 import { Banner } from "src/app/models/Banner";
 import { ChangeDetectorRef } from "@angular/core";
 import { ModalInvitacionGrupoPage } from "../modal-invitacion-grupo/modal-invitacion-grupo.page";
 import { ModalSharePage } from "../modal-share/modal-share.page";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { DomSanitizer } from "@angular/platform-browser";
-import {
-  InAppBrowser,
-  InAppBrowserOptions,
-} from "@ionic-native/in-app-browser/ngx";
+
+import { Browser} from '@capacitor/browser';
+import { TranslateService } from "@ngx-translate/core";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-home",
@@ -43,12 +43,12 @@ export class HomePage implements OnInit {
     private utilities: UtilitiesService,
     private modalCtrl: ModalController,
     private navct: NavController,
-    private socialSharing: SocialSharing,
     private cd: ChangeDetectorRef,
     private nav: NavController,
     private auth: AuthenticationService,
     public sanitizer: DomSanitizer,
-    private Browser: InAppBrowser
+    private translateService: TranslateService
+    // HotFix: private Browser: InAppBrowser Capacitor Browser ** DONE ** 
   ) {}
 
   public async ngOnInit() {
@@ -144,8 +144,8 @@ export class HomePage implements OnInit {
 
   ProblemWithShare(res: any) {
     this.utilities.showAlert(
-      "Hubo un problema al intentar compartir",
-      "Intente de nuevo mas tarde"
+      this.translateService.instant("Hubo un problema al intentar compartir"),
+      this.translateService.instant("Intente de nuevo mas tarde")
     );
     console.error(res);
   }
@@ -154,7 +154,7 @@ export class HomePage implements OnInit {
     console.log("INIT SHARE");
     console.log(res.data.chanel_id);
 
-    this.apiService.groupChanges.next();
+    this.apiService.groupChanges.next("");
     await this.getGrupo(res.data.chanel_id).then((chanel) => {
       this.navct.navigateForward("grupo", {
         state: {
@@ -231,19 +231,19 @@ export class HomePage implements OnInit {
 
 
     // let files = imagen;
-    let files = "https://timemapp.davidtovar.dev/storage/Y7rNM3yGx5SCqoYJPzKxvRp8G5rBnySNaf7nPSX1.png";
+    let files = environment.domainUrl + "storage/Y7rNM3yGx5SCqoYJPzKxvRp8G5rBnySNaf7nPSX1.png";
 
     let message = "¡Mira mi publicacion de TimeMapp!";
 
     var options = {
       message: message, // not supported on some apps (Facebook, Instagram)
-      subject: "Sujeto", // fi. for email
-      chooserTitle: "Escoge la app para compartir", // Android only, you can override the default share sheet title
+      subject: this.translateService.instant("Sujeto"), // fi. for email
+      chooserTitle: this.translateService.instant("Escoge la app para compartir"), // Android only, you can override the default share sheet title
       url: url,
       files: [files],
     };
 
-    this.socialSharing.shareWithOptions(options).then(
+    Share.share(options).then(
       (result) => {
         console.log("plugin result", result);
       },
@@ -265,7 +265,7 @@ export class HomePage implements OnInit {
     this.apiService
       .getEntity("megustas", publicacion.id)
       .subscribe((message) => {
-        this.utilities.showToast("Le has dado Me gusta a la Publicación");
+        this.utilities.showToast(this.translateService.instant("Le has dado Me gusta a la Publicación"));
         if (publicacion.isDisliked) {
           publicacion.isDisliked = false;
           if (publicacion.DislikesCount > 0) {
@@ -290,8 +290,8 @@ export class HomePage implements OnInit {
       .toPromise();
     console.log(r);
     this.utilities.showAlert(
-      "¡Gracias por tu valoracion!",
-      "Tu gesto ayuda a los creadores"
+      this.translateService.instant("¡Gracias por tu valoracion!"),
+      this.translateService.instant("Tu gesto ayuda a los creadores")
     );
   }
 
@@ -299,7 +299,7 @@ export class HomePage implements OnInit {
     this.apiService
       .getEntity("megustas", publicacion.id)
       .subscribe((message) => {
-        this.utilities.showToast("Le has quitado like a la Publicación");
+        this.utilities.showToast(this.translateService.instant("Le has quitado like a la Publicación"));
         publicacion.isliked = false;
         publicacion.megustas = parseInt(publicacion.megustas) - 1;
       });
@@ -418,26 +418,26 @@ export class HomePage implements OnInit {
 
   OpenWeb($event) {
     console.log($event);
+    // HotFix:  Capacitor Browser ** DONE **
+    // let options: InAppBrowserOptions = {
+    //   location: "no", //Or 'no'
+    //   hidden: "yes", //Or  'yes' //clearcache : 'yes',
+    //   //clearsessioncache : 'yes',
+    //   zoom: "yes", //Android only ,shows browser zoom controls
+    //   hardwareback: "yes",
+    //   mediaPlaybackRequiresUserAction: "no",
+    //   shouldPauseOnSuspend: "no", //Android only
+    //   closebuttoncaption: "Cerrar", //iOS only
+    //   disallowoverscroll: "no", //iOS only
+    //   toolbar: "yes", //iOS only
+    //   enableViewportScale: "no", //iOS only
+    //   allowInlineMediaPlayback: "no", //iOS only
+    //   fullscreen: "yes", //Windows only
+    //   hideurlbar: "yes",
+    //   hidenavigationbuttons: "yes",
+    // };
 
-    let options: InAppBrowserOptions = {
-      location: "no", //Or 'no'
-      hidden: "yes", //Or  'yes' //clearcache : 'yes',
-      //clearsessioncache : 'yes',
-      zoom: "yes", //Android only ,shows browser zoom controls
-      hardwareback: "yes",
-      mediaPlaybackRequiresUserAction: "no",
-      shouldPauseOnSuspend: "no", //Android only
-      closebuttoncaption: "Cerrar", //iOS only
-      disallowoverscroll: "no", //iOS only
-      toolbar: "yes", //iOS only
-      enableViewportScale: "no", //iOS only
-      allowInlineMediaPlayback: "no", //iOS only
-      fullscreen: "yes", //Windows only
-      hideurlbar: "yes",
-      hidenavigationbuttons: "yes",
-    };
-
-    this.Browser.create($event, "_system", options);
+    Browser.open({ url: $event });
   }
 
   /**

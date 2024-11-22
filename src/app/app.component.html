@@ -1,6 +1,6 @@
 <ion-app>
-  <ion-split-pane *ngIf="!isLoading">
-    <ion-menu>
+  <ion-split-pane *ngIf="!isLoading" contentId="maincontent">
+    <ion-menu contentId="maincontent">
       <ion-header>
         <ion-toolbar color="primary" style="text-align: center">
           <img style="width: 110px" src="assets/imgs/logo_name.svg" />
@@ -14,7 +14,7 @@
               <ion-icon *ngIf="!p.icon" slot="start" [src]="p.src"></ion-icon>
 
               <ion-label>
-                {{ p.title }}
+                {{ p.title | translate}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -24,10 +24,16 @@
        
 
               <ion-label>
-              Cerrar sesión
+              {{"Cerrar sesión" | translate}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-item>
+            <ion-buttons>
+              <ion-button (click)="setLanguage('en')">{{ "English" | translate }}</ion-button>
+              <ion-button (click)="setLanguage('es')">{{ "Spanish" | translate }}</ion-button>
+            </ion-buttons>
+          </ion-item>
         </ion-list>
         <div class="divMap">
           <!--Mapa-->
@@ -47,16 +53,16 @@
         </div>
         
         <div class="version">
-					<p>Contacto:</p>
-					<p>info@timeapp.com</p>
+					<p>{{"Contacto" | translate}}:</p>
+					<p>info&#64;timeapp.com</p>
 					<p style="margin-bottom: 50px;">+00 000 000 000</p>
 
-          <p>Timemapp @ 2023</p>
-          <p>Version:</p>
+          <p>Timemapp &#64; 2023</p>
+          <p>{{"Versión" | translate}}:</p>
           <p>0.0.17</p>
         </div>
       </ion-content>
     </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet main id="maincontent"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

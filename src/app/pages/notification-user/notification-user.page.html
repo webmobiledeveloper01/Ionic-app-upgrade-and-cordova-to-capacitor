@@ -18,16 +18,16 @@
         <ion-col size="2" class="not-col">
           <ion-icon (click)="toggleConfig($event)" name="settings"></ion-icon
         ></ion-col>
-        <ion-col> <p style="font-weight: bold;">Configuración de notificaciones</p></ion-col>
+        <ion-col> <p style="font-weight: bold;">{{"Configuración de notificaciones" | translate}}</p></ion-col>
       </ion-row>
       <ion-row>
         <ion-grid class="inner-wrap">
           <ion-row class="wrap-title">
-            <p>Bloqueo de notificaciones</p></ion-row
+            <p>{{"Bloqueo de notificaciones" | translate}}</p></ion-row
           >
           <ion-row
             ><ion-col class="text-col"
-              >Notificacion al recibir un mensaje</ion-col
+              >{{"Notificacion al recibir un mensaje" | translate}}</ion-col
             >
             <ion-col size="3"
               ><ion-toggle
@@ -37,7 +37,7 @@
           ></ion-row>
           <ion-row
             ><ion-col class="text-col"
-              >Notificacion al recibir un comentario</ion-col
+              >{{"Notificacion al recibir un comentario"| translate}}</ion-col
             >
             <ion-col size="3"
               ><ion-toggle
@@ -46,7 +46,7 @@
               ></ion-toggle></ion-col
           ></ion-row>
           <ion-row
-            ><ion-col class="text-col">Notificacion al recibir like</ion-col>
+            ><ion-col class="text-col">{{"Notificacion al recibir like" | translate}}</ion-col>
             <ion-col size="3"
               ><ion-toggle
                 [checked]="block_notification_like"
@@ -55,7 +55,7 @@
           ></ion-row>
           <ion-row
             ><ion-col class="text-col"
-              >Notificacion para nuevo seguidor</ion-col
+              >{{"Notificacion para nuevo seguidor" | translate}}</ion-col
             >
             <ion-col size="3"
               ><ion-toggle
@@ -65,7 +65,7 @@
           ></ion-row>
           <ion-row
             ><ion-col class="text-col"
-              >Notificacion al ser añadido a un grupo</ion-col
+              >{{"Notificacion al ser añadido a un grupo" | translate}}</ion-col
             >
             <ion-col size="3"
               ><ion-toggle
@@ -78,7 +78,7 @@
 							font-family: 'Alliance';
 							font-size: 15px;
 							">
-              Guardar mis preferencias</ion-button
+              {{"Guardar mis preferencias" | translate}}</ion-button
             ></ion-row
           >
         </ion-grid>
@@ -111,6 +111,6 @@
   </ion-list>
 
   <div class="void" *ngIf="isVoid&&!IsLoading">
-    <h1>No hay notificaciones nuevas</h1>
+    <h1>{{"No hay notificaciones nuevas" | translate}}</h1>
   </div>
 </ion-content>

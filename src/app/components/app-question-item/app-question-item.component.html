@@ -3,7 +3,7 @@
     <ion-col><img src="{{ object.archivo }}" alt="" srcset="" /></ion-col>
     <ion-col class="text-data">
       <p class="title-expired" *ngIf="isExpired">
-        Esta pregunta ya no está disponible
+        {{"Esta pregunta ya no está disponible" | translate}}
       </p>
       <div class="title">{{ object.question }}</div>
       <div class="subtitle">{{ object.date | date : "dd/MM/yyyy" }}</div>

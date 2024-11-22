@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { BuscadorPublicacionesPage } from './buscador-publicaciones.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -21,8 +23,9 @@ const routes: Routes = [
     ComponentsModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes), TranslateModule
   ],
-  declarations: [BuscadorPublicacionesPage]
+  declarations: [BuscadorPublicacionesPage],
+  providers: [NativeGeocoder]
 })
 export class BuscadorPublicacionesPageModule {}

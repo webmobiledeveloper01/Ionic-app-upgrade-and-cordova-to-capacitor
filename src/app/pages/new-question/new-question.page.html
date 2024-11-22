@@ -45,7 +45,7 @@
           text-align: center;
         "
       >
-        <span style="font-style: italic;">geoask</span><br>Pregunta en el mapa
+        <span style="font-style: italic;">{{"Geoask" | translate}}</span><br>{{"Pregunta en el mapa" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -68,7 +68,7 @@
       <ion-grid class="wrap-grid">
         <ion-row class="row-title">
           <ion-row class="inner-row-label">
-            <ion-label> Haz tu pregunta </ion-label>
+            <ion-label> {{"Haz tu pregunta" | translate}} </ion-label>
           </ion-row>
           <ion-row class="inner-row-input">
             <!--  -->
@@ -99,7 +99,7 @@ style="color: #f3b562"
         </ion-row>
         <ion-row class="row-description" *ngIf="!base64img">
           <ion-row class="inner-row-label">
-            <ion-label>Sube un archivo </ion-label>
+            <ion-label>{{"Sube un archivo" | translate}} </ion-label>
           </ion-row>
           <ion-row class="inner-row-input">
             <ion-button
@@ -112,7 +112,7 @@ style="color: #f3b562"
               color="danger"
               (click)="adjuntarImagen()"
               ><div class="inner-custom">
-                Adjunta archivo en .jpg, .png o .mp4
+                {{"Adjunta archivo en .jpg, .png o .mp4" | translate}}
                 <ion-icon
                   name="filing"
                   src="../../../assets/icon/Upload_Icon_blanco.svg"
@@ -121,7 +121,7 @@ style="color: #f3b562"
           </ion-row>
         </ion-row>
         <ion-row class="row-category">
-          <ion-row> <ion-label> Tema </ion-label></ion-row>
+          <ion-row> <ion-label> {{"Tema" | translate}} </ion-label></ion-row>
           <ion-row id="category-wrap" class="chip-row">
             <ion-col class="chip-wrap" *ngFor="let c of categories">
               <!-- <ion-chip (click)="SetCategoryValue($event)" id="{{c.id}}"
@@ -135,7 +135,7 @@ style="color: #f3b562"
         </ion-row>
         <ion-row class="row-type">
           <ion-row>
-            <ion-label> ¿Te acuerdas de cuándo ocurrió? </ion-label></ion-row
+            <ion-label> {{"¿Te acuerdas de cuándo ocurrió?" | translate}} </ion-label></ion-row
           >
           <ion-row id="privacy-wrap" style="flex-flow: row">
             <ion-col>
@@ -167,7 +167,7 @@ style="color: #f3b562"
 
           <ion-row class="row-title">
             <ion-row class="inner-row-label">
-              <ion-label> Establece la duración de tu pregunta </ion-label>
+              <ion-label> {{"Establece la duración de tu pregunta" | translate}} </ion-label>
             </ion-row>
             <ion-row class="inner-row-input">
               <ion-datetime
@@ -184,7 +184,7 @@ style="color: #f3b562"
 
           <ion-row id="map-row-vis" style="display: none" class="map-row">
             <ion-row>
-              <ion-label>Ubicación</ion-label>
+              <ion-label>{{"Ubicación" | translate}}</ion-label>
             </ion-row>
             <ion-row>
               <ion-input
@@ -234,7 +234,7 @@ style="color: #f3b562"
 
           <ion-row class="visibility-row" style="flex-flow: column">
             <ion-row
-              ><ion-label> ¿Quién podrá ver esta pregunta? </ion-label></ion-row
+              ><ion-label> {{"¿Quién podrá ver esta pregunta?" | translate}} </ion-label></ion-row
             >
             <ion-row
               class="visibility-row-inner"
@@ -246,7 +246,7 @@ style="color: #f3b562"
                   class="uno"
                   (click)="SetVisibilityValue($event)"
                   id="0"
-                  >Grupos</ion-chip
+                  >{{"Grupos" | translate}}</ion-chip
                 ></ion-col
               >
               <ion-col>
@@ -254,7 +254,7 @@ style="color: #f3b562"
                   class="uno"
                   (click)="SetVisibilityValue($event)"
                   id="1"
-                  >Usuarios</ion-chip
+                  >{{"Usuarios" | translate}}</ion-chip
                 ></ion-col
               >
             </ion-row>
@@ -271,7 +271,7 @@ style="color: #f3b562"
               class="btn-create-tres"
               (click)="CreateQuestion()"
               [disabled]="!form.valid"
-              >Subir pregunta</ion-button
+              >{{"Subir pregunta" | translate}}</ion-button
             >
             <!-- <ion-button
             class="btn-create"

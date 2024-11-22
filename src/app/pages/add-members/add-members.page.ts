@@ -1,6 +1,7 @@
 import { TypeofExpr } from "@angular/compiler";
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 
@@ -13,11 +14,12 @@ export class AddMembersPage implements OnInit {
   seguidores: any[];
   NoFriends: boolean;
   Users: number[] = [];
-
+  isLoading: boolean = false; // HotFix:  Not using this loading property in Component only used in template without defining that.
   constructor(
     private api: ApiService,
     private utils: UtilitiesService,
-    private nav: NavController
+    private nav: NavController,
+    private translateService: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -43,7 +45,7 @@ export class AddMembersPage implements OnInit {
         throw new Error(res);
       }
     } catch (error) {
-      this.utils.showAlert("¡Vaya!", "Ha surgido un error en el servidor");
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"), this.translateService.instant("Ha surgido un error en el servidor"));
       console.log(error);
     }
   }

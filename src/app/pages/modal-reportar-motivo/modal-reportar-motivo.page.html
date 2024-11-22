@@ -6,29 +6,29 @@
           <ion-icon name="close" slot="end"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <p class="description">Explica el motivo por el cual quieres reportar esta publicación</p>      
+      <p class="description">{{"Explica el motivo por el cual quieres reportar esta publicación" | translate}}</p>      
       <div class="center">
         <div style="margin-top: 5%;">
-          <ion-checkbox mode="ios" (ionChange)="spam($event)"></ion-checkbox><ion-label>Es spam</ion-label>
+          <ion-checkbox mode="ios" (ionChange)="spam($event)"></ion-checkbox><ion-label>{{"Es spam" |translate}}</ion-label>
         </div>
        <div style="margin-top: 5%;">
-        <ion-checkbox mode="ios" (ionChange)="nomegusta($event)"></ion-checkbox><ion-label>No me gusta</ion-label>
+        <ion-checkbox mode="ios" (ionChange)="nomegusta($event)"></ion-checkbox><ion-label>{{"No me gusta" | translate}}</ion-label>
        </div>
         <div style="margin-top: 5%;">
-          <ion-checkbox mode="ios" (ionChange)="suicidio($event)"></ion-checkbox><ion-label>Suicidio, autolesión o trastornos alimenticios</ion-label>
+          <ion-checkbox mode="ios" (ionChange)="suicidio($event)"></ion-checkbox><ion-label>{{"Suicidio, autolesión o trastornos alimenticios" | translate}}</ion-label>
         </div>
         <div style="margin-top: 5%;">
-          <ion-checkbox mode="ios" (ionChange)="desnudo($event)"></ion-checkbox><ion-label>Desnudos o actividad sexual</ion-label>
+          <ion-checkbox mode="ios" (ionChange)="desnudo($event)"></ion-checkbox><ion-label>{{"Desnudos o actividad sexual" | translate}}</ion-label>
         </div>
        <div style="margin-top: 5%;">
-        <ion-checkbox mode="ios" (ionChange)="lenguaje($event)"></ion-checkbox><ion-label>Lenguaje o símbolos que incitan al odio</ion-label>
+        <ion-checkbox mode="ios" (ionChange)="lenguaje($event)"></ion-checkbox><ion-label>{{"Lenguaje o símbolos que incitan al odio" | translate}}</ion-label>
        </div>
         <div style="margin-top: 5%;">
-          <ion-checkbox mode="ios" (ionChange)="contenido($event)"></ion-checkbox><ion-label>Contenido incorrecto o inapropiado</ion-label>
+          <ion-checkbox mode="ios" (ionChange)="contenido($event)"></ion-checkbox><ion-label>{{"Contenido incorrecto o inapropiado" | translate}}</ion-label>
         </div>
       </div>
       <ion-button (click)="reportar()" class="reserva" expand="block">
-        <p>Reportar</p>
+        <p>{{"Reportar" | translate}}</p>
       </ion-button>
     </div>
   </div>

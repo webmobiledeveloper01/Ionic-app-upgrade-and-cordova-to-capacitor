@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProfilePage } from './profile.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage],
+  providers: [NativeGeocoder]
 })
 export class ProfilePageModule {}

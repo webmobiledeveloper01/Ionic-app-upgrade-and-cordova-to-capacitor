@@ -36,7 +36,7 @@
           text-align: center;
         "
       >
-        <span style="font-style: italic;">mis</span><br>Recetas
+        <span style="font-style: italic;">{{"mis" | translate}}</span><br>{{"Recetas" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -56,7 +56,7 @@
 
   <ion-grid class="body-wrap">
     <div class="no-recipes-wrap" *ngIf="sinRecetas">
-      <p class="void-text">Aún no has subido ninguna receta</p>
+      <p class="void-text">{{"Aún no has subido ninguna receta" | translate}}</p>
     </div>
 
     <div class="grid-wrap" *ngIf="!sinRecetas">

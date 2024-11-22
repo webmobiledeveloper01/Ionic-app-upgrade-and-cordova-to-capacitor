@@ -6,14 +6,14 @@ import {
   ViewChild,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 import {
   FileTransfer,
   FileTransferObject,
   FileUploadOptions,
-} from "@ionic-native/file-transfer/ngx";
-import { DomSanitizer } from "@angular/platform-browser";
-import { File } from "@ionic-native/file/ngx";
+} from "@awesome-cordova-plugins/file-transfer/ngx";
+// import { DomSanitizer } from "@angular/platform-browser";
+import { File } from "@awesome-cordova-plugins/file/ngx";
 import {
   GoogleMaps,
   GoogleMap,
@@ -32,26 +32,30 @@ import {
   HtmlInfoWindow,
   Circle,
 } from "@ionic-native/google-maps/ngx";
-
-import { Crop } from "@ionic-native/crop/ngx";
+// BK:NotInUse Not in use.
+// import { Crop } from "@ionic-native/crop/ngx";
 import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
-import { FileChooser } from "@ionic-native/file-chooser/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
+// import { FileChooser } from "@ionic-native/file-chooser/ngx";
+// import { Filesystem, Directory } from '@capacitor/filesystem';
+
 import {
   IonCheckbox,
   ModalController,
   NavController,
   Platform,
 } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 import { Tema } from "src/app/models/Temas";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { environment } from "src/environments/environment";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
+import { FilePicker, PickFilesOptions} from '@capawesome/capacitor-file-picker';
+
 declare var google;
 
 @Component({
@@ -93,24 +97,40 @@ export class SubirContenidoPage implements OnInit {
     { value: 2010, nombre: "Decada 2010" },
     { value: 2020, nombre: "Decada 2020" },
   ];
+  // BK:UsingCapacitorPlugin Convert cordova camera options to Capacitor.
+  // CameraImageOptions: CameraOptions = {
+  //   quality: 100,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  // };
 
+  // CameraVideoOptions: CameraOptions = {
+  //   quality: 100,
+  //   destinationType: this.camera.DestinationType.FILE_URI,
+  //   mediaType: this.camera.MediaType.VIDEO,
+  //   // encodingType: this.camera.EncodingType.JPEG,
+  //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //   targetWidth: 1920,
+  //   targetHeight: 1080,
+  //   allowEdit: true,
+  //   correctOrientation: true,
+  // };
+  // UsingCapacitorPlugin Verifiy options from Capacitor.
   CameraImageOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    mediaType: this.camera.MediaType.PICTURE,
-    encodingType: this.camera.EncodingType.JPEG,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    resultType: CameraResultType.DataUrl, // Use DataUrl for data URI
+    source: CameraSource.Photos, // Use Photos for PhotoLibrary
   };
-
+  
   CameraVideoOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    mediaType: this.camera.MediaType.VIDEO,
-    // encodingType: this.camera.EncodingType.JPEG,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    targetWidth: 1920,
-    targetHeight: 1080,
-    allowEdit: true,
+    resultType: CameraResultType.Uri, // Use Uri for file URI
+    source: CameraSource.Photos, // Use Photos for PhotoLibrary
+    width: 1920,
+    height: 1080,
+    allowEditing: true,
     correctOrientation: true,
   };
 
@@ -130,7 +150,7 @@ export class SubirContenidoPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private camera: Camera,
+    // ,
     private utilities: UtilitiesService,
     private apiService: ApiService,
     private nativeGeocoder: NativeGeocoder,
@@ -138,17 +158,18 @@ export class SubirContenidoPage implements OnInit {
     private ngzone: NgZone,
     private storage: Storage,
     private transfer: FileTransfer,
-    private fileChooser: FileChooser,
+    // UsingCapacitorPlugin Implement File System from capacitor
+    // private fileChooser: FileChooser,
     private platform: Platform,
     private modcontrol: ModalController,
-    private crop: Crop,
+    // private crop: Crop,
     private file: File
   ) {
     this.googleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
     this.platform.is("android")
-      ? this.CameraImageOptions.allowEdit == false
-      : this.CameraImageOptions.allowEdit;
+      ? this.CameraImageOptions.allowEditing == false
+      : this.CameraImageOptions.allowEditing;
   }
 
   async ngOnInit() {
@@ -324,22 +345,46 @@ export class SubirContenidoPage implements OnInit {
     console.log(this.autocompleteItems);
   }
 
-  public GetMp3() {
-    console.log("Entra donde debe");
+  // UsingCapacitorPlugin:FilePicker Updated to Capacitor
+  // public GetMp3() {
+  //   console.log("Entra donde debe");
 
-    let options = { mime: "audio/*" };
-    this.fileChooser
-      .open(options)
-      .then((uri) => {
-        // console.log(file);
-        console.log(uri);
-        this.base64img = uri;
-        this.form.patchValue({ archivo: this.base64img });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  //   let options = { mime: "audio/*" };
+  //   this.fileChooser
+  //     .open(options)
+  //     .then((uri) => {
+  //       // console.log(file);
+  //       console.log(uri);
+  //       this.base64img = uri;
+  //       this.form.patchValue({ archivo: this.base64img });
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }
+  
+  public async GetMp3() {
+  console.log("Entra donde debe");
+
+  try {
+    const options: PickFilesOptions = {
+      "types": ['audio/*'],
+      multiple: false,
+    };
+
+    const result = await FilePicker.pickFiles(options);
+
+    if (result.files.length > 0) {
+      console.log(result.files[0].path);
+      this.base64img = result.files[0].data;
+      this.form.patchValue({ archivo: this.base64img });
+    } else {
+      console.log('No file selected');
+    }
+  } catch (e) {
+    console.error(e);
   }
+}
 
   public selectSearchResult(descripcion): void {
     // console.log("select search result");
@@ -487,6 +532,9 @@ export class SubirContenidoPage implements OnInit {
       this.form.patchValue({ archivo: this.base64img });
       console.log("Is image, returnig true");
       return true;
+    }
+    else{ 
+      return false;
     }
 
     // this.SelectedFileType.isDocument;
@@ -808,18 +856,18 @@ export class SubirContenidoPage implements OnInit {
   public adjuntarImagen(): void {
     let options = this.CameraImageOptions;
     this.ngzone.run(() => {
-      this.camera
-        .getPicture(options)
+      // TODO
+      Camera
+        .getPhoto(options)
         .then(async (urlFoto) => {
-          this.base64img = "data:image/jpeg;base64," + urlFoto;
+          this.base64img = urlFoto.dataUrl;
           // this.base64img = base64;
           this.form.patchValue({ archivo: this.base64img });
 
-          //   await this.crop.crop(urlFoto, { quality: 100 }).then((path) => {
-          //     console.warn("Cropped Image Path=>: " + path);
-          //     this.showCroppedImage(path.split('?')[0]);
-          //   });
-          // }
+            // await this.crop.crop(urlFoto, { quality: 100 }).then((path) => {
+            //   console.warn("Cropped Image Path=>: " + path);
+            //   this.showCroppedImage(path.split('?')[0]);
+            // });
         })
 
         .catch((error) => {
@@ -859,9 +907,9 @@ export class SubirContenidoPage implements OnInit {
 
   getVideo() {
     let options = this.CameraVideoOptions;
-    this.camera.getPicture(options).then(async (file) => {
+    Camera.getPhoto(options).then(async (file) => {
       console.log(file);
-      this.base64img = file;
+      this.base64img = file.dataUrl;
       this.form.patchValue({ archivo: this.base64img });
     });
   }

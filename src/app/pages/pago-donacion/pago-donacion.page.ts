@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Stripe, StripeCardTokenParams } from '@ionic-native/stripe/ngx';
+import { Stripe, StripeCardTokenParams } from '@awesome-cordova-plugins/stripe/ngx';
 import { ApiService } from 'src/app/services/api.service';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { NavController } from '@ionic/angular';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 

@@ -1,35 +1,40 @@
 import { Component, NgZone, OnInit } from "@angular/core";
 import {
   Platform,
-  Events,
   NavController,
   ToastController,
   ModalController,
 } from "@ionic/angular";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
-import { StatusBar } from "@ionic-native/status-bar/ngx";
+// Capacitor
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style } from '@capacitor/status-bar';
+
+
 import { ApiService } from "./services/api.service";
 import { User } from "./models/User";
-import { Push, PushObject, PushOptions } from "@ionic-native/push/ngx";
+// import { Push, PushObject, PushOptions } from "@ionic-native/push/ngx";
 import { environment } from "../environments/environment";
-import { Stripe } from "@ionic-native/stripe/ngx";
+// import { Stripe } from "@awesome-cordova-plugins/stripe/ngx";
 import { AuthenticationService } from "./services/authentication.service";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 import { HttpErrorResponse } from "@angular/common/http";
 import { UtilitiesService } from "./services/utilities.service";
-import { Deeplinks } from "@ionic-native/deeplinks/ngx";
+// import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { HomePage } from "./pages/home/home.page";
 import { ProfilePage } from "./pages/profile/profile.page";
 import { DetallePublicacionPage } from "./pages/detalle-publicacion/detalle-publicacion.page";
 import { Router } from "@angular/router";
 import { UserService } from "./services/user.service";
-import { SplashPage } from "../app/pages/splash/splash.page";
+import { StorageService } from "./services/storage.service";
+import { TranslateService } from "@ngx-translate/core";
+// import { SplashPage } from "../app/pages/splash/splash.page";
 declare var cordova: any;
 
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
   styleUrls: ["app.component.scss"],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   user: User;
@@ -103,80 +108,89 @@ export class AppComponent implements OnInit {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+
     private apiService: ApiService,
-    private push: Push,
-    private events: Events,
-    private stripe: Stripe,
+   // TODO
+    // private push: Push,
+    // private events: Events,
+    // private stripe: Stripe,
+    // protected deeplinks: Deeplinks,
     private auth: AuthenticationService,
     private navCtrl: NavController,
-    private storage: Storage,
+    // private storage: Storage,
     private utilities: UtilitiesService,
-    protected deeplinks: Deeplinks,
     private toastController: ToastController,
     private zone: NgZone,
-    private router: Router,
     private userService: UserService,
-    private modalController: ModalController
-  ) {}
+    private storageService: StorageService,
+    private translateService: TranslateService
+  ) {
+
+    
+  }
 
   /**
    * Nos suscribimos a los cambios dle perfil
    */
-  public ngOnInit(): void {
-    this.auth.authenticationState.subscribe(async (token) => {
-      if (token != "logout" && token != "" && token != null) {
-        await this.SetNotifications()
-          .then()
-          .catch((err) => {
-            console.warn("***ERROR NOTITIFICACIONES***");
-            console.error(err);
-            console.warn("***ERROR NOTITIFICACIONES***");
-          });
-        this.prepararStripe();
-
-        this.apiService.setTokenToHeaders(token);
-        this.navCtrl.navigateRoot("tabs").then(async () => {
-          // console.log("User undefined");
-          await this.userService
-            .setUserFromDB()
-            .then(async () => {
-              await this.userService
-                .getUser()
-                .then((user) => {
-                  this.user = user;
-                  this.CheckIfUserIsBanner();
-                  this.isLoading = false;
-                  // this.navCtrl.navigateRoot("/home");
-                })
-                .catch((err) => this.handleError(err));
-            })
-            .catch((err) => this.handleError(err));
-
-          // console.log("USER IS=>");
-          // console.log(this.user);
-        });
-      } else if (token == "logout") {
-        this.userService.logout();
-        this.user = undefined;
-        this.prepararStripe();
-        this.apiService.removeTokenToHeaders();
-        this.navCtrl.navigateRoot("register").then(() => {
-          this.isLoading = false;
-        });
-      } else {
-        this.isLoading = false;
-
-        // console.log("primera vez");
-      }
-
-      // IMPORTANTE: para comprobar si la app está o no suspendida, debe ponerse el dominio en la propiedad "domainUrl" del archivo "src/environments/environment.ts"
-      this.checkIfAppIsSuspended();
-    });
+  async ngOnInit() {
+   
 
     if (this.platform.is("cordova")) {
       this.platform.ready().then(async () => {
+        const currenttoken = await this.storageService.init();
+
+        this.auth.authenticationState.next(currenttoken);
+    
+        this.translateService.setDefaultLang("es");
+        this.auth.authenticationState.subscribe(async (token) => {
+          if (token != "logout" && token != "" && token != null) {
+            await this.SetNotifications()
+              .then()
+              .catch((err) => {
+                console.warn("***ERROR NOTITIFICACIONES***");
+                console.error(err);
+                console.warn("***ERROR NOTITIFICACIONES***");
+              });
+            this.prepararStripe();
+    
+            this.apiService.setTokenToHeaders(token);
+            this.navCtrl.navigateRoot("tabs").then(async () => {
+              // console.log("User undefined");
+              await this.userService
+                .setUserFromDB()
+                .then(async () => {
+                  await this.userService
+                    .getUser()
+                    .then((user) => {
+                      this.user = user;
+                      this.CheckIfUserIsBanner();
+                      this.isLoading = false;
+                      // this.navCtrl.navigateRoot("/home");
+                    })
+                    .catch((err) => this.handleError(err));
+                })
+                .catch((err) => this.handleError(err));
+    
+              // console.log("USER IS=>");
+              // console.log(this.user);
+            });
+          } else if (token == "logout") {
+            this.userService.logout();
+            this.user = undefined;
+            this.prepararStripe();
+            this.apiService.removeTokenToHeaders();
+            this.navCtrl.navigateRoot("register").then(() => {
+              this.isLoading = false;
+            });
+          } else {
+            this.isLoading = false;
+    
+            // console.log("primera vez");
+          }
+    
+          // IMPORTANTE: para comprobar si la app está o no suspendida, debe ponerse el dominio en la propiedad "domainUrl" del archivo "src/environments/environment.ts"
+          this.checkIfAppIsSuspended();
+        });
         // this.splashScreen.show();
         // await this.storage.get("auth-token").then((res) => {
         //   console.log("es null?");
@@ -187,7 +201,7 @@ export class AppComponent implements OnInit {
         // });
 
         this.setUpDeepLinks();
-        this.statusBar.styleBlackOpaque();
+        // StatusBar.setStyle("");
       });
     }
 
@@ -255,43 +269,43 @@ export class AppComponent implements OnInit {
 
   setUpDeepLinks() {
     console.log("Entra en el set deeplinks");
+    // TODO
+    // this.deeplinks
+    //   .route({
+    //     "/detalle-publicacion": HomePage,
+    //   })
+    //   .subscribe(
+    //     async (match) => {
+    //       console.log("Successfully routed", match);
 
-    this.deeplinks
-      .route({
-        "/detalle-publicacion": HomePage,
-      })
-      .subscribe(
-        async (match) => {
-          console.log("Successfully routed", match);
+    //       await this.utilities.showLoading("Cargando...");
 
-          await this.utilities.showLoading("Cargando...");
+    //       setTimeout(() => {
+    //         if (match.$link.host == "timemapp.davidtovar.dev") {
+    //           console.log("DENTRO!!!!");
 
-          setTimeout(() => {
-            if (match.$link.host == "timemapp.davidtovar.dev") {
-              console.log("DENTRO!!!!");
+    //           let pathArray = String(match.$link.path).split("/");
 
-              let pathArray = String(match.$link.path).split("/");
+    //           console.log(pathArray);
 
-              console.log(pathArray);
+    //           let route = pathArray[1];
 
-              let route = pathArray[1];
+    //           let id = pathArray[2];
 
-              let id = pathArray[2];
+    //           //                   let id = pathArray[3];
 
-              //                   let id = pathArray[3];
-
-              this.navCtrl.navigateForward([route + "/" + id]).then(() => {
-                this.utilities.dismissLoading();
-              });
-            } else {
-              console.log("FUERA!!!!");
-            }
-          }, 2000);
-        },
-        (nomatch) => {
-          console.log("NO Successfully routed", nomatch); // console.warn('Unmatched Route', nomatch.$link);
-        }
-      );
+    //           this.navCtrl.navigateForward([route + "/" + id]).then(() => {
+    //             this.utilities.dismissLoading();
+    //           });
+    //         } else {
+    //           console.log("FUERA!!!!");
+    //         }
+    //       }, 2000);
+    //     },
+    //     (nomatch) => {
+    //       console.log("NO Successfully routed", nomatch); // console.warn('Unmatched Route', nomatch.$link);
+    //     }
+    //   );
 
     //// console.log("Remember to activate DeepLinks in app.components.ts");
 
@@ -339,85 +353,86 @@ export class AppComponent implements OnInit {
    * Configuración de las notificación push
    */
   public pushNotifications(): void {
-    const options: PushOptions = {
-      android: {
-        senderID: environment.senderID,
-        icon: "timeapp",
-      },
-      ios: {
-        alert: "true",
-        badge: true,
-        sound: "true",
-      },
-      windows: {},
-    };
+    // TODO
+    // const options: PushOptions = {
+    //   android: {
+    //     senderID: environment.senderID,
+    //     icon: "timeapp",
+    //   },
+    //   ios: {
+    //     alert: "true",
+    //     badge: true,
+    //     sound: "true",
+    //   },
+    //   windows: {},
+    // };
 
-    const pushObject: PushObject = this.push.init(options);
+    // const pushObject: PushObject = this.push.init(options);
 
-    pushObject.on("notification").subscribe((notification: any) => {
-      // this.apiService.InvitationNotificactionChanges.next();
-      // console.log("NOTIFICACION");
-      // console.log(notification);
+    // pushObject.on("notification").subscribe((notification: any) => {
+    //   // this.apiService.InvitationNotificactionChanges.next("");
+    //   // console.log("NOTIFICACION");
+    //   // console.log(notification);
 
-      //// console.log(notification);
+    //   //// console.log(notification);
 
-      // fix en ios para recibir correctamente los datos de la notificación
-      if (this.utilities.getPlatform() === "ios") {
-        notification.additionalData["apiData"] = JSON.parse(
-          notification.additionalData["gcm.notification.apiData"]
-        );
-      }
+    //   // fix en ios para recibir correctamente los datos de la notificación
+    //   if (this.utilities.getPlatform() === "ios") {
+    //     notification.additionalData["apiData"] = JSON.parse(
+    //       notification.additionalData["gcm.notification.apiData"]
+    //     );
+    //   }
 
-      if (notification.additionalData.apiData.url == "/notification-user") {
-        this.zone.run(() => {
-          //Cuando está dentro de la app muestra un toast
-          if (notification.additionalData.foreground) {
-            this.showToastMessage(notification);
-          } else {
-            this.navCtrl.navigateForward(
-              notification.additionalData.apiData.url
-            );
-          }
-        });
-      } else if (notification.additionalData.apiData.url == "/chats") {
-        this.zone.run(() => {
-          this.events.publish(
-            "add-mensaje",
-            notification.additionalData.apiData.mensaje
-          );
+    //   if (notification.additionalData.apiData.url == "/notification-user") {
+    //     this.zone.run(() => {
+    //       //Cuando está dentro de la app muestra un toast
+    //       if (notification.additionalData.foreground) {
+    //         this.showToastMessage(notification);
+    //       } else {
+    //         this.navCtrl.navigateForward(
+    //           notification.additionalData.apiData.url
+    //         );
+    //       }
+    //     });
+    //   } else if (notification.additionalData.apiData.url == "/chats") {
+    //     this.zone.run(() => {
+    //       this.events.publish(
+    //         "add-mensaje",
+    //         notification.additionalData.apiData.mensaje
+    //       );
 
-          //Cuando está dentro de la app muestra un toast
-          if (notification.additionalData.foreground) {
-            this.showToastMessage(notification);
-          } else {
-            this.navCtrl.navigateForward(
-              notification.additionalData.apiData.url
-            );
-          }
-        });
-      }
+    //       //Cuando está dentro de la app muestra un toast
+    //       if (notification.additionalData.foreground) {
+    //         this.showToastMessage(notification);
+    //       } else {
+    //         this.navCtrl.navigateForward(
+    //           notification.additionalData.apiData.url
+    //         );
+    //       }
+    //     });
+    //   }
 
-      // this.events.publish(
-      //   "add-mensaje",
-      //   notification.additionalData.apiData.mensaje
-      // );
-    });
+    //   // this.events.publish(
+    //   //   "add-mensaje",
+    //   //   notification.additionalData.apiData.mensaje
+    //   // );
+    // });
 
-    pushObject.on("registration").subscribe((registration: any) => {
-      const regId = registration.registrationId;
-      this.apiService.guardarTokenDeRegistro(regId).subscribe(
-        (response) => {
-          // console.log(response);
-        },
-        (error) => {
-          // console.log(error);
-        }
-      );
-    });
+    // pushObject.on("registration").subscribe((registration: any) => {
+    //   const regId = registration.registrationId;
+    //   this.apiService.guardarTokenDeRegistro(regId).subscribe(
+    //     (response) => {
+    //       // console.log(response);
+    //     },
+    //     (error) => {
+    //       // console.log(error);
+    //     }
+    //   );
+    // });
 
-    pushObject
-      .on("error")
-      .subscribe((error) => console.error("Error with Push plugin", error));
+    // pushObject
+    //   .on("error")
+    //   .subscribe((error) => console.error("Error with Push plugin", error));
   }
 
   async SetNotifications() {
@@ -467,8 +482,8 @@ export class AppComponent implements OnInit {
    */
   public prepararStripe(): void {
     // console.log("Entra en Stripe");
-
-    this.stripe.setPublishableKey(environment.stripePublishableKey);
+    // TODO
+    // this.stripe.setPublishableKey(environment.stripePublishableKey);
   }
 
   public async showToastMessage(notification) {
@@ -511,5 +526,9 @@ export class AppComponent implements OnInit {
 
     const { role } = await toast.onDidDismiss();
     // console.log("onDidDismiss resolved with role", role);
+  }
+
+  setLanguage(lang: string){
+    this.translateService.setDefaultLang(lang);
   }
 }

@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PagoPage } from './pago.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
 
 const routes: Routes = [
   {
@@ -20,8 +22,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes), TranslateModule
   ],
-  declarations: [PagoPage]
+  declarations: [PagoPage],
+  providers: [Stripe]
 })
 export class PagoPageModule {}

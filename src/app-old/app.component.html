@@ -1,0 +1,62 @@
+<ion-app>
+  <ion-split-pane *ngIf="!isLoading">
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar color="primary" style="text-align: center">
+          <img style="width: 110px" src="assets/imgs/logo_name.svg" />
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="p.url">
+              <ion-icon *ngIf="p.icon" slot="start" [name]="p.icon"></ion-icon>
+              <ion-icon *ngIf="!p.icon" slot="start" [src]="p.src"></ion-icon>
+
+              <ion-label>
+                {{ p.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item (click)="auth.logout()">
+      
+       
+
+              <ion-label>
+              Cerrar sesión
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        <div class="divMap">
+          <!--Mapa-->
+          <div id="map_canvas">
+            <!-- <ion-button class="btnPlus" color="light"> -->
+            <!-- <img class="icono_input" src="assets/icons/locate2.png" /> -->
+            <!-- </ion-button> -->
+            <!--<div class="add-q-btn">
+              <ion-button (click)="newQuestion()">Nueva pregunta</ion-button>
+            </div>-->
+            <!-- <img
+              class="icono_street"
+              src="assets/icons/street.png"
+              routerLink="/mapa-street"
+            /> -->
+          </div>
+        </div>
+        
+        <div class="version">
+					<p>Contacto:</p>
+					<p>info&#64;timeapp.com</p>
+					<p style="margin-bottom: 50px;">+00 000 000 000</p>
+
+          <p>Timemapp &#64; 2023</p>
+          <p>Version:</p>
+          <p>0.0.17</p>
+        </div>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

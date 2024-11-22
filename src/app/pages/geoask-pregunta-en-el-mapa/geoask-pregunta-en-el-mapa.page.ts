@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -9,12 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class GeoaskPreguntaEnElMapaPage implements OnInit {
   
 
-  constructor() {
+  constructor(private navController: NavController) {
     
   }
 
   ngOnInit() {
   }
 
+  adjuntarImagen(){
+    console.log("TODO: Balkishan:  Method was not implemented in Component.");
+  }
+
+  back(){
+    console.log("TODO: Method was not implemented. Added Placeholder");
+    this.navController.back(); // HotFix: Need to confirm the behaviour 
+  }
 }
 

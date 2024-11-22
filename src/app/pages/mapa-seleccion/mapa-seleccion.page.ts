@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@capacitor/geolocation';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -17,13 +17,13 @@ export class MapaSeleccionPage implements OnInit {
   public miDireccion:any;
   public publicaciones:any;
 
-  constructor(private navCtrl:NavController,private geolocation: Geolocation,
+  constructor(private navCtrl:NavController,
     private nativeGeocoder:NativeGeocoder,
     private utilities:UtilitiesService,
     private apiService: ApiService) { }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().then((resp) =>{
+    Geolocation.getCurrentPosition().then((resp: any) =>{
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
       console.log(resp);

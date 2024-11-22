@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -6,7 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MappPage } from './mapp.page';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 const routes: Routes = [
@@ -17,12 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
+ 
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MappPage]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  declarations: [MappPage],
+  providers: [NativeGeocoder, GoogleMaps, Geolocation]
 })
 export class MappPageModule {}

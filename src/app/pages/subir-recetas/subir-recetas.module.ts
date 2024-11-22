@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SubirRecetasPage } from './subir-recetas.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
         IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SubirRecetasPage]
+  declarations: [SubirRecetasPage],
+  providers: [NativeGeocoder]
 })
 export class SubirRecetasPageModule {}

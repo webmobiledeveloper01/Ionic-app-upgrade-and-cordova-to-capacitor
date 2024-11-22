@@ -6,7 +6,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
 import { SplashPage } from "./splash.page";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+// import { SplashScreen } from "@capacitor/splash-screen";
 
 const routes: Routes = [
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
   ],
-  providers: [SplashScreen],
+  // providers: [SplashScreen],
   declarations: [SplashPage],
 })
 export class SplashPageModule {}

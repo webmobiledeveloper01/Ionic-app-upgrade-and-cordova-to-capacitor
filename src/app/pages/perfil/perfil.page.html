@@ -51,7 +51,7 @@
           (click)="out()"
           class="col-perfil-datos-nacionalidad"
         >
-          <p id="texto_nacionalidad">Aún no se ha añadido tu procedencia</p>
+          <p id="texto_nacionalidad">{{"Aún no se ha añadido tu procedencia" | translate}}</p>
         </ion-col>
 
         <ion-col class="col-perfil-datos-texto">
@@ -64,8 +64,8 @@
             >{{user?.description}}
           </label>
 
-          <label *ngIf="!user?.description" id="texto_usuario"
-            >Aún no has añadido ninguna descripción
+          <label *ngIf="!user?.description" id="texto_usuario" >
+            {{"Aún no has añadido ninguna descripción" | translate}}
           </label>
       
        
@@ -82,13 +82,13 @@
           <!--Followers-->
           <ion-col (click)="GoToFollowers()" class="col-followers">
             <label id="num_followers">{{user?.followers}}</label>
-            <label id="tipo_followers">SEGUIDORES</label>
+            <label id="tipo_followers">{{"SEGUIDORES" | translate}}</label>
           </ion-col>
 
           <!--Following-->
           <ion-col class="col-following" (click)="GoToFollowing()">
             <label id="num_following">{{user?.seguidos}}</label>
-            <label id="tipo_following">SIGUIENDO</label>
+            <label id="tipo_following">{{"SIGUIENDO" | translate}}</label>
           </ion-col>
 
           <!--Likes-->
@@ -106,12 +106,12 @@
           <ion-button routerLink="/my-questions" style="
 						font-family: 'Alliance';	
 						font-size: 15px;
-						">Mis preguntas</ion-button>
+						">{{"Mis preguntas" | translate}}</ion-button>
                 <ion-button routerLink="/modal-banners" style="
                 font-family: 'Alliance';	
                 --background: #f3b562;
                 font-size: 15px;
-                ">Ser sponsor</ion-button>
+                ">{{"Ser sponsor" | translate}}</ion-button>
           <!-- <ion-button routerLink="/new-question">Nueva pregunta</ion-button> -->
         </ion-row>
       </ion-row>
@@ -126,7 +126,7 @@
       style="color: black"
       (click)="openModal()"
     >
-      Mas acciones
+      {{"Mas acciones" | translate}}
     </p>
   </div>
 
@@ -206,7 +206,7 @@
   </div>
 
   <div class="NoPosts" *ngIf="!ThereIsPosts">
-    <p class="noposts-label">Aún no hay publicaciones subidas</p>
+    <p class="noposts-label">{{"Aún no hay publicaciones subidas" | translate}}</p>
   </div>
 
   <!--Container numero 2 para las fechas y fotos-->
@@ -291,14 +291,14 @@
       class="pago"
       *ngIf="user?.role_id == 4 && user?.suscripcion == 0"
       (click)="iraPago()"
-      >Suscripción Banners</ion-button
+      >{{"Suscripción Banners" | translate}}</ion-button
     >
     <a href="https://timemapp.davidtovar.dev/intranet/"
       ><ion-button
         *ngIf="user?.role_id == 4 && user?.suscripcion == 1"
         style="--color: black"
       >
-        <p>Ir al Panel de Admin</p></ion-button
+        <p>{{"Ir al Panel de Admin" | translate}}</p></ion-button
       ></a
     >
   </div>
@@ -309,7 +309,7 @@
       style="--color: black"
       (click)="cancelarSuscripcion()"
     >
-      <p>Cancelar Suscripción</p>
+      <p>{{"Cancelar Suscripción" | translate}}</p>
     </ion-button>
 
     <!--<ion-button class="cancelar">

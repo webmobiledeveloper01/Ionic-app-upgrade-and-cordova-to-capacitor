@@ -28,13 +28,13 @@
       </div>
     </ion-col>
     <ion-col class="img-col">
-      <img
+      <ion-img
         *ngIf="post.tipo_archivo == 1"
         (click)="GoDetails()"
         [src]="post.archivo"
         alt=""
         srcset=""
-      />
+      ></ion-img>
 
       <div class="audio-player" *ngIf="post.tipo_archivo == 3">
         <audio controls controlsList="nodownload">

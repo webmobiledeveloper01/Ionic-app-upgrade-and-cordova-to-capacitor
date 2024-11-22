@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Environment, GoogleMap, GoogleMaps, GoogleMapsEvent, MyLocation, StreetViewCameraPosition, StreetViewLocation } from '@ionic-native/google-maps';
 import { HistoricPlace } from 'src/app/models/historic-place';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@capacitor/geolocation';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { ApiService } from 'src/app/services/api.service';
 
 declare var google;
-
-
-
-
 @Component({
   selector: 'app-mapa-street',
   templateUrl: './mapa-street.page.html',
@@ -92,7 +88,7 @@ export class MapaStreetPage implements OnInit {
   }
 
   generatePanorama(): void {
-    this.geolocation.getCurrentPosition().then((resp) =>{
+    this.geolocation.getCurrentPosition((resp) =>{
       let userLocation = {lat: resp.coords.latitude, lng: resp.coords.longitude};
       var streetviewService = new google.maps.StreetViewService;
       streetviewService.getPanorama({
@@ -114,7 +110,7 @@ export class MapaStreetPage implements OnInit {
       this.apiService.publicacionesLatitudLongitud(userLocation).subscribe((publicaciones) =>{
         this.publicaciones = publicaciones
       });
-    });
+    })
    
   }
 

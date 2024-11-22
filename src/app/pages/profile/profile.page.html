@@ -1,4 +1,4 @@
-<app-loading [text]="'Cargando perfil...'" *ngIf="isLoading"></app-loading>
+<app-loading [text]="'Cargando perfil...' | translate" *ngIf="isLoading"></app-loading>
 
 <ion-content padding *ngIf="!isLoading">
   
@@ -45,7 +45,7 @@
           text-align: center;
         "
       >
-        <span style="font-style: italic;">editar</span><br>Perfil
+        <span style="font-style: italic;">{{"editar" | translate}}</span><br>{{"Perfil" | translate}}
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -68,17 +68,17 @@
   </ion-avatar>
 
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
-    <ion-label> Nombre </ion-label>
+    <ion-label> {{"Nombre" | translate}} </ion-label>
     <ion-item lines="none">
       <ion-input
         clearInput
         type="text"
-        placeholder="Nombre de usuario"
+        [placeholder]="'Nombre de usuario' | translate"
         formControlName="name"
       ></ion-input>
     </ion-item>
 
-    <ion-label> Email </ion-label>
+    <ion-label> {{"Email" | translate}} </ion-label>
     <ion-item lines="none">
       <ion-input
         clearInput
@@ -88,24 +88,24 @@
       ></ion-input>
     </ion-item>
 
-    <ion-label> Descripción </ion-label>
+    <ion-label> {{"Descripción" | translate}} </ion-label>
     <ion-item lines="none">
       <ion-input
         clearInput
         type="text"
-        placeholder="Introduce una descripcion"
+        [placeholder]="'Introduce una descripcion' | translate"
         formControlName="description"
       ></ion-input>
     </ion-item>
 
-    <ion-label> Localizacion </ion-label>
+    <ion-label> {{"Localizacion" | translate}} </ion-label>
 
     <ion-item lines="none">
       <ion-input
         [(ngModel)]="direccion"
         clearInput
         type="text"
-        placeholder="¿De donde eres?"
+        [placeholder]="'¿De donde eres?' | translate"
         formControlName="user_location"
       ></ion-input>
 
@@ -141,7 +141,7 @@
       *ngIf="resultadosDireccion.length==0 && NoResult"
     >
       <ion-list>
-        <div class="place-wrap">No se ha encontrado ninguna dirección</div>
+        <div class="place-wrap">{{"No se ha encontrado ninguna dirección" | translate}}</div>
       </ion-list>
     </ion-item>
 
@@ -151,7 +151,7 @@
 				font-family: 'Alliance';	
 				font-size: 15px;
 			"
-			>Guardar cambios</ion-button
+			>{{"Guardar cambios" | translate}}</ion-button
       >
       <ion-button
         class="logout"
@@ -171,7 +171,7 @@
 					font-family: 'Alliance';	
 					font-size: 15px;
 				"
-        >Cerrar sesión</ion-button
+        >{{"Cerrar sesión" | translate}}</ion-button
       >
       <ion-button
         class="delete"
@@ -190,7 +190,7 @@
     border-radius: 20px;
     color: black;
 				"
-        >Eliminar usuario</ion-button
+        >{{"Cancelar cuenta" | translate}}</ion-button
       >
     </div>
   </form>

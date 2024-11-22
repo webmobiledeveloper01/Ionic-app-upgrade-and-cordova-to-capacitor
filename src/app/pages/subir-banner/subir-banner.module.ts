@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SubirBannerPage } from './subir-banner.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     ComponentsModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SubirBannerPage]

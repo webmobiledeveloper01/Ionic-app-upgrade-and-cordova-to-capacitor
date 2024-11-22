@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { Grupos } from "src/app/models/Grupos";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
@@ -13,7 +14,8 @@ export class CanalesGruposPage implements OnInit {
   constructor(
     private utilitiesService: UtilitiesService,
     private navCtrl: NavController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private translateService: TranslateService
   ) {}
 
   public chanels;
@@ -110,7 +112,7 @@ export class CanalesGruposPage implements OnInit {
   }
 
   async JoinGroup($event) {
-    await this.utilitiesService.showLoading("Añadiendo solicitud");
+    await this.utilitiesService.showLoading(this.translateService.instant("Añadiendo solicitud"));
 
     const grupo = this.chanels.find((obj) => obj.id === $event);
     let params = {
@@ -136,8 +138,8 @@ export class CanalesGruposPage implements OnInit {
           
         } else {
           this.utilitiesService.showAlert(
-            "¡Vaya!",
-            "Ha ocurrido un error, intentelo mas tarde"
+            this.translateService.instant("¡Vaya!"),
+            this.translateService.instant("Ha ocurrido un error, intentelo mas tarde")
           );
           this.utilitiesService.dismissLoading();
         }

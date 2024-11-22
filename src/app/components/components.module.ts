@@ -19,6 +19,7 @@ import { AppRecetasComponent } from "./app-recetas/app-recetas.component";
 import { AppUserFollowerComponent } from "./app-user-follower/app-user-follower.component";
 import { AppHomePostComponent } from "./app-home-post/app-home-post.component";
 import { GroupItemComponent } from "./group-item/group-item.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 const COMPONENTS = [
   AppRecetasComponent,
@@ -40,8 +41,8 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, IonicModule.forRoot(), RouterModule, FormsModule],
+  imports: [CommonModule, IonicModule.forRoot(), RouterModule, FormsModule, TranslateModule],
   declarations: [COMPONENTS],
-  exports: [COMPONENTS],
+  exports: [COMPONENTS, TranslateModule],
 })
 export class ComponentsModule {}

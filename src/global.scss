@@ -10,17 +10,241 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+
+[aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+  border-color: #FF8000;
+  background: #FF8000;
+}
+
+[aria-checked="true"].sc-ion-alert-ios .alert-radio-icon.sc-ion-alert-ios {
+  border-color: #FF8000;
+  background: #FF8000;
+}
+
+[aria-checked=true].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios {
+  color: #ff8000;
+}
+
+.alert-head.sc-ion-alert-md+.alert-message.sc-ion-alert-md {
+  padding-top: 0;
+  margin: 5% auto;
+  display: flex;
+  flex-flow: column;
+  white-space: break-spaces;
+  overflow: scroll;
+  width: 95%;
+}
+
+.alert-checkbox-group.sc-ion-alert-md,
+.alert-radio-group.sc-ion-alert-md {
+  border: none;
+}
+
+.alert-checkbox-group.sc-ion-alert-ios,
+.alert-radio-group.sc-ion-alert-ios {
+  border: none;
+
+}
+
+.alert-button {
+  color: #ffa000 !important;
+  box-shadow: 0px 0px 10px 1px #0000002b;
+  border-radius: 20pt !important;
+}
+
+.searchbar-row-buscador {
+
+  .searchbar-input.sc-ion-searchbar-md {
+    border-radius: 20pt;
+  }
+
+  .searchbar-input.sc-ion-searchbar-ios {
+    border-radius: 20pt;
+  }
+}
+
+.cancelbtn {
+  --color: #333;
+  --button-color: #333;
+  color: #333;
+
+  // --button-color: #333;
+  .toast-button-inner {
+    display: flex;
+    align-items: center;
+    --color: #333;
+    color: #333;
+  }
+}
+
+ion-checkbox {
+  --checkmark-color: rgb(255, 189, 89);
+  --background-checked: rgb(255, 208, 163);
+  --border-color: rgb(255, 191, 15);
+  --border-color-checked: rgb(255, 123, 0);
+}
+
+ion-toast.CustomNotificationToast {
+
+  --background: rgb(220, 185, 109);
+  --color: #f3f3f3;
+  --button-color: #f3f3f3;
+  --border-radius: 20pt;
+  // --te
+
+
+
+
+
+
+}
+
+.alert-message.sc-ion-alert-ios {
+  max-height: 240px;
+  white-space: break-spaces;
+  overflow: scroll;
+  margin: 10% auto;
+  width: 95%;
+
+}
+
+
+ion-button {
+  text-transform: none;
+}
+
+.modal-eliminar {
+  &.phone-modal {
+    padding: 35vh 30px 20vh 30px;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &.sc-ion-modal-md-h {
+    --background: none;
+  }
+
+  &.sc-ion-modal-ios-h {
+    --background: none;
+  }
+  --background: #00000000;
+}
+
+.modal-compartir {
+  .modal-wrapper {
+    width: 80%;
+    height: 50%;
+    border-radius: 30pt;
+  }
+}
+
+.modal-custom {
+  .modal-wrapper {
+    width: 80%;
+    height: 30%;
+    border-radius: 30pt;
+  }
+}
+
+
+.picker-wrapper {
+
+  button {
+    color: rgb(249, 191, 99) !important;
+  }
+}
+
+.alert-wrapper {
+
+  button {
+    color: black;
+  }
+}
+
+.pgm-html-info-tail-left {
+  display: none !important;
+
+}
+
+.pgm-html-info-tail-right {
+  display: none !important;
+
+}
+
+.pgm-html-info-frame {
+  top: 0vh !important;
+
+}
+
+.pgm-html-info-content-frame {
+  display: block;
+  position: relative;
+  background-color: white;
+  border: 1px solid rgb(204, 204, 204);
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  border-radius: 10pt;
+
+}
+
+
+.pgm-html-info-content-frame {
+  // padding: 10px;
+
+  .pgm-html-info-content-box {
+
+    box-shadow: 0px 0px 47px 10px rgba(0, 0, 0, 0.53);
+    display: flex;
+    padding: 0 !important;
+    box-sizing: content-box;
+    min-height: 50px;
+    width: 100%;
+    // width: 90%;
+    justify-content: center;
+    height: 100%;
+    margin: auto;
+
+    .divMapa {
+      width: 100%;
+      display: flex;
+      flex-flow: column;
+      height: 50vh;
+
+      h3 {
+        text-align: center;
+        font-family: "Alliance";
+      }
+    }
+
+
+  }
+
+  ion-content {
+    --background: transparent;
+  }
+  
+  body {
+    background: transparent;
+  }
+.no-bg-modal.modal-wrapper,
+ion-modal.no-bg-modal {
+  background: transparent;
+  --background: transparent;
+}
+}

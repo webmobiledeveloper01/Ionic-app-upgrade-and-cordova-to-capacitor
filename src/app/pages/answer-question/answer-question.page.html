@@ -17,7 +17,7 @@
           <!-- <img style="width: 150vh;" src="assets/icons/LosCanales2.svg"> -->
 
           <div class="ion-text-wrap">
-            <p id="titulo">Contesta la pregunta</p>
+            <p id="titulo">{{"Contesta la pregunta" | translate}}</p>
           </div>
         </ion-col>
 
@@ -44,7 +44,7 @@
       <p>Pasó el {{question.date}}</p>
     </ion-row>
     <ion-row class="action-row">
-      <ion-button (click)="displayTextArea()">Contestar pregunta</ion-button>
+      <ion-button (click)="displayTextArea()">{{"Contestar pregunta" | translate}}</ion-button>
     </ion-row>
   </ion-grid>
 

@@ -1,5 +1,7 @@
 {
   "name": "timemapp-ionic",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

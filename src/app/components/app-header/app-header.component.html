@@ -3,29 +3,23 @@
     <img
       [ngStyle]="{ visibility: arrowBack ? 'visible' : 'hidden' }"
       (click)="returnToPage()"
-      src="assets/imgs/Group 114.png"
-      alt=""
-  /></ion-col>
+      src="assets/imgs/Group 114.png" alt="" /></ion-col>
   <ion-col size="8"> <img src="assets/imgs/logo_name.svg" /></ion-col>
   <ion-col size="2">
-    <ion-badge *ngIf="countNotificaciones > 0" class="badge" color="#FA581E">{{
-      countNotificaciones
-    }}</ion-badge>
+    <ion-badge *ngIf="countNotificaciones > 0" class="badge" color="#FA581E">
+      {{countNotificaciones}}
+    </ion-badge>
     <img
       style="width: 20px"
       class="notificacion"
       *ngIf="countNotificaciones <= 0"
       [src]="imageNotification"
-      alt=""
-      routerLink="/notification-user"
-    />
+      alt="" routerLink="/notification-user"/>
     <img
       style="width: 20px"
       class="notificacion"
       *ngIf="countNotificaciones > 0"
       [src]="imageNotificationActivated"
-      alt=""
-      routerLink="/notification-user"
-    />
+      alt="" routerLink="/notification-user" />
   </ion-col>
 </ion-row>

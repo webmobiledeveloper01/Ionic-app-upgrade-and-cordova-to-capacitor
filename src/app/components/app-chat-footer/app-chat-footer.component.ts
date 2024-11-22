@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Mensaje } from 'src/app/models/Mensaje';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-chat-footer',
@@ -14,7 +14,7 @@ export class AppChatFooterComponent implements OnInit {
   @Output() sendText = new EventEmitter<Mensaje>();
 
 
-  constructor(private camera: Camera) { }
+  constructor() { }
 
   ngOnInit() {
     this.initMessage();
@@ -31,17 +31,15 @@ export class AppChatFooterComponent implements OnInit {
   public addImage(): void {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos,
+      width: 1920,
+      height: 1080,
+      allowEditing: true,
       correctOrientation: true,
     }
-    this.camera.getPicture(options).then((urlFoto) => {
-      let base64img = 'data:image/jpeg;base64,' + urlFoto;
+    Camera.getPhoto(options).then((urlFoto) => {
+      let base64img = urlFoto.dataUrl;
       this.message.imagen = base64img;
       console.log(urlFoto);
     }).catch(error => {

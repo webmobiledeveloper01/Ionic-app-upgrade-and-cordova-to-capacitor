@@ -1,4 +1,4 @@
-<app-loading *ngIf="isLoading" text="Cargando recuerdo..."></app-loading>
+<app-loading *ngIf="isLoading" [text]="'Cargando recuerdo...' | translate"></app-loading>
 
 <ion-content *ngIf="!isLoading">
   <div class="main-wrap">
@@ -38,21 +38,21 @@
           class="btn-change"
           (click)="adjuntarImagen()"
         >
-          Cambiar foto
+          {{"Cambiar foto" | translate}}
         </ion-button>
         <ion-button
           *ngIf="SelectedFileType.isImage&&this.base64img"
           class="btn-change"
           (click)="openCropImageModal()"
         >
-          Ajustar foto
+          {{"Ajustar foto" | translate}}
         </ion-button>
         <ion-button
           *ngIf="SelectedFileType.isVideo"
           class="btn-change"
           (click)="getVideo()"
         >
-          Cambiar video
+          {{"Cambiar video" | translate}}
         </ion-button>
       </div>
     </div>
@@ -65,7 +65,7 @@
           <ion-item class="form-item" lines="none">
             <ion-grid>
               <ion-row class="form-item-label">
-                <ion-label> Titulo </ion-label>
+                <ion-label> {{"Titulo" | translate}} </ion-label>
               </ion-row>
               <ion-row class="form-item-input">
                 <ion-input
@@ -79,7 +79,7 @@
           <ion-item class="form-item" lines="none">
             <ion-grid>
               <ion-row class="form-item-label">
-                <ion-label> Tipo de archivo </ion-label>
+                <ion-label> {{"Tipo de archivo" | translate}} </ion-label>
               </ion-row>
               <ion-row class="form-item-input">
                 <ion-select
@@ -87,8 +87,8 @@
                   (ionChange)="cambiarTipoArchivo($event)"
                   placeholder="Tipo de Archivo"
                 >
-                  <ion-select-option value="1">Foto</ion-select-option>
-                  <ion-select-option value="2">Video</ion-select-option>
+                  <ion-select-option value="1">{{"Foto" | translate}}</ion-select-option>
+                  <ion-select-option value="2">{{"Video" | translate}}</ion-select-option>
                   <!-- <ion-select-option value="3">Documento</ion-select-option> -->
                 </ion-select>
               </ion-row>
@@ -98,7 +98,7 @@
           <ion-item class="form-item" lines="none">
             <ion-grid>
               <ion-row class="form-item-label">
-                <ion-label> Descripcion </ion-label>
+                <ion-label> {{"Descripcion" | translate}} </ion-label>
               </ion-row>
               <ion-row class="form-item-input">
                 <ion-input
@@ -112,7 +112,7 @@
           <ion-item class="form-item" lines="none">
             <ion-grid>
               <ion-row class="form-item-label">
-                <ion-label> Fecha </ion-label>
+                <ion-label> {{"Fecha" | translate}} </ion-label>
               </ion-row>
               <ion-row class="form-item-input">
                 <ion-datetime
@@ -128,7 +128,7 @@
           <ion-item class="form-item" lines="none">
             <ion-grid>
               <ion-row class="form-item-label">
-                <ion-label> Década </ion-label>
+                <ion-label> {{"Década" | translate}} </ion-label>
               </ion-row>
               <ion-row class="form-item-input">
                 <ion-select formControlName="decada">
@@ -153,7 +153,7 @@
                 </ion-col>
 
                 <ion-col class="map-select-col-label" size="9">
-                  <ion-label>Modificar ubicacion</ion-label>
+                  <ion-label>{{"Modificar ubicacion" | translate}}</ion-label>
                 </ion-col>
               </ion-row>
               <ion-row class="form-item-input">
@@ -173,7 +173,7 @@
             > -->
 
             <ion-button class="btn-submit" (click)="SubmitForm()"
-              >Actualizar recuerdo</ion-button
+              >{{"Actualizar recuerdo" | translate}}</ion-button
             >
           </div>
         </form>

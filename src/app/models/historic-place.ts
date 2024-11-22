@@ -8,6 +8,11 @@ export interface HistoricPlace {
     nombreVia?:string;
     urlImagenes?: string;
     lat: number,
-    longitud: number
+    longitud: number,
+    comentarios?: any;
+    megustas?: any;
+    usuario?: any;
+    created_at?: any;
+    descripcion?: any;
 
 }

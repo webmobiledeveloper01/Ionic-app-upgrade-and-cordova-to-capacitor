@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController,ToastController, LoadingController, Platform } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'

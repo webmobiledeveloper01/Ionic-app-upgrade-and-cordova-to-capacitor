@@ -1,4 +1,4 @@
-<app-loading *ngIf="isLoading" text="Cargando..."></app-loading>
+<app-loading *ngIf="isLoading" [text]="'Cargando...' | translate"></app-loading>
 
 <ion-content *ngIf="!isLoading">
   <div class="contenedor">
@@ -19,8 +19,8 @@
           <!-- <img style="width: 150vh;" src="assets/icons/LosCanales2.svg"> -->
 
           <div class="ion-text-wrap">
-            <h1 id="titulo">Geoask</h1>
-            <h2 id="subtitulo">Editar pregunta en el mapa</h2>
+            <h1 id="titulo">{{"Geoask" | translate}}</h1>
+            <h2 id="subtitulo">{{"Editar pregunta en el mapa" | translate}}</h2>
           </div>
         </ion-col>
 
@@ -39,7 +39,7 @@
       <ion-grid class="wrap-grid">
         <ion-row class="row-title">
           <ion-row class="inner-row-label">
-            <ion-label> Haz tu pregunta </ion-label>
+            <ion-label> {{"Haz tu pregunta" | translate}} </ion-label>
           </ion-row>
           <ion-row class="inner-row-input">
             <!--  -->
@@ -52,7 +52,7 @@
 
         <ion-row class="row-description">
           <ion-row class="inner-row-label">
-            <ion-label>Sube un archivo </ion-label>
+            <ion-label>{{"Sube un archivo" | translate}} </ion-label>
           </ion-row>
           <ion-row class="inner-row-input">
             <ion-button
@@ -66,14 +66,14 @@
               color="danger"
               (click)="adjuntarImagen()"
               ><div class="inner-custom">
-                Seleccione el archivo a subir
+                {{"Seleccione el archivo a subir" | translate}}
                 <ion-icon name="filing"></ion-icon></div
             ></ion-button>
 
             <div class="preview-wrap" *ngIf="base64img">
               <div class="btn-wrap">
-                <ion-button class="delete-btn" (click)="deleteImage()">Eliminar imagen</ion-button>
-                <ion-button class="adjust-btn" (click)="openCropImageModal()">Ajustar imagen</ion-button>
+                <ion-button class="delete-btn" (click)="deleteImage()">{{"Eliminar imagen" | translate}}</ion-button>
+                <ion-button class="adjust-btn" (click)="openCropImageModal()">{{"Ajustar imagen" | translate}}</ion-button>
               </div>
               <div class="img-wrap">
                 <img src="{{base64img}}" alt="" srcset="" />
@@ -113,7 +113,7 @@
           </ion-row>
         </ion-row>
         <ion-row class="row-category">
-          <ion-row> <ion-label> Temas </ion-label></ion-row>
+          <ion-row> <ion-label> {{"Temas" | translate}} </ion-label></ion-row>
           <ion-row id="category-wrap" class="chip-row">
             <div class="chip-wrap" *ngFor="let c of categories">
               <ion-chip (click)="SetCategoryValue($event)" id="{{c.id}}"
@@ -124,7 +124,7 @@
         </ion-row>
         <ion-row class="row-type">
           <ion-row>
-            <ion-label> ¿Te acuerdas de cuándo ocurrió? </ion-label></ion-row
+            <ion-label> {{"¿Te acuerdas de cuándo ocurrió?" | translate}} </ion-label></ion-row
           >
           <ion-row id="privacy-wrap">
             <ion-col>
@@ -158,7 +158,7 @@
 
           <ion-row id="map-row-vis" style="display: none" class="map-row">
             <ion-row>
-              <ion-label>Ubicación</ion-label>
+              <ion-label>{{"Ubicación" | translate}}</ion-label>
             </ion-row>
             <ion-row>
               <ion-input
@@ -208,7 +208,7 @@
 
           <ion-row class="visibility-row" style="flex-flow: column">
             <ion-row
-              ><ion-label> ¿Quién podrá ver esta pregunta? </ion-label></ion-row
+              ><ion-label> {{"¿Quién podrá ver esta pregunta?" | translate}} </ion-label></ion-row
             >
             <ion-row
               class="visibility-row-inner"
@@ -217,12 +217,12 @@
             >
               <ion-col>
                 <ion-chip (click)="SetVisibilityValue($event)" id="0"
-                  >Grupos</ion-chip
+                  >{{"Grupos" | translate}}</ion-chip
                 ></ion-col
               >
               <ion-col>
                 <ion-chip (click)="SetVisibilityValue($event)" id="1"
-                  >Usuarios</ion-chip
+                  >{{"Usuarios" | translate}}</ion-chip
                 ></ion-col
               >
             </ion-row>
@@ -233,12 +233,12 @@
                 class="btn-create"
                 (click)="submitQuestion()"
                 [disabled]="!form.valid"
-                >Guardar cambios</ion-button
+                >{{"Guardar cambios" | translate}}</ion-button
               >
             </ion-col>
             <ion-col
               ><ion-button class="btn-delete" (click)="deleteQuestion()"
-                >Eliminar pregunta</ion-button
+                >{{"Eliminar pregunta" | translate}}</ion-button
               >
             </ion-col>
           </ion-row>

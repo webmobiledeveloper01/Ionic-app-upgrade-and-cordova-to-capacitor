@@ -45,7 +45,7 @@
           text-align: center;
         "
       >
-        <span style="font-style: italic;">crear</span><br>Impacto
+        <span style="font-style: italic;">{{"crear" | translate}}</span><br>Impacto
       </p>
 
       <!-- <ion-button (click)="out()" style="color: red
@@ -83,14 +83,14 @@
 
         <div class="center" *ngIf="user.role_id!=4">
           <ion-button (click)="GoToSponsor()" class="reserva" expand="block">
-            <p>Ser sponsor</p>
+            <p>{{"Ser sponsor" | translate}}</p>
             <!-- href="https://timemapp.davidtovar.dev/intranet/" -->
           </ion-button>
         </div>
 
         <div class="center">
           <ion-button (click)="irPin()" class="reserva" expand="block">
-            <p>Canal Privado</p>
+            <p>{{"Canal Privado" | translate}}</p>
           </ion-button>
         </div>
 

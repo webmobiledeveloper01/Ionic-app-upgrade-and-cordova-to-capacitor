@@ -11,7 +11,7 @@
     <ion-col size="6" class="inner-top-mid-wrap">
       <!-- <img src="assets/imgs/logo_name.svg"
     /> -->
-      <p>Subir Banner</p>
+      <p>{{"Subir Banner" | translate}}</p>
     </ion-col>
     <ion-col size="3" class="inner-top-right-wrap">
       <div class="star-wrap">
@@ -34,11 +34,11 @@
     <ion-grid class="form-wrap">
       <ion-row class="input-row">
         <ion-row class="label-row">
-          <p class="input-label">Nombre del usuario o empresa</p>
+          <p class="input-label">{{"Nombre del usuario o empresa" | translate}}</p>
         </ion-row>
         <ion-row class="input-row-inner"
           ><ion-input
-            placeholder="Escribe aqui"
+            [placeholder]="'Escribe aqui' | translate"
             formControlName="nombre"
           ></ion-input
         ></ion-row>
@@ -46,7 +46,7 @@
 
       <ion-row class="input-row">
         <ion-row class="label-row">
-          <p class="input-label">Duracion del banner</p>
+          <p class="input-label">{{"Duracion del banner" | translate}}</p>
         </ion-row>
         <ion-row class="input-row-inner">
           <ion-datetime
@@ -62,11 +62,11 @@
 
       <ion-row class="input-row">
         <ion-row class="label-row">
-          <p class="input-label">Descripción del banner</p>
+          <p class="input-label">{{"Descripción del banner" | translate}}</p>
         </ion-row>
         <ion-row class="input-row-inner"
           ><ion-input
-            placeholder="Escribe aqui"
+            [placeholder]="'Escribe aqui' | translate"
             formControlName="descripcion"
           ></ion-input
         ></ion-row>
@@ -74,12 +74,12 @@
 
       <ion-row class="input-row" *ngIf="base64img === undefined">
         <ion-row class="label-row">
-          <p class="input-label">Elige el logo del banner</p>
+          <p class="input-label">{{"Sube tu logo" | translate}}</p>
         </ion-row>
         <ion-row class="input-row-inner">
           <ion-button class="upload-btn" (click)="adjuntarImagen()">
             <div class="inner-button">
-              <p>Selecciona una imagen a subir</p>
+              <p>{{"Selecciona una imagen a subir" | translate}}</p>
               <ion-icon name="filing"></ion-icon>
             </div>
           </ion-button>
@@ -92,17 +92,17 @@
         </div>
         <div class="btn-wrap">
           <ion-button (click)="deleteImage()"
-            ><p>Eliminar imagen</p></ion-button
+            ><p>{{"Eliminar imagen" | translate}}</p></ion-button
           >
           <ion-button (click)="openCropImageModal()"
-            ><p>Ajustar imagen</p></ion-button
+            ><p>{{"Ajustar imagen" | translate}}</p></ion-button
           >
         </div>
       </ion-row>
 
       <ion-row class="input-row">
         <ion-row class="label-row">
-          <p class="input-label">Delimita zona geográfica de tu audiencia</p>
+          <p class="input-label">{{"Delimita zona geográfica de tu audiencia" | translate}}</p>
         </ion-row>
         <ion-row class="input-row-inner-grid">
           <ion-grid class="select-grid">
@@ -114,7 +114,7 @@
                   class="input-like-select"
                   ><div class="inn-button">
                     <div class="text-div">
-                      <p *ngIf="BannerType != 1">Pais</p>
+                      <p *ngIf="BannerType != 1">{{"Pais" | translate}}</p>
                       <p *ngIf="BannerType == 1 && BannerLocation != undefined">
                         {{BannerLocation}}
                       </p>
@@ -131,7 +131,7 @@
                   class="input-like-select"
                   ><div class="inn-button">
                     <div class="text-div">
-                      <p *ngIf="BannerType != 2">Región</p>
+                      <p *ngIf="BannerType != 2">{{"Región" | translate}}</p>
                       <p
                         *ngIf="BannerType === 2 && BannerLocation != undefined"
                       >
@@ -152,7 +152,7 @@
                   class="input-like-select"
                   ><div class="inn-button">
                     <div class="text-div">
-                      <p *ngIf="BannerType != 3">Provincia</p>
+                      <p *ngIf="BannerType != 3">{{"Provincia" | translate}}</p>
                       <p
                         *ngIf="BannerType === 3 && BannerLocation != undefined"
                       >
@@ -171,7 +171,7 @@
                   class="input-like-select"
                   ><div class="inn-button">
                     <div class="text-div">
-                      <p *ngIf="BannerType != 4">Población</p>
+                      <p *ngIf="BannerType != 4">{{"Población" | translate}}</p>
                       <p
                         *ngIf="BannerType === 4 && BannerLocation != undefined"
                       >
@@ -191,7 +191,7 @@
 
       <ion-row class="input-row">
         <ion-row class="label-row">
-          <p class="input-label">Enlace incluido en el banner</p>
+          <p class="input-label">{{"Enlace incluido en el banner" | translate}}</p>
         </ion-row>
         <ion-row class="input-row-inner-orange">
           <ion-input
@@ -208,7 +208,7 @@
     <ion-grid class="btn-wrap">
       <ion-row class="btn-row">
         <ion-button type="submit" class="btn-submit">
-          <p>Subir banner</p>
+          <p>{{"Subir Banner" | translate}}</p>
         </ion-button>
       </ion-row>
       <!-- <ion-row class="btn-row">

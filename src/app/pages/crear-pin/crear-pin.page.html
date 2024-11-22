@@ -83,13 +83,13 @@
           padding: 8px;
         "
       >
-        Titulo de la publicación
+        {{"Titulo de la publicación" | translate}}
       </p>
       <ion-item class="item-native" lines="none" style="--background: #f1eae0">
         <ion-input
           clearInput
           type="text"
-          placeholder="Escribe aqui el titulo..."
+          [placeholder]="'Escribe aqui el titulo...' | translate"
           formControlName="titulo"
           required
         ></ion-input>
@@ -102,13 +102,13 @@
           padding: 8px;
         "
       >
-        Descripción de la publicación
+        {{"Descripción de la publicación" | translate}}
       </p>
       <ion-item class="item-native" lines="none" style="--background: #f1eae0">
         <ion-input
           clearInput
           type="text"
-          placeholder="Escribe aqui la descripcion..."
+          [placeholder]="'Escribe aqui la descripcion...' | translate"
           formControlName="descripcion"
           required
           [(ngModel)]="direccion"
@@ -123,7 +123,7 @@
           padding: 8px;
         "
       >
-        Ubicación
+        {{"Ubicación" | translate}}
       </p>
       <ion-item class="item-native" lines="none" style="--background: #f1eae0">
         <ion-input
@@ -145,7 +145,7 @@
         color="warning"
         type="submit"
       >
-        Crear Canal Privado
+        {{"Activa tu Pin" | translate}}
       </ion-button>
     </form>
   </div>

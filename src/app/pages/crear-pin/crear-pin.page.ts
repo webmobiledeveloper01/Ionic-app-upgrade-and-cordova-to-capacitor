@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@capacitor/camera';
 import { Environment, GoogleMapOptions, GoogleMaps, GoogleMapsEvent } from '@ionic-native/google-maps/ngx';
 import { GoogleMap } from '@ionic-native/google-maps/ngx';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { NavController } from '@ionic/angular';
 import { Tema } from 'src/app/models/Temas';
 import { ApiService } from 'src/app/services/api.service';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { codeErrors } from 'src/app/utils/utils';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-crear-pin',
@@ -25,11 +26,12 @@ export class CrearPinPage implements OnInit {
 
   constructor(
     private formBuilder:FormBuilder,
-    private camera:Camera,
+    // private camera:Camera,
     private utilities:UtilitiesService,
     private apiService: ApiService,
     private nativeGeocoder: NativeGeocoder,
-    private navCtrl:NavController
+    private navCtrl:NavController,
+    private translateService: TranslateService
   ) { }
 
    ngOnInit() {
@@ -119,7 +121,7 @@ export class CrearPinPage implements OnInit {
       }, (err) => {
         console.log(err);
         this.utilities.dismissLoading();
-        this.utilities.showToast('Ha ocurrido un error al insertar el Pin');
+        this.utilities.showToast(this.translateService.instant('Ha ocurrido un error al insertar el Pin'));
       });
   }
 

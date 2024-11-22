@@ -40,16 +40,16 @@
     <ion-row *ngIf="grupo.private == 1" class="row-titulo-grupo-informacion">
       <ion-icon src="assets/icons/candado.svg"></ion-icon>
       <!-- <p id="texto-info">Private group-126 members</p> -->
-      <p id="texto-info">Grupo privado - {{ grupo.count_members }} miembro/s</p>
+      <p id="texto-info">{{"Grupo privado" | translate}} - {{ grupo.count_members }} {{"miembro/s" | translate}}</p>
     </ion-row>
 
     <ion-row *ngIf="grupo.private == 0" class="row-titulo-grupo-informacion">
-      <p id="texto-info">Grupo público - {{ grupo.count_members }} miembro/s</p>
+      <p id="texto-info">{{"Grupo público" | translate}} - {{ grupo.count_members }} {{"miembro/s" | translate}}</p>
     </ion-row>
   </ion-row>
   <ion-row class="bot-wrap">
-    <ion-button *ngIf="!grupo.user_tried_to_join" (click)="TriedToJoin()" class="request-btn">Solicitar unirse</ion-button>
-    <ion-button *ngIf="grupo.user_tried_to_join" [disabled]="'true'" class="requested-btn">Ya has solicitado unirte</ion-button>
+    <ion-button *ngIf="!grupo.user_tried_to_join" (click)="TriedToJoin()" class="request-btn">{{"Solicitar unirse" | translate}}</ion-button>
+    <ion-button *ngIf="grupo.user_tried_to_join" [disabled]="'true'" class="requested-btn">{{"Ya has solicitado unirte" | translate}}</ion-button>
   </ion-row>
 </ion-grid>
 

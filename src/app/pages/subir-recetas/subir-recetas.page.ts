@@ -4,7 +4,7 @@ import { PasoReceta } from "src/app/models/PasoReceta";
 import { Ingrediente } from "src/app/models/Ingrediente";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { Camera, CameraOptions } from "@capacitor/camera";
 import {
   GoogleMaps,
   GoogleMap,
@@ -27,7 +27,7 @@ import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
-} from "@ionic-native/native-geocoder/ngx";
+} from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { ModalController, NavController } from "@ionic/angular";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
 declare var google;
@@ -56,7 +56,6 @@ export class SubirRecetasPage implements OnInit {
   private: boolean = false;
 
   constructor(
-    private camera: Camera,
     private ngzone: NgZone,
     private nativeGeocoder: NativeGeocoder,
     private utilities: UtilitiesService,
@@ -259,6 +258,7 @@ export class SubirRecetasPage implements OnInit {
       this.pasos.push({ id: position, step: steps });
 
       console.log(this.pasos);
+      return "";
     }
   }
 
@@ -460,32 +460,33 @@ export class SubirRecetasPage implements OnInit {
   // Adjuntar Imagen
 
   public adjuntarImagen(): void {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE,
-      encodingType: this.camera.EncodingType.JPEG,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1920,
-      targetHeight: 1080,
-      allowEdit: false,
-      correctOrientation: true,
-    };
-    this.ngzone.run(() => {
-      this.camera
-        .getPicture(options)
-        .then(async (urlFoto) => {
-          this.base64img = "data:image/jpeg;base64," + urlFoto;
-          this.form.patchValue({ archivo: this.base64img });
+    // TODO Implement new camera.
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.DATA_URL,
+    //   mediaType: this.camera.MediaType.PICTURE,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    //   targetWidth: 1920,
+    //   targetHeight: 1080,
+    //   allowEdit: false,
+    //   correctOrientation: true,
+    // };
+    // this.ngzone.run(() => {
+    //   this.camera
+    //     .getPicture(options)
+    //     .then(async (urlFoto) => {
+    //       this.base64img = "data:image/jpeg;base64," + urlFoto;
+    //       this.form.patchValue({ archivo: this.base64img });
 
-          console.log(urlFoto);
+    //       console.log(urlFoto);
 
-          await this.loadMap();
-        })
-        .catch((error) => {
-          this.utilities.showAlert("Error al obtener imagen", error);
-        });
-    });
+    //       await this.loadMap();
+    //     })
+    //     .catch((error) => {
+    //       this.utilities.showAlert("Error al obtener imagen", error);
+    //     });
+    // });
   }
 
   // CARGAR MAPA
