@@ -12,15 +12,14 @@ import {
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { ModalAjustesPage } from "../modal-ajustes/modal-ajustes.page";
 import { GoogleMap, MapType, Marker } from "@capacitor/google-maps";
-import { Environment, GoogleMaps, GoogleMapsEvent, MarkerIcon,StreetViewCameraPosition, StreetViewLocation } from "@ionic-native/google-maps/ngx";
 import { environment } from "src/environments/environment";
-declare var google;
+declare let plugins: any;
 @Component({
   selector: "app-mapp",
   templateUrl: "./mapp.page.html",
   styleUrls: ["./mapp.page.scss"],
 })
-export class MappPage implements OnInit, OnDestroy {
+export class MappPage implements AfterViewInit, OnDestroy {
   // map: any;
   panorama: any;
   public place: HistoricPlace;
@@ -48,14 +47,12 @@ export class MappPage implements OnInit, OnDestroy {
     private modalController: ModalController,
     private platform: Platform
   ) {}
-  async ngOnInit() {
-    
-  }
+
   async ngAfterViewInit() {
    this.isIos = this.platform.is("ios");
     console.log(this.isIos);
     this.SetView();
-    
+
     this.apiService.questionChange.subscribe(async () => {
       await this.getQuestions().then(async () => {
         await this.getPublicaciones().then(() => {
@@ -128,7 +125,7 @@ export class MappPage implements OnInit, OnDestroy {
       console.log(resp);
       this.getAddressFromCoords(this.latitude, this.longitude);
     });
-    
+
     this.placesMap.push({lat:36.6801604, longitud:-6.1307971});
     console.warn("TODO:", "Check for any issue as the longitude property was 'Long' and in model its longitud");
     // Environment.setEnv({
@@ -139,7 +136,7 @@ export class MappPage implements OnInit, OnDestroy {
       {
         featureType: "poi",
         stylers: [{ visibility: "off" }],
-      },  
+      },
     ];
     const apiKey = 'AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE';
     // const apiKey = 'AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y';
@@ -154,12 +151,12 @@ export class MappPage implements OnInit, OnDestroy {
           lng: -117.9,
         },
         height: window.innerHeight, width: window.innerWidth,
-        zoom: 12, tilt: 30, 
+        zoom: 12,
         styles: styles
       },
     }, async ()=>{
       console.log(this.newMap);
-       
+
     });
     await this.newMap.setMapType(MapType.Satellite);
     await this.newMap.enableCurrentLocation(true);
@@ -263,16 +260,15 @@ export class MappPage implements OnInit, OnDestroy {
     //     height: 40,
     //   },
     // };
-    const newmarker: Marker = {
-      coordinate: { lat: this.latitude ? Number(this.latitude) : 0, lng: this.longitude ? Number(this.longitude) : 0 },
-      iconUrl:
-        'https://timemapp.davidtovar.dev/storage/CtD5XZr2MZ6RVTvMc0uSuzRjA0v86MTmEuHt2v5h.png',
-        iconSize:  {
-          width: 27,
-          height: 40,
-        },
-    };
-    this.newMap.addMarker(newmarker)
+    this.newMap.addMarker({
+      coordinate:  { lat: this.latitude ? Number(this.latitude) : 0, lng: this.longitude ? Number(this.longitude) : 0 },
+      iconUrl: 'https://timemapp.davidtovar.dev/storage/CtD5XZr2MZ6RVTvMc0uSuzRjA0v86MTmEuHt2v5h.png',
+      iconSize :   {
+        width: 27,
+        height: 40,
+      },
+    })
+
     // TODO
     this.SetQuestions();
     this.SetPlaces();
@@ -309,7 +305,7 @@ export class MappPage implements OnInit, OnDestroy {
     // };
     for (let place of this.placesMap) {
       //
-     let marker: Marker = {
+    this.newMap.addMarker({
       coordinate: { lat: Number(place.lat), lng: Number(place.longitud) },
       iconUrl: environment.domainUrl+ environment.domainUrl + "storage/PHskaBr6u3p8LCov5K0hyyU2n9GLo6xr3DOkztei.png",
       iconSize: {
@@ -317,14 +313,15 @@ export class MappPage implements OnInit, OnDestroy {
         height: 60,
       },
       title: "Marca",
-    }
+
+    })
       // let marker: Marker = this.map.addMarkerSync({
       //   animation: "DROP",
       //   icon: iconPlace,
       //   // title: "Marca",
       //   position: { lat: place.lat, lng: place.longitud },
       // });
-      let htmlInfoWindow = new google.maps.InfoWindow();
+      let htmlInfoWindow = new plugins.google.maps.InfoWindow();
       let frame: HTMLElement = document.createElement("div");
       frame.innerHTML = [
         '<div class="divMapa" >',
@@ -344,10 +341,10 @@ export class MappPage implements OnInit, OnDestroy {
       htmlInfoWindow.setContent(frame, {
         width: h,
         height: h,
-        
+
       });
-      //TODO: 
-      this.newMap.addMarker(marker);
+      //TODO:
+      // this.newMap.addMarker(marker);
       this.newMap.setOnMarkerClickListener((marker)=>{
         if(marker.title = "Marca"){
           htmlInfoWindow.open(marker);
@@ -356,15 +353,15 @@ export class MappPage implements OnInit, OnDestroy {
       // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       //   htmlInfoWindow.open(marker);
       // });
-      this.postMarkers.push(marker);
+      // this.postMarkers.push(marker);
     }
   }
 
   addInfoWindow(marker:Marker, origContent){
-    let infoWindow = new google.maps.InfoWindow();
+    let infoWindow = new plugins.google.maps.InfoWindow();
     var content = document.createElement('div');
     content.innerHTML = (origContent);
-    google.maps.event.addListener(marker, 'click', () => {
+    plugins.google.maps.event.addListener(marker, 'click', () => {
       infoWindow.setContent(content);
     });
   }
@@ -414,13 +411,9 @@ export class MappPage implements OnInit, OnDestroy {
     // await this.drawImage(data.length).then((res) => {
     //   url = res;
     // });
-    let iconito: MarkerIcon = {
-      url: "../../../assets/icons/icono-SMALL.png",
-      size: {
-        width: 60,
-        height: 40,
-      },
-    };
+    // let iconito: MarkerIcon = {
+
+    // };
     // console.log("dibujado =>", iconito);
     // TODO: Marker Cluster need to convert to capacitor;
     // var markerCluster = this.map?.addMarkerCluster({
@@ -499,7 +492,7 @@ export class MappPage implements OnInit, OnDestroy {
     });
   }
   OpenInfoWindow(marker) {
-    let htmlInfoWindow = new google.maps.InfoWindow();
+    let htmlInfoWindow = new plugins.google.maps.InfoWindow();
     let frame: HTMLElement = document.createElement("div");
     let post = marker.get("InstanceOfPost");
     let innerFrame;
@@ -593,31 +586,28 @@ export class MappPage implements OnInit, OnDestroy {
       console.log("pin WILL BE SETTED =>", place);
       // console.log("Overlay=> ");
       // console.log(res);
-      let iconpin: MarkerIcon = {
-        url: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
-        size: {
-          width: 40,
-          height: 60,
-        },
-      };
-      // let marker: any = this.map?.addMarkerSync({
-      //   animation: "DROP",
-      //   icon: iconpin,
-      //   title: "Pin oficial",
-      //   position: { lat: place.latitud, lng: place.longitud },
-      // });
-      let marker: Marker = {
-        // animation: "DROP",
+       this.newMap?.addMarker({
         iconUrl: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
-        title: "Pin oficial",
-        coordinate: { lat: Number(place.latitud ?? 0), lng: Number(place.longitud ?? 0) },
         iconSize: {
           width: 40,
           height: 60,
-        }
-      }
-      this.newMap.addMarker(marker);
-      let htmlInfoWindow = new google.maps.InfoWindow();
+        },
+        // animation: "DROP",
+        // icon: iconpin,
+        title: "Pin oficial",
+        coordinate: { lat: place.latitud, lng: place.longitud },
+      });
+      // let marker: Marker = new Marker(this.newMap,{
+      //   // animation: "DROP",
+      //   icon: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
+      //   title: "Pin oficial",
+      //   coordinate: { lat: Number(place.latitud ?? 0), lng: Number(place.longitud ?? 0) },
+      //   iconSize: {
+      //     width: 40,
+      //     height: 60,
+      //   }
+      // })
+      let htmlInfoWindow = new plugins.google.maps.InfoWindow();
       let frame: HTMLElement = document.createElement("div");
       console.log("631");
       frame.innerHTML = [
@@ -647,30 +637,16 @@ export class MappPage implements OnInit, OnDestroy {
     }
   }
   SetQuestions() {
-    let iconPlace: MarkerIcon = {
-      url: environment.domainUrl + "storage/APRxUJVQGUNgZdjT8PvMkasnzHgUHj9X9Ozfy27Z.png",
-      size: {
-        width: 40,
-        height: 60,
-      },
-    };
     for (let place of this.questions) {
-      // let marker: Marker = this.map.addMarkerSync({
-      //   animation: "DROP",
-      //   icon: iconPlace,
-      //   // title: "Marca",
-      //   position: { lat: place.lat, lng: place.lng },
-      // });
-      let marker : Marker = {
+ this.newMap.addMarker({
         iconUrl : environment.domainUrl + "storage/APRxUJVQGUNgZdjT8PvMkasnzHgUHj9X9Ozfy27Z.png",
         iconSize: {
           width: 40,
           height: 60,
         },
         coordinate:  { lat: Number(place.lat ?? 0), lng: Number(place.lng ?? 0) }
-      };
-      this.newMap.addMarker(marker);
-      let htmlInfoWindow = new google.maps.InfoWindow();
+      });
+      let htmlInfoWindow = new plugins.google.maps.InfoWindow();
       let frame: HTMLElement = document.createElement("div");
       frame.innerHTML = [
         '<div class="divMapa" >',
@@ -696,7 +672,7 @@ export class MappPage implements OnInit, OnDestroy {
       this.newMap.setOnMarkerClickListener((marker)=>{
         htmlInfoWindow.open(marker);
       })
-      this.QuestionMarkers.push(marker);
+      // this.QuestionMarkers.push(marker);
     }
   }
   public getAddressFromCoords(latitude, longitude) {
@@ -768,37 +744,37 @@ export class MappPage implements OnInit, OnDestroy {
   }
   public streetView(): void {
     console.log("entra en street view");
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y",
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y",
-    });
-    let div = document.getElementById("pano_canvas1");
-    this.panorama = GoogleMaps.createPanorama("pano_canvas1", {
-      camera: {
-        target: { lat: 42.345573, lng: -71.098326 },
-      },
-    });
-    this.panorama
-      .one(GoogleMapsEvent.PANORAMA_READY)
-      .then((result) => {
-        console.log("panorama is ready!", result);
-      })
-      .catch((error) => {
-        console.log("error");
-        console.log(error);
-      });
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y",
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y",
+    // });
+    // let div = document.getElementById("pano_canvas1");
+    // this.panorama = GoogleMaps.createPanorama("pano_canvas1", {
+    //   camera: {
+    //     target: { lat: 42.345573, lng: -71.098326 },
+    //   },
+    // });
+    // this.panorama
+    //   .one(.PANORAMA_READY)
+    //   .then((result) => {
+    //     console.log("panorama is ready!", result);
+    //   })
+    //   .catch((error) => {
+    //     console.log("error");
+    //     console.log(error);
+    //   });
     // Move the map camera when the panorama camera has been moved.
-    this.panorama
-      .on(GoogleMapsEvent.PANORAMA_LOCATION_CHANGE)
-      .subscribe((params: any[]) => {
-        let location: StreetViewLocation = params[0];
-      });
+    // this.panorama
+    //   .on(GoogleMapsEvent.PANORAMA_LOCATION_CHANGE)
+    //   .subscribe((params: any[]) => {
+    //     let location: StreetViewLocation = params[0];
+    //   });
     // Change the marker bearing when the panorama camera is panning.
-    this.panorama
-      .on(GoogleMapsEvent.PANORAMA_CAMERA_CHANGE)
-      .subscribe((params: any[]) => {
-        let camera: StreetViewCameraPosition = params[0];
-      });
+    // this.panorama
+    //   .on(GoogleMapsEvent.PANORAMA_CAMERA_CHANGE)
+    //   .subscribe((params: any[]) => {
+    //     let camera: StreetViewCameraPosition = params[0];
+    //   });
   }
   public redireccion(place): void {
     this.navCtrl.navigateForward("detalle-publicacion/" + place.id, {
@@ -816,11 +792,11 @@ export class MappPage implements OnInit, OnDestroy {
   }
   generatePanorama(): void {
     let userLocation = { lat: 42.345573, lng: -71.098326 };
-    var streetviewService = new google.maps.StreetViewService();
+    var streetviewService = new plugins.google.maps.StreetViewService();
     streetviewService.getPanorama(
       {
         location: userLocation,
-        preference: google.maps.StreetViewPreference.NEAREST,
+        preference: plugins.google.maps.StreetViewPreference.NEAREST,
         radius: 100,
       },
       function (result, status) {
@@ -830,7 +806,7 @@ export class MappPage implements OnInit, OnDestroy {
           "\nAdjusted longitude: ",
           result.location.latLng.lng()
         );
-        this.panorama = new google.maps.StreetViewPanorama(
+        this.panorama = new plugins.google.maps.StreetViewPanorama(
           document.getElementById("pano_canvas1"),
           {
             position: result.location.latLng,
@@ -867,7 +843,7 @@ export class MappPage implements OnInit, OnDestroy {
       {
         featureType: "poi",
         stylers: [{ visibility: "off" }],
-      },  
+      },
     ];
     const apiKey = 'AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE';
     // const apiKey = 'AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y';
@@ -882,7 +858,7 @@ export class MappPage implements OnInit, OnDestroy {
           lng: -117.9,
         },
         height: window.innerHeight, width: window.innerWidth,
-        zoom: 12, tilt: 30, 
+        zoom: 12,
         styles: styles
       },
     }, async (readyData)=>{

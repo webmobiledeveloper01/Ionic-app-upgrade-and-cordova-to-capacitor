@@ -1,24 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonIcon, NavController } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import { ApiService } from "src/app/services/api.service";
 import {
-  GoogleMaps,
   GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  ILatLng,
-  Spherical,
-  GoogleMapsMapTypeId,
-  MyLocation,
-  Environment,
-  GoogleMapOptions,
-  MarkerIcon,
-  MarkerCluster,
-  MarkerClusterIcon,
-  HtmlInfoWindow,
-  Circle,
-} from "@ionic-native/google-maps/ngx";
+} from "@capacitor/google-maps";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import {
   NativeGeocoder,
@@ -28,6 +13,8 @@ import {
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { TranslateService } from "@ngx-translate/core";
 import { environment } from "src/environments/environment";
+import { CreateMapArgs } from "@capacitor/google-maps/dist/typings/implementation";
+import { Marker } from "@capacitor-community/google-maps";
 
 @Component({
   selector: "app-buscador-publicaciones",
@@ -207,7 +194,7 @@ export class BuscadorPublicacionesPage implements OnInit {
       }, 100);
     } else {
       if (this.map != null && typeof this.map != "undefined") {
-        await this.map.remove();
+        // await this.map.remove(); // TODO: Remove map
       }
     }
   }
@@ -223,7 +210,7 @@ export class BuscadorPublicacionesPage implements OnInit {
     event.target.classList.toggle("customChip");
 
     console.log("LA CLASSLIST ES=>" ,event.target.classList);
-    
+
     if (this.SelectedTemas.includes(id)) {
       this.SelectedTemas = this.SelectedTemas.filter((num) => num !== id);
     } else {
@@ -332,62 +319,66 @@ export class BuscadorPublicacionesPage implements OnInit {
 
   public async loadMap() {
     // this.MustShowMap = true;
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-    });
-    Environment.setBackgroundColor("white");
-    let mapOptions: GoogleMapOptions;
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+    // });
+    // Environment.setBackgroundColor("white");
+    // let mapOptions: CreateMapOptions;
 
-    mapOptions = {
-      camera: {
-        target: {
+  let  mapOptions : CreateMapArgs = {
+    id: 'mapcontainerid',
+apiKey: 'AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE',
+      element: document.getElementById("map-container"),
+      config: {
+        center: {
           lat: 0,
           lng: 0,
         },
         zoom: 15,
-        tilt: 30,
+        // tilt: 30,
       },
     };
 
-    this.map = await GoogleMaps.create("map-container", mapOptions);
+    this.map = await GoogleMap.create(mapOptions);
 
-    this.map
-      .getMyLocation()
-      .then((res) => {
-        this.map.moveCamera({
-          target: res.latLng,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+   // TODO
+    // this.map
+    //   .getMyLocation()
+    //   .then((res) => {
+    //     this.map.moveCamera({
+    //       target: res.latLng,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
 
-        this.utils.showAlert(
-          this.translateService.instant("Ubicacion desactivada"),
-          this.translateService.instant("Sin acceso a la ubicacion no se visualizara la localización")
-        );
-      });
+    //     this.utils.showAlert(
+    //       this.translateService.instant("Ubicacion desactivada"),
+    //       this.translateService.instant("Sin acceso a la ubicacion no se visualizara la localización")
+    //     );
+    //   });
 
-    this.map
-      .one(GoogleMapsEvent.MAP_READY)
-      .then(async () => {
-        this.map.setMapTypeId("MAP_TYPE_SATELLITE");
-        this.map.setMyLocationEnabled(true);
-        this.map.setMyLocationButtonEnabled(true);
+    // this.map
+    //   .one(GoogleMapsEvent.MAP_READY)
+    //   .then(async () => {
+    //     this.map.setMapTypeId("MAP_TYPE_SATELLITE");
+    //     this.map.setMyLocationEnabled(true);
+    //     this.map.setMyLocationButtonEnabled(true);
 
-        this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((res) => {
-          // this.SetNewMarker(res);
-          // this.SetValuesOnForm(res);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+    //     this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((res) => {
+    //       // this.SetNewMarker(res);
+    //       // this.SetValuesOnForm(res);
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
 
-        this.utils.showAlert(
-          this.translateService.instant("Ubicacion desactivada"),
-          this.translateService.instant("Sin acceso a la ubicacion no se podra actualizar la localización")
-        );
-      });
+    //     this.utils.showAlert(
+    //       this.translateService.instant("Ubicacion desactivada"),
+    //       this.translateService.instant("Sin acceso a la ubicacion no se podra actualizar la localización")
+    //     );
+    //   });
   }
   SearchLocalizacion() {
     this.InputValue(this.direccionSeleccionada);
@@ -412,7 +403,7 @@ export class BuscadorPublicacionesPage implements OnInit {
         throw new Error(res);
       }
     } catch (error) {
-      this.utils.showAlert(this.translateService.instant("¡Vaya!"), 
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"),
       this.translateService.instant("Ha ocurrido un error en el servidor"));
 
       console.log(error);
@@ -451,38 +442,30 @@ export class BuscadorPublicacionesPage implements OnInit {
   }
   async ShowLocation(result) {
     if (this.markerMaps !== undefined && this.markerMaps !== null) {
-      this.markerMaps.remove();
+      // this.markerMaps.destroy();// TODO
     }
     let loc = this.SetLocalizacionValue(result[0]);
     // this.SearchLocalizacionSend = loc;
-    let Selectedposition: ILatLng = {
+    let Selectedposition: any = {
       lat: result[0].latitude,
       lng: result[0].longitude,
     };
 
-    let iconpin: MarkerIcon = {
-      url: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
-      size: {
-        width: 40,
-        height: 60,
-      },
-    };
-
-    let options = {
-      position: Selectedposition,
-      iconpin: iconpin,
-      title: loc,
-    };
-
-    this.map.moveCamera({
-      target: {
+    this.map.setCamera({
+      coordinate: {
         lat: result[0].latitude,
         lng: result[0].longitude,
       },
     });
 
-    this.markerMaps = await this.map.addMarker(options);
-    this.markerMaps.showInfoWindow();
+await this.map.addMarker({ coordinate: Selectedposition,
+      iconUrl: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
+        iconSize: {
+          width: 40,
+          height: 60,
+        },
+      title: loc,});
+    // this.markerMaps.showInfoWindow();
   }
 
   SetLocalizacionValue(resultados: any): string {

@@ -6,24 +6,7 @@ import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  ILatLng,
-  Spherical,
-  GoogleMapsMapTypeId,
-  MyLocation,
-  Environment,
-  GoogleMapOptions,
-  MarkerIcon,
-  MarkerCluster,
-  MarkerClusterIcon,
-  HtmlInfoWindow,
-  Circle,
-} from "@ionic-native/google-maps/ngx";
+
 import {
   NativeGeocoder,
   NativeGeocoderOptions,
@@ -31,6 +14,7 @@ import {
 } from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
 import { TranslateService } from "@ngx-translate/core";
+import { GoogleMap } from "@capacitor/google-maps";
 
 // import {
 //   Environment,
@@ -39,7 +23,7 @@ import { TranslateService } from "@ngx-translate/core";
 //   GoogleMaps,
 //   GoogleMapsEvent,
 // } from "@ionic-native/google-maps";
-declare var google;
+declare var plugins;
 @Component({
   selector: "app-edit-question",
   templateUrl: "./edit-question.page.html",
@@ -81,7 +65,7 @@ export class EditQuestionPage implements OnInit {
     private modalController: ModalController,
     private translateService: TranslateService
   ) {
-    this.googleAutocomplete = new google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
   }
 
@@ -107,63 +91,109 @@ export class EditQuestionPage implements OnInit {
     this.nav.back();
   }
   public async loadMap() {
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
-    });
-    Environment.setBackgroundColor("white");
+    try {
+      const mapElement = document.getElementById('map-div') as HTMLElement;
 
-    //  let myPosition= await GoogleMap.getMyLocation();
 
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          // lat: 40.712784,
-          // lng: -74.005941
-
-          lat: 37.789441,
-          lng: -122.419397,
+      this.map = await GoogleMap.create({
+        id: 'map-div',
+        element: mapElement,
+        apiKey: 'AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y',
+        config: {
+          center: { lat: 37.789441, lng: -122.419397 },
+          zoom: 12,
+          // tilt: 30,
         },
-        zoom: 12,
-        tilt: 30,
-      },
-    };
-
-    this.map = GoogleMaps.create("map-div", mapOptions);
-
-    this.map.getMyLocation().then((res) => {
-      this.map.moveCamera({
-        target: res.latLng,
       });
-    });
 
-    console.log(this.map);
+      console.log('Map created successfully!', this.map);
 
-    this.map
-      .one(GoogleMapsEvent.MAP_READY)
-      .then(() => {
-        this.map
-          .getMyLocation()
-          .then((response) => {
-            console.log("Respuesta Localizacion Camara", response);
 
-            this.map.moveCamera({
-              target: response.latLng,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
+      await this.map.enableCurrentLocation(true);
 
-        this.utils.showAlert(
-          this.translateService.instant("Ubicacion desactivada"),
-          this.translateService.instant("Sin acceso a la ubicacion la publicacion no se subira correctamente")
-        );
-      });
+
+      // await this.map;
+      // let currentPosition = this.map.location
+      // console.log('Current Position:', currentPosition);
+
+
+      // await this.map.setCamera({
+      //   coordinate: {
+      //     lat: currentPosition.latitude,
+      //     lng: currentPosition.longitude,
+      //   },
+      //   zoom: 15,
+      // });
+
+      console.log('Camera moved to user location.');
+    } catch (error) {
+      console.error('Error initializing map:', error);
+      this.utils.showAlert(
+        this.translateService.instant('Ubicación desactivada'),
+        this.translateService.instant(
+          'Sin acceso a la ubicación, la publicación no se subirá correctamente'
+        )
+      );
+    }
   }
+  // public async loadMap() {
+  //   Environment.setEnv({
+  //     API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
+  //     API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
+  //   });
+  //   Environment.setBackgroundColor("white");
+
+  //   //  let myPosition= await GoogleMap.getMyLocation();
+
+  //   let mapOptions: GoogleMapOptions = {
+  //     camera: {
+  //       target: {
+  //         // lat: 40.712784,
+  //         // lng: -74.005941
+
+  //         lat: 37.789441,
+  //         lng: -122.419397,
+  //       },
+  //       zoom: 12,
+  //       tilt: 30,
+  //     },
+  //   };
+
+  //   this.map = GoogleMaps.create("map-div", mapOptions);
+
+  //   this.map.getMyLocation().then((res) => {
+  //     this.map.moveCamera({
+  //       target: res.latLng,
+  //     });
+  //   });
+
+  //   console.log(this.map);
+
+  //   this.map
+  //     .one(GoogleMapsEvent.MAP_READY)
+  //     .then(() => {
+  //       this.map
+  //         .getMyLocation()
+  //         .then((response) => {
+  //           console.log("Respuesta Localizacion Camara", response);
+
+  //           this.map.moveCamera({
+  //             target: response.latLng,
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+
+  //       this.utils.showAlert(
+  //         this.translateService.instant("Ubicacion desactivada"),
+  //         this.translateService.instant("Sin acceso a la ubicacion la publicacion no se subira correctamente")
+  //       );
+  //     });
+  // }
 
   MapSwitch(option) {
     switch (option) {
@@ -201,7 +231,7 @@ export class EditQuestionPage implements OnInit {
     }
   }
   async UnloadMap() {
-    await this.map.remove();
+    await this.map.destroy();
     let mpRow = document.getElementById("map-row-vis");
 
     mpRow.style.display = "none";
@@ -237,7 +267,7 @@ export class EditQuestionPage implements OnInit {
   //     console.log(error);
   //   }
   // }
-  
+
   public async adjuntarImagen(): Promise<void> {
     const options: CameraOptions = {
       quality: 100,
@@ -248,14 +278,14 @@ export class EditQuestionPage implements OnInit {
       allowEditing: true,
       correctOrientation: true,
     };
-  
+
     try {
       const capturedPhoto = await Camera.getPhoto(options);
-  
+
       if (capturedPhoto.dataUrl) {
         this.base64img = capturedPhoto.dataUrl;
         this.form.patchValue({ archivo: this.base64img });
-  
+
         console.log(capturedPhoto.dataUrl);
       } else {
         this.utils.showAlert(this.translateService.instant("Error al obtener imagen"), this.translateService.instant("No se pudo obtener la imagen"));
@@ -265,12 +295,12 @@ export class EditQuestionPage implements OnInit {
       this.utils.showAlert(this.translateService.instant("Error al obtener imagen"), error.message);
     }
   }
-  
-  
+
+
   deleteImage(){
     this.base64img=null;
     this.form.patchValue({ archivo: "" });
-  
+
   }
   async openCropImageModal() {
 
@@ -459,7 +489,7 @@ export class EditQuestionPage implements OnInit {
         console.log(error);
       }
     } else {
-      this.utils.showAlert(this.translateService.instant("¡Vaya!"), 
+      this.utils.showAlert(this.translateService.instant("¡Vaya!"),
       this.translateService.instant("La fecha y la decada no coinciden"));
     }
   }
@@ -539,8 +569,8 @@ export class EditQuestionPage implements OnInit {
         console.log("FORM IS=>");
         console.log(this.form.value);
 
-        this.map.moveCamera({
-          target: this.positionSelected,
+        this.map.setCamera({
+          coordinate: this.positionSelected,
           zoom: 20,
         });
       })

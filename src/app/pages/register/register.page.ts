@@ -1,3 +1,4 @@
+/// <reference types="google.maps" />
 import { Component, OnInit } from "@angular/core";
 import {
   // Events,
@@ -41,11 +42,11 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private modalCtrl: ModalController,
     // private events: Events, // TODO
-    
+
     private auth: AuthenticationService,
     private translateService: TranslateService
   ) {
-    
+
   }
 
   async ngOnInit() {
@@ -228,23 +229,23 @@ export class RegisterPage implements OnInit {
 
   /**
    * ========================REGISTRO CON FACEBOOK===================================
-   * 
+   *
    * 1. Registrar la nueva app en : https://developers.facebook.com/apps/
-   * 2. Añadir el Login/Registro con Facebook, para Android y/o iOS : 
+   * 2. Añadir el Login/Registro con Facebook, para Android y/o iOS :
    *    - Seguir los diferentes pasos para la creación de de los hash (debug and release) (PARA ANDROID)
    *    ---- EJEMPLO GENERACIÓN DEL HASH : keytool -exportcert -alias ALIAS_O_ALIAS_DEBUG -keystore "RUTA_DEBUG_KEY_O_RELEASE_KEY" | "RUTA_OPENSSL" sha1 -binary | "RUTA_OPENSSL" base64
-   * 
+   *
    * keytool -exportcert -alias androiddebugkey -keystore "C:\Users\USERNAME\.android\debug.keystore" | "PATH_TO_OPENSSL_LIBRARY\bin\openssl" sha1 -binary | "PATH_TO_OPENSSL_LIBRARY\bin\openssl" base64
 
    * 3. Recoger el identificador de la aplicación (en facebook developers, dentro de la app, en la zona superior izquierda)
-   * 4. AÑADIR EL PLUGIN : ionic cordova plugin add cordova-plugin-facebook-connect --variable APP_ID="NUESTRA_VARIABLE" --variable APP_NAME="NOMBRE_APP" --variable FACEBOOK_HYBRID_APP_EVENTS="false" 
+   * 4. AÑADIR EL PLUGIN : ionic cordova plugin add cordova-plugin-facebook-connect --variable APP_ID="NUESTRA_VARIABLE" --variable APP_NAME="NOMBRE_APP" --variable FACEBOOK_HYBRID_APP_EVENTS="false"
    * 5. Dentro del developers : Revisión de la aplicación > Permisos y funciones
    *      - Dar permiso a public_profile
    *      - Dar permiso a email
    *      - Realizar la comprobación de uso de datos (tendremos una alerta en naranja).
-   * 
+   *
    * 6. MODIFICACIÓN DEL PLUGIN PARA QUE SÓLO LANZE LA WEB Y NO FALLE AL TENER INSTALADA LA APP DE FACEBOOK
-   * 
+   *
    *    6.1. Ir al archivo dentro de plugins : cordova-plugin-facebook4 > src > android > ConnectPlugin.java
    *    6.2. Importar : import com.facebook.login.LoginBehavior;
    *    6.3. Buscar : LoginManager.getInstance().logInWithReadPermissions(cordova.getActivity(), permissions);

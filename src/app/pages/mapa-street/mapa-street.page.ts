@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Environment, GoogleMap, GoogleMaps, GoogleMapsEvent, MyLocation, StreetViewCameraPosition, StreetViewLocation } from '@ionic-native/google-maps';
+// import { Environment, GoogleMap, GoogleMaps, GoogleMapsEvent, MyLocation, StreetViewCameraPosition, StreetViewLocation } from '@ionic-native/google-maps';
 import { HistoricPlace } from 'src/app/models/historic-place';
 import { Geolocation } from '@capacitor/geolocation';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { UtilitiesService } from 'src/app/services/utilities.service';
 import { ApiService } from 'src/app/services/api.service';
-
-declare var google;
+import { GoogleMap } from '@capacitor/google-maps';
+declare let plugins : any;
 @Component({
   selector: 'app-mapa-street',
   templateUrl: './mapa-street.page.html',
@@ -35,10 +35,10 @@ export class MapaStreetPage implements OnInit {
 
 
   public setCamera() {
-    this.map.getMyLocation()
+    this.map.getMapBounds()
       .then(response => {
-        this.map.moveCamera({
-          target: response.latLng
+        this.map.setCamera({
+          coordinate: response.center
         });
       })
       .catch(error => {
@@ -48,70 +48,79 @@ export class MapaStreetPage implements OnInit {
 
   public streetView():void{
     console.log("entra en street view");
-    
 
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y",
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y"
-    });
+
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y",
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y"
+    // });
 
     let div = document.getElementById("pano_canvas1");
 
-    this.panorama= GoogleMaps.createPanorama('pano_canvas1', {
-      camera: {
-        target: {lat: 42.345573, lng: -71.098326},
+    this.panorama = GoogleMap.create({
+      element: div,
+      id: 'panomap1',
+      apiKey: 'AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y',
+      config: {
+        center: { lat: 42.345573, lng: -71.098326 },
+        zoom: 1,
       },
-    
-    });
-
-    this.panorama.one(GoogleMapsEvent.PANORAMA_READY).then((result) => {
+    }).then((result) => {
       console.log('panorama is ready!', result);
     }).catch(error => {
       console.log("error");
-      
+
       console.log(error);
     });
-    
-    
-    // Move the map camera when the panorama camera has been moved.
-    this.panorama.on(GoogleMapsEvent.PANORAMA_LOCATION_CHANGE).subscribe((params:any[]) => {
-      let location: StreetViewLocation = params[0];
-    
-    });
-    
-    // Change the marker bearing when the panorama camera is panning.
-    this.panorama.on(GoogleMapsEvent.PANORAMA_CAMERA_CHANGE).subscribe((params: any[]) => {
-      let camera: StreetViewCameraPosition = params[0];
-    
-    });
+
+    // this.panorama.one(.PANORAMA_READY).then((result) => {
+    //   console.log('panorama is ready!', result);
+    // }).catch(error => {
+    //   console.log("error");
+
+    //   console.log(error);
+    // });
+
+
+    // // Move the map camera when the panorama camera has been moved.
+    // this.panorama.on(GoogleMapsEvent.PANORAMA_LOCATION_CHANGE).subscribe((params:any[]) => {
+    //   let location: StreetViewLocation = params[0];
+
+    // });
+
+    // // Change the marker bearing when the panorama camera is panning.
+    // this.panorama.on(GoogleMapsEvent.PANORAMA_CAMERA_CHANGE).subscribe((params: any[]) => {
+    //   let camera: StreetViewCameraPosition = params[0];
+
+    // });
 
   }
 
   generatePanorama(): void {
     this.geolocation.getCurrentPosition((resp) =>{
       let userLocation = {lat: resp.coords.latitude, lng: resp.coords.longitude};
-      var streetviewService = new google.maps.StreetViewService;
+      var streetviewService = new plugins.google.maps.StreetViewService;
       streetviewService.getPanorama({
         location: userLocation,
-        preference: google.maps.StreetViewPreference.NEAREST,
+        preference: plugins.google.maps.StreetViewPreference.NEAREST,
         radius: 100},
         function(result, status) {
           console.log("Adjusted latitude: ", result.location.latLng.lat(),
                       "\nAdjusted longitude: ", result.location.latLng.lng());
-          this.panorama = new google.maps.StreetViewPanorama(document.getElementById('pano_canvas1'), {
+          this.panorama = new plugins.google.maps.StreetViewPanorama(document.getElementById('pano_canvas1'), {
             position: result.location.latLng,
             pov: {heading: 165, pitch: 0},
             zoom: 1
           });
         });
-      console.log(resp);     
-      this.getAddressFromCoords(userLocation); 
-      
+      console.log(resp);
+      this.getAddressFromCoords(userLocation);
+
       this.apiService.publicacionesLatitudLongitud(userLocation).subscribe((publicaciones) =>{
         this.publicaciones = publicaciones
       });
     })
-   
+
   }
 
 

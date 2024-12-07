@@ -6,30 +6,15 @@ import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  ILatLng,
-  Spherical,
-  GoogleMapsMapTypeId,
-  MyLocation,
-  Environment,
-  GoogleMapOptions,
-  MarkerIcon,
-  MarkerCluster,
-  MarkerClusterIcon,
-  HtmlInfoWindow,
-  Circle,
-} from "@ionic-native/google-maps/ngx";
+
 import {
   NativeGeocoder,
   NativeGeocoderOptions,
   NativeGeocoderResult,
 } from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
+import { GoogleMap, MapType } from "@capacitor/google-maps";
+import { CreateMapArgs } from "@capacitor/google-maps/dist/typings/implementation";
 
 // import {
 //   Environment,
@@ -38,7 +23,7 @@ import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-im
 //   GoogleMaps,
 //   GoogleMapsEvent,
 // } from "@ionic-native/google-maps";
-declare var google;
+declare let plugins: any;
 
 @Component({
   selector: "app-new-question",
@@ -86,7 +71,7 @@ export class NewQuestionPage implements OnInit {
     private navCtrl: NavController,
     private modcontrol: ModalController
   ) {
-    this.googleAutocomplete = new google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
   }
 
@@ -181,62 +166,71 @@ export class NewQuestionPage implements OnInit {
   public async loadMap() {
     console.log("CARGANDO MAPA");
 
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
-    });
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDnVEq799iMJ1j0FjyVA2CB5yriBuPHKdE",
+    // });
     // Environment.setBackgroundColor("white");
 
     //  let myPosition= await GoogleMap.getMyLocation();
 
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 0,
-          lng: 0,
+    let mapOptions: CreateMapArgs = {
+      id: 'map-div',
+      apiKey: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+      element: document.getElementById("map-div"),
+      config: {
+        center:{
+           lat: 0,
+        lng: 0,
         },
         zoom: 12,
-        tilt: 30,
+
+        //  mapTypeId: MapType.Satellite
       },
+
     };
 
-    this.map = GoogleMaps.create("map-div", mapOptions);
-
-    this.map.getMyLocation().then((res) => {
-      this.map.moveCamera({
-        target: res.latLng,
-      });
-    });
-
-    console.log(this.map);
-
-    this.map
-      .one(GoogleMapsEvent.MAP_READY)
-      .then(() => {
-        this.map.setMapTypeId("MAP_TYPE_SATELLITE");
-        this.map.setMyLocationEnabled(true);
-        this.map.setMyLocationButtonEnabled(true);
+    this.map = await GoogleMap.create(mapOptions, (readyCallback)=>{
+      // this.map.setMapTypeId("MAP_TYPE_SATELLITE");
+        this.map.enableCurrentLocation(true);
+      this.map.setOnMyLocationClickListener(
+        (event) => { console.log(event) }
+      );
         this.map
-          .getMyLocation()
+          .getMapBounds()
           .then((response) => {
             console.log("Respuesta Localizacion Camara", response);
 
-            this.map.moveCamera({
-              target: response.latLng,
+            this.map.setCamera({
+              coordinate: response.center,
             });
           })
           .catch((error) => {
             console.log(error);
           });
-      })
-      .catch((error) => {
-        console.log(error);
+    });
 
-        this.utils.showAlert(
-          "Ubicacion desactivada",
-          "Sin acceso a la ubicacion la publicacion no se subira correctamente"
-        );
-      });
+    // this.map.getMyLocation().then((res) => {
+    //   this.map.moveCamera({
+    //     target: res.latLng,
+    //   });
+    // });
+
+    console.log(this.map);
+
+    // this.map
+    //   .one(GoogleMapsEvent.MAP_READY)
+    //   .then(() => {
+
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+
+    //     this.utils.showAlert(
+    //       "Ubicacion desactivada",
+    //       "Sin acceso a la ubicacion la publicacion no se subira correctamente"
+    //     );
+    //   });
   }
 
   //<---------------------- FIN METODO map---------------------->
@@ -346,16 +340,16 @@ export class NewQuestionPage implements OnInit {
       allowEditing: true,
       correctOrientation: true,
     };
-  
+
     try {
       const capturedPhoto = await Camera.getPhoto(options);
-  
+
       if (capturedPhoto.dataUrl) {
         this.base64img = capturedPhoto.dataUrl;
         this.form.patchValue({ archivo: this.base64img });
-  
+
         console.log(capturedPhoto.dataUrl);
-  
+
         this.chargeMap();
       } else {
         this.utils.showAlert("Error al obtener imagen", "No se pudo obtener la imagen");
@@ -533,8 +527,8 @@ export class NewQuestionPage implements OnInit {
         console.log("FORM IS=>");
         console.log(this.form.value);
 
-        this.map.moveCamera({
-          target: this.positionSelected,
+        this.map.setCamera({
+          coordinate: this.positionSelected,
           zoom: 20,
         });
       })
@@ -573,7 +567,7 @@ export class NewQuestionPage implements OnInit {
     if (this.map == undefined) {
       console.log("nomap");
     } else {
-      await this.map.remove();
+      await this.map.destroy();
     }
 
     this.base64img = undefined;

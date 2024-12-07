@@ -2,14 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     namespace "com.xerintel.timemapp5872"
-    compileSdkVersion rootProject.ext.compileSdkVersion
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.xerintel.timemapp5872"
         minSdkVersion rootProject.ext.minSdkVersion
-        minSdk rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        targetSdk rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -54,14 +51,4 @@ try {
     }
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
-}
-configurations.configureEach {
-  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-    def requested = details.requested
-    if (requested.group == 'com.android.support') {
-      if (!requested.name.startsWith("multidex")) {
-        details.useVersion '27.1.0'
-      }
-    }
-  }
 }

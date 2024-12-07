@@ -5,24 +5,24 @@ import { Ingrediente } from "src/app/models/Ingrediente";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { Camera, CameraOptions } from "@capacitor/camera";
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  ILatLng,
-  Spherical,
-  GoogleMapsMapTypeId,
-  MyLocation,
-  Environment,
-  GoogleMapOptions,
-  MarkerIcon,
-  MarkerCluster,
-  MarkerClusterIcon,
-  HtmlInfoWindow,
-  Circle,
-} from "@ionic-native/google-maps/ngx";
+// import {
+//   GoogleMaps,
+//   GoogleMap,
+//   GoogleMapsEvent,
+//   Marker,
+//   GoogleMapsAnimation,
+//   ILatLng,
+//   Spherical,
+//   GoogleMapsMapTypeId,
+//   MyLocation,
+//   Environment,
+//   GoogleMapOptions,
+//   MarkerIcon,
+//   MarkerCluster,
+//   MarkerClusterIcon,
+//   HtmlInfoWindow,
+//   Circle,
+// } from "@ionic-native/google-maps/ngx";
 import {
   NativeGeocoder,
   NativeGeocoderOptions,
@@ -30,7 +30,9 @@ import {
 } from "@awesome-cordova-plugins/native-geocoder/ngx";
 import { ModalController, NavController } from "@ionic/angular";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
-declare var google;
+import { GoogleMap } from "@capacitor/google-maps";
+import { CreateMapArgs } from "@capacitor/google-maps/dist/typings/implementation";
+declare let plugins: any;
 
 @Component({
   selector: "app-subir-recetas",
@@ -64,10 +66,10 @@ export class SubirRecetasPage implements OnInit {
     private nav: NavController,
     private modalController: ModalController
   ) {
-    this.googleAutocomplete = new google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
   }
-  
+
 
   async ngOnInit() {
     const    urlPattern = 'https?://.+';
@@ -325,7 +327,7 @@ export class SubirRecetasPage implements OnInit {
    */
   async removeImage() {
     if (this.map != undefined) {
-      await this.map.remove();
+      await this.map.destroy();
     }
     this.base64img = undefined;
   }
@@ -333,7 +335,7 @@ export class SubirRecetasPage implements OnInit {
 
 
 
-// Metodo crop 
+// Metodo crop
   async openCropImageModal() {
 
     const modal = await this.modalController.create({
@@ -449,8 +451,8 @@ export class SubirRecetasPage implements OnInit {
         console.log("FORM IS=>");
         console.log(this.form.value);
 
-        this.map.moveCamera({
-          target: this.positionSelected,
+        this.map.setCamera({
+          coordinate: this.positionSelected,
           zoom: 20,
         });
       })
@@ -492,46 +494,37 @@ export class SubirRecetasPage implements OnInit {
   // CARGAR MAPA
 
   public async loadMap() {
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-    });
-    Environment.setBackgroundColor("white");
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+    // });
+    // Environment.setBackgroundColor("white");
+    let mapOptions: CreateMapArgs = {
+      id: "",
+      apiKey: '',
+      element: document.getElementById("map-div-1010"),
+      config: {
+        center: {
           lat: 39.416775,
           lng: -3.703,
         },
         zoom: 15,
-        tilt: 30,
+
       },
     };
 
-    this.map = await GoogleMaps.create("map-div-1010", mapOptions);
+    this.map = await GoogleMap.create(mapOptions, (mapready: any)=>{
+    //  for(let offer of this.offers){
+    //     this.getCoordsFromAddress(offer);
+    //     console.log(offer.location);
 
-    this.map.getMyLocation().then((res) => {
-      this.map.moveCamera({
-        target: res.latLng,
-      });
+    //   }
     });
-
-    this.map
-      .one(GoogleMapsEvent.MAP_READY)
-      .then(() => {
-        /*  for(let offer of this.offers){
-        this.getCoordsFromAddress(offer);
-        console.log(offer.location);
-
-      } */
-      })
-      .catch((error) => {
-        console.log(error);
-
-        this.utilities.showAlert(
-          "Ubicacion desactivada",
-          "Sin acceso a la ubicacion la publicacion no se subira correctamente"
-        );
-      });
   }
+
+    // this.map.getMyLocation().then((res) => {
+    //   this.map.moveCamera({
+    //     target: res.latLng,
+    //   });
+    // });
 }

@@ -1,9 +1,8 @@
-import { GoogleMap } from "@capacitor/google-maps";
-import { LatLng } from "@capacitor/google-maps/dist/typings/definitions";
+import { GoogleMap } from "@capacitor-community/google-maps";
 
 export interface MapState {
   Map?: GoogleMap;
-  PositionSelected: LatLng;
+  PositionSelected: any;
   PositionName: string;
   MapIsVisible: boolean;
 }

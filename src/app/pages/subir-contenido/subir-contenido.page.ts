@@ -14,24 +14,24 @@ import {
 } from "@awesome-cordova-plugins/file-transfer/ngx";
 // import { DomSanitizer } from "@angular/platform-browser";
 import { File } from "@awesome-cordova-plugins/file/ngx";
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  ILatLng,
-  Spherical,
-  GoogleMapsMapTypeId,
-  MyLocation,
-  Environment,
-  GoogleMapOptions,
-  MarkerIcon,
-  MarkerCluster,
-  MarkerClusterIcon,
-  HtmlInfoWindow,
-  Circle,
-} from "@ionic-native/google-maps/ngx";
+// import {
+//   GoogleMaps,
+//   GoogleMap,
+//   GoogleMapsEvent,
+//   Marker,
+//   GoogleMapsAnimation,
+//   ILatLng,
+//   Spherical,
+//   GoogleMapsMapTypeId,
+//   MyLocation,
+//   Environment,
+//   GoogleMapOptions,
+//   MarkerIcon,
+//   MarkerCluster,
+//   MarkerClusterIcon,
+//   HtmlInfoWindow,
+//   Circle,
+// } from "@ionic-native/google-maps/ngx";
 // BK:NotInUse Not in use.
 // import { Crop } from "@ionic-native/crop/ngx";
 import {
@@ -55,8 +55,10 @@ import { UtilitiesService } from "src/app/services/utilities.service";
 import { environment } from "src/environments/environment";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
 import { FilePicker, PickFilesOptions} from '@capawesome/capacitor-file-picker';
+import { GoogleMap, MapType } from "@capacitor/google-maps";
+import { CreateMapArgs } from "@capacitor/google-maps/dist/typings/implementation";
 
-declare var google;
+declare let plugins: any;
 
 @Component({
   selector: "app-subir-contenido",
@@ -123,7 +125,7 @@ export class SubirContenidoPage implements OnInit {
     resultType: CameraResultType.DataUrl, // Use DataUrl for data URI
     source: CameraSource.Photos, // Use Photos for PhotoLibrary
   };
-  
+
   CameraVideoOptions: CameraOptions = {
     quality: 100,
     resultType: CameraResultType.Uri, // Use Uri for file URI
@@ -165,7 +167,7 @@ export class SubirContenidoPage implements OnInit {
     // private crop: Crop,
     private file: File
   ) {
-    this.googleAutocomplete = new google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
     this.platform.is("android")
       ? this.CameraImageOptions.allowEditing == false
@@ -250,54 +252,61 @@ export class SubirContenidoPage implements OnInit {
   }
 
   public async loadMap() {
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-    });
+    // Environment.setEnv({
+    //   API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+    //   API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
+    // });
 
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 36.67929,
-          lng: -6.1241,
+    let mapOptions: CreateMapArgs = {
+      id: 'createMap1',
+      apiKey: 'AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE',
+      element: document.getElementById('map_canvas'),
+      config:{
+        // mapTypeId: MapType.Satellite,
+          center: {
+            lat: 36.67929,
+            lng: -6.1241,
+          },
+          zoom: 15,
+          // tilt: 30,
         },
-        zoom: 15,
-        tilt: 30,
-      },
-    };
+      }
 
     setTimeout(async () => {
-      this.map = await GoogleMaps.create("map_canvas", mapOptions);
+    await GoogleMap.create(mapOptions, ()=>{
 
-      this.map.getMyLocation().then((res) => {
-        this.map.moveCamera({
-          target: res.latLng,
-        });
-      });
+      }).then(() => {
+        // this.map.setMapTypeId("MAP_TYPE_SATELLITE");
+        // this.map.setMyLocationEnabled(true);
+        // this.map.setMyLocationButtonEnabled(true);
+      })
+      .catch((error) => {
+        console.log(error);
 
-      this.map
-        .one(GoogleMapsEvent.MAP_READY)
-        .then(() => {
-          this.map.setMapTypeId("MAP_TYPE_SATELLITE");
-          this.map.setMyLocationEnabled(true);
-          this.map.setMyLocationButtonEnabled(true);
-        })
-        .catch((error) => {
-          console.log(error);
+        // this.utilities.showAlert(
+        //   "Ubicacion desactivada",
+        //   "Sin acceso a la ubicacion la publicacion no se subira correctamente"
+        // );
+      });;
 
-          // this.utilities.showAlert(
-          //   "Ubicacion desactivada",
-          //   "Sin acceso a la ubicacion la publicacion no se subira correctamente"
-          // );
-        });
-    }, 1000);
-  }
+    //   this.map.getMyLocation().then((res) => {
+    //     this.map.moveCamera({
+    //       target: res.latLng,
+    //     });
+    //   });
+
+    //   this.map
+    //     .one(GoogleMapsEvent.MAP_READY)
+
+    // }, 1000);
+  })
+}
 
   async removeImage() {
     console.log("Entra en el borrar");
 
     if (this.map != undefined) {
-      await this.map.remove();
+      await this.map.destroy();
     }
     this.base64img = null;
     this.form.get("archivo").setValue(null);
@@ -362,14 +371,14 @@ export class SubirContenidoPage implements OnInit {
   //       console.log(e);
   //     });
   // }
-  
+
   public async GetMp3() {
   console.log("Entra donde debe");
 
   try {
     const options: PickFilesOptions = {
       "types": ['audio/*'],
-      multiple: false,
+      limit: 1
     };
 
     const result = await FilePicker.pickFiles(options);
@@ -420,8 +429,8 @@ export class SubirContenidoPage implements OnInit {
         console.log("FORM IS=>");
         console.log(this.form.value);
 
-        this.map.moveCamera({
-          target: this.positionSelected,
+        this.map.setCamera({
+          coordinate: this.positionSelected,
           zoom: 20,
         });
       })
@@ -533,7 +542,7 @@ export class SubirContenidoPage implements OnInit {
       console.log("Is image, returnig true");
       return true;
     }
-    else{ 
+    else{
       return false;
     }
 
@@ -710,7 +719,7 @@ export class SubirContenidoPage implements OnInit {
         this.MapIsVisible = true;
         await this.loadMap()
           .then((res) => {
-            Environment.setBackgroundColor("#FAF5F0");
+            // Environment.setBackgroundColor("#FAF5F0");
             console.log(res);
             console.log("Mapa cargado correctamente");
           })
@@ -732,7 +741,7 @@ export class SubirContenidoPage implements OnInit {
       }
     } else {
       if (this.map != undefined) {
-        await this.map.remove();
+        await this.map.destroy();
       }
       this.MapIsVisible = false;
       this.resetMapControlsValues();

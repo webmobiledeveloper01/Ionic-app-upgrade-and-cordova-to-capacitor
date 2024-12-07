@@ -15,24 +15,7 @@ import { MapState } from "src/app/models/MapState";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  ILatLng,
-  Spherical,
-  GoogleMapsMapTypeId,
-  MyLocation,
-  Environment,
-  GoogleMapOptions,
-  MarkerIcon,
-  MarkerCluster,
-  MarkerClusterIcon,
-  HtmlInfoWindow,
-  Circle,
-} from "@ionic-native/google-maps/ngx";
+
 import { Storage } from "@ionic/storage-angular";
 import {
   NativeGeocoder,
@@ -47,6 +30,7 @@ import {
 import { environment } from "src/environments/environment";
 import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-imagen.page";
 import { TranslateService } from "@ngx-translate/core";
+import { GoogleMap, MapType, Marker } from "@capacitor/google-maps";
 declare var Google: any;
 
 @Component({
@@ -81,7 +65,7 @@ export class EditarPublicacionPage implements OnInit {
   CameraVideoOptions: CameraOptions = {
     quality: 100,
     resultType: CameraResultType.DataUrl,
-   
+
     // encodingType: this.camera.EncodingType.JPEG,
  source: CameraSource.Camera,
     width: 1920,
@@ -239,7 +223,7 @@ export class EditarPublicacionPage implements OnInit {
     if (this.map != null || typeof this.map != "undefined") {
       // console.log(typeof this.map);
       await this.map
-        .remove()
+        .destroy()
         .then(() => {
           console.table(this.map);
           this.HideMapDiv();
@@ -259,77 +243,77 @@ export class EditarPublicacionPage implements OnInit {
       });
   }
   public async loadMap() {
-    // this.MustShowMap = true;
-    this.ToggleMapDiv();
-    Environment.setEnv({
-      API_KEY_FOR_BROWSER_DEBUG: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-      API_KEY_FOR_BROWSER_RELEASE: "AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE",
-    });
-    Environment.setBackgroundColor("white");
-    let mapOptions: GoogleMapOptions;
+    try {
+      // Ensure the map container is toggled and visible
+      this.ToggleMapDiv();
 
-    mapOptions = {
-      camera: {
-        target: {
-          lat: 0,
-          lng: 0,
+      // Create the map instance
+      const mapElement = document.getElementById('map-container') as HTMLElement;
+
+      this.map = await GoogleMap.create({
+        id: 'my-map', // Unique identifier for the map
+        element: mapElement,
+        apiKey: 'AIzaSyDmfNZjzV2rN3hJZuMihXZIiB3Hjkw0LtE',
+        config: {
+          center: {
+            lat: this.Post?.lat || 0,
+            lng: this.Post?.longitud || 0,
+          },
+          zoom: 15,
+          // mapTypeId: MapType.Satellite,
         },
-        zoom: 15,
-        tilt: 30,
-      },
-    };
-
-    this.map = await GoogleMaps.create("map-container", mapOptions);
-
-    if (this.Post.lat != null && this.Post.longitud != null) {
-      this.map.moveCamera({
-        target: { lat: this.Post.lat, lng: this.Post.longitud },
       });
 
-      let iconpin: MarkerIcon = {
-        url: environment.domainUrl + "storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png",
-        size: {
-          width: 40,
-          height: 60,
-        },
-      };
+      console.log('Map created successfully!');
 
-      this.MarkerInstance = this.map.addMarkerSync({
-        animation: "DROP",
-        icon: iconpin,
-        title: "Ubicacion actual",
-        position: { lat: this.Post.lat, lng: this.Post.longitud },
-      });
-
-      this.MarkerInstance.showInfoWindow();
-    } else {
-      this.map.getMyLocation().then((res) => {
-        this.map.moveCamera({
-          target: res.latLng,
+      // Add a marker if lat and lng are defined
+      if (this.Post?.lat && this.Post?.longitud) {
+        this.Markertmp = await this.map.addMarker({
+          coordinate: { lat: this.Post.lat, lng: this.Post.longitud },
+          title: 'Ubicación actual',
+          snippet: 'Este es el marcador de tu ubicación',
+          iconUrl: `${environment.domainUrl}storage/QTYH7JKuCqj64pYlepLvNIozVJ4cboTsRjrPGpxz.png`,
+          iconSize: { width: 40, height: 60 },
         });
+
+        // Show the marker's info window
+        await this.Markertmp?.showInfoWindow();
+      } else {
+        // Center the map on the user's current location
+       await this.map.enableCurrentLocation(true);
+       const currentPosition = this.map.getMapBounds();
+        await this.map.setCamera({
+          coordinate: {
+            lat: (await currentPosition).center.lat,
+            lng: (await currentPosition).center.lng,
+          },
+          zoom: 15,
+        });
+      }
+
+      // Add a click event listener for setting a new marker
+      this.map.setOnMapClickListener(async (event) => {
+        console.log('Map clicked:', event);
+
+        const newCoordinates = { lat: event.latitude, lng: event.longitude };
+
+        // Add or update the marker
+        await this.SetNewMarker(newCoordinates);
+
+        // Update form values based on the clicked position
+        this.SetValuesOnForm(newCoordinates);
       });
+
+      console.log('Map setup completed!');
+    } catch (error) {
+      console.error('Error initializing map:', error);
+      this.utils.showAlert(
+        this.translateService.instant('Ubicación desactivada'),
+        this.translateService.instant(
+          'Sin acceso a la ubicación no se podrá actualizar la localización'
+        )
+      );
     }
-
-    this.map
-      .one(GoogleMapsEvent.MAP_READY)
-      .then(async () => {
-        this.map.setMapTypeId("MAP_TYPE_SATELLITE");
-        this.map.setMyLocationEnabled(true);
-        this.map.setMyLocationButtonEnabled(true);
-
-        this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((res) => {
-          this.SetNewMarker(res);
-          this.SetValuesOnForm(res);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-
-        this.utils.showAlert(
-          this.translateService.instant("Ubicacion desactivada"),
-          this.translateService.instant("Sin acceso a la ubicacion no se podra actualizar la localización")
-        );
-      });
   }
 
   ToggleMapDiv() {
@@ -428,27 +412,24 @@ export class EditarPublicacionPage implements OnInit {
       this.Markertmp = null;
     }
 
-    let iconpin: MarkerIcon = {
-      url: environment.domainUrl + "storage/nhWaZo9RlQX8pXLfgrvrhz4jJAJqYcoLhoFzDDOZ.png",
-      size: {
+    let markerItem : Marker= {
+      // zIndex: "DROP",
+      iconUrl:  environment.domainUrl + "storage/nhWaZo9RlQX8pXLfgrvrhz4jJAJqYcoLhoFzDDOZ.png",
+      iconSize:{
         width: 40,
         height: 60,
       },
-    };
-
-    let Marker = {
-      animation: "DROP",
-      icon: iconpin,
       title: info,
-      position: {
+      coordinate: {
         lat: value.lat,
         lng: value.lng,
       },
+      snippet : info,
     };
 
-    this.map.addMarker(Marker).then((marker) => {
+    this.map.addMarker(markerItem).then((marker) => {
       this.Markertmp = marker;
-      marker.showInfoWindow();
+      // marker;
     });
   }
 
@@ -697,7 +678,7 @@ export class EditarPublicacionPage implements OnInit {
 
         this.form.patchValue({ archivo: this.base64img });
       } else {
-        this.utils.showAlert(this.translateService.instant("¡Vaya!"), 
+        this.utils.showAlert(this.translateService.instant("¡Vaya!"),
         this.translateService.instant("La extension del video debe ser mp4"));
       }
     });
@@ -707,8 +688,8 @@ export class EditarPublicacionPage implements OnInit {
     let CameraImageOptions: CameraOptions = {
       quality: 100,
       resultType: CameraResultType.DataUrl,
-      
-      
+
+
       source: CameraSource.Photos,
      width: 1920,
      height: 1080,

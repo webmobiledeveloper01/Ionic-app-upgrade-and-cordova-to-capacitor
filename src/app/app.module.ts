@@ -7,7 +7,7 @@ import { StatusBar } from "@capacitor/status-bar";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { IonicStorageModule, Storage } from "@ionic/storage-angular";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 // import { Toast } from "@ionic-native/toast/ngx";
 // import { Push } from "@ionic-native/push/ngx";
 // import { Camera } from "@capacitor/camera";
@@ -59,71 +59,43 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
-@NgModule({
-  declarations: [AppComponent],
-  // entryComponents: [],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule, ReactiveFormsModule,
-    IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-    AppRoutingModule,
-    // ServiceWorkerModule.register("ngsw-worker.js", {
-    //   enabled: environment.production,
-    // }),
-    // ImageCropperModule,
-    // SplashPageModule,
-    // FullscreenImagePageModule,
-    // ModalEliminarpublicacionPageModule,
-    // ModalReportarPageModule,
-    // ModalAjustarImagenPageModule,
-    // ModalSharePageModule,
-    // ModalReportarMotivoPageModule,
-    // ModalInvitacionGrupoPageModule,
-    // ModalReportarPublicacionPageModule,
-    // ModalSolicitarGrupoPageModule,
-    // ModalAjustesPageModule,
-    // ModalBannersPageModule,
-    // ModalInfoSponsorPageModule,
-    // ModalInvitePageModule,
-    // ModalChangePageModule,
-    // ModalLocalizacionPageModule,
-  ],
-  providers: [
-    // Share,
-    // FileChooser,
-    // Crop,
-    // Deeplinks,
-    // StatusBar,
-    // SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // Toast,
-    // Push,
-    // Camera,
-    // Stripe,
-    // File,
-    // FileTransfer,
-    // Facebook,
-    // GooglePlus,
-    // GoogleMaps,
-    // NativeGeocoder,
-    // Geolocation,
-    // InAppBrowser,
-
-    // New Service Injections
-    AuthGuard,
-    AuthenticationService,
-    StorageService, 
-  ],
-  bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
+        FormsModule, ReactiveFormsModule,
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+        }),
+        AppRoutingModule], providers: [
+        // Share,
+        // FileChooser,
+        // Crop,
+        // Deeplinks,
+        // StatusBar,
+        // SplashScreen,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        // Toast,
+        // Push,
+        // Camera,
+        // Stripe,
+        // File,
+        // FileTransfer,
+        // Facebook,
+        // GooglePlus,
+        // GoogleMaps,
+        // NativeGeocoder,
+        // Geolocation,
+        // InAppBrowser,
+        // New Service Injections
+        AuthGuard,
+        AuthenticationService,
+        StorageService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
