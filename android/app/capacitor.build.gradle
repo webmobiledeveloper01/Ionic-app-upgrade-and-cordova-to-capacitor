@@ -9,10 +9,8 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
-    implementation project(':capacitor-community-google-maps')
     implementation project(':capacitor-community-stripe')
     implementation project(':capacitor-app')
-    implementation project(':capacitor-browser')
     implementation project(':capacitor-camera')
     implementation project(':capacitor-filesystem')
     implementation project(':capacitor-geolocation')
@@ -28,8 +26,7 @@ dependencies {
     implementation project(':codetrix-studio-capacitor-google-auth')
     implementation "com.stripe:stripe-android:4.1.2"
 }
-apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/tbxml-android.gradle"
-apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/pgm-custom.gradle"
+
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

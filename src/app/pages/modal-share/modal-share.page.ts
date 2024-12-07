@@ -1,7 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { ApiService } from "src/app/services/api.service";
-import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-modal-share",
@@ -10,8 +9,8 @@ import { FormsModule } from "@angular/forms";
   standalone: false
 })
 export class ModalSharePage implements OnInit {
-  post_id;
-  post;
+  @Input() post_id : any;
+  @Input() post: any;
   chanels: any;
   IsLoading: boolean = true;
   NoGroups: boolean = false;

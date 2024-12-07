@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { IonButton, ModalController, NavController } from "@ionic/angular";
-import * as moment from "moment";
+import moment from "moment";
 import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";

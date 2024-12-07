@@ -1,4 +1,4 @@
-import { GoogleMap } from "@capacitor-community/google-maps";
+import { GoogleMap } from "@capacitor/google-maps";
 
 export interface MapState {
   Map?: GoogleMap;

@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { MappPage } from './mapp.page';
 import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
-import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 
 const routes: Routes = [
@@ -27,6 +26,6 @@ const routes: Routes = [
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [MappPage],
-  providers: [NativeGeocoder, Geolocation]
+  providers: [NativeGeocoder]
 })
 export class MappPageModule {}

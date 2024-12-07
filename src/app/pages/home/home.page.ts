@@ -14,7 +14,7 @@ import { ModalSharePage } from "../modal-share/modal-share.page";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { DomSanitizer } from "@angular/platform-browser";
 
-import { Browser} from '@capacitor/browser';
+// import { Browser} from '@capacitor/browser';
 import { TranslateService } from "@ngx-translate/core";
 import { environment } from "src/environments/environment";
 
@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
     private auth: AuthenticationService,
     public sanitizer: DomSanitizer,
     private translateService: TranslateService
-    // HotFix: private Browser: InAppBrowser Capacitor Browser ** DONE ** 
+    // HotFix: private Browser: InAppBrowser Capacitor Browser ** DONE **
   ) {}
 
   public async ngOnInit() {
@@ -437,7 +437,7 @@ export class HomePage implements OnInit {
     //   hidenavigationbuttons: "yes",
     // };
 
-    Browser.open({ url: $event });
+    // Browser.open({ url: $event });
   }
 
   /**

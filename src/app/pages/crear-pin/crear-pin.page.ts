@@ -144,7 +144,6 @@ export class CrearPinPage implements OnInit {
 // import { UtilitiesService } from 'src/app/services/utilities.service';
 // import { codeErrors } from 'src/app/utils/utils';
 // import { TranslateService } from '@ngx-translate/core';
-// // import { GoogleMap } from '@capacitor-community/google-maps';
 
 // @Component({
 //   selector: 'app-crear-pin',

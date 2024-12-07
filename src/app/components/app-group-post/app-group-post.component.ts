@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import * as moment from "moment";
+import moment from "moment";
 
 @Component({
   selector: "app-group-post",

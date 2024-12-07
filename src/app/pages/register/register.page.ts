@@ -19,7 +19,7 @@ import { ModalInvitacionGrupoPage } from "../modal-invitacion-grupo/modal-invita
 import { ModalSolicitarGrupoPage } from "../modal-solicitar-grupo/modal-solicitar-grupo.page";
 import { GoogleAuth, GoogleAuthPlugin } from "@codetrix-studio/capacitor-google-auth";
 import { AuthenticationService } from "src/app/services/authentication.service";
-import * as moment from "moment";
+import moment from "moment";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({

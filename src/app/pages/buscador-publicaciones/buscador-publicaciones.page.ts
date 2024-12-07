@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { NavController } from "@ionic/angular";
 import { ApiService } from "src/app/services/api.service";
 import {
-  GoogleMap,
+  GoogleMap, Marker
 } from "@capacitor/google-maps";
 import { UtilitiesService } from "src/app/services/utilities.service";
 import {
@@ -14,7 +14,6 @@ import { AuthenticationService } from "src/app/services/authentication.service";
 import { TranslateService } from "@ngx-translate/core";
 import { environment } from "src/environments/environment";
 import { CreateMapArgs } from "@capacitor/google-maps/dist/typings/implementation";
-import { Marker } from "@capacitor-community/google-maps";
 
 @Component({
   selector: "app-buscador-publicaciones",

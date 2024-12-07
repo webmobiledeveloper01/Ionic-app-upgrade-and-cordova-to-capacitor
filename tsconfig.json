@@ -24,13 +24,14 @@
     ],
     "types": ["google.maps"],
     "useDefineForClassFields": false,
+    "esModuleInterop": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": false,
     "strictInputAccessModifiers": false,
     "strictTemplates": false,
-    "allowSyntheticDefaultImports": false
+    "allowSyntheticDefaultImports": true,
 
   }
 }
