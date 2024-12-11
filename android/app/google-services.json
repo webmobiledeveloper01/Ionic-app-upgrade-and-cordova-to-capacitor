@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "457684864864",
+    "project_id": "app-fernando",
+    "storage_bucket": "app-fernando.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457684864864:android:9b27bbff2560a0124cd805",
+        "android_client_info": {
+          "package_name": "com.xerintel.timemapp5872"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457684864864-a6job15llmttnqec2cvtd81cqigsii4j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xerintel.timemapp5872",
+            "certificate_hash": "ce213a7d1451857bb65e1b16e3cc25231207d04c"
+          }
+        },
+        {
+          "client_id": "457684864864-cqtdcgb5hurpupjqntvm6fk99cihmbtq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xerintel.timemapp5872",
+            "certificate_hash": "58a5e6e6a9bd0ea7e71e0ba920c940d8ef50f5bf"
+          }
+        },
+        {
+          "client_id": "457684864864-td9rb9tep63gcpf4u578plfj3n45t151.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xerintel.timemapp5872",
+            "certificate_hash": "06e2c6595b007b21f9ea35c9b9e19629e7e08054"
+          }
+        },
+        {
+          "client_id": "457684864864-iaffen1ng8d9o5jq6vsupgekj2omb5s4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFicGw2uNlwVz0huYvSXyuU0JnQlpaG_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457684864864-h8cpjpgoj0ect79hue73fditk1tr1p13.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "457684864864-49aef7o9age8hve0nekok66pa2387ffp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.xerintel.timemapp5872"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
