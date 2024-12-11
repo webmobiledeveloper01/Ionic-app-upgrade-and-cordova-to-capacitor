@@ -167,7 +167,7 @@ export class SubirContenidoPage implements OnInit {
     // private crop: Crop,
     private file: File
   ) {
-    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
     this.platform.is("android")
       ? this.CameraImageOptions.allowEditing == false

@@ -8,7 +8,7 @@ import {
 // Capacitor
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
-
+import { PushNotifications } from '@capacitor/push-notifications';
 
 import { ApiService } from "./services/api.service";
 import { User } from "./models/User";
@@ -27,7 +27,8 @@ import { Router } from "@angular/router";
 import { UserService } from "./services/user.service";
 import { StorageService } from "./services/storage.service";
 import { TranslateService } from "@ngx-translate/core";
-// import { SplashPage } from "../app/pages/splash/splash.page";
+import { SplashPage } from "./pages/splash/splash.page";
+import { App, URLOpenListenerEvent } from '@capacitor/app';
 declare var cordova: any;
 
 @Component({
@@ -123,24 +124,25 @@ export class AppComponent implements OnInit {
     private zone: NgZone,
     private userService: UserService,
     private storageService: StorageService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private modalController: ModalController
   ) {
 
-    
+
   }
 
   /**
    * Nos suscribimos a los cambios dle perfil
    */
   async ngOnInit() {
-   
+
 
     if (this.platform.is("cordova")) {
       this.platform.ready().then(async () => {
         const currenttoken = await this.storageService.init();
 
         this.auth.authenticationState.next(currenttoken);
-    
+
         this.translateService.setDefaultLang("es");
         this.auth.authenticationState.subscribe(async (token) => {
           if (token != "logout" && token != "" && token != null) {
@@ -152,7 +154,7 @@ export class AppComponent implements OnInit {
                 console.warn("***ERROR NOTITIFICACIONES***");
               });
             this.prepararStripe();
-    
+
             this.apiService.setTokenToHeaders(token);
             this.navCtrl.navigateRoot("tabs").then(async () => {
               // console.log("User undefined");
@@ -170,7 +172,7 @@ export class AppComponent implements OnInit {
                     .catch((err) => this.handleError(err));
                 })
                 .catch((err) => this.handleError(err));
-    
+
               // console.log("USER IS=>");
               // console.log(this.user);
             });
@@ -184,13 +186,14 @@ export class AppComponent implements OnInit {
             });
           } else {
             this.isLoading = false;
-    
+
             // console.log("primera vez");
           }
-    
+
           // IMPORTANTE: para comprobar si la app está o no suspendida, debe ponerse el dominio en la propiedad "domainUrl" del archivo "src/environments/environment.ts"
           this.checkIfAppIsSuspended();
         });
+        this.pushNoti();
         // this.splashScreen.show();
         // await this.storage.get("auth-token").then((res) => {
         //   console.log("es null?");
@@ -199,6 +202,15 @@ export class AppComponent implements OnInit {
         //     this.ShowSplash();
         //   }
         // });
+         // Show splash screen
+          await SplashScreen.show();
+         await this.storageService.get("auth-token").then((res) => {
+          console.log("es null?");
+          console.log(res);
+          if (!res || res == "") {
+            this.ShowSplash();
+          }
+        });
 
         this.setUpDeepLinks();
         // StatusBar.setStyle("");
@@ -212,14 +224,14 @@ export class AppComponent implements OnInit {
     });
   }
   cerrarsesion(){
-    
+
   }
   async ShowSplash() {
-    // let modal = await this.modalController.create({
-    //   component: SplashPage,
-    //   keyboardClose: true,
-    // });
-    // modal.present();
+    let modal = await this.modalController.create({
+      component: SplashPage,
+      keyboardClose: true,
+    });
+    modal.present();
     console.log("Se llama al splash");
     this.navCtrl.navigateRoot("/splash");
   }
@@ -270,45 +282,31 @@ export class AppComponent implements OnInit {
   setUpDeepLinks() {
     console.log("Entra en el set deeplinks");
     // TODO
-    // this.deeplinks
-    //   .route({
-    //     "/detalle-publicacion": HomePage,
-    //   })
-    //   .subscribe(
-    //     async (match) => {
-    //       console.log("Successfully routed", match);
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      this.zone.run(() => {
+        //   if(URL.parse(event.url).pathname == "/detalle-publicacion"){
+        //     await this.utilities.showLoading("Cargando...");
+        //     if (URL.parse(event.url).host == "timemapp.davidtovar.dev") {
+        //       console.log("DENTRO!!!!");
 
-    //       await this.utilities.showLoading("Cargando...");
+        //       let pathArray = String(URL.parse(event.url).pathname).split("/");
 
-    //       setTimeout(() => {
-    //         if (match.$link.host == "timemapp.davidtovar.dev") {
-    //           console.log("DENTRO!!!!");
+        //       console.log(pathArray);
 
-    //           let pathArray = String(match.$link.path).split("/");
+        //       let route = pathArray[1];
 
-    //           console.log(pathArray);
+        //       let id = pathArray[2];
 
-    //           let route = pathArray[1];
+        //       //                   let id = pathArray[3];
 
-    //           let id = pathArray[2];
+        //       this.navCtrl.navigateForward([route + "/" + id]).then(() => {
+        //         this.utilities.dismissLoading();
+        //       });
+        // }
+        //   }
 
-    //           //                   let id = pathArray[3];
-
-    //           this.navCtrl.navigateForward([route + "/" + id]).then(() => {
-    //             this.utilities.dismissLoading();
-    //           });
-    //         } else {
-    //           console.log("FUERA!!!!");
-    //         }
-    //       }, 2000);
-    //     },
-    //     (nomatch) => {
-    //       console.log("NO Successfully routed", nomatch); // console.warn('Unmatched Route', nomatch.$link);
-    //     }
-    //   );
-
-    //// console.log("Remember to activate DeepLinks in app.components.ts");
-
+      })
+    })
     // this.deeplinks
     //   .route({
     //     home: "home",
@@ -317,10 +315,7 @@ export class AppComponent implements OnInit {
     //   .subscribe(
     //     (match) => {
     //       // console.log("Successfully matched route", match);
-    //       const internalPath = `/${match.$route}`;
-    //       this.zone.run(() => {
-    //         this.router.navigateByUrl(internalPath);
-    //       });
+
     //     },
     //     (nomatch) => {
     //       // nomatch.$link - the full link data
@@ -352,108 +347,21 @@ export class AppComponent implements OnInit {
   /**
    * Configuración de las notificación push
    */
-  public pushNotifications(): void {
-    // TODO
-    // const options: PushOptions = {
-    //   android: {
-    //     senderID: environment.senderID,
-    //     icon: "timeapp",
-    //   },
-    //   ios: {
-    //     alert: "true",
-    //     badge: true,
-    //     sound: "true",
-    //   },
-    //   windows: {},
-    // };
 
-    // const pushObject: PushObject = this.push.init(options);
-
-    // pushObject.on("notification").subscribe((notification: any) => {
-    //   // this.apiService.InvitationNotificactionChanges.next("");
-    //   // console.log("NOTIFICACION");
-    //   // console.log(notification);
-
-    //   //// console.log(notification);
-
-    //   // fix en ios para recibir correctamente los datos de la notificación
-    //   if (this.utilities.getPlatform() === "ios") {
-    //     notification.additionalData["apiData"] = JSON.parse(
-    //       notification.additionalData["gcm.notification.apiData"]
-    //     );
-    //   }
-
-    //   if (notification.additionalData.apiData.url == "/notification-user") {
-    //     this.zone.run(() => {
-    //       //Cuando está dentro de la app muestra un toast
-    //       if (notification.additionalData.foreground) {
-    //         this.showToastMessage(notification);
-    //       } else {
-    //         this.navCtrl.navigateForward(
-    //           notification.additionalData.apiData.url
-    //         );
-    //       }
-    //     });
-    //   } else if (notification.additionalData.apiData.url == "/chats") {
-    //     this.zone.run(() => {
-    //       this.events.publish(
-    //         "add-mensaje",
-    //         notification.additionalData.apiData.mensaje
-    //       );
-
-    //       //Cuando está dentro de la app muestra un toast
-    //       if (notification.additionalData.foreground) {
-    //         this.showToastMessage(notification);
-    //       } else {
-    //         this.navCtrl.navigateForward(
-    //           notification.additionalData.apiData.url
-    //         );
-    //       }
-    //     });
-    //   }
-
-    //   // this.events.publish(
-    //   //   "add-mensaje",
-    //   //   notification.additionalData.apiData.mensaje
-    //   // );
-    // });
-
-    // pushObject.on("registration").subscribe((registration: any) => {
-    //   const regId = registration.registrationId;
-    //   this.apiService.guardarTokenDeRegistro(regId).subscribe(
-    //     (response) => {
-    //       // console.log(response);
-    //     },
-    //     (error) => {
-    //       // console.log(error);
-    //     }
-    //   );
-    // });
-
-    // pushObject
-    //   .on("error")
-    //   .subscribe((error) => console.error("Error with Push plugin", error));
-  }
-
-  async SetNotifications() {
-    console.log(cordova);
-
-    await cordova.plugins.firebase.messaging.requestPermission({
-      forceShow: false,
-    });
-
-    let token;
-    try {
-      token = await cordova.plugins.firebase.messaging.getToken();
-    } catch (err) {
-      console.log("err obtener token firebase");
-      console.log(err);
-      return;
+public pushNoti(): void {
+  PushNotifications.requestPermissions().then((result) => {
+    if (result.receive === 'granted') {
+      // Register with Apple / Google to receive push via APNS/FCM
+      PushNotifications.register();
+    } else {
+      // Show some error
     }
-    console.log("token = ");
-    console.log(token);
-    if (token) {
-      this.apiService.guardarTokenDeRegistro(token).subscribe(
+  });
+
+  PushNotifications.addListener('registration',
+    (token: any) => {
+      console.log('Push registration success, token: ' + token.value);
+      this.apiService.guardarTokenDeRegistro(token.value).subscribe(
         (response) => {
           console.log(response);
         },
@@ -462,20 +370,207 @@ export class AppComponent implements OnInit {
         }
       );
     }
+  );
 
-    cordova.plugins.firebase.messaging.onBackgroundMessage((payload) => {
-      console.log("New background FCM message: ", payload);
+  PushNotifications.addListener('registrationError',
+    (error: any) => {
+      console.error('Error on registration: ' + JSON.stringify(error));
+    }
+  );
 
-      this.apiService.notificationChanges.next(payload);
-    });
+  PushNotifications.addListener('pushNotificationReceived',
+    (notification: any) => {
+      console.log('Push received: ', notification);
+      this.apiService.notificationChanges.next(notification);
+      this.showToastMessage(notification);
+    }
+  );
 
-    cordova.plugins.firebase.messaging.onMessage((payload) => {
-      console.log("New foreground FCM message: ", payload);
-      this.apiService.notificationChanges.next(payload);
-      // this.utilities.showAlert(payload.title, payload.message);
-      this.showToastMessage(payload);
-    });
+  PushNotifications.addListener('pushNotificationActionPerformed',
+    (notification: any) => {
+      console.log('Push action performed: ' + JSON.stringify(notification));
+      if (notification.notification.data.url) {
+        this.zone.run(() => {
+          this.navCtrl.navigateForward(notification.notification.data.url);
+        });
+      }
+      if (notification.notification.data.url === '/chats') {
+        this.zone.run(() => {
+          // this.events.publish('add-mensaje', notification.notification.data.mensaje); //TODO
+        });
+      }
+    }
+  );
+}
+
+async SetNotifications() {
+  console.log(PushNotifications);
+
+  PushNotifications.requestPermissions().then(result => {
+    if (result.receive === 'granted') {
+      PushNotifications.register();
+    } else {
+      console.error('Push notification permission not granted');
+    }
+  });
+
+  let token;
+  try {
+    const registration = await PushNotifications.addListener('registration',
+      (token: any) => {
+        token = token.value;
+        console.log('Registration token: ', token);
+      }
+    );
+  } catch (err) {
+    console.error('Error getting token: ', err);
+    return;
   }
+
+  if (token) {
+    this.apiService.guardarTokenDeRegistro(token).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  PushNotifications.addListener('pushNotificationReceived',
+    (payload: any) => {
+      console.log('New foreground FCM message: ', payload);
+      this.apiService.notificationChanges.next(payload);
+      this.showToastMessage(payload);
+    }
+  );
+}
+
+  // public pushNotifications(): void {
+  //   // TODO
+  //   // const options: PushOptions = {
+  //   //   android: {
+  //   //     senderID: environment.senderID,
+  //   //     icon: "timeapp",
+  //   //   },
+  //   //   ios: {
+  //   //     alert: "true",
+  //   //     badge: true,
+  //   //     sound: "true",
+  //   //   },
+  //   //   windows: {},
+  //   // };
+
+  //   // const pushObject: PushObject = this.push.init(options);
+
+  //   // pushObject.on("notification").subscribe((notification: any) => {
+  //   //   // this.apiService.InvitationNotificactionChanges.next("");
+  //   //   // console.log("NOTIFICACION");
+  //   //   // console.log(notification);
+
+  //   //   //// console.log(notification);
+
+  //   //   // fix en ios para recibir correctamente los datos de la notificación
+  //   //   if (this.utilities.getPlatform() === "ios") {
+  //   //     notification.additionalData["apiData"] = JSON.parse(
+  //   //       notification.additionalData["gcm.notification.apiData"]
+  //   //     );
+  //   //   }
+
+  //   //   if (notification.additionalData.apiData.url == "/notification-user") {
+  //   //     this.zone.run(() => {
+  //   //       //Cuando está dentro de la app muestra un toast
+  //   //       if (notification.additionalData.foreground) {
+  //   //         this.showToastMessage(notification);
+  //   //       } else {
+  //   //         this.navCtrl.navigateForward(
+  //   //           notification.additionalData.apiData.url
+  //   //         );
+  //   //       }
+  //   //     });
+  //   //   } else if (notification.additionalData.apiData.url == "/chats") {
+  //   //     this.zone.run(() => {
+  //   //       this.events.publish(
+  //   //         "add-mensaje",
+  //   //         notification.additionalData.apiData.mensaje
+  //   //       );
+
+  //   //       //Cuando está dentro de la app muestra un toast
+  //   //       if (notification.additionalData.foreground) {
+  //   //         this.showToastMessage(notification);
+  //   //       } else {
+  //   //         this.navCtrl.navigateForward(
+  //   //           notification.additionalData.apiData.url
+  //   //         );
+  //   //       }
+  //   //     });
+  //   //   }
+
+  //   //   // this.events.publish(
+  //   //   //   "add-mensaje",
+  //   //   //   notification.additionalData.apiData.mensaje
+  //   //   // );
+  //   // });
+
+  //   // pushObject.on("registration").subscribe((registration: any) => {
+  //   //   const regId = registration.registrationId;
+  //   //   this.apiService.guardarTokenDeRegistro(regId).subscribe(
+  //   //     (response) => {
+  //   //       // console.log(response);
+  //   //     },
+  //   //     (error) => {
+  //   //       // console.log(error);
+  //   //     }
+  //   //   );
+  //   // });
+
+  //   // pushObject
+  //   //   .on("error")
+  //   //   .subscribe((error) => console.error("Error with Push plugin", error));
+  // }
+
+  // async SetNotifications() {
+  //   console.log(cordova);
+
+  //   await cordova.plugins.firebase.messaging.requestPermission({
+  //     forceShow: false,
+  //   });
+
+  //   let token;
+  //   try {
+  //     token = await cordova.plugins.firebase.messaging.getToken();
+  //   } catch (err) {
+  //     console.log("err obtener token firebase");
+  //     console.log(err);
+  //     return;
+  //   }
+  //   console.log("token = ");
+  //   console.log(token);
+  //   if (token) {
+  //     this.apiService.guardarTokenDeRegistro(token).subscribe(
+  //       (response) => {
+  //         console.log(response);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+
+  //   cordova.plugins.firebase.messaging.onBackgroundMessage((payload) => {
+  //     console.log("New background FCM message: ", payload);
+
+  //     this.apiService.notificationChanges.next(payload);
+  //   });
+
+  //   cordova.plugins.firebase.messaging.onMessage((payload) => {
+  //     console.log("New foreground FCM message: ", payload);
+  //     this.apiService.notificationChanges.next(payload);
+  //     // this.utilities.showAlert(payload.title, payload.message);
+  //     this.showToastMessage(payload);
+  //   });
+  // }
 
   /**
    * Preparamos stripe con su configuración

@@ -71,7 +71,7 @@ export class NewQuestionPage implements OnInit {
     private navCtrl: NavController,
     private modcontrol: ModalController
   ) {
-    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
   }
 

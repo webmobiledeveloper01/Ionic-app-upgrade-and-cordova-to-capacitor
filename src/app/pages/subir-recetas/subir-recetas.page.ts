@@ -66,7 +66,7 @@ export class SubirRecetasPage implements OnInit {
     private nav: NavController,
     private modalController: ModalController
   ) {
-    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
   }
 

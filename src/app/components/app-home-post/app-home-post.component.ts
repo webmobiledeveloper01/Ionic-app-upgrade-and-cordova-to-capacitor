@@ -7,13 +7,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 })
 export class AppHomePostComponent implements OnInit {
   @Input() post: any;
-  @Output() onPostLike = new EventEmitter<any>();
-  @Output() onPostDislike = new EventEmitter<any>();
-  @Output() onPostGoDetails = new EventEmitter<any>();
-  @Output() onPostReport = new EventEmitter<any>();
-  @Output() onPostShare = new EventEmitter<any>();
-  @Output() onPostGoProfile = new EventEmitter<any>();
-  @Output() onTrueDislike = new EventEmitter<any>();
+  @Output() PostLike = new EventEmitter<any>();
+  @Output() PostDislike = new EventEmitter<any>();
+  @Output() PostGoDetails = new EventEmitter<any>();
+  @Output() PostReport = new EventEmitter<any>();
+  @Output() PostShare = new EventEmitter<any>();
+  @Output() PostGoProfile = new EventEmitter<any>();
+  @Output() TrueDislike = new EventEmitter<any>();
 
   constructor() {}
 
@@ -22,28 +22,28 @@ export class AppHomePostComponent implements OnInit {
   }
 
   megustas() {
-    this.onPostLike.emit(this.post);
+    this.PostLike.emit(this.post);
   }
 
   nomegustas() {
-    this.onPostDislike.emit(this.post);
+    this.PostDislike.emit(this.post);
   }
 
   GoDetails() {
-    this.onPostGoDetails.emit(this.post);
+    this.PostGoDetails.emit(this.post);
   }
   reportar() {
-    this.onPostReport.emit(this.post.id);
+    this.PostReport.emit(this.post.id);
   }
 
   openShare() {
-    this.onPostShare.emit(this.post);
+    this.PostShare.emit(this.post);
   }
   GoToProfile() {
-    this.onPostGoProfile.emit(this.post.user);
+    this.PostGoProfile.emit(this.post.user);
   }
 
   Dislike() {
-    this.onTrueDislike.emit(this.post);
+    this.TrueDislike.emit(this.post);
   }
 }

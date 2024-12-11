@@ -23,7 +23,7 @@ import { GoogleMap } from "@capacitor/google-maps";
 //   GoogleMaps,
 //   GoogleMapsEvent,
 // } from "@ionic-native/google-maps";
-declare var plugins;
+declare var plugins, google;
 @Component({
   selector: "app-edit-question",
   templateUrl: "./edit-question.page.html",
@@ -65,7 +65,7 @@ export class EditQuestionPage implements OnInit {
     private modalController: ModalController,
     private translateService: TranslateService
   ) {
-    this.googleAutocomplete = new plugins.google.maps.places.AutocompleteService();
+    this.googleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
   }
 

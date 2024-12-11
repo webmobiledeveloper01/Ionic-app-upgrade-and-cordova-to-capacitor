@@ -99,15 +99,15 @@ export class MapaStreetPage implements OnInit {
   generatePanorama(): void {
     this.geolocation.getCurrentPosition((resp) =>{
       let userLocation = {lat: resp.coords.latitude, lng: resp.coords.longitude};
-      var streetviewService = new plugins.google.maps.StreetViewService;
+      var streetviewService = new google.maps.StreetViewService;
       streetviewService.getPanorama({
         location: userLocation,
-        preference: plugins.google.maps.StreetViewPreference.NEAREST,
+        preference: google.maps.StreetViewPreference.NEAREST,
         radius: 100},
         function(result, status) {
           console.log("Adjusted latitude: ", result.location.latLng.lat(),
                       "\nAdjusted longitude: ", result.location.latLng.lng());
-          this.panorama = new plugins.google.maps.StreetViewPanorama(document.getElementById('pano_canvas1'), {
+          this.panorama = new google.maps.StreetViewPanorama(document.getElementById('pano_canvas1'), {
             position: result.location.latLng,
             pov: {heading: 165, pitch: 0},
             zoom: 1

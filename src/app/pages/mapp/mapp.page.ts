@@ -321,7 +321,7 @@ export class MappPage implements AfterViewInit, OnDestroy {
       //   // title: "Marca",
       //   position: { lat: place.lat, lng: place.longitud },
       // });
-      let htmlInfoWindow = new plugins.google.maps.InfoWindow();
+      let htmlInfoWindow = new google.maps.InfoWindow();
       let frame: HTMLElement = document.createElement("div");
       frame.innerHTML = [
         '<div class="divMapa" >',
@@ -338,16 +338,14 @@ export class MappPage implements AfterViewInit, OnDestroy {
         });
       // let w = this.percentage(this.width, 40) + "px";
       let h = this.percentage(this.height, 40) + "px";
-      htmlInfoWindow.setContent(frame, {
-        width: h,
-        height: h,
-
-      });
+      htmlInfoWindow.setContent(frame);
       //TODO:
       // this.newMap.addMarker(marker);
       this.newMap.setOnMarkerClickListener((marker)=>{
         if(marker.title = "Marca"){
-          htmlInfoWindow.open(marker);
+          htmlInfoWindow.setHeaderContent(marker.title);
+          // htmlInfoWindow.setContent(marker.snippet)
+          htmlInfoWindow.open();
         }
       });
       // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
@@ -358,10 +356,10 @@ export class MappPage implements AfterViewInit, OnDestroy {
   }
 
   addInfoWindow(marker:Marker, origContent){
-    let infoWindow = new plugins.google.maps.InfoWindow();
+    let infoWindow = new google.maps.InfoWindow();
     var content = document.createElement('div');
     content.innerHTML = (origContent);
-    plugins.google.maps.event.addListener(marker, 'click', () => {
+    google.maps.event.addListener(marker, 'click', () => {
       infoWindow.setContent(content);
     });
   }
@@ -492,7 +490,7 @@ export class MappPage implements AfterViewInit, OnDestroy {
     });
   }
   OpenInfoWindow(marker) {
-    let htmlInfoWindow = new plugins.google.maps.InfoWindow();
+    let htmlInfoWindow = new google.maps.InfoWindow();
     let frame: HTMLElement = document.createElement("div");
     let post = marker.get("InstanceOfPost");
     let innerFrame;
@@ -535,12 +533,7 @@ export class MappPage implements AfterViewInit, OnDestroy {
       });
     // let w = this.percentage(this.width, 40) + "px";
     let h = this.percentage(this.height, 40) + "px";
-    htmlInfoWindow.setContent(frame, {
-      width: h,
-      // "180px"
-      height: h,
-      // "150px"
-    });
+    htmlInfoWindow.setContent(frame);
     htmlInfoWindow.open(marker);
   }
   getImageStyle(image) {
@@ -607,7 +600,7 @@ export class MappPage implements AfterViewInit, OnDestroy {
       //     height: 60,
       //   }
       // })
-      let htmlInfoWindow = new plugins.google.maps.InfoWindow();
+      let htmlInfoWindow = new google.maps.InfoWindow();
       let frame: HTMLElement = document.createElement("div");
       console.log("631");
       frame.innerHTML = [
@@ -625,14 +618,10 @@ export class MappPage implements AfterViewInit, OnDestroy {
         });
       let w = this.percentage(this.width, 40) + "px";
       let h = this.percentage(this.height, 40) + "px";
-      htmlInfoWindow.setContent(frame, {
-        width: h,
-        // "180px"
-        height: h,
-        // "150px"
-      });
+      htmlInfoWindow.setContent(frame);
       this.newMap.setOnMarkerClickListener(((markeri) => {
-        htmlInfoWindow.open(markeri);
+        htmlInfoWindow.setHeaderContent(markeri.title)
+        htmlInfoWindow.open();
       }));
     }
   }
@@ -646,7 +635,7 @@ export class MappPage implements AfterViewInit, OnDestroy {
         },
         coordinate:  { lat: Number(place.lat ?? 0), lng: Number(place.lng ?? 0) }
       });
-      let htmlInfoWindow = new plugins.google.maps.InfoWindow();
+      let htmlInfoWindow = new google.maps.InfoWindow();
       let frame: HTMLElement = document.createElement("div");
       frame.innerHTML = [
         '<div class="divMapa" >',
@@ -663,14 +652,10 @@ export class MappPage implements AfterViewInit, OnDestroy {
         });
       let w = this.percentage(this.width, 40) + "px";
       let h = this.percentage(this.height, 40) + "px";
-      htmlInfoWindow.setContent(frame, {
-        width: h,
-        // "180px"
-        height: h,
-        // "150px"
-      });
+      htmlInfoWindow.setContent(frame);
       this.newMap.setOnMarkerClickListener((marker)=>{
-        htmlInfoWindow.open(marker);
+        htmlInfoWindow.setHeaderContent(marker.title)
+        htmlInfoWindow.open();
       })
       // this.QuestionMarkers.push(marker);
     }
@@ -792,11 +777,11 @@ export class MappPage implements AfterViewInit, OnDestroy {
   }
   generatePanorama(): void {
     let userLocation = { lat: 42.345573, lng: -71.098326 };
-    var streetviewService = new plugins.google.maps.StreetViewService();
+    var streetviewService = new google.maps.StreetViewService();
     streetviewService.getPanorama(
       {
         location: userLocation,
-        preference: plugins.google.maps.StreetViewPreference.NEAREST,
+        preference: google.maps.StreetViewPreference.NEAREST,
         radius: 100,
       },
       function (result, status) {
@@ -806,7 +791,7 @@ export class MappPage implements AfterViewInit, OnDestroy {
           "\nAdjusted longitude: ",
           result.location.latLng.lng()
         );
-        this.panorama = new plugins.google.maps.StreetViewPanorama(
+        this.panorama = new google.maps.StreetViewPanorama(
           document.getElementById("pano_canvas1"),
           {
             position: result.location.latLng,

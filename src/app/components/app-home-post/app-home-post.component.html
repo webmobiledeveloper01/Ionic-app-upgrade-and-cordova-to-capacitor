@@ -57,11 +57,10 @@
   </ion-row>
   <ion-row class="bot-row">
     <ion-col class="icon-col">
-      <ion-icon
-        src="assets/icons/compartir.svg"
-        (click)="openShare()"
-      ></ion-icon
-    ></ion-col>
+    <ion-button (click)="openShare()">
+      <ion-icon slot="icon-only" src="assets/icons/compartir.svg"></ion-icon>
+    </ion-button>
+    </ion-col>
 
     <ion-col class="icon-col">
       <ion-icon

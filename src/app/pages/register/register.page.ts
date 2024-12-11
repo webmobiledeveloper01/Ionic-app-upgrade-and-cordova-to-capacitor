@@ -5,6 +5,7 @@ import {
   MenuController,
   ModalController,
   NavController,
+  Platform,
 } from "@ionic/angular";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { confirmPassword } from "src/app/utils/utils";
@@ -44,14 +45,17 @@ export class RegisterPage implements OnInit {
     // private events: Events, // TODO
 
     private auth: AuthenticationService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private platform: Platform
   ) {
 
   }
 
   async ngOnInit() {
     this.currentLang = this.translateService.currentLang;
-    GoogleAuth.initialize();
+    this.platform.ready().then(()=>{
+      GoogleAuth.initialize();
+    })
     this.menuCtrl.enable(false);
     this.form = this.formBuilder.group({
       name: ["", Validators.required],

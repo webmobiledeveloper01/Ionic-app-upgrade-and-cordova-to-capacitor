@@ -48,12 +48,12 @@
 
         <app-home-post
           [post]="p"
-          (onPostLike)="HandlePostLike($event)"
-          (onPostDislike)="HandlePostDislike($event)"
-          (onPostGoDetails)="HandlePostGoDetails($event)"
-          (onPostReport)="HandlePostReport($event)"
-          (onPostShare)="HandlePostShare($event)"
-          (onPostGoProfile)="HandlePostGoProfile($event)"
+          (PostLike)="HandlePostLike($event)"
+          (PostDislike)="HandlePostDislike($event)"
+          (PostGoDetails)="HandlePostGoDetails($event)"
+          (PostReport)="HandlePostReport($event)"
+          (PostShare)="HandlePostShare($event)"
+          (PostGoProfile)="HandlePostGoProfile($event)"
         ></app-home-post>
       </ion-row>
     </ion-grid>

@@ -1,23 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ApiService } from "src/app/services/api.service";
 import { MenuController, ModalController, NavController } from "@ionic/angular";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { ModalReportarPage } from "../modal-reportar/modal-reportar.page";
 import { ModalReportarPublicacionPage } from "../modal-reportar-publicacion/modal-reportar-publicacion.page";
 import { User } from "src/app/models/User";
 import { ModalBannersPage } from "../modal-banners/modal-banners.page";
 import { Share } from "@capacitor/share";
-import { Banner } from "src/app/models/Banner";
-import { ChangeDetectorRef } from "@angular/core";
-import { ModalInvitacionGrupoPage } from "../modal-invitacion-grupo/modal-invitacion-grupo.page";
 import { ModalSharePage } from "../modal-share/modal-share.page";
 import { AuthenticationService } from "src/app/services/authentication.service";
 import { DomSanitizer } from "@angular/platform-browser";
-
-// import { Browser} from '@capacitor/browser';
 import { TranslateService } from "@ngx-translate/core";
 import { environment } from "src/environments/environment";
-
+import { Browser } from '@capacitor/browser';
 @Component({
   selector: "app-home",
   templateUrl: "./home.page.html",
@@ -48,7 +42,6 @@ export class HomePage implements OnInit {
     private auth: AuthenticationService,
     public sanitizer: DomSanitizer,
     private translateService: TranslateService
-    // HotFix: private Browser: InAppBrowser Capacitor Browser ** DONE **
   ) {}
 
   public async ngOnInit() {
@@ -319,14 +312,6 @@ export class HomePage implements OnInit {
     await modal.present();
   }
 
-  async openModal() {
-    const modal = await this.modalCtrl.create({
-      component: ModalBannersPage,
-      cssClass: "modal-eliminar",
-      componentProps: {},
-    });
-    await modal.present();
-  }
   async doRefresh(event) {
     await this.Innitpage().then(() => {
       event.target.complete();
@@ -437,7 +422,7 @@ export class HomePage implements OnInit {
     //   hidenavigationbuttons: "yes",
     // };
 
-    // Browser.open({ url: $event });
+    Browser.open({ url: $event });
   }
 
   /**

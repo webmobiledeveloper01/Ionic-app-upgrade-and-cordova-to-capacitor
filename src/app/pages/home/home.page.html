@@ -1,13 +1,8 @@
 <app-loading *ngIf="isLoading" [text]="'Cargando...' | translate"></app-loading>
 
 <ion-header *ngIf="!isLoading" no-border>
-  <app-app-header
-    textHeader="TimeMapp"
-    [showNotification]="true"
-    imageNotification="assets/icon/campana.png"
-    [editButton]="false"
-    [arrowBack]="false"
-  ></app-app-header>
+  <app-app-header textHeader="TimeMapp" [showNotification]="true" imageNotification="assets/icon/campana.png"
+    [editButton]="false" [arrowBack]="false"></app-app-header>
 
   <!-- <ion-button routerLink="/landing"><p style="color:red">CLICK</p></ion-button> -->
   <!-- <p routerLink="/landing">LANDING</p> -->
@@ -17,12 +12,8 @@
 
 <ion-content *ngIf="!isLoading" class="ion-text-center" color="primary">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      [pullingText]="'Suelte para refrescar...' | translate"
-      refreshingSkspinner="circles"
-      [refreshingText]="'Cargando...' | translate"
-    >
+    <ion-refresher-content pullingIcon="arrow-dropdown" [pullingText]="'Suelte para refrescar...' | translate"
+      refreshingSpinner="circles" [refreshingText]="'Cargando...' | translate">
     </ion-refresher-content>
   </ion-refresher>
   <div class="contenido">
@@ -37,45 +28,24 @@
         <ion-item style="--background: transparent; width: 100%">
           <!--Publicacion perfil-->
 
-          <app-home-post
-            (onPostLike)="megustas($event)"
-            (onPostDislike)="nomegustas($event)"
-            (onPostGoDetails)="GoDetails($event)"
-            (onPostReport)="reportar($event)"
-            (onPostShare)="openShare($event)"
-            (onPostGoProfile)="GoToProfile($event)"
-            (onTrueDislike)="onTrueDislike($event)"
-            style="width: 100%"
-            [post]="publicacion"
-          ></app-home-post>
+          <app-home-post (PostLike)="megustas($event)" (PostDislike)="nomegustas($event)"
+            (PostGoDetails)="GoDetails($event)" (PostReport)="reportar($event)" (PostShare)="openShare($event)"
+            (PostGoProfile)="GoToProfile($event)" (TrueDislike)="onTrueDislike($event)" style="width: 100%"
+            [post]="publicacion"></app-home-post>
         </ion-item>
 
-        <ion-row
-          class="banner-row"
-          *ngIf="i % 2 == 0 && banners[(i/2)-1] != null"
-          style="border-bottom: 1px solid #d7d7d7; margin: 10% auto"
-        >
+        <ion-row class="banner-row" *ngIf="i % 2 == 0 && banners[(i/2)-1] != null"
+          style="border-bottom: 1px solid #d7d7d7; margin: 10% auto">
           <ion-item class="" lines="none" style="--background: transparent">
             <!-- {{ increaseIndex() }} -->
-            <app-ad-banner
-              [banner]="banners[(i/2)-1]"
-              (IsTapped)="OpenWeb($event)"
-            ></app-ad-banner>
+            <app-ad-banner [banner]="banners[(i/2)-1]" (IsTapped)="OpenWeb($event)"></app-ad-banner>
           </ion-item>
-          <p
-            text-center
-            *ngIf="user?.role_id == 4"
-            style="color: black; width: 100%"
-            (click)="openModal()"
-          >
+          <p text-center *ngIf="user?.role_id == 4" style="color: black; width: 100%" (click)="presentModal()">
             {{"Mas acciones" | translate}}
           </p>
           <div class="button-like-banner">
             <p class="sponsors">{{"Sponsor" | translate}}</p>
-            <div
-              class="button-gracias"
-              (click)="IsVisited(banners[(i/2)-1].id)"
-            >
+            <div class="button-gracias" (click)="IsVisited(banners[(i/2)-1].id)">
               {{"¡Gracias!" | translate}}
             </div>
           </div>
@@ -85,7 +55,7 @@
 
 
 
- 
+
       <!--Publicacion publicidad-->
     </ion-list>
   </div>
