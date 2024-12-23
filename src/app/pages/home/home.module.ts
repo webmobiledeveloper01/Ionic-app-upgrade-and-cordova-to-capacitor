@@ -8,7 +8,6 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { ModalSharePageModule } from '../modal-share/modal-share.module';
 
 const routes: Routes = [
   {
@@ -23,7 +22,7 @@ const routes: Routes = [
     ComponentsModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes), TranslateModule, ModalSharePageModule
+    RouterModule.forChild(routes), TranslateModule
   ],
   declarations: [HomePage]
 })
