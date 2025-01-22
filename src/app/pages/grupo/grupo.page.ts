@@ -11,6 +11,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "app-grupo",
   templateUrl: "./grupo.page.html",
   styleUrls: ["./grupo.page.scss"],
+standalone: false,
 })
 export class GrupoPage implements OnInit {
   public grupo: any;
@@ -37,7 +38,7 @@ export class GrupoPage implements OnInit {
         this.isLoading = false;
       });
     });
-    
+
 
     this.innitData().then(() => {
       this.isLoading = false;

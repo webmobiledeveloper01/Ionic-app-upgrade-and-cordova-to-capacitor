@@ -1,6 +1,19 @@
 
 <ion-header>
-  <div *ngIf="!isIos" class="barraSuperior">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <div style="text-align: center">
+      <img style="width: 110px" src="assets/imgs/logo_name.svg" />
+    </div>
+<ion-buttons slot="end">
+  <ion-button color="primary" (click)="ajustes()">
+    <ion-icon slot="icon-only" name="search"></ion-icon>
+  </ion-button>
+</ion-buttons>
+  </ion-toolbar>
+  <!-- <div *ngIf="!isIos" class="barraSuperior">
     <ion-row class="row-barraSuperior">
       <ion-col class="col-btn-atras"> </ion-col>
       <img id="btn_atras" src="assets/imgs/Group 114.png" (click)="back()" />
@@ -8,9 +21,11 @@
         <img style="width: 110px" src="assets/imgs/logo_name.svg" />
       </ion-col>
       <ion-col class="col-btn-ajustes">
-        <ion-button id="btnAjustes" color="primary" (click)="ajustes()">
-          <ion-icon src="/assets/icons/search 1.svg"></ion-icon>
-        </ion-button>
+        <ion-buttons>
+          <ion-button id="btnAjustes" color="primary">
+            <ion-icon slot="icon-only" src="/assets/icons/search 1.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </ion-col>
     </ion-row>
   </div>
@@ -22,12 +37,14 @@
         <img style="width: 110px" src="assets/imgs/logo_name.svg" />
       </ion-col>
       <ion-col class="col-btn-ajustes" size="2">
-        <ion-button id="btnAjustes" color="primary" (click)="ajustes()">
-          <ion-icon src="/assets/icons/search 1.svg"></ion-icon>
-        </ion-button>
+        <ion-buttons>
+          <ion-button id="btnAjustes" color="primary" (click)="ajustes()">
+            <ion-icon slot="icon-only" src="/assets/icons/search 1.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </ion-col>
     </ion-row>
-  </div>
+  </div> -->
 </ion-header>
 <ion-content>
   <div class="divMap">
@@ -35,15 +52,15 @@
 <div id="map_canvas">
     <capacitor-google-map #googleMap ></capacitor-google-map>
     <!-- <div id="map_canvas">
-      <ion-button class="btnPlus" color="light"> 
-      <img class="icono_input" src="assets/icons/locate2.png" /> 
+      <ion-button class="btnPlus" color="light">
+      <img class="icono_input" src="assets/icons/locate2.png" />
       </ion-button>
       <img
         class="icono_street"
         src="assets/icons/street.png"
         routerLink="/mapa-street"
       /> -->
-    </div> 
+    </div>
   </div>
   <!-- <div class="divBajo">
     <img id="barra" src="assets/icons/linea.png" />

@@ -7,6 +7,7 @@ import { environment } from "src/environments/environment";
   selector: "app-ad-banner",
   templateUrl: "./app-ad-banner.component.html",
   styleUrls: ["./app-ad-banner.component.scss"],
+standalone: false,
 })
 export class AppAdBannerComponent implements OnInit {
   @Input() banner?: Banner;
@@ -24,7 +25,7 @@ export class AppAdBannerComponent implements OnInit {
   openWindow() {
 
     console.log(this.banner);
-    
+
     this.IsTapped.emit(this.banner.banner_url);
   }
 }

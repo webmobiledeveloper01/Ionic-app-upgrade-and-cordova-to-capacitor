@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
   selector: 'app-mapa-seleccion',
   templateUrl: './mapa-seleccion.page.html',
   styleUrls: ['./mapa-seleccion.page.scss'],
+standalone: false,
 })
 export class MapaSeleccionPage implements OnInit {
 

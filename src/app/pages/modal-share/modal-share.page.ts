@@ -6,7 +6,7 @@ import { ApiService } from "src/app/services/api.service";
   selector: "app-modal-share",
   templateUrl: "./modal-share.page.html",
   styleUrls: ["./modal-share.page.scss"],
-  standalone: false
+standalone: false,
 })
 export class ModalSharePage implements OnInit {
   @Input() post_id : any;

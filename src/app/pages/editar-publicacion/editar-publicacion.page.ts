@@ -37,6 +37,7 @@ declare var Google: any;
   selector: "app-editar-publicacion",
   templateUrl: "./editar-publicacion.page.html",
   styleUrls: ["./editar-publicacion.page.scss"],
+standalone: false,
 })
 export class EditarPublicacionPage implements OnInit {
   @ViewChild("MapDiv", { static: false }) private Mapdiv: any;

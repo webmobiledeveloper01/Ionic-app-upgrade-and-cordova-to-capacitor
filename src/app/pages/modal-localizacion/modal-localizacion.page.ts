@@ -10,6 +10,7 @@ import { FormGroup } from "@angular/forms";
   selector: "app-modal-localizacion",
   templateUrl: "./modal-localizacion.page.html",
   styleUrls: ["./modal-localizacion.page.scss"],
+standalone: false,
 })
 export class ModalLocalizacionPage implements OnInit {
   params: number;

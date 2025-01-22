@@ -5,6 +5,7 @@ import { Receta } from "src/app/models/Receta";
   selector: "app-recetas",
   templateUrl: "./app-recetas.component.html",
   styleUrls: ["./app-recetas.component.scss"],
+standalone: false,
 })
 export class AppRecetasComponent implements OnInit {
   @Input() receta?: Receta;

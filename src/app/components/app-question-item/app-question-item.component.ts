@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-question-item',
   templateUrl: './app-question-item.component.html',
   styleUrls: ['./app-question-item.component.scss'],
+standalone: false,
 })
 export class AppQuestionItemComponent implements OnInit {
 

@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
   selector: 'app-pago-correcto',
   templateUrl: './pago-correcto.page.html',
   styleUrls: ['./pago-correcto.page.scss'],
+standalone: false,
 })
 export class PagoCorrectoPage implements OnInit {
 
@@ -12,12 +13,12 @@ export class PagoCorrectoPage implements OnInit {
 
   ngOnInit() {
     setTimeout(() =>{
-      
+
         this.navCtrl.navigateForward('/tabs/home');
-   
-     
+
+
     }, 3000)
-    
+
   }
 
 }

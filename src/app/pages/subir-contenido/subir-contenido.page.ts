@@ -64,6 +64,7 @@ declare let plugins: any;
   selector: "app-subir-contenido",
   templateUrl: "./subir-contenido.page.html",
   styleUrls: ["./subir-contenido.page.scss"],
+standalone: false,
 })
 export class SubirContenidoPage implements OnInit {
   @ViewChild("Mapcheckbox", { static: false }) Mapcheckbox: IonCheckbox;

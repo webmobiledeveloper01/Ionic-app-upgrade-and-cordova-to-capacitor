@@ -10,6 +10,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-seguidores",
   templateUrl: "./seguidores.page.html",
   styleUrls: ["./seguidores.page.scss"],
+standalone: false,
 })
 export class SeguidoresPage implements OnInit {
   isLoading: boolean = true;

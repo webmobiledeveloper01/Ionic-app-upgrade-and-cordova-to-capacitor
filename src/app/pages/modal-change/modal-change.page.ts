@@ -7,7 +7,8 @@ import { IonInput, IonicModule, ModalController } from "@ionic/angular";
   selector: "app-modal-change",
   templateUrl: "./modal-change.page.html",
   styleUrls: ["./modal-change.page.scss"],
- 
+standalone: false,
+
 })
 export class ModalChangePage implements OnInit {
   input: IonInput;

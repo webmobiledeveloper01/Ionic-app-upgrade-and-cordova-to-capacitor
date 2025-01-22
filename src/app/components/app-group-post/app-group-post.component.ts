@@ -6,6 +6,7 @@ import moment from "moment";
   selector: "app-group-post",
   templateUrl: "./app-group-post.component.html",
   styleUrls: ["./app-group-post.component.scss"],
+standalone: false,
 })
 export class AppGroupPostComponent implements OnInit {
   @Input() post: any;

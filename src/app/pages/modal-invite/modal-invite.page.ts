@@ -7,7 +7,8 @@ import { IonicModule, ModalController } from "@ionic/angular";
   selector: "app-modal-invite",
   templateUrl: "./modal-invite.page.html",
   styleUrls: ["./modal-invite.page.scss"],
-  
+standalone: false,
+
 })
 export class ModalInvitePage implements OnInit {
   invited;
@@ -24,8 +25,8 @@ this.SetFriends();
 
     console.log("INVITED =>");
     console.log(this.invited);
-    
-    
+
+
     this.invited.length < 1 ? this.NoFriends=true : this.NoFriends=false;
 
   }

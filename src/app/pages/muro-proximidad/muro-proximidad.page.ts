@@ -10,6 +10,7 @@ import { Share } from "@capacitor/share";
   selector: "app-muro-proximidad",
   templateUrl: "./muro-proximidad.page.html",
   styleUrls: ["./muro-proximidad.page.scss"],
+standalone: false,
 })
 export class MuroProximidadPage implements OnInit {
   IsLoading: boolean = false;

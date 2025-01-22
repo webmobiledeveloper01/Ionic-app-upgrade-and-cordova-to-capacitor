@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-idiomas',
   templateUrl: './idiomas.page.html',
   styleUrls: ['./idiomas.page.scss'],
+standalone: false,
 })
 export class IdiomasPage implements OnInit {
 

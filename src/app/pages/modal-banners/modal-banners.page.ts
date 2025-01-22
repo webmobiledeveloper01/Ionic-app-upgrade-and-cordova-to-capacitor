@@ -8,6 +8,7 @@ import { UserService } from "src/app/services/user.service";
   selector: "app-modal-banners",
   templateUrl: "./modal-banners.page.html",
   styleUrls: ["./modal-banners.page.scss"],
+standalone: false,
 })
 export class ModalBannersPage implements OnInit {
   user: User;
@@ -20,14 +21,14 @@ export class ModalBannersPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    
+
     this.user = await this.uservice.getUser();
     this.IsLoading = false;
   }
 
 	public back() {
     this.navCtrl.navigateForward("/tabs");
-  	} 
+  	}
 
   irDonacion() {
     this.modalCtrl.dismiss();

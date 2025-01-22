@@ -6,7 +6,7 @@ import { AbstractControl } from '@angular/forms';
 
 /**
  * Validador para la confirmación de contraseña
- * @param control 
+ * @param control
  */
 export const confirmPassword = (control: AbstractControl) => {
 
@@ -19,9 +19,9 @@ export const confirmPassword = (control: AbstractControl) => {
 
 /**
  * Método que recibe el error y genera una respuesta
- * @param error 
+ * @param error
  */
-export const codeErrors = (error) => {
+export const codeErrors = (error: any) => {
   let message: string;
   switch (error.status) {
     case 401:

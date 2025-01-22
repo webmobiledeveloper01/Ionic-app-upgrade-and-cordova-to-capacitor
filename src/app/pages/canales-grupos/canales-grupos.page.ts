@@ -9,6 +9,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-canales-grupos",
   templateUrl: "./canales-grupos.page.html",
   styleUrls: ["./canales-grupos.page.scss"],
+standalone: false,
 })
 export class CanalesGruposPage implements OnInit {
   constructor(
@@ -135,7 +136,7 @@ export class CanalesGruposPage implements OnInit {
           grupo.user_tried_to_join = true;
 
           this.utilitiesService.dismissLoading();
-          
+
         } else {
           this.utilitiesService.showAlert(
             this.translateService.instant("¡Vaya!"),

@@ -1,4 +1,4 @@
-<ion-content color="primary">
+<ion-content>
   <ion-row class="row-titulo-pagina ion-align-items-center">
     <!--Decorado 1-->
     <ion-col class="col-perfil-decorado1">
@@ -41,7 +41,7 @@
   </ion-row>
 
   <div class="contenido">
-    
+
     <form
       *ngIf="form"
       [formGroup]="form"
@@ -54,7 +54,7 @@
           text-align: left;
           font-family: 'Canela';
           padding: 8px;
-          
+
         "
       >
         {{"Name" | translate}}
@@ -102,7 +102,7 @@
 
         <ion-modal [keepContentsMounted]="true" #datetime>
           <ng-template>
-            <ion-datetime id="datetime"  
+            <ion-datetime id="datetime"
             presentation="date"
             (ionChange)="onDiaChange($event)"></ion-datetime>
           </ng-template>
@@ -110,9 +110,9 @@
 
      <!--    <ion-row class="date-wrap" style="width: 100%">
           <ion-col>
-            
 
-            
+
+
             </ion-col>
               <ion-col>
                 <ion-datetime
@@ -145,7 +145,7 @@
         {{"Password" | translate}}
       </p>
       <ion-item class="contraseña">
-        <ion-input 
+        <ion-input
           clearInput
           type="password"
           [placeholder]="'Password' | translate"

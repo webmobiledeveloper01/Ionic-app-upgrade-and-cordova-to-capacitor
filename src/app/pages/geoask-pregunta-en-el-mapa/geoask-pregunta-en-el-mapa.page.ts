@@ -6,12 +6,13 @@ import { NavController } from '@ionic/angular';
   selector: 'app-geoask-pregunta-en-el-mapa',
   templateUrl: './geoask-pregunta-en-el-mapa.page.html',
   styleUrls: ['./geoask-pregunta-en-el-mapa.page.scss'],
+standalone: false,
 })
 export class GeoaskPreguntaEnElMapaPage implements OnInit {
-  
+
 
   constructor(private navController: NavController) {
-    
+
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class GeoaskPreguntaEnElMapaPage implements OnInit {
 
   back(){
     console.log("TODO: Method was not implemented. Added Placeholder");
-    this.navController.back(); // HotFix: Need to confirm the behaviour 
+    this.navController.back(); // HotFix: Need to confirm the behaviour
   }
 }
 

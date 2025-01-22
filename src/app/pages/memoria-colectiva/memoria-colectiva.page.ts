@@ -5,6 +5,7 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
   selector: 'app-memoria-colectiva',
   templateUrl: './memoria-colectiva.page.html',
   styleUrls: ['./memoria-colectiva.page.scss'],
+standalone: false,
 })
 export class MemoriaColectivaPage implements OnInit {
 

@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-interior-chat',
   templateUrl: './interior-chat.page.html',
   styleUrls: ['./interior-chat.page.scss'],
+standalone: false,
 })
 export class InteriorChatPage implements OnInit {
 
@@ -29,7 +30,7 @@ export class InteriorChatPage implements OnInit {
     private translateService: TranslateService,
     private ngZone: NgZone) {
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: any) => {
       this.idChat = params.id_chat;
       this.chatName = params.nombre_chat;
       this.lastMessage = params.ultimo_mensaje;
@@ -45,11 +46,11 @@ export class InteriorChatPage implements OnInit {
   }
   /* Obtenemos los mensajes y nos suscribimos a las notificaciones push */
   public ngOnInit(): void {
-    
+
     // TODO *** Create a new evet service with Behaviour subject
-    
-    
-    
+
+
+
     this.events.addMensaje().subscribe((mensaje) => {
       this.ngZone.run(() => {
         let m: Mensaje = {

@@ -39,7 +39,7 @@ declare var cordova: any;
 })
 export class AppComponent implements OnInit {
   user: User;
-  public isLoading: boolean = true;
+  public isLoading: boolean = false;
   public appPages = [
     {
       title: "Inicio",
@@ -136,86 +136,83 @@ export class AppComponent implements OnInit {
    */
   async ngOnInit() {
 
+    this.platform.ready().then(async () => {
+      const currenttoken = await this.storageService.init();
 
-    if (this.platform.is("cordova")) {
-      this.platform.ready().then(async () => {
-        const currenttoken = await this.storageService.init();
+      this.auth.authenticationState.next(currenttoken);
 
-        this.auth.authenticationState.next(currenttoken);
-
-        this.translateService.setDefaultLang("es");
-        this.auth.authenticationState.subscribe(async (token) => {
-          if (token != "logout" && token != "" && token != null) {
-            await this.SetNotifications()
-              .then()
-              .catch((err) => {
-                console.warn("***ERROR NOTITIFICACIONES***");
-                console.error(err);
-                console.warn("***ERROR NOTITIFICACIONES***");
-              });
-            this.prepararStripe();
-
-            this.apiService.setTokenToHeaders(token);
-            this.navCtrl.navigateRoot("tabs").then(async () => {
-              // console.log("User undefined");
-              await this.userService
-                .setUserFromDB()
-                .then(async () => {
-                  await this.userService
-                    .getUser()
-                    .then((user) => {
-                      this.user = user;
-                      this.CheckIfUserIsBanner();
-                      this.isLoading = false;
-                      // this.navCtrl.navigateRoot("/home");
-                    })
-                    .catch((err) => this.handleError(err));
-                })
-                .catch((err) => this.handleError(err));
-
-              // console.log("USER IS=>");
-              // console.log(this.user);
+      this.translateService.setDefaultLang("es");
+      this.auth.authenticationState.subscribe(async (token) => {
+        if (token != "logout" && token != "" && token != null) {
+          await this.SetNotifications()
+            .then()
+            .catch((err) => {
+              console.warn("***ERROR NOTITIFICACIONES***");
+              console.error(err);
+              console.warn("***ERROR NOTITIFICACIONES***");
             });
-          } else if (token == "logout") {
-            this.userService.logout();
-            this.user = undefined;
-            this.prepararStripe();
-            this.apiService.removeTokenToHeaders();
-            this.navCtrl.navigateRoot("register").then(() => {
-              this.isLoading = false;
-            });
-          } else {
+          this.prepararStripe();
+
+          this.apiService.setTokenToHeaders(token);
+          this.navCtrl.navigateRoot("tabs").then(async () => {
+            // console.log("User undefined");
+            await this.userService
+              .setUserFromDB()
+              .then(async () => {
+                await this.userService
+                  .getUser()
+                  .then((user) => {
+                    this.user = user;
+                    this.CheckIfUserIsBanner();
+                    this.isLoading = false;
+                    // this.navCtrl.navigateRoot("/home");
+                  })
+                  .catch((err) => this.handleError(err));
+              })
+              .catch((err) => this.handleError(err));
+
+            // console.log("USER IS=>");
+            // console.log(this.user);
+          });
+        } else if (token == "logout") {
+          this.userService.logout();
+          this.user = undefined;
+          this.prepararStripe();
+          this.apiService.removeTokenToHeaders();
+          this.navCtrl.navigateRoot("register").then(() => {
             this.isLoading = false;
+          });
+        } else {
+          this.isLoading = false;
 
-            // console.log("primera vez");
-          }
+          // console.log("primera vez");
+        }
 
-          // IMPORTANTE: para comprobar si la app está o no suspendida, debe ponerse el dominio en la propiedad "domainUrl" del archivo "src/environments/environment.ts"
-          this.checkIfAppIsSuspended();
-        });
-        this.pushNoti();
-        // this.splashScreen.show();
-        // await this.storage.get("auth-token").then((res) => {
-        //   console.log("es null?");
-        //   console.log(res);
-        //   if (!res || res == "") {
-        //     this.ShowSplash();
-        //   }
-        // });
-         // Show splash screen
-          await SplashScreen.show();
-         await this.storageService.get("auth-token").then((res) => {
-          console.log("es null?");
-          console.log(res);
-          if (!res || res == "") {
-            this.ShowSplash();
-          }
-        });
-
-        this.setUpDeepLinks();
-        // StatusBar.setStyle("");
+        // IMPORTANTE: para comprobar si la app está o no suspendida, debe ponerse el dominio en la propiedad "domainUrl" del archivo "src/environments/environment.ts"
+        this.checkIfAppIsSuspended();
       });
-    }
+      this.pushNoti();
+      // this.splashScreen.show();
+      // await this.storage.get("auth-token").then((res) => {
+      //   console.log("es null?");
+      //   console.log(res);
+      //   if (!res || res == "") {
+      //     this.ShowSplash();
+      //   }
+      // });
+       // Show splash screen
+        await SplashScreen.show();
+       await this.storageService.get("auth-token").then((res) => {
+        console.log("es null?");
+        console.log(res);
+        if (!res || res == "") {
+          this.ShowSplash();
+        }
+      });
+
+      this.setUpDeepLinks();
+      // StatusBar.setStyle("");
+    });
 
     this.apiService.userChanges.subscribe((user: User) => {
       this.user = user;
@@ -609,7 +606,7 @@ async SetNotifications() {
         {
           text: "Eliminar",
           //icon:'',
-          cssClass: "cancelbtn",
+          // cssClass: "cancelbtn",
           role: "cancel",
           handler: () => {
             // console.log("Cancel clicked");

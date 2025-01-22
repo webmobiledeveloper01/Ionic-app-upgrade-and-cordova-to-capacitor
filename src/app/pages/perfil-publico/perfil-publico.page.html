@@ -1,6 +1,6 @@
 <app-loading *ngIf="isLoading" [text]="'Cargando Perfil...' | translate"></app-loading>
 
-<ion-content color="primary" *ngIf="!isLoading">
+<ion-content  *ngIf="!isLoading">
   <div class="container">
     <div class="perfil-datos">
       <ion-row class="row-perfil-datos">
@@ -53,14 +53,14 @@
             >“Remembering my childhood at my family country house gives me a
             sense of belonging and nourishes my present experience.”</label
           > -->
-          
+
           <label *ngIf="user?.description" id="texto_usuario"
             >{{user?.description}}
           </label>
 
-   
+
         </ion-col>
-        <!-- 
+        <!--
         <ion-button class="boton-principal" type="submit" color="primary" style="margin-bottom: 2vh;" (click)="auth.logout()">
           <p class="register">Salir de la cuenta</p>
           </ion-button> -->
@@ -71,7 +71,7 @@
           <!--Followers-->
           <ion-col class="col-followers" (click)="GoToFollowers()">
             <label id="num_followers">{{user?.followers}}</label>
-            <label id="tipo_followers">{{"SEGUIDORES" | translsate}}</label>
+            <label id="tipo_followers">{{"SEGUIDORES" | translate}}</label>
           </ion-col>
 
           <!--Following-->
@@ -82,14 +82,14 @@
 
           <!-- follow -->
           <!-- <ion-col class="col-likes">
-        
+
           </ion-col> -->
         </ion-row>
       </ion-row>
     </div>
   </div>
 
-  
+
 
   <div class="action-buttons">
     <div class="action-follows" >
@@ -103,7 +103,7 @@
     </div>
     <div class="action-Mutual" *ngIf="isMutual">
       <ion-grid style="margin: 0px;width: 100%;">
-        
+
         <ion-row  style="margin:0px" class="status"> {{"Os seguis mutuamente" | translate}}</ion-row>
         <ion-row style="margin:11px">
           <ion-button class="stop-follow" (click)="StopFollow()"

@@ -1,14 +1,14 @@
 <!-- <app-loading  *ngIf="isloading" text="Cargando..." color="danger" ></app-loading> -->
 <!-- *ngIf="!isloading" -->
 
-<ion-content color="primary">
+<ion-content>
   <div class="container">
     <div class="cabecera-pagina">
       <img *ngIf="post.tipo_archivo == 1"
       class="imagen-cabecera"
       [src]="post.archivo"
       (click)="openFullscreen(post.archivo)" />
-      
+
       <div *ngIf="post.tipo_archivo==2" class="player">
         <video playsinline
           class="video"
@@ -28,7 +28,7 @@
 
       <img [ngClass]="platform.is('ios') ? 'ios-image' : 'imagen-atras'"
       src="assets/icons/Group 114-2.png" (click)="back()" />
-      
+
     </div>
   </div>
 
@@ -144,7 +144,7 @@
               class="cambio-icono"
               src="assets/icons/Group 870.svg"
             ></ion-icon> -->
-            <!-- 
+            <!--
             <ion-slides class="slides1">
               <ion-slide class="slide1">
                 <img class="imagen-slide" src="assets/imgs/Rectangle 104.png" />

@@ -10,6 +10,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-perfil-publico",
   templateUrl: "./perfil-publico.page.html",
   styleUrls: ["./perfil-publico.page.scss"],
+standalone: false,
 })
 export class PerfilPublicoPage implements OnInit {
   user;
@@ -53,7 +54,7 @@ export class PerfilPublicoPage implements OnInit {
 
     console.log(this.user.user_location);
 
-    this.user.user_location = this.user.user_location.replace("undefined,", "");
+    this.user.user_location = this.user.user_location?.replace("undefined,", "");
 
     if (this.user.IsCurrentUser) {
       if (this.user.role_id == 4) {

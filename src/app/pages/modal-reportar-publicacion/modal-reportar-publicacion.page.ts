@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-modal-reportar-publicacion',
   templateUrl: './modal-reportar-publicacion.page.html',
   styleUrls: ['./modal-reportar-publicacion.page.scss'],
+standalone: false,
 })
 export class ModalReportarPublicacionPage implements OnInit {
   public publicacion_id: any;
@@ -18,7 +19,7 @@ export class ModalReportarPublicacionPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.publicacion_id = this.navParams.data.id;
+    this.publicacion_id = this.navParams.data['id'];
 
     console.log('ModalReportarPublicacionPage');
   }

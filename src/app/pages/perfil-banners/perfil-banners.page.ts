@@ -12,6 +12,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-perfil-banners",
   templateUrl: "./perfil-banners.page.html",
   styleUrls: ["./perfil-banners.page.scss"],
+standalone: false,
 })
 export class PerfilBannersPage implements OnInit {
   user: User;

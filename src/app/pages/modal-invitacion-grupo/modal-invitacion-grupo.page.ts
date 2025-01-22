@@ -8,7 +8,8 @@ import { ApiService } from "src/app/services/api.service";
   selector: "app-modal-invitacion-grupo",
   templateUrl: "./modal-invitacion-grupo.page.html",
   styleUrls: ["./modal-invitacion-grupo.page.scss"],
- 
+standalone: false,
+
 })
 export class ModalInvitacionGrupoPage implements OnInit {
   constructor(private api: ApiService, private mcontrol: ModalController) {}

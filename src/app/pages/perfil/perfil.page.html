@@ -1,6 +1,6 @@
 <app-loading *ngIf="isLoading" text="Cargando Perfil..."></app-loading>
 
-<ion-content color="primary" *ngIf="!isLoading">
+<ion-content  *ngIf="!isLoading">
   <div class="container">
     <div class="perfil-datos">
       <ion-row class="row-perfil-datos">
@@ -67,11 +67,11 @@
           <label *ngIf="!user?.description" id="texto_usuario" >
             {{"Aún no has añadido ninguna descripción" | translate}}
           </label>
-      
-       
+
+
         </ion-col>
-        
-        <!-- 
+
+        <!--
         <ion-button class="boton-principal" type="submit" color="primary" style="margin-bottom: 2vh;" (click)="auth.logout()">
           <p class="register">Salir de la cuenta</p>
           </ion-button> -->
@@ -104,22 +104,22 @@
 
         <ion-row class="questions-row">
           <ion-button routerLink="/my-questions" style="
-						font-family: 'Alliance';	
+						font-family: 'Alliance';
 						font-size: 15px;
 						">{{"Mis preguntas" | translate}}</ion-button>
                 <ion-button routerLink="/modal-banners" style="
-                font-family: 'Alliance';	
+                font-family: 'Alliance';
                 --background: #f3b562;
                 font-size: 15px;
                 ">{{"Ser sponsor" | translate}}</ion-button>
           <!-- <ion-button routerLink="/new-question">Nueva pregunta</ion-button> -->
         </ion-row>
       </ion-row>
- 
+
     </div>
   </div>
   <div>
-    
+
     <p
       text-center
       *ngIf="user?.role_id == 4"
@@ -222,7 +222,7 @@
 
   <!-- 1984  -->
   <!--   <label slot="end" class="numero-years"> 1 de {{posts.postCount}}</label>
-              1 of 7 
+              1 of 7
           </ion-item>
         </ion-col> -->
 
@@ -246,7 +246,7 @@
   <!-- <label id="texto-pie-imagen"
                 >
                 {{p.titulo}}
-              
+
                 </label
               > -->
 

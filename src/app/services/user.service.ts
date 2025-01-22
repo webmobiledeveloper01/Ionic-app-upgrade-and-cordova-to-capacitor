@@ -6,7 +6,7 @@ import { ApiService } from "./api.service";
   providedIn: "root",
 })
 export class UserService {
-  user: User;
+  user?: User;
 
   constructor(private api: ApiService) {}
 

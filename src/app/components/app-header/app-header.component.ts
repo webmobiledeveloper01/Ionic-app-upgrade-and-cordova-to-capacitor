@@ -16,6 +16,7 @@ import { ApiService } from "src/app/services/api.service";
   selector: "app-app-header",
   templateUrl: "./app-header.component.html",
   styleUrls: ["./app-header.component.scss"],
+standalone: false,
 })
 export class AppHeaderComponent implements OnInit {
   @Input() textHeader: string = "";

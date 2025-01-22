@@ -10,7 +10,8 @@ import {
   selector: "app-modal-ajustes",
   templateUrl: "./modal-ajustes.page.html",
   styleUrls: ["./modal-ajustes.page.scss"],
- 
+standalone: false,
+
 })
 export class ModalAjustesPage implements OnInit {
   public direccion: any;

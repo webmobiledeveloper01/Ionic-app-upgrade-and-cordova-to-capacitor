@@ -14,6 +14,7 @@ import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
   selector: "app-login",
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"],
+standalone: false,
 })
 export class LoginPage implements OnInit {
   public isUpdating: boolean;
@@ -58,6 +59,7 @@ export class LoginPage implements OnInit {
 
         //Vamos a inicio
         this.auth.login(user.api_token);
+        this.navCtrl.navigateRoot("/home");
       },
       (error) => {
         this.utilitiesService.dismissLoading();
@@ -180,13 +182,13 @@ export class LoginPage implements OnInit {
     //   this.apiService.loginGoogle(user).subscribe(
       //     (user: User) => {
         //       this.utilitiesService.dismissLoading();
-        
+
         //       //Ahora aplicamos la cabecera devuelta a las siguientes peticiones
         //       this.apiService.setTokenToHeaders(user.api_token);
-        
+
         //       //Emitimos el evento de login
         //       // this.events.publish("user:login"); // TODO create service if required.
-        
+
         //       //Vamos a inicio
         //       this.auth.login(user.api_token);
         //     },
@@ -212,13 +214,13 @@ export class LoginPage implements OnInit {
               this.apiService.loginGoogle(user).subscribe(
                 (user: User) => {
                   this.utilitiesService.dismissLoading();
-              
+
                   // Now apply the returned header to the following requests
                   this.apiService.setTokenToHeaders(user.api_token);
-              
+
                   // Emit the login event
                   // this.events.publish("user:login"); // TODO create service if required.
-              
+
                   // Go to home
                   this.auth.login(user.api_token);
                 },
@@ -229,12 +231,12 @@ export class LoginPage implements OnInit {
                 }
               );
           }
-          
+
           async rememberPassword() {
             let email = this.form.get("email").value;
-            
+
             console.log(email);
-            
+
             let ValidEmail = this.validateMail(email);
 
     if (ValidEmail) {

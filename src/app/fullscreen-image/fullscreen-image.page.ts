@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-fullscreen-image',
   templateUrl: './fullscreen-image.page.html',
   styleUrls: ['./fullscreen-image.page.scss'],
+standalone: false,
 })
 export class FullscreenImagePage {
   @Input() imageUrl: string;

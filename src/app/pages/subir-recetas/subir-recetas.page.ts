@@ -4,7 +4,7 @@ import { PasoReceta } from "src/app/models/PasoReceta";
 import { Ingrediente } from "src/app/models/Ingrediente";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
-import { Camera, CameraOptions } from "@capacitor/camera";
+import { Camera, CameraOptions, CameraResultType, CameraSource } from "@capacitor/camera";
 // import {
 //   GoogleMaps,
 //   GoogleMap,
@@ -38,13 +38,14 @@ declare let plugins: any;
   selector: "app-subir-recetas",
   templateUrl: "./subir-recetas.page.html",
   styleUrls: ["./subir-recetas.page.scss"],
+standalone: false,
 })
 export class SubirRecetasPage implements OnInit {
   form: FormGroup;
   public googleAutocomplete: any;
   public map: GoogleMap;
   IsLoading: boolean = true;
-  Servings: { id: number; name: string };
+  Servings: Array<{ id: number; name: string }>;
   NoServings: boolean = false;
   ingredients: Ingrediente[] = [];
   pasos: PasoReceta[] = [];
@@ -461,36 +462,58 @@ export class SubirRecetasPage implements OnInit {
 
   // Adjuntar Imagen
 
-  public adjuntarImagen(): void {
-    // TODO Implement new camera.
-    // const options: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   mediaType: this.camera.MediaType.PICTURE,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    //   targetWidth: 1920,
-    //   targetHeight: 1080,
-    //   allowEdit: false,
-    //   correctOrientation: true,
-    // };
-    // this.ngzone.run(() => {
-    //   this.camera
-    //     .getPicture(options)
-    //     .then(async (urlFoto) => {
-    //       this.base64img = "data:image/jpeg;base64," + urlFoto;
-    //       this.form.patchValue({ archivo: this.base64img });
+  // public adjuntarImagen(): void {
+  //   // TODO Implement new camera.
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+  //     targetWidth: 1920,
+  //     targetHeight: 1080,
+  //     allowEdit: false,
+  //     correctOrientation: true,
+  //   };
+  //   this.ngzone.run(() => {
+  //     this.camera
+  //       .getPicture(options)
+  //       .then(async (urlFoto) => {
+  //         this.base64img = "data:image/jpeg;base64," + urlFoto;
+  //         this.form.patchValue({ archivo: this.base64img });
 
-    //       console.log(urlFoto);
+  //         console.log(urlFoto);
 
-    //       await this.loadMap();
-    //     })
-    //     .catch((error) => {
-    //       this.utilities.showAlert("Error al obtener imagen", error);
-    //     });
-    // });
+  //         await this.loadMap();
+  //       })
+  //       .catch((error) => {
+  //         this.utilities.showAlert("Error al obtener imagen", error);
+  //       });
+  //   });
+  // }
+  public async adjuntarImagen(): Promise<void> {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 100,
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Photos,
+        width: 1920,
+        height: 1080,
+        correctOrientation: true
+      });
+
+      if (image && image.base64String) {
+        this.base64img = `data:image/jpeg;base64,${image.base64String}`;
+        this.form.patchValue({ archivo: this.base64img });
+
+        console.log(image.base64String);
+
+        await this.loadMap();
+      }
+    } catch (error) {
+      this.utilities.showAlert('Error al obtener imagen', error.message || error);
+    }
   }
-
   // CARGAR MAPA
 
   public async loadMap() {

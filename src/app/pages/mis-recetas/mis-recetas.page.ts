@@ -10,6 +10,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-mis-recetas",
   templateUrl: "./mis-recetas.page.html",
   styleUrls: ["./mis-recetas.page.scss"],
+standalone: false,
 })
 export class MisRecetasPage implements OnInit {
   User: User;
@@ -89,7 +90,7 @@ export class MisRecetasPage implements OnInit {
     switch (response.status) {
       case "ok":
         this.recipes = response.data;
-        
+
         console.log(response.message);
         this.sinRecetas = false;
         break;

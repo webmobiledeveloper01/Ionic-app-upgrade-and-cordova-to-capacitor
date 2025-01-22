@@ -28,9 +28,9 @@ export class AuthenticationService {
       return res ?? false;
   }
 
-  
 
-  public login(token): Promise<void> {
+
+  public login(token: any): Promise<void> {
     return this.storage.set(TOKEN_KEY, token).then(() => {
       this.authenticationState.next(token);
     });

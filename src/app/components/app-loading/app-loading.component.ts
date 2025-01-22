@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-loading',
   templateUrl: './app-loading.component.html',
   styleUrls: ['./app-loading.component.scss'],
+standalone: false,
 })
 export class AppLoadingComponent {
 

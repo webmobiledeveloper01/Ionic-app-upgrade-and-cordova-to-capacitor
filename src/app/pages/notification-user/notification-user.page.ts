@@ -9,6 +9,7 @@ import { ModalInvitacionGrupoPage } from "../modal-invitacion-grupo/modal-invita
   selector: "app-notification-user",
   templateUrl: "./notification-user.page.html",
   styleUrls: ["./notification-user.page.scss"],
+standalone: false,
 })
 export class NotificationUserPage implements OnInit {
   public notificaciones: Notification[] = [];
@@ -178,7 +179,7 @@ export class NotificationUserPage implements OnInit {
 
     this.apiService.groupChanges.next("");
   }
-  
+
 
   toggleConfig($event) {
     // console.log("Clicked");

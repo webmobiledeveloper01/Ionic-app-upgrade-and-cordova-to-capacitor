@@ -1,5 +1,5 @@
 <ion-content>
- 
+
 		<!-- doomed v3 header -->
 
 		<img
@@ -104,7 +104,7 @@
               (click)="SelectThisChip(t.id,$event)"
               >
               {{t.name}}
-              
+
               </ion-chip
             >
           </ion-row>
@@ -116,14 +116,21 @@
           </ion-row>
           <ion-row class="fecha-row">
             <ion-col class="fecha-input-wrap">
-              <ion-datetime
+              <ion-datetime-button datetime="date-day"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                id="date-day"
                 placeholder="Día"
-                pickerFormat="DD"
-                displayFormat="DD"
-                (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
+                presentation="date"
+
+                (ionChange)="SetDateValue($event.detail.value, 'day', 1, true)"
               ></ion-datetime>
+                </ng-template>
+              </ion-modal>
             </ion-col>
 
+<!--
             <ion-col class="fecha-input-wrap">
               <ion-datetime
                 placeholder="Mes"
@@ -140,7 +147,7 @@
                 displayFormat="YYYY"
                 (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
               ></ion-datetime>
-            </ion-col>
+            </ion-col> -->
 
             <!-- <ion-col class="fecha-input-wrap">
               <ion-select
@@ -165,15 +172,20 @@
           </ion-row>
           <ion-row class="fecha-row">
             <ion-col class="fecha-input-wrap">
-              <ion-datetime
+            <ion-datetime-button datetime="fechaHastaDatetime"></ion-datetime-button>
+            <ion-modal  [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime
+                id="fechaHastaDatetime"
                 placeholder="Día"
-                pickerFormat="DD"
-                displayFormat="DD"
+                presentation="date"
                 (ionChange)="SetDateValue($event.detail.value,'day',1,true)"
               ></ion-datetime>
+              </ng-template>
+            </ion-modal>
             </ion-col>
 
-            <ion-col class="fecha-input-wrap">
+            <!-- <ion-col class="fecha-input-wrap">
               <ion-datetime
                 placeholder="Mes"
                 pickerFormat="MM"
@@ -189,7 +201,7 @@
                 displayFormat="YYYY"
                 (ionChange)="SetDateValue($event.detail.value,'year',3,true)"
               ></ion-datetime>
-            </ion-col>
+            </ion-col> -->
 
             <!-- <ion-col class="fecha-input-wrap">
               <ion-select
@@ -213,19 +225,20 @@
             <p class="title">{{"Ubicación" | translate}}</p>
           </ion-row>
 
-          <ion-row class="row-ubicacion-input">
-            <ion-input
-              class="ubicacion-input"
-              placeholder="Introduce una ubicación..."
-              [(ngModel)]="direccionSeleccionada"
-            ></ion-input>
-            <!-- (ionChange)="InputValue($event)" 
-              [debounce]="1000" -->
-            <ion-button class="searchBtn" (click)="SearchLocalizacion()"
-              ><ion-icon name="search"></ion-icon
-            ></ion-button>
-          </ion-row>
+          <ion-item><ion-input
+            class="ubicacion-input"
+            placeholder="Introduce una ubicación..."
+            [(ngModel)]="direccionSeleccionada"
+            (ionChange)="InputValue($event)"
+            [debounce]="1000"
+          ></ion-input>
 
+         <ion-buttons slot="end">
+          <ion-button class="searchBtn" (click)="SearchLocalizacion()"
+          ><ion-icon name="search"></ion-icon
+        ></ion-button>
+         </ion-buttons>
+          </ion-item>
           <ion-row class="row-ubicacion-map">
             <ion-row class="row-title">
               <ion-icon src="assets/icons/map 1.svg" mode="ios"></ion-icon>
@@ -255,7 +268,7 @@
   </ion-grid>
 
   <!-- <ion-grid style="margin: 10% auto;width: 90%;">
-    
+
     <ion-row><img src="assets/imgs/image 202.png"  id="image-357" /></ion-row>
     <ion-row><canvas id="canva-357" ></canvas></ion-row>
   </ion-grid>

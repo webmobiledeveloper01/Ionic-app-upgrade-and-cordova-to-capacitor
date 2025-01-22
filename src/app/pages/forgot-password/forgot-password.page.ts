@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
   styleUrls: ['./forgot-password.page.scss'],
+standalone: false,
 })
 export class ForgotPasswordPage implements OnInit {
 

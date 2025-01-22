@@ -1,6 +1,6 @@
 <app-loading *ngIf="IsLoading" text="Cargando..."></app-loading>
 
-<ion-content *ngIf="!IsLoading" color="primary">
+<ion-content *ngIf="!IsLoading">
 
 	<!-- doomed v3 header -->
 
@@ -54,7 +54,7 @@
 
 	<!-- doomed header v3 -->
 
-  
+
 
   <div class="btn-wrap">
     <ion-grid>
@@ -68,7 +68,7 @@
           ></ion-col
         >
         <ion-col
-          ><ion-button 
+          ><ion-button
             [ngClass]="DisplayOwnGroups==true ? 'new' : 'none' "
             (click)="SetDisplayMode(true)"
             >{{"Mis grupos" | translate}}</ion-button

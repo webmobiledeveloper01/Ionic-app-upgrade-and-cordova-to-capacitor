@@ -6,6 +6,7 @@ import { Banner } from "src/app/models/Banner";
   selector: "app-mis-banners",
   templateUrl: "./mis-banners.page.html",
   styleUrls: ["./mis-banners.page.scss"],
+standalone: false,
 })
 export class MisBannersPage implements OnInit {
   error: boolean;

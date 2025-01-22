@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
   selector: "app-home-post",
   templateUrl: "./app-home-post.component.html",
   styleUrls: ["./app-home-post.component.scss"],
+standalone: false,
 })
 export class AppHomePostComponent implements OnInit {
   @Input() post: any;

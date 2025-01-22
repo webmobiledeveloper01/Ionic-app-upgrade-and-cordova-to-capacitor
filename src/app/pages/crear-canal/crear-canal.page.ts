@@ -10,6 +10,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-crear-canal",
   templateUrl: "./crear-canal.page.html",
   styleUrls: ["./crear-canal.page.scss"],
+standalone: false,
 })
 export class CrearCanalPage implements OnInit {
   categories: Category[][];

@@ -6,6 +6,7 @@ import { User } from "src/app/models/User";
   selector: "app-user-follower",
   templateUrl: "./app-user-follower.component.html",
   styleUrls: ["./app-user-follower.component.scss"],
+standalone: false,
 })
 export class AppUserFollowerComponent implements OnInit {
   @Input() User: User;

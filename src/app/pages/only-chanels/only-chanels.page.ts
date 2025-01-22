@@ -7,6 +7,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-only-chanels",
   templateUrl: "./only-chanels.page.html",
   styleUrls: ["./only-chanels.page.scss"],
+standalone: false,
 })
 export class OnlyChanelsPage implements OnInit {
   Chanels: any[] = [];
@@ -22,7 +23,7 @@ export class OnlyChanelsPage implements OnInit {
 
 	public back() {
     this.navCtrl.navigateForward("/tabs");
-  } 
+  }
 
   async getChanels() {
     await this.api
@@ -52,7 +53,7 @@ export class OnlyChanelsPage implements OnInit {
   }
 
 
-  
+
   goToGrupos(grupo) {
     this.navCtrl.navigateForward("grupo", {
       state: {

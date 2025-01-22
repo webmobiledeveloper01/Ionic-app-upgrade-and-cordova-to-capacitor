@@ -11,6 +11,7 @@ declare let plugins : any;
   selector: 'app-mapa-street',
   templateUrl: './mapa-street.page.html',
   styleUrls: ['./mapa-street.page.scss'],
+standalone: false,
 })
 export class MapaStreetPage implements OnInit {
 

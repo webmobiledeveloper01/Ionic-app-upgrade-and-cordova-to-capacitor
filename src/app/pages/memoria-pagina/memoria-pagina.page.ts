@@ -9,6 +9,7 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
   selector: 'app-memoria-pagina',
   templateUrl: './memoria-pagina.page.html',
   styleUrls: ['./memoria-pagina.page.scss'],
+standalone: false,
 })
 export class MemoriaPaginaPage implements OnInit {
 
@@ -27,7 +28,7 @@ export class MemoriaPaginaPage implements OnInit {
     this.apiService.getEntity('comentarios',this.place.id).subscribe((comentarios) =>{
       this.comentarios = comentarios
       console.log(this.comentarios);
-      
+
     });
 
     this.apiService.getEntity('user').subscribe((user) =>{
@@ -42,12 +43,12 @@ export class MemoriaPaginaPage implements OnInit {
 
   public enviarComentario(){
     console.log(this.comentario);
-    
+
     let params = {
       'comentario':this.comentario,
       'publicacion_id': this.place.id
-        }    
-        
+        }
+
         this.apiService.addEntity('comentarios',params).subscribe((comentario) =>{
           this.comentarios.push(comentario);
           this.utilities.showToast('Comentario enviado');

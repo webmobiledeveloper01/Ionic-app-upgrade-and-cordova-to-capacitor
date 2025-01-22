@@ -6,6 +6,7 @@ import { ApiService } from "src/app/services/api.service";
   selector: "app-my-questions",
   templateUrl: "./my-questions.page.html",
   styleUrls: ["./my-questions.page.scss"],
+standalone: false,
 })
 export class MyQuestionsPage implements OnInit {
   public questions = [];

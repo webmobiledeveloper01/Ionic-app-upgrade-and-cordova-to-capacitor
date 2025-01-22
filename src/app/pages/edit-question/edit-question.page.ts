@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { IonButton, ModalController, NavController } from "@ionic/angular";
-import moment from "moment";
+// import * as moment from "moment";
 import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
@@ -28,6 +28,7 @@ declare var plugins, google;
   selector: "app-edit-question",
   templateUrl: "./edit-question.page.html",
   styleUrls: ["./edit-question.page.scss"],
+standalone: false,
 })
 export class EditQuestionPage implements OnInit {
   form: any;

@@ -8,6 +8,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-answer-question",
   templateUrl: "./answer-question.page.html",
   styleUrls: ["./answer-question.page.scss"],
+standalone: false,
 })
 export class AnswerQuestionPage implements OnInit {
   question;

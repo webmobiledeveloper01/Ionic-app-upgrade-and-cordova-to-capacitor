@@ -11,6 +11,7 @@ import { UserService } from "src/app/services/user.service";
   selector: "app-pago",
   templateUrl: "./pago.page.html",
   styleUrls: ["./pago.page.scss"],
+standalone: false,
 })
 export class PagoPage implements OnInit {
   form: FormGroup;
@@ -28,7 +29,7 @@ export class PagoPage implements OnInit {
 
   ngOnInit() {
 
-    
+
 
     this.form = this.formBuilder.group({
       name: ["", [Validators.required]],
@@ -50,7 +51,7 @@ export class PagoPage implements OnInit {
           .procesarPago({ precio: 0.99, stripeToken: token.id, donacion: 0 })
           .subscribe(async (response) => {
             this.utilities.dismissLoading();
-            console.log(response);            
+            console.log(response);
           await this.uservice.setUser(response.data);
           this.utilities.showToast("¡Felicidades! a partir de ahora eres sponsor");
             this.navCtrl.navigateRoot("/pago-correcto");
@@ -65,9 +66,9 @@ export class PagoPage implements OnInit {
   // TODO Capacitor Plugin Method Implementation not working.
   // public async submitForm() {
   //   await this.utilities.showLoading("Procesando Pago...");
-  
+
   //   let card: StripeCardTokenParams = this.form.value;
-  
+
   //   Stripe.createCardToken(card).then(
   //     async (token) => {
   //       this.apiService

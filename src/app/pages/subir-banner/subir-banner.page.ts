@@ -12,6 +12,7 @@ import { ModalAjustarImagenPage } from "../modal-ajustar-imagen/modal-ajustar-im
   selector: "app-subir-banner",
   templateUrl: "./subir-banner.page.html",
   styleUrls: ["./subir-banner.page.scss"],
+standalone: false,
 })
 export class SubirBannerPage implements OnInit {
   form: FormGroup;
@@ -140,7 +141,7 @@ export class SubirBannerPage implements OnInit {
   //       });
   //   });
   // }
-  
+
   public async adjuntarImagen(): Promise<void> {
     try {
       const options: CameraOptions = {
@@ -152,9 +153,9 @@ export class SubirBannerPage implements OnInit {
         allowEditing: false,
         correctOrientation: true,
       };
-  
+
       const capturedPhoto = await Camera.getPhoto(options);
-  
+
       if (capturedPhoto.dataUrl) {
         this.base64img = capturedPhoto.dataUrl;
       } else {

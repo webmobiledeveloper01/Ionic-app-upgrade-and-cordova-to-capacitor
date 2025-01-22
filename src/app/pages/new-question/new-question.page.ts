@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ModalController, NavController, Platform } from "@ionic/angular";
-import moment from "moment";
+import  moment from "moment";
 import { Category } from "src/app/models/Category";
 import { ApiService } from "src/app/services/api.service";
 import { UtilitiesService } from "src/app/services/utilities.service";
@@ -29,6 +29,7 @@ declare let plugins: any;
   selector: "app-new-question",
   templateUrl: "./new-question.page.html",
   styleUrls: ["./new-question.page.scss"],
+standalone: false,
 })
 export class NewQuestionPage implements OnInit {
   currentDate: Date = new Date();

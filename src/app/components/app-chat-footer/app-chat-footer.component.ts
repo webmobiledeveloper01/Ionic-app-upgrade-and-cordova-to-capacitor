@@ -6,6 +6,7 @@ import { Camera, CameraOptions, CameraResultType, CameraSource } from '@capacito
   selector: 'app-chat-footer',
   templateUrl: './app-chat-footer.component.html',
   styleUrls: ['./app-chat-footer.component.scss'],
+standalone: false,
 })
 export class AppChatFooterComponent implements OnInit {
 

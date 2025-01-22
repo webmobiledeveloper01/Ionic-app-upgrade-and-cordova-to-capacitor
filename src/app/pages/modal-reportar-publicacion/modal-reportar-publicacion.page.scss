@@ -1,7 +1,7 @@
 ion-content {
     --background: transparent !important;
     border-radius:20px;
-    
+
     .flex{
         width: 100%;
         height: 100%;
@@ -43,7 +43,7 @@ ion-content {
             justify-content: center;
             align-items: center;
         }
-    
+
         .reserva{
             margin-top: 4vh;
             width: 85vw;
@@ -52,21 +52,21 @@ ion-content {
             --background: var(--ion-color-tertiary);
             text-transform: none;
             color: white;
-            
+
             margin-bottom: 2vh;
         }
         .reserva2{
             margin-top: 4vh;
             width: 85vw;
             height: 7vh;
-            --border-radius: 15px;
+            --border-radius: 50px;
             --background: white;
             text-transform: none;
             color: black;
-            
+
             margin-bottom: 2vh;
         }
     }
-    
-    
+
+
 }

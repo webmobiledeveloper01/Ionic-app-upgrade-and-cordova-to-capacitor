@@ -9,6 +9,7 @@ import { UserService } from "src/app/services/user.service";
   selector: "app-tabs",
   templateUrl: "./tabs.page.html",
   styleUrls: ["./tabs.page.scss"],
+standalone: false,
 })
 export class TabsPage implements OnInit {
   public user: User;
@@ -20,11 +21,11 @@ export class TabsPage implements OnInit {
   // public pagesIzq = [
   //   { tab: "canales-grupos", name: "", icon: "/assets/icons/search 1.svg" },
   // ];
-  
+
   public pagesIzq = [
     { tab: "buscador-publicaciones", name: "", icon: "/assets/icons/search 1.svg" },
   ];
-  
+
   // public pagesDcha = [
   //   { tab: "map", name: "", icon: "/assets/icons/map 1.svg" },
   //   { tab: "perfil", name: "", icon: "/assets/icons/user 1.svg" },
@@ -47,7 +48,7 @@ export class TabsPage implements OnInit {
     console.log("tabs tiene el user");
 
     if (this.user.role_id == 4) {
-      
+
       this.pagesDcha = [
         { tab: "mapp", name: "", icon: "/assets/icons/map 1.svg" },
         { tab: "perfil-banners", name: "", icon: "/assets/icons/user 1.svg" },

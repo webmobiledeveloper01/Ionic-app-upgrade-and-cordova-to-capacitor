@@ -7,6 +7,7 @@ import { IonicModule, ModalController, NavParams } from '@ionic/angular';
   selector: 'app-modal-reportar',
   templateUrl: './modal-reportar.page.html',
   styleUrls: ['./modal-reportar.page.scss'],
+standalone: false,
 })
 export class ModalReportarPage implements OnInit {
   public publicacion_id: any;

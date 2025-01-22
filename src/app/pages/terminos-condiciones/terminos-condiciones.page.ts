@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
   selector: 'app-terminos-condiciones',
   templateUrl: './terminos-condiciones.page.html',
   styleUrls: ['./terminos-condiciones.page.scss'],
+standalone: false,
 })
 export class TerminosCondicionesPage implements OnInit {
 

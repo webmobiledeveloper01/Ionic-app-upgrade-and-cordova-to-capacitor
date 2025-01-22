@@ -9,6 +9,7 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
   selector: 'app-modal-reportar-motivo',
   templateUrl: './modal-reportar-motivo.page.html',
   styleUrls: ['./modal-reportar-motivo.page.scss'],
+standalone: false,
 })
 
 export class ModalReportarMotivoPage implements OnInit {
@@ -27,10 +28,10 @@ export class ModalReportarMotivoPage implements OnInit {
     private utilities: UtilitiesService,
     private modalController:ModalController) { }
 
-    
+
 
   ngOnInit() {
-    this.publicacion_id = this.navParams.data.id
+    this.publicacion_id = this.navParams.data['id']
     console.log("ModalReportarMotivoPage");
 
   }
@@ -51,7 +52,7 @@ export class ModalReportarMotivoPage implements OnInit {
     this.apiService.addEntity('reportar',params).subscribe((reportar) =>{
       this.utilities.showToast('Reportado con éxito');
       this.modalController.dismiss();
-      
+
     });
 
   }
@@ -59,7 +60,7 @@ export class ModalReportarMotivoPage implements OnInit {
   cerrarModal() {
     this.modalController.dismiss();
   }
-  
+
 
   spam(event){
     this.checkSpam = !this.checkSpam

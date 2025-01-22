@@ -17,6 +17,7 @@ import { TranslateService } from "@ngx-translate/core";
   selector: "app-perfil",
   templateUrl: "./perfil.page.html",
   styleUrls: ["./perfil.page.scss"],
+standalone: false,
 })
 export class PerfilPage implements OnInit {
   public verPublicacion: boolean = true;
@@ -230,7 +231,7 @@ Followers : false,
  }
 
   async sliderChanges($event, post) {
-  
+
 
     let res = await $event.target.getActiveIndex();
     console.log(res);
@@ -268,7 +269,7 @@ Followers : false,
     } catch (error) {
       this.utilities.showToast(
         this.translateService.instant("Ha ocurrido un error en el servidor, inténtelo mas tarde")
-        
+
       );
       console.log(error);
     }

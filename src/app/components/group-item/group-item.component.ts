@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
   selector: "app-group-item",
   templateUrl: "./group-item.component.html",
   styleUrls: ["./group-item.component.scss"],
+standalone: false,
 })
 export class GroupItemComponent implements OnInit {
   @Input() grupo: any;

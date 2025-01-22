@@ -6,6 +6,7 @@ import { Banner } from "src/app/models/Banner";
   selector: "app-modal-ajustar-imagen",
   templateUrl: "./modal-ajustar-imagen.page.html",
   styleUrls: ["./modal-ajustar-imagen.page.scss"],
+standalone: false,
 })
 export class ModalAjustarImagenPage implements OnInit {
   croppedImage = null;

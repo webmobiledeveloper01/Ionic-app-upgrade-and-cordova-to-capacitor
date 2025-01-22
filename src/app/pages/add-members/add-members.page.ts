@@ -9,6 +9,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-add-members",
   templateUrl: "./add-members.page.html",
   styleUrls: ["./add-members.page.scss"],
+standalone: false,
 })
 export class AddMembersPage implements OnInit {
   seguidores: any[];
@@ -54,8 +55,8 @@ export class AddMembersPage implements OnInit {
     this.NoFriends = !mode;
     // console.log("CHANGED TO");
     console.log(this.NoFriends);
-    
-    
+
+
   }
 
   selected($event) {

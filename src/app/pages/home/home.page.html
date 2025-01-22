@@ -10,7 +10,7 @@
 
 <!-- <img src="../../../assets/imgs/logo01.png" alt=""> -->
 
-<ion-content *ngIf="!isLoading" class="ion-text-center" color="primary">
+<ion-content *ngIf="!isLoading" class="ion-text-center">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" [pullingText]="'Suelte para refrescar...' | translate"
       refreshingSpinner="circles" [refreshingText]="'Cargando...' | translate">

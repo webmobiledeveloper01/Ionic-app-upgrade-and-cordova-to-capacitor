@@ -11,6 +11,7 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
   selector: 'app-pago-donacion',
   templateUrl: './pago-donacion.page.html',
   styleUrls: ['./pago-donacion.page.scss'],
+standalone: false,
 })
 export class PagoDonacionPage implements OnInit {
 
@@ -36,23 +37,23 @@ export class PagoDonacionPage implements OnInit {
 
   }
 
-  
+
 
   public async submitForm() {
-   
+
     await this.utilities.showLoading('Procesando Pago...');
-    
+
     let card: StripeCardTokenParams = this.form.value;
-   
+
 
     this.stripe.createCardToken(card).then(
       token => {
-      
+
         this.apiService.procesarPago({ precio: this.form.value.precio, stripeToken: token.id,donacion:1}).subscribe(
-          async response => {           
-            
+          async response => {
+
             console.log(response);
-            
+
             this.utilities.dismissLoading();
             this.navCtrl.navigateRoot('/pago-correcto');
           }
@@ -64,7 +65,7 @@ export class PagoDonacionPage implements OnInit {
 
   }
 
-  
+
   public irAtras() {
     this.navCtrl.back();
   }

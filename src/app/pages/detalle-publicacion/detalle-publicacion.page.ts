@@ -14,6 +14,7 @@ import { FullscreenImagePage } from '../../fullscreen-image/fullscreen-image.pag
   selector: "app-detalle-publicacion",
   templateUrl: "./detalle-publicacion.page.html",
   styleUrls: ["./detalle-publicacion.page.scss"],
+standalone: false,
 })
 export class DetallePublicacionPage implements OnInit {
   public post: any;
@@ -44,7 +45,7 @@ export class DetallePublicacionPage implements OnInit {
     return await modal.present();
   }
   async ngOnInit() {
-    
+
     this.platform.is("ios") ? (this.IsIos = true) : (this.IsIos = false);
 
     this.id = this.route.snapshot.paramMap.get("id");

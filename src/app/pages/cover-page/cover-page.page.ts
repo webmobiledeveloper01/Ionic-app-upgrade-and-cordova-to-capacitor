@@ -8,6 +8,7 @@ import { IonicModule, MenuController } from '@ionic/angular';
   selector: 'app-cover-page',
   templateUrl: './cover-page.page.html',
   styleUrls: ['./cover-page.page.scss'],
+// standalone: false,
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
 })

@@ -18,6 +18,7 @@ declare let plugins: any;
   selector: "app-mapp",
   templateUrl: "./mapp.page.html",
   styleUrls: ["./mapp.page.scss"],
+standalone: false,
 })
 export class MappPage implements AfterViewInit, OnDestroy {
   // map: any;

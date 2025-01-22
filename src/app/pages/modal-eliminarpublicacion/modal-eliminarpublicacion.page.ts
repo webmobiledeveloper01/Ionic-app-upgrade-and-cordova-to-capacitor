@@ -9,6 +9,7 @@ import { UtilitiesService } from 'src/app/services/utilities.service';
   selector: 'app-modal-eliminarpublicacion',
   templateUrl: './modal-eliminarpublicacion.page.html',
   styleUrls: ['./modal-eliminarpublicacion.page.scss'],
+standalone: false,
 })
 export class ModalEliminarpublicacionPage implements OnInit {
 
@@ -22,7 +23,7 @@ export class ModalEliminarpublicacionPage implements OnInit {
 
   ngOnInit() {
     console.log(this.id);
-    
+
   }
 
   public goBack(){

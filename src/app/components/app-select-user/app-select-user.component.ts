@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
   selector: "app-select-user",
   templateUrl: "./app-select-user.component.html",
   styleUrls: ["./app-select-user.component.scss"],
+standalone: false,
 })
 export class AppSelectUserComponent implements OnInit {
   @Input() object: any;
@@ -14,7 +15,7 @@ export class AppSelectUserComponent implements OnInit {
   ngOnInit() {}
 
   IsSelected(id,mode) {
-    
+
 
     let params={
 
@@ -29,7 +30,7 @@ export class AppSelectUserComponent implements OnInit {
   }
 
   ChangeMode(mode) {
-    
+
     this.IsSelectedItem = mode;
 
     let id="custom"+this.object.id;
@@ -40,7 +41,7 @@ export class AppSelectUserComponent implements OnInit {
       row.classList.add("custom");
       this.IsSelected(this.object.id,1);
 
-      
+
     }else{
 
       row.classList.remove("custom");

@@ -5,6 +5,7 @@ import { ApiService } from "src/app/services/api.service";
   selector: "app-landing",
   templateUrl: "./landing.page.html",
   styleUrls: ["./landing.page.scss"],
+standalone: false,
 })
 export class LandingPage implements OnInit {
   constructor(public api: ApiService) {}

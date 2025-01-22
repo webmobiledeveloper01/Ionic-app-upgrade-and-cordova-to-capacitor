@@ -2,8 +2,8 @@
 
 
 export interface User{
-   
-   
+
+
     id?: number,
     name?: string,
     email: string,
@@ -20,5 +20,6 @@ export interface User{
     description?: string,
     user_location?: string,
     user_flag?:string,
-    IsCurrentUser?: boolean;
+    IsCurrentUser?: boolean,
+    suscripcion?: any,
 }

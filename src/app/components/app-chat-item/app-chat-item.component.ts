@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-chat-item',
   templateUrl: './app-chat-item.component.html',
   styleUrls: ['./app-chat-item.component.scss'],
+standalone: false,
 })
 export class AppChatItemComponent{
 

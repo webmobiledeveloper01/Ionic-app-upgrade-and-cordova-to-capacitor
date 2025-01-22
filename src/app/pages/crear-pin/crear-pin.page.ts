@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-crear-pin',
   templateUrl: './crear-pin.page.html',
   styleUrls: ['./crear-pin.page.scss'],
+standalone: false,
 })
 export class CrearPinPage implements OnInit {
   form: FormGroup;
@@ -149,6 +150,7 @@ export class CrearPinPage implements OnInit {
 //   selector: 'app-crear-pin',
 //   templateUrl: './crear-pin.page.html',
 //   styleUrls: ['./crear-pin.page.scss'],
+// standalone: false,
 // })
 // export class CrearPinPage implements OnInit {
 

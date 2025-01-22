@@ -7,6 +7,7 @@ import { ModalInvitacionGrupoPage } from "src/app/pages/modal-invitacion-grupo/m
   selector: "app-notification-item",
   templateUrl: "./app-notification-item.component.html",
   styleUrls: ["./app-notification-item.component.scss"],
+standalone: false,
 })
 export class AppNotificationItemComponent implements OnInit {
   @Input() notification: Notification;
@@ -46,7 +47,7 @@ let params = {
 };
 
 this.onRequest.emit(params);
-        
+
       }else{
         console.log("no es invitacion ni request");
 
@@ -56,7 +57,7 @@ this.onRequest.emit(params);
   }
 
 
-  
+
 
 
 

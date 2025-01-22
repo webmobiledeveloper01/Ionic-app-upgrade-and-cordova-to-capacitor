@@ -11,6 +11,7 @@ import { UtilitiesService } from "src/app/services/utilities.service";
   selector: "app-detalle-recetas",
   templateUrl: "./detalle-recetas.page.html",
   styleUrls: ["./detalle-recetas.page.scss"],
+standalone: false,
 })
 export class DetalleRecetasPage implements OnInit {
   receta: Receta;

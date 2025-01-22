@@ -19,6 +19,7 @@ import { CreateMapArgs } from "@capacitor/google-maps/dist/typings/implementatio
   selector: "app-buscador-publicaciones",
   templateUrl: "./buscador-publicaciones.page.html",
   styleUrls: ["./buscador-publicaciones.page.scss"],
+standalone: false,
 })
 
 
@@ -230,12 +231,26 @@ export class BuscadorPublicacionesPage implements OnInit {
   // }
 
   SetDateValue(value, key, options) {
+    console.log(value);
     let Returnvalue = "" + this.formatfecha(value, options);
     if (Returnvalue != "NaN") {
       this.FechaFiltro[key] = Returnvalue;
     } else {
       this.FechaFiltro[key] = "";
     }
+    let formatDate = new Date(value);
+
+    let day = "" + formatDate.getDate();
+    if (Number(day) < 10) {
+      this.FechaFiltro['day'] = "0" + day;
+    }
+
+    let month = "" + (formatDate.getMonth() + 1);
+    if (Number(month) < 10) {
+      this.FechaFiltro['month'] = "0" + month;
+    }
+
+    this.FechaFiltro['year'] = formatDate.getFullYear().toString();
 
     console.log(this.FechaFiltro);
   }
